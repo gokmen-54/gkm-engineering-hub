@@ -115,5 +115,18 @@
     "cta_headline": "Makinanızın CE ve Emniyet Uyumluluğu İçin Destek mi Gerekiyor?",
     "cta_text": "GKM Elektrik ISO 13849-1 standartlarına uygun emniyet devresi projelendirmesi ve SISTEMA hesaplamalarını anahtar teslim yapar. Projenizi danışın.",
     "date": "2026-11-13"
+  },
+  {
+    "slug": "modbus-rtu-ve-modbus-tcp-haberlesme-sorunlari-ve-cozumleri",
+    "category": "plc-scada-yazilim",
+    "category_title": "PLC & SCADA Yazılım",
+    "title": "Endüstriyel Sahalarda Modbus RTU & Modbus TCP Haberleşme Sorunları, Zaman Aşımı (Timeout) ve Çözümleri",
+    "summary": "RS-485 hatlarında yansıma (termination resistor), baud rate uyumsuzluğu, GND potansiyel farkları ve PLC Modbus sorgu kuyruk optimizasyonu.",
+    "target_audience": "Otomasyon Şefleri & Saha Bakım Mühendisleri",
+    "reading_time": "7 dk okuma",
+    "diagram_type": "scada_iot",
+    "cta_headline": "Haberleşme Kopmaları Üretiminizi mi Durduruyor?",
+    "cta_text": "RS-485 veya endüstriyel Ethernet ağınızdaki paket kayıplarını analizörlerimizle yerinde tespit edip çözüyoruz. Bize ulaşın.",
+    "date": "2026-11-13"
   }
 ]
