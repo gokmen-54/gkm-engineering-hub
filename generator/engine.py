@@ -1,19 +1,22 @@
 """
-Static Site Generator (SSG) Engine for GKM Elektrik Engineering Hub
-Compiles Markdown content into ultra-fast, multi-page, high-ranking static HTML.
-Zero external framework dependencies - runs purely on Python.
+GKM Elektrik & Mühendislik - Programmatic Engineering Hub SSG Compiler
+Ultra High-End Corporate Frontend matching gkmelektrik.com
+Real assets, official logos, brand marquee, project showcase, and daily programmatic SEO articles.
 """
 
 import os
-import re
-import json
 import glob
+import re
+import shutil
+import urllib.parse
 from datetime import datetime
 from svg_generator import generate_svg_diagram
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT_DIR = os.path.join(BASE_DIR, "content")
 DIST_DIR = os.path.join(BASE_DIR, "dist")
+DOCS_DIR = os.path.join(BASE_DIR, "docs")
+ASSETS_DIR = os.path.join(BASE_DIR, "assets")
 
 SITE_URL = "https://gokmen-54.github.io/gkm-engineering-hub"
 MAIN_WEBSITE = "https://gkmelektrik.com"
@@ -25,27 +28,79 @@ CATEGORIES = {
         "title": "Makine Otomasyonu",
         "desc": "Özel makine otomasyon yazılımları, servo/step motor senkronizasyonu, hat revizyonu ve elektronik kamlama çözümleri.",
         "icon": "⚙️",
-        "color": "cyan"
+        "color": "sky",
+        "img": "assets/gkm_7_robotik_hat.webp"
     },
     "plc-scada-yazilim": {
         "title": "PLC & SCADA Yazılım",
         "desc": "Siemens, Schneider ve Beckhoff PLC programlama, SCADA mimarisi, Endüstriyel IoT ve Modbus/MQTT veri toplama.",
         "icon": "💻",
-        "color": "indigo"
+        "color": "blue",
+        "img": "assets/gkm_1_fabrika_otomasyon.webp"
     },
     "pcb-elektronik-tasarim": {
         "title": "PCB & Elektronik Tasarım",
         "desc": "Çok katmanlı endüstriyel elektronik kart tasarımı, Altium/KiCad şematiği, STM32/ESP32 gömülü yazılım ve prototipleme.",
         "icon": "⚡",
-        "color": "emerald"
+        "color": "emerald",
+        "img": "assets/gkm_3_otomasyon.webp"
     },
     "elektrik-panosu-salt": {
         "title": "Elektrik Panosu & Şalt",
         "desc": "Tip testli Ana Dağıtım (ADP), MCC motor kontrol panoları, harmonik filtreli kompanzasyon ve toptan şalt tedariği.",
         "icon": "🛡️",
-        "color": "amber"
+        "color": "amber",
+        "img": "assets/gkm_6_fabrika_da__t_m_panosu.webp"
     }
 }
+
+MARQUEE_PROJECTS = [
+    {
+        "title": "Ana Dağıtım & ADP Pano İmalatı",
+        "desc": "IEC 61439 Form 4b Tip Testli İmalat",
+        "img": "assets/gkm_6_fabrika_da__t_m_panosu.webp",
+        "tag": "Pano İmalatı"
+    },
+    {
+        "title": "Robotik Hat & Makine Otomasyonu",
+        "desc": "Çok Eksenli Servo Senkronizasyonu",
+        "img": "assets/gkm_7_robotik_hat.webp",
+        "tag": "Makine Otomasyonu"
+    },
+    {
+        "title": "Fabrika Dağıtım & PLC / SCADA",
+        "desc": "Siemens S7-1500 TIA Portal Entegrasyonu",
+        "img": "assets/gkm_1_fabrika_otomasyon.webp",
+        "tag": "Endüstriyel Yazılım"
+    },
+    {
+        "title": "Harmonik Filtreli Kompanzasyon",
+        "desc": "189 Hz %7 De-Tuned Reaktörlü Pano",
+        "img": "assets/gkm_8_kompanzasyon.webp",
+        "tag": "Enerji Kalitesi"
+    },
+    {
+        "title": "MCC Motor Kontrol & Sürücü Panoları",
+        "desc": "VFD & Soft Starter Güç Dağıtımı",
+        "img": "assets/gkm_4_pano_donan_m_.webp",
+        "tag": "MCC Panoları"
+    },
+    {
+        "title": "Endüstriyel Busbar & Şalt Altyapısı",
+        "desc": "Yüksek Akım Güç İletim Hatları",
+        "img": "assets/gkm_9_plaza_busbar.webp",
+        "tag": "Tesis Altyapısı"
+    }
+]
+
+BRANDS = [
+    "Siemens", "Schneider Electric", "ABB", "Eaton",
+    "Phoenix Contact", "Weidmüller", "Omron", "Delta Electronics", "Beckhoff Automation"
+]
+
+
+def urllib_quote(text):
+    return urllib.parse.quote(text)
 
 
 def parse_frontmatter(content):
@@ -54,86 +109,75 @@ def parse_frontmatter(content):
     if content.startswith("---"):
         parts = content.split("---", 2)
         if len(parts) >= 3:
-            raw_meta = parts[1].strip()
-            body = parts[2].strip()
-            for line in raw_meta.split("\n"):
+            fm_text = parts[1]
+            body = parts[2]
+            for line in fm_text.strip().splitlines():
                 if ":" in line:
-                    k, v = line.split(":", 1)
-                    meta[k.strip()] = v.strip().strip('"').strip("'")
-    return meta, body
+                    key, val = line.split(":", 1)
+                    meta[key.strip()] = val.strip().strip('"').strip("'")
+    return meta, body.strip()
 
 
 def markdown_to_html(md):
-    # Code blocks
-    def replace_code_block(match):
-        lang = match.group(1) or ""
-        code = match.group(2).replace("<", "&lt;").replace(">", "&gt;")
-        return f'<pre class="bg-slate-950 text-cyan-300 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm overflow-x-auto my-6 font-mono"><code>{code}</code></pre>'
-    
-    html = re.sub(r'```(\w+)?\n([\s\S]*?)```', replace_code_block, md)
-
-    # Tables
-    lines = html.split("\n")
-    in_table = False
-    table_lines = []
-    output_lines = []
+    lines = md.splitlines()
+    html_lines = []
+    in_code = False
+    code_lang = ""
+    code_buffer = []
 
     for line in lines:
-        if "|" in line:
-            if not in_table:
-                in_table = True
-                table_lines = []
-            table_lines.append(line)
-        else:
-            if in_table:
-                in_table = False
-                # Convert table_lines to HTML table
-                t_html = '<div class="overflow-x-auto my-6"><table class="w-full text-left text-xs sm:text-sm border-collapse bg-slate-900/60 rounded-xl border border-slate-800">'
-                header = True
-                for tl in table_lines:
-                    if "---" in tl:
-                        continue
-                    cells = [c.strip() for c in tl.split("|")[1:-1]]
-                    if header:
-                        t_html += '<thead class="bg-slate-950 text-cyan-400 font-bold border-b border-slate-800"><tr>' + "".join(f'<th class="p-3.5">{c}</th>' for c in cells) + '</tr></thead><tbody>'
-                        header = False
-                    else:
-                        t_html += '<tr class="border-b border-slate-800/60 hover:bg-slate-800/30 transition">' + "".join(f'<td class="p-3.5">{c}</td>' for c in cells) + '</tr>'
-                t_html += '</tbody></table></div>'
-                output_lines.append(t_html)
-            output_lines.append(line)
-
-    if in_table:
-        # flush table at end
-        pass
-
-    html = "\n".join(output_lines)
-
-    # Headings
-    html = re.sub(r'^### (.*$)', r'<h3 class="text-lg sm:text-xl font-bold text-white mt-8 mb-3">\1</h3>', html, flags=re.M)
-    html = re.sub(r'^## (.*$)', r'<h2 class="text-xl sm:text-2xl font-black text-cyan-400 mt-10 mb-4 pb-2 border-b border-slate-800">\1</h2>', html, flags=re.M)
-    html = re.sub(r'^# (.*$)', r'<h1 class="text-2xl sm:text-3xl font-black text-white mt-6 mb-4">\1</h1>', html, flags=re.M)
-
-    # Paragraphs & Lists
-    html = re.sub(r'^\- (.*$)', r'<li class="ml-4 list-disc text-slate-300 mb-1.5">\1</li>', html, flags=re.M)
-    html = re.sub(r'^\d+\. (.*$)', r'<li class="ml-4 list-decimal text-slate-300 mb-1.5">\1</li>', html, flags=re.M)
-
-    # Strong / Emphasis
-    html = re.sub(r'\*\*(.*?)\*\*', r'<strong class="text-white font-extrabold">\1</strong>', html)
-    html = re.sub(r'\*(.*?)\*', r'<em class="text-slate-300 italic">\1</em>', html)
-
-    # Wrap bare lines in <p>
-    final_paras = []
-    for block in html.split("\n\n"):
-        block = block.strip()
-        if not block:
+        if line.startswith("```"):
+            if not in_code:
+                in_code = True
+                code_lang = line[3:].strip()
+                code_buffer = []
+            else:
+                in_code = False
+                escaped_code = (
+                    "\n".join(code_buffer)
+                    .replace("&", "&amp;")
+                    .replace("<", "&lt;")
+                    .replace(">", "&gt;")
+                )
+                html_lines.append(
+                    f'<div class="my-6 rounded-2xl overflow-hidden border border-slate-700 bg-slate-950 shadow-xl">'
+                    f'<div class="bg-slate-900 px-4 py-2 text-[11px] font-mono text-sky-400 font-bold border-b border-slate-800 flex items-center justify-between">'
+                    f'<span>{code_lang.upper() if code_lang else "KOD ÖRNEĞİ"}</span>'
+                    f'<span class="text-slate-500">GKM Endüstriyel Standart</span>'
+                    f'</div>'
+                    f'<pre class="p-4 text-xs font-mono text-emerald-300 overflow-x-auto leading-relaxed">{escaped_code}</pre>'
+                    f'</div>'
+                )
             continue
-        if block.startswith("<h") or block.startswith("<pre") or block.startswith("<div") or block.startswith("<li"):
-            final_paras.append(block)
-        else:
-            final_paras.append(f'<p class="text-slate-300 leading-relaxed text-sm sm:text-base mb-4">{block}</p>')
 
-    return "\n\n".join(final_paras)
+        if in_code:
+            code_buffer.append(line)
+            continue
+
+        # Headings
+        if line.startswith("### "):
+            html_lines.append(f'<h3 class="text-xl font-black text-slate-900 mt-8 mb-3 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-sky-500"></span>{line[4:].strip()}</h3>')
+        elif line.startswith("## "):
+            html_lines.append(f'<h2 class="text-2xl sm:text-3xl font-black text-slate-950 mt-10 mb-4 pb-2 border-b border-slate-200">{line[3:].strip()}</h2>')
+        elif line.startswith("# "):
+            html_lines.append(f'<h1 class="text-3xl sm:text-4xl font-black text-slate-950 mb-6">{line[2:].strip()}</h1>')
+        elif line.startswith("> "):
+            html_lines.append(f'<blockquote class="border-l-4 border-sky-500 bg-sky-50/70 text-slate-800 p-4 my-6 rounded-r-2xl text-sm font-medium leading-relaxed italic">{line[2:].strip()}</blockquote>')
+        elif line.startswith("- "):
+            html_lines.append(f'<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-disc mb-1.5">{line[2:].strip()}</li>')
+        elif re.match(r"^\d+\.\s", line):
+            content = re.sub(r"^\d+\.\s", "", line)
+            html_lines.append(f'<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">{content.strip()}</li>')
+        elif line.strip() == "":
+            html_lines.append('<div class="h-3"></div>')
+        else:
+            # Inline bold / code replacements
+            p_text = line
+            p_text = re.sub(r"\*\*(.*?)\*\*", r"<strong class='font-black text-slate-900'>\1</strong>", p_text)
+            p_text = re.sub(r"`(.*?)`", r"<code class='bg-slate-100 text-sky-700 font-mono text-xs px-1.5 py-0.5 rounded border border-slate-200'>\1</code>", p_text)
+            html_lines.append(f'<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">{p_text}</p>')
+
+    return "\n".join(html_lines)
 
 
 def load_all_articles():
@@ -154,50 +198,53 @@ def load_all_articles():
 
 def get_base_header(active_nav=""):
     return f"""
-    <!-- Top Announcement Bar -->
-    <div class="bg-gradient-to-r from-slate-950 via-cyan-950/40 to-slate-950 text-slate-300 text-xs py-2.5 px-4 border-b border-slate-800">
+    <!-- Top Announcement Bar (Deep Navy matching gkmelektrik.com) -->
+    <div class="bg-[#001c30] text-slate-300 text-xs py-2.5 px-4 border-b border-sky-950">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
             <div class="flex items-center gap-2">
-                <span class="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-                <span><b>GKM Elektrik & Mühendislik:</b> Endüstriyel Otomasyon, PLC/SCADA, PCB ve Pano İmalatı</span>
+                <span class="inline-block w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+                <span class="font-bold text-white">GKM Elektrik & Mühendislik:</span>
+                <span class="hidden md:inline text-slate-300">Özel Makine Otomasyonu, PLC/SCADA, PCB ve Tip Testli Pano İmalatı</span>
             </div>
-            <div class="flex items-center gap-4 text-xs font-semibold">
-                <a href="{MAIN_WEBSITE}" target="_blank" class="text-cyan-400 hover:underline flex items-center gap-1">
-                    <span>Resmi Sitemiz: gkmelektrik.com</span> ➔
+            <div class="flex items-center gap-5 text-xs font-semibold">
+                <a href="{MAIN_WEBSITE}" target="_blank" class="text-sky-400 hover:text-sky-300 flex items-center gap-1 transition">
+                    <span>Resmi Mağaza & Şalt: <b>gkmelektrik.com</b></span> ➔
                 </a>
-                <a href="tel:{WHATSAPP_PHONE}" class="text-slate-400 hover:text-white hidden sm:inline">
-                    📞 {PHONE_DISPLAY}
+                <a href="tel:{WHATSAPP_PHONE}" class="text-slate-300 hover:text-white hidden sm:flex items-center gap-1">
+                    <span>📞 {PHONE_DISPLAY}</span>
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- Main Navigation Header -->
-    <header class="border-b border-slate-800 bg-slate-950/90 backdrop-blur-md sticky top-0 z-50">
+    <!-- Main Clean Navigation Header (White with backdrop blur) -->
+    <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
             
-            <!-- Logo -->
+            <!-- Real Official Logo from gkmelektrik.com -->
             <a href="{SITE_URL}/" class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-cyan-500/20">
-                    ⚡
-                </div>
-                <div>
-                    <span class="text-xl font-black text-white tracking-tight block">GKM<span class="text-cyan-400">MÜHENDİSLİK</span></span>
-                    <span class="text-[10px] text-slate-400 uppercase tracking-widest block font-bold">Endüstriyel Çözüm & Teknik Hub</span>
+                <img src="{SITE_URL}/assets/logo.webp" alt="Gökmen Elektrik Logo" class="h-10 sm:h-12 w-auto object-contain">
+                <div class="border-l border-slate-200 pl-3 hidden sm:block">
+                    <span class="text-xs font-black tracking-wider text-slate-900 block uppercase">MÜHENDİSLİK HUB</span>
+                    <span class="text-[10px] text-sky-700 font-bold uppercase tracking-wider block">Endüstriyel Otomasyon & Ar-Ge</span>
                 </div>
             </a>
 
             <!-- Nav Links -->
-            <nav class="hidden lg:flex items-center gap-6 text-xs sm:text-sm font-bold text-slate-300">
-                <a href="{SITE_URL}/makine-otomasyonu/" class="hover:text-cyan-400 transition {'text-cyan-400' if active_nav == 'makine-otomasyonu' else ''}">Makine Otomasyonu</a>
-                <a href="{SITE_URL}/plc-scada-yazilim/" class="hover:text-cyan-400 transition {'text-cyan-400' if active_nav == 'plc-scada-yazilim' else ''}">PLC & SCADA</a>
-                <a href="{SITE_URL}/pcb-elektronik-tasarim/" class="hover:text-cyan-400 transition {'text-cyan-400' if active_nav == 'pcb-elektronik-tasarim' else ''}">PCB Tasarımı</a>
-                <a href="{SITE_URL}/elektrik-panosu-salt/" class="hover:text-cyan-400 transition {'text-cyan-400' if active_nav == 'elektrik-panosu-salt' else ''}">Pano & Şalt</a>
+            <nav class="hidden lg:flex items-center gap-7 text-xs sm:text-sm font-bold text-slate-700">
+                <a href="{SITE_URL}/makine-otomasyonu/" class="hover:text-sky-600 transition {'text-sky-600 border-b-2 border-sky-600 pb-1' if active_nav == 'makine-otomasyonu' else ''}">Makine Otomasyonu</a>
+                <a href="{SITE_URL}/plc-scada-yazilim/" class="hover:text-sky-600 transition {'text-sky-600 border-b-2 border-sky-600 pb-1' if active_nav == 'plc-scada-yazilim' else ''}">PLC & SCADA</a>
+                <a href="{SITE_URL}/pcb-elektronik-tasarim/" class="hover:text-sky-600 transition {'text-sky-600 border-b-2 border-sky-600 pb-1' if active_nav == 'pcb-elektronik-tasarim' else ''}">PCB Tasarımı</a>
+                <a href="{SITE_URL}/elektrik-panosu-salt/" class="hover:text-sky-600 transition {'text-sky-600 border-b-2 border-sky-600 pb-1' if active_nav == 'elektrik-panosu-salt' else ''}">Pano İmalatı & Şalt</a>
             </nav>
 
-            <!-- CTA Buttons -->
+            <!-- Conversion Action Buttons -->
             <div class="flex items-center gap-3">
-                <a href="https://wa.me/{WHATSAPP_PHONE}?text={urllib_quote('Merhaba, mühendislik projemiz için teknik görüşme ve teklif almak istiyoruz.')}" target="_blank" rel="noopener" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs sm:text-sm py-2.5 px-4 sm:px-5 rounded-full shadow-lg shadow-emerald-500/20 transition flex items-center gap-2">
+                <a href="{MAIN_WEBSITE}" target="_blank" class="hidden md:inline-flex bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold py-2.5 px-4 rounded-xl border border-slate-300 transition">
+                    gkmelektrik.com ↗
+                </a>
+
+                <a href="https://wa.me/{WHATSAPP_PHONE}?text={urllib_quote('Merhaba GKM Elektrik, mühendislik projemiz için teknik görüşme ve teklif almak istiyoruz.')}" target="_blank" rel="noopener" class="bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-2.5 px-4 sm:px-5 rounded-full shadow-lg shadow-emerald-500/20 transition flex items-center gap-2">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
                     <span>WhatsApp Proje Danış</span>
                 </a>
@@ -211,112 +258,138 @@ def get_base_header(active_nav=""):
 def get_base_footer():
     return f"""
     <!-- Mobile Sticky Action Bar -->
-    <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-950/95 border-t border-slate-800 backdrop-blur-lg px-4 py-2.5 flex items-center justify-between gap-2 shadow-2xl">
-        <a href="tel:{WHATSAPP_PHONE}" class="flex-1 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-3 rounded-xl border border-slate-700 flex items-center justify-center gap-1.5">
+    <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 border-t border-slate-200 backdrop-blur-lg px-4 py-2.5 flex items-center justify-between gap-2 shadow-2xl">
+        <a href="tel:{WHATSAPP_PHONE}" class="flex-1 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow">
             📞 Hemen Ara: {PHONE_DISPLAY}
         </a>
-        <a href="https://wa.me/{WHATSAPP_PHONE}?text={urllib_quote('Merhaba GKM Elektrik, teknik projemiz için şema/liste gönderip teklif almak istiyoruz.')}" target="_blank" class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs py-2.5 px-3 rounded-xl shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-1.5">
+        <a href="https://wa.me/{WHATSAPP_PHONE}?text={urllib_quote('Merhaba GKM Elektrik, teknik projemiz için şema/liste gönderip teklif almak istiyoruz.')}" target="_blank" class="flex-1 bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs py-2.5 px-3 rounded-xl shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-1.5">
             <span>WhatsApp Şema Gönder</span>
         </a>
     </div>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-800 bg-slate-950 text-slate-500 text-xs py-14 pb-24 lg:pb-14">
+    <!-- Corporate Footer (Deep Navy) -->
+    <footer class="border-t border-slate-200 bg-[#001c30] text-slate-400 text-xs py-14 pb-24 lg:pb-14">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-slate-900">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-slate-800">
                 <div class="md:col-span-1">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center text-slate-950 font-black">⚡</div>
-                        <span class="font-black text-white text-base">GKM Elektrik</span>
-                    </div>
-                    <p class="text-slate-400 leading-relaxed text-xs mb-4">
-                        Özel makine otomasyonu, PLC/SCADA yazılımı, çok katmanlı PCB tasarımı ve tip testli elektrik panosu imalatı.
+                    <img src="{SITE_URL}/assets/logo.webp" alt="Gökmen Elektrik Logo" class="h-10 w-auto object-contain brightness-0 invert mb-4">
+                    <p class="text-slate-300 leading-relaxed text-xs mb-4">
+                        Özel makine otomasyonu, PLC/SCADA yazılımı, çok katmanlı endüstriyel PCB tasarımı ve IEC 61439 tip testli pano imalatı.
                     </p>
-                    <a href="{MAIN_WEBSITE}" target="_blank" class="text-cyan-400 font-bold hover:underline block">
-                        ➔ Resmi Web Sitemiz: gkmelektrik.com
+                    <a href="{MAIN_WEBSITE}" target="_blank" class="text-sky-400 font-bold hover:underline block">
+                        ➔ Resmi E-Ticaret & Şalt: gkmelektrik.com
                     </a>
                 </div>
 
                 <div>
-                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Hizmet Alanlarımız</h4>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Mühendislik Çözümleri</h4>
                     <ul class="space-y-2">
-                        <li><a href="{SITE_URL}/makine-otomasyonu/" class="hover:text-cyan-400 transition">Makine Otomasyonu & Servo</a></li>
-                        <li><a href="{SITE_URL}/plc-scada-yazilim/" class="hover:text-cyan-400 transition">PLC Programlama & SCADA</a></li>
-                        <li><a href="{SITE_URL}/pcb-elektronik-tasarim/" class="hover:text-cyan-400 transition">Özel PCB & Gömülü Sistemler</a></li>
-                        <li><a href="{SITE_URL}/elektrik-panosu-salt/" class="hover:text-cyan-400 transition">Tip Testli Pano & Kompanzasyon</a></li>
+                        <li><a href="{SITE_URL}/makine-otomasyonu/" class="hover:text-sky-400 transition">Makine Otomasyonu & Servo</a></li>
+                        <li><a href="{SITE_URL}/plc-scada-yazilim/" class="hover:text-sky-400 transition">PLC Programlama & SCADA</a></li>
+                        <li><a href="{SITE_URL}/pcb-elektronik-tasarim/" class="hover:text-sky-400 transition">Özel PCB & Gömülü Sistemler</a></li>
+                        <li><a href="{SITE_URL}/elektrik-panosu-salt/" class="hover:text-sky-400 transition">Tip Testli Pano & Kompanzasyon</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Mühendislik İletişim</h4>
-                    <ul class="space-y-2 text-slate-400">
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">İletişim & Fabrika Destek</h4>
+                    <ul class="space-y-2 text-slate-300">
                         <li><b>Telefon:</b> <a href="tel:{WHATSAPP_PHONE}" class="hover:text-white">{PHONE_DISPLAY}</a></li>
-                        <li><b>WhatsApp:</b> <a href="https://wa.me/{WHATSAPP_PHONE}" target="_blank" class="hover:text-emerald-400">+90 537 702 99 54</a></li>
-                        <li><b>Hizmet Sahası:</b> Sakarya, Kocaeli, Marmara & Tüm Türkiye</li>
+                        <li><b>WhatsApp Destek:</b> <a href="https://wa.me/{WHATSAPP_PHONE}" target="_blank" class="hover:text-emerald-400">+90 537 702 99 54</a></li>
+                        <li><b>Hizmet Sahası:</b> Sakarya, Kocaeli, Gebze, Bursa, Marmara & Tüm Türkiye</li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Hızlı Şema & Teklif</h4>
-                    <p class="text-slate-400 text-xs mb-3">
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Teknik Şema & Teklif</h4>
+                    <p class="text-slate-300 text-xs mb-3">
                         EPLAN pano projenizi, makine fonksiyon şemanızı veya PCB gerber dosyalarınızı WhatsApp üzerinden anında iletebilirsiniz.
                     </p>
-                    <a href="https://wa.me/{WHATSAPP_PHONE}?text={urllib_quote('Merhaba, projemiz için teknik döküman paylaşmak istiyoruz.')}" target="_blank" class="inline-block bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-slate-800 px-4 py-2 rounded-xl text-xs font-bold transition">
+                    <a href="https://wa.me/{WHATSAPP_PHONE}?text={urllib_quote('Merhaba, projemiz için teknik döküman paylaşmak istiyoruz.')}" target="_blank" class="inline-block bg-sky-600 hover:bg-sky-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition shadow-md">
                         Şema & Liste Gönder ➔
                     </a>
                 </div>
             </div>
 
-            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-600">
-                <p>© 2026 GKM Elektrik & Mühendislik. Tüm hakları saklıdır.</p>
-                <p>Programmatic Engineering Hub • Yüksek Performanslı SEO ve Müşteri Yakalama Motoru</p>
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-400">
+                <p>© 2026 GKM Elektrik & Otomasyon Sistemleri. Tüm hakları saklıdır.</p>
+                <p>Programmatic Engineering Hub • Yüksek Performanslı Teknik Blog ve Müşteri Yakalama Motoru</p>
             </div>
         </div>
     </footer>
     """
 
 
-def urllib_quote(text):
-    import urllib.parse
-    return urllib.parse.quote(text)
-
-
 def build_homepage(articles):
     header = get_base_header(active_nav="")
     footer = get_base_footer()
 
-    # Cards HTML for all articles
+    # Brand badges HTML
+    brands_html = "".join([
+        f'<div class="flex items-center gap-2 bg-white border border-slate-200 px-5 py-2.5 rounded-xl shadow-sm font-bold text-xs text-slate-800 whitespace-nowrap">'
+        f'<span class="w-2 h-2 rounded-full bg-sky-500"></span>{b}'
+        f'</div>'
+        for b in BRANDS * 2  # duplicated for seamless infinite loop
+    ])
+
+    # Real project marquee cards HTML
+    project_cards = []
+    for p in MARQUEE_PROJECTS:
+        wa_text = urllib_quote(f"Merhaba GKM Elektrik, {p['title']} benzeri projemiz için bilgi ve teklif almak istiyoruz.")
+        project_cards.append(
+            f'<div class="flex-none w-[320px] bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-md hover:shadow-xl hover:border-sky-500 transition duration-300 flex flex-col">'
+            f'<div class="h-48 overflow-hidden bg-slate-900 relative">'
+            f'<img src="{SITE_URL}/{p["img"]}" alt="{p["title"]}" class="w-full h-full object-cover hover:scale-105 transition duration-500">'
+            f'<span class="absolute top-3 left-3 bg-sky-600 text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full uppercase shadow">{p["tag"]}</span>'
+            f'</div>'
+            f'<div class="p-4 flex-1 flex flex-col justify-between">'
+            f'<div>'
+            f'<h4 class="font-black text-slate-900 text-sm leading-snug mb-1">{p["title"]}</h4>'
+            f'<p class="text-slate-500 text-xs font-medium">{p["desc"]}</p>'
+            f'</div>'
+            f'<a href="https://wa.me/{WHATSAPP_PHONE}?text={wa_text}" target="_blank" class="mt-3 text-sky-600 hover:text-sky-700 text-xs font-bold flex items-center gap-1">'
+            f'<span>Detay & Teklif Al</span> ➔'
+            f'</a>'
+            f'</div>'
+            f'</div>'
+        )
+    project_cards_html = "".join(project_cards)
+
+    # Articles HTML (Daily Presentation Feed)
     cards_html = ""
     for a in articles:
         cat_info = CATEGORIES.get(a["category"], {})
-        badge_color = cat_info.get("color", "cyan")
-        svg_preview = generate_svg_diagram(a.get("diagram_type", "default"), a["title"])
-        
+        cat_img = cat_info.get("img", "assets/gkm_0_g_kmen_elektrik__amp__otomasyo.webp")
+
         cards_html += f"""
-        <article class="bg-slate-900/70 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col justify-between overflow-hidden group">
-            <div class="p-3 bg-slate-950 border-b border-slate-800">
-                {svg_preview}
+        <article class="bg-white rounded-2xl border border-slate-200 hover:border-sky-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between overflow-hidden group">
+            <div class="h-44 bg-slate-900 relative overflow-hidden">
+                <img src="{SITE_URL}/{cat_img}" alt="{a['title']}" class="w-full h-full object-cover opacity-90 group-hover:scale-105 group-hover:opacity-100 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                <span class="absolute bottom-3 left-3 bg-white text-slate-900 font-extrabold text-[10px] px-3 py-1 rounded-full uppercase shadow">
+                    {a.get('category_title', 'Mühendislik')}
+                </span>
             </div>
 
             <div class="p-6 flex-1 flex flex-col justify-between">
                 <div>
                     <div class="flex items-center justify-between text-xs font-bold text-slate-400 mb-2">
-                        <span class="text-cyan-400 uppercase tracking-wider">{a.get('category_title', 'Mühendislik')}</span>
-                        <span>{a.get('reading_time', '7 dk')}</span>
+                        <span class="text-sky-600 font-extrabold">⏱️ {a.get('reading_time', '7 dk')}</span>
+                        <span>📅 {a.get('date', 'Güncel')}</span>
                     </div>
 
-                    <h3 class="text-lg font-black text-white leading-snug group-hover:text-cyan-400 transition mb-3">
+                    <h3 class="text-base sm:text-lg font-black text-slate-900 leading-snug group-hover:text-sky-600 transition mb-3">
                         <a href="{SITE_URL}/rehber/{a['slug']}/">{a['title']}</a>
                     </h3>
 
-                    <p class="text-slate-400 text-xs sm:text-sm line-clamp-3 leading-relaxed mb-6">
+                    <p class="text-slate-600 text-xs sm:text-sm line-clamp-3 leading-relaxed mb-6 font-medium">
                         {a['summary']}
                     </p>
                 </div>
 
-                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
                     <span class="text-[11px] font-semibold text-slate-500">🎯 {a.get('target_audience', 'Mühendisler')}</span>
-                    <a href="{SITE_URL}/rehber/{a['slug']}/" class="text-cyan-400 hover:text-cyan-300 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition">
+                    <a href="{SITE_URL}/rehber/{a['slug']}/" class="text-sky-600 hover:text-sky-700 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition">
                         <span>Teknik Analizi İncele</span> ➔
                     </a>
                 </div>
@@ -330,14 +403,15 @@ def build_homepage(articles):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GKM Elektrik & Mühendislik | Makine Otomasyonu, PLC/SCADA, PCB Tasarımı ve Pano İmalatı</title>
-    <meta name="description" content="Özel makine otomasyonu, Siemens/Beckhoff PLC ve SCADA yazılımı, çok katmanlı PCB ve gömülü sistemler, tip testli elektrik panoları ve kompanzasyon çözümleri.">
-    <meta name="keywords" content="makine otomasyonu, plc programlama, scada yazılımı, pcb tasarımı, gömülü sistemler, elektrik panosu imalatı, harmonik filtre kompanzasyon, sakarya otomasyon, kocaeli otomasyon">
+    <meta name="description" content="Gökmen Elektrik: Özel makine otomasyonu, Siemens/Beckhoff PLC ve SCADA yazılımı, 4 katmanlı PCB tasarımı, IEC 61439 tip testli pano imalatı ve şalt çözümleri.">
+    <meta name="keywords" content="gökmen elektrik, makine otomasyonu, plc programlama, scada yazılımı, pcb tasarımı, gömülü sistemler, elektrik panosu imalatı, kompanzasyon, sakarya elektrik, kocaeli otomasyon">
     <link rel="canonical" href="{SITE_URL}/">
 
     <!-- Open Graph -->
     <meta property="og:title" content="GKM Elektrik & Mühendislik | Endüstriyel Çözüm & Otomasyon Hub">
     <meta property="og:description" content="Fabrikalar ve makine imalatçıları için ileri teknoloji mühendislik, PLC/SCADA, özel PCB ve şalt çözümleri.">
     <meta property="og:url" content="{SITE_URL}/">
+    <meta property="og:image" content="{SITE_URL}/assets/gkm_0_g_kmen_elektrik__amp__otomasyo.webp">
     <meta property="og:type" content="website">
 
     <!-- Tailwind CSS -->
@@ -345,6 +419,31 @@ def build_homepage(articles):
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
         body {{ font-family: 'Plus Jakarta Sans', sans-serif; }}
+        
+        .gkm-watermark {{
+            font-size: clamp(40px, 8vw, 120px);
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.08);
+            letter-spacing: -2px;
+            line-height: 0.85;
+            user-select: none;
+            pointer-events: none;
+            text-transform: uppercase;
+        }}
+
+        @keyframes marquee {{
+            0% {{ transform: translateX(0); }}
+            100% {{ transform: translateX(-50%); }}
+        }}
+        .animate-marquee {{
+            display: flex;
+            width: max-content;
+            animation: marquee 25s linear infinite;
+        }}
+        .animate-marquee:hover {{
+            animation-play-state: paused;
+        }}
     </style>
 
     <!-- Schema.org Structured Data -->
@@ -357,16 +456,9 @@ def build_homepage(articles):
           "@id": "{SITE_URL}/#organization",
           "name": "GKM Elektrik & Mühendislik",
           "url": "{MAIN_WEBSITE}",
-          "logo": "{SITE_URL}/assets/logo.png",
-          "contactPoint": {{
-            "@type": "ContactPoint",
-            "telephone": "+{WHATSAPP_PHONE}",
-            "contactType": "customer service",
-            "areaServed": "TR"
-          }},
-          "sameAs": [
-            "{MAIN_WEBSITE}"
-          ]
+          "logo": "{SITE_URL}/assets/logo.webp",
+          "telephone": "+{WHATSAPP_PHONE}",
+          "areaServed": "TR"
         }},
         {{
           "@type": "WebSite",
@@ -378,147 +470,226 @@ def build_homepage(articles):
     }}
     </script>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-cyan-500 selection:text-black min-h-screen flex flex-col justify-between">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-sky-500 selection:text-white min-h-screen flex flex-col justify-between">
 
     {header}
 
-    <!-- Hero Section -->
-    <section class="relative pt-16 pb-20 border-b border-slate-800 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-cyan-500/10 via-slate-950 to-slate-950 pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-            
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 border border-cyan-500/30 text-cyan-400 text-xs font-bold mb-6">
-                <span>⚡ PROGRAMMATIC ENGINEERING & INDUSTRIAL AUTOMATION HUB</span>
-            </div>
-
-            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight max-w-4xl mx-auto leading-tight mb-6">
-                Özel Makine Otomasyonu, <span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Gömülü PCB Tasarımı</span> ve Tip Testli Pano Sistemleri
-            </h1>
-
-            <p class="text-slate-400 text-sm sm:text-base max-w-3xl mx-auto leading-relaxed mb-10">
-                Endüstriyel tesisler, makine imalatçıları ve Ar-Ge departmanları için uçtan uca mühendislik: PLC/SCADA yazılımı, yüksek hassasiyetli servo kontrolü, 4 katmanlı EMC uyumlu PCB üretimi ve harmonik filtreli kompanzasyon panoları.
-            </p>
-
-            <!-- Quick Action Hero Buttons -->
-            <div class="flex flex-wrap items-center justify-center gap-4">
-                <a href="https://wa.me/{WHATSAPP_PHONE}?text={urllib_quote('Merhaba GKM Elektrik, projemiz için şema/şartname gönderip teknik teklif almak istiyoruz.')}" target="_blank" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-sm py-4 px-8 rounded-2xl shadow-xl shadow-cyan-500/20 transition transform hover:scale-105 flex items-center gap-2">
-                    <span>⚡ WhatsApp'tan Proje / Şema Danış</span>
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-                </a>
+    <!-- Hero Section (Matches the high-end gkmelektrik.com design) -->
+    <section class="relative bg-gradient-to-br from-[#001c30] via-[#001726] to-[#00111f] text-white pt-14 pb-16 border-b border-sky-950 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                 
-                <a href="{MAIN_WEBSITE}" target="_blank" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm py-4 px-8 rounded-2xl border border-slate-700 transition flex items-center gap-2">
-                    <span>Resmi Şirket Sitemiz (gkmelektrik.com)</span> ➔
-                </a>
-            </div>
+                <!-- Left Column: Copy & Actions -->
+                <div class="lg:col-span-7 text-left">
+                    <div class="gkm-watermark mb-2">GKM ELEKTRİK</div>
+                    
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-900/60 border border-sky-400/30 text-sky-300 text-xs font-bold mb-4">
+                        <span>⚡ GÖKMEN ELEKTRİK & OTOMASYON MÜHENDİSLİK SİSTEMLERİ</span>
+                    </div>
 
-            <!-- Industrial Trust Metrics -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-14 pt-10 border-t border-slate-800/80 text-left">
-                <div>
-                    <span class="text-2xl font-black text-cyan-400 block">IEC 61439</span>
-                    <span class="text-xs text-slate-400">Tip Testli Pano Standartları</span>
-                </div>
-                <div>
-                    <span class="text-2xl font-black text-emerald-400 block">TIA & TwinCAT</span>
-                    <span class="text-xs text-slate-400">Siemens & Beckhoff PLC/SCL</span>
-                </div>
-                <div>
-                    <span class="text-2xl font-black text-amber-400 block">4-Katman EMC</span>
-                    <span class="text-xs text-slate-400">Endüstriyel PCB & STM32</span>
-                </div>
-                <div>
-                    <span class="text-2xl font-black text-indigo-400 block">24/7 Saha</span>
-                    <span class="text-xs text-slate-400">Devreye Alma & Revizyon</span>
-                </div>
-            </div>
+                    <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-4">
+                        Özel Makine Otomasyonu, <span class="text-sky-400">Gömülü PCB Tasarımı</span> ve Tip Testli Pano İmalatı
+                    </h1>
 
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8 max-w-2xl font-medium">
+                        Endüstriyel tesisleriniz ve makine imalat projeleriniz için komple mühendislik: PLC/SCADA yazılımı, yüksek hassasiyetli servo kontrolü, 4 katmanlı EMC uyumlu PCB üretimi ve IEC 61439 tip testli pano çözümleri tek çatı altında.
+                    </p>
+
+                    <!-- Hero Action Buttons -->
+                    <div class="flex flex-wrap items-center gap-3">
+                        <a href="https://wa.me/{WHATSAPP_PHONE}?text={urllib_quote('Merhaba GKM Elektrik, projemiz için şema/şartname gönderip teknik teklif almak istiyoruz.')}" target="_blank" class="bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-sm py-3.5 px-6 rounded-2xl shadow-xl shadow-emerald-500/20 transition transform hover:scale-105 flex items-center gap-2">
+                            <span>💬 WhatsApp ile Şema / Proje Danış</span>
+                        </a>
+                        
+                        <a href="{MAIN_WEBSITE}" target="_blank" class="bg-white/10 hover:bg-white/20 text-white font-bold text-sm py-3.5 px-6 rounded-2xl border border-white/20 transition flex items-center gap-2">
+                            <span>gkmelektrik.com Resmi Mağaza</span> ➔
+                        </a>
+                    </div>
+
+                    <!-- Industrial Trust Badges -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-10 pt-8 border-t border-slate-800/80 text-left">
+                        <div>
+                            <span class="text-xl font-black text-sky-400 block">IEC 61439</span>
+                            <span class="text-[11px] text-slate-400 font-semibold">Tip Testli Pano</span>
+                        </div>
+                        <div>
+                            <span class="text-xl font-black text-emerald-400 block">TIA & SCL</span>
+                            <span class="text-[11px] text-slate-400 font-semibold">Siemens & Beckhoff</span>
+                        </div>
+                        <div>
+                            <span class="text-xl font-black text-amber-400 block">4-Katman EMC</span>
+                            <span class="text-[11px] text-slate-400 font-semibold">Endüstriyel PCB</span>
+                        </div>
+                        <div>
+                            <span class="text-xl font-black text-indigo-400 block">7/24 Saha</span>
+                            <span class="text-[11px] text-slate-400 font-semibold">Devreye Alma</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Real Workshop & Team Photo from gkmelektrik.com -->
+                <div class="lg:col-span-5">
+                    <div class="relative rounded-3xl overflow-hidden border-2 border-sky-400/30 shadow-2xl bg-slate-900 group">
+                        <img src="{SITE_URL}/assets/gkm_0_g_kmen_elektrik__amp__otomasyo.webp" alt="Gökmen Elektrik & Otomasyon - Pano İmalatı ve Atölye" class="w-full h-[400px] object-cover group-hover:scale-105 transition duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#001c30] via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md rounded-2xl p-4 border border-slate-200 text-slate-900">
+                            <div class="flex items-center gap-2 text-xs font-black text-sky-700 uppercase mb-1">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                                <span>GÖKMEN ELEKTRİK SAHA EKİBİ & İMALAT</span>
+                            </div>
+                            <p class="text-xs font-bold text-slate-700 leading-snug">
+                                Kendi atölyemizde tip testli pano montajı, kablaj ve test süreçleri uzman mühendis kadromuzla yürütülmektedir.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 
-    <!-- 4 Core Service Pillars -->
+    <!-- Infinite Brand Ticker (From gkmelektrik.com) -->
+    <section class="bg-white border-b border-slate-200 py-5 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 mb-2 text-center">
+            <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Çözüm Ortağı Olduğumuz Dünya Standartlarında Markalar</span>
+        </div>
+        <div class="flex overflow-hidden">
+            <div class="animate-marquee flex items-center gap-4 py-2">
+                {brands_html}
+            </div>
+        </div>
+    </section>
+
+    <!-- 4 Core Service Pillars (Corporate White Cards) -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div class="mb-10 text-center">
-            <span class="text-xs font-black text-cyan-400 uppercase tracking-widest block mb-1">MÜHENDİSLİK DİSİPLİNLERİMİZ</span>
-            <h2 class="text-2xl sm:text-3xl font-black text-white">Fabrikalar ve Makine İmalatçıları İçin Çözümler</h2>
+            <span class="text-xs font-black text-sky-600 uppercase tracking-widest block mb-1">MÜHENDİSLİK DİSİPLİNLERİMİZ</span>
+            <h2 class="text-2xl sm:text-4xl font-black text-slate-950">Fabrikalar ve Makine İmalatçıları İçin Çözümler</h2>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto mt-2">Aradığınız mühendislik alanına tıklayarak hazır vaka analizlerini ve teknik rehberleri inceleyebilirsiniz.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="bg-slate-900/60 p-6 rounded-2xl border border-slate-800 hover:border-cyan-500/40 transition">
-                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-2xl mb-4">⚙️</div>
-                <h3 class="text-lg font-bold text-white mb-2">Makine Otomasyonu</h3>
-                <p class="text-slate-400 text-xs leading-relaxed mb-4">
-                    Elektronik kamlama, çok eksenli servo senkronizasyonu, hat revizyonları ve paketleme/dolum makineleri yazılımı.
-                </p>
-                <a href="{SITE_URL}/makine-otomasyonu/" class="text-cyan-400 text-xs font-bold hover:underline">Rehberleri İncele ➔</a>
-            </div>
+            
+            <a href="{SITE_URL}/makine-otomasyonu/" class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-sky-500 hover:shadow-xl transition flex flex-col justify-between group">
+                <div>
+                    <div class="h-36 rounded-xl overflow-hidden mb-4 bg-slate-900">
+                        <img src="{SITE_URL}/assets/gkm_7_robotik_hat.webp" alt="Makine Otomasyonu" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <h3 class="text-lg font-black text-slate-900 mb-2 group-hover:text-sky-600 transition">Makine Otomasyonu</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed mb-4 font-medium">
+                        Elektronik kamlama, çok eksenli servo senkronizasyonu, hat revizyonları ve paketleme/dolum makineleri yazılımı.
+                    </p>
+                </div>
+                <span class="text-sky-600 text-xs font-black flex items-center gap-1 group-hover:translate-x-1 transition">Rehberleri İncele ➔</span>
+            </a>
 
-            <div class="bg-slate-900/60 p-6 rounded-2xl border border-slate-800 hover:border-indigo-500/40 transition">
-                <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-2xl mb-4">💻</div>
-                <h3 class="text-lg font-bold text-white mb-2">PLC & SCADA Yazılım</h3>
-                <p class="text-slate-400 text-xs leading-relaxed mb-4">
-                    Siemens TIA SCL, Beckhoff TwinCAT, WinCC/Ignition SCADA ve Modbus/MQTT Endüstriyel IoT veri toplama.
-                </p>
-                <a href="{SITE_URL}/plc-scada-yazilim/" class="text-indigo-400 text-xs font-bold hover:underline">Rehberleri İncele ➔</a>
-            </div>
+            <a href="{SITE_URL}/plc-scada-yazilim/" class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-sky-500 hover:shadow-xl transition flex flex-col justify-between group">
+                <div>
+                    <div class="h-36 rounded-xl overflow-hidden mb-4 bg-slate-900">
+                        <img src="{SITE_URL}/assets/gkm_1_fabrika_otomasyon.webp" alt="PLC & SCADA" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <h3 class="text-lg font-black text-slate-900 mb-2 group-hover:text-sky-600 transition">PLC & SCADA Yazılım</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed mb-4 font-medium">
+                        Siemens TIA SCL, Beckhoff TwinCAT, WinCC/Ignition SCADA ve Modbus/MQTT Endüstriyel IoT veri toplama.
+                    </p>
+                </div>
+                <span class="text-sky-600 text-xs font-black flex items-center gap-1 group-hover:translate-x-1 transition">Rehberleri İncele ➔</span>
+            </a>
 
-            <div class="bg-slate-900/60 p-6 rounded-2xl border border-slate-800 hover:border-emerald-500/40 transition">
-                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl mb-4">⚡</div>
-                <h3 class="text-lg font-bold text-white mb-2">Özel PCB & Elektronik</h3>
-                <p class="text-slate-400 text-xs leading-relaxed mb-4">
-                    Çok katmanlı endüstriyel PCB tasarımı, STM32/ESP32 gömülü yazılım, optokuplör izolasyonlu I/O kartları.
-                </p>
-                <a href="{SITE_URL}/pcb-elektronik-tasarim/" class="text-emerald-400 text-xs font-bold hover:underline">Rehberleri İncele ➔</a>
-            </div>
+            <a href="{SITE_URL}/pcb-elektronik-tasarim/" class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-sky-500 hover:shadow-xl transition flex flex-col justify-between group">
+                <div>
+                    <div class="h-36 rounded-xl overflow-hidden mb-4 bg-slate-900">
+                        <img src="{SITE_URL}/assets/gkm_3_otomasyon.webp" alt="Özel PCB" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <h3 class="text-lg font-black text-slate-900 mb-2 group-hover:text-sky-600 transition">Özel PCB & Gömülü</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed mb-4 font-medium">
+                        Çok katmanlı endüstriyel PCB tasarımı, STM32/ESP32 gömülü yazılım, optokuplör izolasyonlu I/O kartları.
+                    </p>
+                </div>
+                <span class="text-sky-600 text-xs font-black flex items-center gap-1 group-hover:translate-x-1 transition">Rehberleri İncele ➔</span>
+            </a>
 
-            <div class="bg-slate-900/60 p-6 rounded-2xl border border-slate-800 hover:border-amber-500/40 transition">
-                <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-2xl mb-4">🛡️</div>
-                <h3 class="text-lg font-bold text-white mb-2">Elektrik Panosu & Şalt</h3>
-                <p class="text-slate-400 text-xs leading-relaxed mb-4">
-                    Tip testli ADP ana dağıtım, MCC sürücü panoları, de-tuned %7 reaktörlü harmonik kompanzasyon panoları.
-                </p>
-                <a href="{SITE_URL}/elektrik-panosu-salt/" class="text-amber-400 text-xs font-bold hover:underline">Rehberleri İncele ➔</a>
+            <a href="{SITE_URL}/elektrik-panosu-salt/" class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-sky-500 hover:shadow-xl transition flex flex-col justify-between group">
+                <div>
+                    <div class="h-36 rounded-xl overflow-hidden mb-4 bg-slate-900">
+                        <img src="{SITE_URL}/assets/gkm_6_fabrika_da__t_m_panosu.webp" alt="Pano İmalatı" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <h3 class="text-lg font-black text-slate-900 mb-2 group-hover:text-sky-600 transition">Pano İmalatı & Şalt</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed mb-4 font-medium">
+                        Tip testli ADP ana dağıtım, MCC sürücü panoları, de-tuned %7 reaktörlü harmonik kompanzasyon panoları.
+                    </p>
+                </div>
+                <span class="text-sky-600 text-xs font-black flex items-center gap-1 group-hover:translate-x-1 transition">Rehberleri İncele ➔</span>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- Real Project Showcase Carousel (Kayan Proje Kartları) -->
+    <section class="bg-slate-100 py-14 border-y border-slate-200 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+                <span class="text-xs font-black text-sky-600 uppercase tracking-widest block">GERÇEK İMALAT & SAHA ÇÖZÜMLERİMİZ</span>
+                <h3 class="text-xl sm:text-2xl font-black text-slate-900">Gökmen Elektrik Proje Galerisi</h3>
+            </div>
+            <a href="https://wa.me/{WHATSAPP_PHONE}?text={urllib_quote('Merhaba GKM Elektrik, fabrikanızdaki imalat ve referans projeler hakkında bilgi almak istiyorum.')}" target="_blank" class="bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 text-xs font-bold py-2 px-4 rounded-xl shadow-sm transition">
+                Tüm Projeler İçin WhatsApp ➔
+            </a>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 overflow-x-auto pb-4 scrollbar-none">
+            <div class="flex gap-5 w-max">
+                {project_cards_html}
             </div>
         </div>
     </section>
 
-    <!-- Engineering Guides & Articles Grid -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-slate-800">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-4 border-b border-slate-800">
+    <!-- Daily Technical Blog & Client Presentation Feed -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-16 flex-1 w-full">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10 pb-4 border-b border-slate-200">
             <div>
-                <span class="text-xs font-black text-cyan-400 uppercase tracking-widest block mb-1">PROGRAMMATIC TEKNİK KÜTÜPHANE</span>
-                <h2 class="text-2xl sm:text-3xl font-black text-white">En Son Mühendislik ve Tasarım Makaleleri</h2>
+                <span class="text-xs font-black text-sky-600 uppercase tracking-widest block mb-1">PROGRAMMATIC ENGINEERING BLOG</span>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-950">Günlük Teknik Rehberler & Mühendislik Vaka Analizleri</h2>
             </div>
-            <p class="text-slate-400 text-xs max-w-md">
-                Şemalar, hesaplama yöntemleri ve saha tecrübeleri ile hazırlanmış güncel endüstriyel uygulama rehberleri.
-            </p>
+            <span class="bg-sky-100 text-sky-900 font-extrabold text-xs px-3.5 py-1.5 rounded-full border border-sky-300">
+                ⚡ 7/24 Otomatik Güncellenir
+            </span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+        <!-- Filter Badges -->
+        <div class="flex flex-wrap items-center gap-2 mb-8 text-xs font-bold">
+            <span class="bg-slate-900 text-white px-4 py-2 rounded-full cursor-pointer">Tüm Konular ({len(articles)})</span>
+            <a href="{SITE_URL}/makine-otomasyonu/" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-full transition">⚙️ Makine Otomasyonu</a>
+            <a href="{SITE_URL}/plc-scada-yazilim/" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-full transition">💻 PLC & SCADA</a>
+            <a href="{SITE_URL}/pcb-elektronik-tasarim/" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-full transition">⚡ PCB Tasarımı</a>
+            <a href="{SITE_URL}/elektrik-panosu-salt/" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-full transition">🛡️ Pano & Şalt</a>
+        </div>
+
+        <!-- Grid of Articles -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {cards_html}
         </div>
-    </section>
+    </main>
 
-    <!-- Hot Conversion Lead Banner -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-        <div class="bg-gradient-to-r from-slate-900 via-cyan-950/40 to-slate-900 rounded-3xl border border-cyan-500/30 p-8 sm:p-12 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-2xl">
+    <!-- Bottom Conversion Banner -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 pb-16">
+        <div class="bg-gradient-to-r from-[#001c30] to-[#00111f] rounded-3xl p-8 sm:p-12 text-white shadow-xl relative overflow-hidden border border-sky-900">
             <div class="max-w-2xl">
-                <span class="text-xs font-black text-cyan-400 uppercase tracking-widest block mb-2">HIZLI TEKNİK İNCELEME & ÖN FİZİBİLİTE</span>
-                <h3 class="text-2xl sm:text-3xl font-black text-white mb-3">Mevcut Bir Makine, Kart veya Pano Projeniz mi Var?</h3>
-                <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                    EPLAN proje şemanızı, PLC fonksiyonel tanımınızı veya PCB gerber dosyalarınızı WhatsApp hattımıza gönderin; mühendislerimiz 24 saat içinde ön fizibilite ve bütçelendirmeyi tamamlasın.
+                <span class="bg-sky-500 text-slate-950 font-black text-xs px-3 py-1 rounded-full uppercase mb-4 inline-block">MÜHENDİSLİK DANIŞMANLIĞI</span>
+                <h3 class="text-2xl sm:text-3xl font-black mb-3">Fabrikanız veya Yeni Makinanız İçin Proje Danışın</h3>
+                <p class="text-slate-300 text-sm leading-relaxed mb-6 font-medium">
+                    Projenizin elektrik şemasını, pano malzeme listesini veya PCB gerber çizimini WhatsApp hattımıza gönderin; mühendislerimiz teknik incelemeyi yapıp 2 saat içinde fiyatlandırsın.
                 </p>
-                <div class="flex items-center gap-6 text-xs text-slate-400">
-                    <span>✓ Gizlilik Sözleşmesi (NDA) Korumalı</span>
-                    <span>✓ Doğrudan Mühendis Görüşmesi</span>
+                <div class="flex flex-wrap items-center gap-3">
+                    <a href="https://wa.me/{WHATSAPP_PHONE}?text={urllib_quote('Merhaba GKM Elektrik, projemizin detaylarını paylaşmak ve teklif almak istiyoruz.')}" target="_blank" class="bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3.5 px-6 rounded-2xl transition flex items-center gap-2 shadow-lg shadow-emerald-500/20">
+                        <span>💬 WhatsApp'tan Şema & Liste Gönder</span>
+                    </a>
+                    <a href="tel:{WHATSAPP_PHONE}" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm py-3.5 px-6 rounded-2xl border border-white/20 transition">
+                        📞 Doğrudan Ara: {PHONE_DISPLAY}
+                    </a>
                 </div>
-            </div>
-
-            <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-                <a href="https://wa.me/{WHATSAPP_PHONE}?text={urllib_quote('Merhaba, teknik bir projemiz var (EPLAN şema / gerber / otomasyon). Birlikte değerlendirmek istiyoruz.')}" target="_blank" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm py-4 px-8 rounded-2xl shadow-xl shadow-emerald-500/25 transition text-center flex items-center justify-center gap-2">
-                    <span>WhatsApp'tan Dosya Gönder</span>
-                </a>
-                <a href="tel:{WHATSAPP_PHONE}" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm py-4 px-6 rounded-2xl border border-slate-700 transition text-center">
-                    📞 {PHONE_DISPLAY}
-                </a>
             </div>
         </div>
     </section>
@@ -527,7 +698,7 @@ def build_homepage(articles):
 
 </body>
 </html>
-"""
+    """
     return full_html
 
 
@@ -539,32 +710,35 @@ def build_category_page(cat_key, articles):
 
     cards_html = ""
     for a in cat_articles:
-        svg_preview = generate_svg_diagram(a.get("diagram_type", "default"), a["title"])
         cards_html += f"""
-        <article class="bg-slate-900/70 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col justify-between overflow-hidden group">
-            <div class="p-3 bg-slate-950 border-b border-slate-800">
-                {svg_preview}
+        <article class="bg-white rounded-2xl border border-slate-200 hover:border-sky-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between overflow-hidden group">
+            <div class="h-44 bg-slate-900 relative overflow-hidden">
+                <img src="{SITE_URL}/{cat_info['img']}" alt="{a['title']}" class="w-full h-full object-cover opacity-90 group-hover:scale-105 group-hover:opacity-100 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                <span class="absolute bottom-3 left-3 bg-white text-slate-900 font-extrabold text-[10px] px-3 py-1 rounded-full uppercase shadow">
+                    {cat_info['title']}
+                </span>
             </div>
 
             <div class="p-6 flex-1 flex flex-col justify-between">
                 <div>
                     <div class="flex items-center justify-between text-xs font-bold text-slate-400 mb-2">
-                        <span class="text-cyan-400 uppercase tracking-wider">{cat_info['title']}</span>
-                        <span>{a.get('reading_time', '7 dk')}</span>
+                        <span class="text-sky-600 font-extrabold">⏱️ {a.get('reading_time', '7 dk')}</span>
+                        <span>📅 {a.get('date', 'Güncel')}</span>
                     </div>
 
-                    <h3 class="text-lg font-black text-white leading-snug group-hover:text-cyan-400 transition mb-3">
+                    <h3 class="text-base sm:text-lg font-black text-slate-900 leading-snug group-hover:text-sky-600 transition mb-3">
                         <a href="{SITE_URL}/rehber/{a['slug']}/">{a['title']}</a>
                     </h3>
 
-                    <p class="text-slate-400 text-xs sm:text-sm line-clamp-3 leading-relaxed mb-6">
+                    <p class="text-slate-600 text-xs sm:text-sm line-clamp-3 leading-relaxed mb-6 font-medium">
                         {a['summary']}
                     </p>
                 </div>
 
-                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
                     <span class="text-[11px] font-semibold text-slate-500">🎯 {a.get('target_audience', 'Mühendisler')}</span>
-                    <a href="{SITE_URL}/rehber/{a['slug']}/" class="text-cyan-400 hover:text-cyan-300 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition">
+                    <a href="{SITE_URL}/rehber/{a['slug']}/" class="text-sky-600 hover:text-sky-700 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition">
                         <span>Teknik Analizi İncele</span> ➔
                     </a>
                 </div>
@@ -586,22 +760,22 @@ def build_category_page(cat_key, articles):
         body {{ font-family: 'Plus Jakarta Sans', sans-serif; }}
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-cyan-500 selection:text-black min-h-screen flex flex-col justify-between">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-sky-500 selection:text-white min-h-screen flex flex-col justify-between">
 
     {header}
 
-    <section class="py-14 border-b border-slate-800 bg-gradient-to-b from-slate-900 to-slate-950">
+    <section class="py-14 border-b border-sky-950 bg-gradient-to-br from-[#001c30] to-[#00111f] text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <span class="text-xs font-black text-cyan-400 uppercase tracking-widest block mb-2">{cat_info['icon']} UZMANLIK ALANIMIZ</span>
+            <span class="text-xs font-black text-sky-400 uppercase tracking-widest block mb-2">{cat_info['icon']} UZMANLIK ALANIMIZ</span>
             <h1 class="text-3xl sm:text-4xl font-black text-white mb-4">{cat_info['title']}</h1>
-            <p class="text-slate-400 text-sm sm:text-base max-w-3xl leading-relaxed">
+            <p class="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed font-medium">
                 {cat_info['desc']}
             </p>
         </div>
     </section>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 py-12 flex-1 w-full">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {cards_html}
         </div>
     </main>
@@ -610,7 +784,7 @@ def build_category_page(cat_key, articles):
 
 </body>
 </html>
-"""
+    """
 
 
 def build_article_page(article):
@@ -621,6 +795,9 @@ def build_article_page(article):
     # WhatsApp pre-filled link
     wa_msg = f"Merhaba GKM Elektrik, '{article['title']}' konulu rehberinizi okudum. Benzer bir projemiz var, teknik detayları danışmak ve teklif almak istiyorum."
     wa_link = f"https://wa.me/{WHATSAPP_PHONE}?text={urllib_quote(wa_msg)}"
+
+    cat_info = CATEGORIES.get(article["category"], {})
+    cat_img = cat_info.get("img", "assets/gkm_0_g_kmen_elektrik__amp__otomasyo.webp")
 
     return f"""<!DOCTYPE html>
 <html lang="tr" class="scroll-smooth">
@@ -635,6 +812,7 @@ def build_article_page(article):
     <meta property="og:title" content="{article['title']}">
     <meta property="og:description" content="{article['summary']}">
     <meta property="og:url" content="{SITE_URL}/rehber/{article['slug']}/">
+    <meta property="og:image" content="{SITE_URL}/{cat_img}">
     <meta property="og:type" content="article">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -692,81 +870,87 @@ def build_article_page(article):
     }}
     </script>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-cyan-500 selection:text-black min-h-screen flex flex-col justify-between">
+<body class="bg-slate-100 text-slate-800 font-sans antialiased selection:bg-sky-500 selection:text-white min-h-screen flex flex-col justify-between">
 
     {header}
 
-    <!-- Article Breadcrumb & Title Header -->
-    <section class="py-12 border-b border-slate-800 bg-slate-900/40">
+    <!-- Article Header Banner -->
+    <section class="py-12 border-b border-sky-950 bg-gradient-to-br from-[#001c30] to-[#00111f] text-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6">
             
             <nav class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-4">
-                <a href="{SITE_URL}/" class="hover:text-cyan-400">Ana Sayfa</a>
+                <a href="{SITE_URL}/" class="hover:text-sky-400">Ana Sayfa</a>
                 <span>/</span>
-                <a href="{SITE_URL}/{article['category']}/" class="text-cyan-400 hover:underline">{article.get('category_title', 'Kategori')}</a>
+                <a href="{SITE_URL}/{article['category']}/" class="text-sky-400 hover:underline">{article.get('category_title', 'Kategori')}</a>
                 <span>/</span>
                 <span class="text-slate-500 truncate max-w-xs">{article['slug']}</span>
             </nav>
 
-            <div class="flex items-center gap-3 text-xs font-bold text-slate-400 mb-4">
-                <span class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full border border-cyan-500/20">{article.get('category_title', 'Mühendislik')}</span>
+            <div class="flex items-center gap-3 text-xs font-bold text-slate-300 mb-4">
+                <span class="bg-sky-500 text-slate-950 px-3 py-1 rounded-full uppercase">{article.get('category_title', 'Mühendislik')}</span>
                 <span>⏱️ {article.get('reading_time', '7 dk')}</span>
-                <span>📅 {article.get('date', '2026-11-12')}</span>
+                <span>📅 {article.get('date', 'Güncel')}</span>
             </div>
 
             <h1 class="text-2xl sm:text-4xl font-black text-white leading-tight mb-4">
                 {article['title']}
             </h1>
 
-            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-medium">
                 {article['summary']}
             </p>
+
+            <div class="mt-6 pt-6 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                <span>🎯 <b>Hedef Kitle:</b> {article.get('target_audience', 'Mühendisler')}</span>
+                <span class="text-sky-400 font-bold">GKM Elektrik Mühendislik Ekibi</span>
+            </div>
 
         </div>
     </section>
 
-    <!-- Article Body & Diagram -->
+    <!-- Article Content Body -->
     <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-1 w-full">
-        
-        <!-- Technical Vector Schematic -->
-        <div class="mb-10">
-            {svg_diagram}
-            <span class="text-[11px] text-slate-500 font-mono block text-center mt-2">Şekil 1: GKM Mühendislik Teknik Mimari ve Sinyal Akış Diyagramı</span>
-        </div>
-
-        <!-- Rendered Markdown Body -->
-        <div class="prose prose-invert max-w-none text-slate-300">
-            {article['html_body']}
-        </div>
-
-        <!-- Hot Lead Magnet & Call To Action Box -->
-        <div class="mt-14 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-slate-900 via-cyan-950/40 to-slate-900 border border-cyan-500/40 shadow-2xl">
-            <span class="text-xs font-black text-cyan-400 uppercase tracking-widest block mb-2">GKM MÜHENDİSLİK TEKNİK DANIŞMANLIK</span>
-            <h3 class="text-xl sm:text-2xl font-black text-white mb-3">{article.get('cta_headline', 'Bu Proje İçin Destek mi Gerekiyor?')}</h3>
-            <p class="text-slate-300 text-sm leading-relaxed mb-6">
-                {article.get('cta_text', 'Mevcut sisteminizi inceleyelim, mühendislik ekibimizle en uygun çözümü projelendirelim.')}
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-4">
-                <a href="{wa_link}" target="_blank" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm py-3.5 px-6 rounded-2xl shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-2">
-                    <span>WhatsApp'tan Proje / Şema Gönder</span>
-                </a>
-                <a href="tel:{WHATSAPP_PHONE}" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm py-3.5 px-6 rounded-2xl border border-slate-700 transition flex items-center justify-center gap-2">
-                    <span>📞 {PHONE_DISPLAY}</span>
-                </a>
-                <a href="{MAIN_WEBSITE}" target="_blank" class="bg-slate-950 hover:bg-slate-900 text-cyan-400 font-bold text-sm py-3.5 px-6 rounded-2xl border border-slate-800 transition flex items-center justify-center gap-2">
-                    <span>Resmi Site: gkmelektrik.com</span>
-                </a>
+        <div class="bg-white rounded-3xl p-6 sm:p-12 border border-slate-200 shadow-sm">
+            
+            <!-- Technical SVG Schematic -->
+            <div class="mb-10 rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+                {svg_diagram}
             </div>
-        </div>
 
+            <!-- Body HTML -->
+            <div class="prose max-w-none">
+                {article['html_body']}
+            </div>
+
+            <!-- High Converting Article Call To Action Box -->
+            <div class="mt-14 p-8 rounded-2xl bg-gradient-to-r from-[#001c30] to-[#00111f] text-white border border-sky-900 shadow-xl">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                    <div>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-sky-400 block mb-1">PROJENİZ İÇİN TEKNİK DESTEK</span>
+                        <h3 class="text-xl sm:text-2xl font-black mb-2">{article.get('cta_headline', 'Bu Alanda Projeniz mi Var?')}</h3>
+                        <p class="text-slate-300 text-xs sm:text-sm font-medium leading-relaxed max-w-xl">
+                            {article.get('cta_text', 'Mühendislerimizle görüşerek teknik detayları netleştirebilir, malzeme listesi ve anahtar teslim uygulama teklifi alabilirsiniz.')}
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                        <a href="{wa_link}" target="_blank" class="bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-5 rounded-xl shadow-lg transition text-center flex items-center justify-center gap-2">
+                            <span>💬 WhatsApp ile Proje Danış</span>
+                        </a>
+                        <a href="tel:{WHATSAPP_PHONE}" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs py-3 px-5 rounded-xl border border-white/20 transition text-center">
+                            📞 {PHONE_DISPLAY}
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </main>
 
     {footer}
 
 </body>
 </html>
-"""
+    """
 
 
 def build_sitemap(articles):
@@ -780,19 +964,20 @@ def build_sitemap(articles):
   </url>"""
     ]
 
-    for cat in CATEGORIES:
+    for cat_key in CATEGORIES.keys():
         urls.append(f"""  <url>
-    <loc>{SITE_URL}/{cat}/</loc>
+    <loc>{SITE_URL}/{cat_key}/</loc>
     <lastmod>{today}</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>""")
 
     for a in articles:
+        date_val = a.get("date", today)
         urls.append(f"""  <url>
     <loc>{SITE_URL}/rehber/{a['slug']}/</loc>
-    <lastmod>{a.get('date', today)}</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>{date_val}</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>""")
 
@@ -811,52 +996,62 @@ Sitemap: {SITE_URL}/sitemap.xml
 
 
 def compile_site():
-    print("[ENGINE] Static compilation starting...")
+    print("[SSG] Derleme baslatildi...")
     articles = load_all_articles()
-    print(f"[ENGINE] Loaded {len(articles)} technical articles.")
+    print(f"[SSG] Yuklenen makale sayisi: {len(articles)}")
+
+    # Clean and prepare dist directory
+    if os.path.exists(DIST_DIR):
+        shutil.rmtree(DIST_DIR)
+    os.makedirs(DIST_DIR, exist_ok=True)
 
     # 1. Homepage
     home_html = build_homepage(articles)
     with open(os.path.join(DIST_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(home_html)
-    print(" -> dist/index.html compiled.")
+    print(" -> index.html olusturuldu.")
 
     # 2. Categories
-    for cat in CATEGORIES:
-        cat_dir = os.path.join(DIST_DIR, cat)
+    for cat_key in CATEGORIES.keys():
+        cat_dir = os.path.join(DIST_DIR, cat_key)
         os.makedirs(cat_dir, exist_ok=True)
-        cat_html = build_category_page(cat, articles)
+        cat_html = build_category_page(cat_key, articles)
         with open(os.path.join(cat_dir, "index.html"), "w", encoding="utf-8") as f:
             f.write(cat_html)
-        print(f" -> dist/{cat}/index.html compiled.")
+        print(f" -> /{cat_key}/index.html olusturuldu.")
 
-    # 3. Articles
+    # 3. Individual Guide / Article pages
     for a in articles:
         art_dir = os.path.join(DIST_DIR, "rehber", a["slug"])
         os.makedirs(art_dir, exist_ok=True)
         art_html = build_article_page(a)
         with open(os.path.join(art_dir, "index.html"), "w", encoding="utf-8") as f:
             f.write(art_html)
-        print(f" -> dist/rehber/{a['slug']}/index.html compiled.")
+    print(f" -> {len(articles)} adet /rehber/[slug]/ sayfasi olusturuldu.")
 
     # 4. Sitemap & Robots
     with open(os.path.join(DIST_DIR, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write(build_sitemap(articles))
-    print(" -> dist/sitemap.xml compiled.")
+    print(" -> sitemap.xml olusturuldu.")
 
     with open(os.path.join(DIST_DIR, "robots.txt"), "w", encoding="utf-8") as f:
         f.write(build_robots_txt())
-    print(" -> dist/robots.txt compiled.")
+    print(" -> robots.txt olusturuldu.")
 
-    # 5. Mirror to docs/ for GitHub Pages
-    import shutil
-    docs_dir = os.path.join(BASE_DIR, "docs")
-    if os.path.exists(docs_dir):
-        shutil.rmtree(docs_dir)
-    shutil.copytree(DIST_DIR, docs_dir)
-    print(" -> Mirrored dist/ to docs/ for GitHub Pages.")
+    # 5. Copy Assets into dist/assets
+    dist_assets = os.path.join(DIST_DIR, "assets")
+    os.makedirs(dist_assets, exist_ok=True)
+    if os.path.exists(ASSETS_DIR):
+        for f in os.listdir(ASSETS_DIR):
+            shutil.copy2(os.path.join(ASSETS_DIR, f), os.path.join(dist_assets, f))
+    print(" -> assets kopyalandi.")
 
-    print(f"[ENGINE] All pages compiled successfully into dist/ and docs/. Total articles: {len(articles)}")
+    # 6. Mirror to /docs for GitHub Pages
+    if os.path.exists(DOCS_DIR):
+        shutil.rmtree(DOCS_DIR)
+    shutil.copytree(DIST_DIR, DOCS_DIR)
+    print(f" -> docs/ klasorune tam ayna senkronizasyonu tamamlandi.")
+    print("[SSG] Site derlemesi basariyla tamamlandi!")
 
 
 if __name__ == "__main__":
