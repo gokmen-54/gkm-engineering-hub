@@ -407,6 +407,10 @@ def build_homepage(articles):
     <meta name="keywords" content="gökmen elektrik, makine otomasyonu, plc programlama, scada yazılımı, pcb tasarımı, gömülü sistemler, elektrik panosu imalatı, kompanzasyon, sakarya elektrik, kocaeli otomasyon">
     <link rel="canonical" href="{SITE_URL}/">
 
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
     <!-- Open Graph -->
     <meta property="og:title" content="GKM Elektrik & Mühendislik | Endüstriyel Çözüm & Otomasyon Hub">
     <meta property="og:description" content="Fabrikalar ve makine imalatçıları için ileri teknoloji mühendislik, PLC/SCADA, özel PCB ve şalt çözümleri.">
@@ -808,6 +812,10 @@ def build_article_page(article):
     <meta name="description" content="{article['summary']}">
     <link rel="canonical" href="{SITE_URL}/rehber/{article['slug']}/">
 
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
     <!-- Open Graph -->
     <meta property="og:title" content="{article['title']}">
     <meta property="og:description" content="{article['summary']}">
@@ -989,8 +997,41 @@ def build_sitemap(articles):
 
 
 def build_robots_txt():
-    return f"""User-agent: *
+    return f"""# GKM Elektrik & Mühendislik Robots Policy
+User-agent: Googlebot
 Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+# Block aggressive scrapers and malicious content stealers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: *
+Allow: /
+
 Sitemap: {SITE_URL}/sitemap.xml
 """
 

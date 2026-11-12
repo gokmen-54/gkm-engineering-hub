@@ -102,5 +102,18 @@
     "diagram_type": "servo_tuning",
     "cta_headline": "Makinanız Titriyor veya Konum Kaçırıyor mu?",
     "cta_text": "Saha mühendislerimiz servo sürücü tuning ve mekanik eksen kalibrasyonunu yerinde veya uzaktan çözer. Hemen iletişime geçin."
+  },
+  {
+    "slug": "iso-13849-1-makine-emniyet-devresi-tasarimi-sil-pl-hesabi",
+    "category": "makine-otomasyonu",
+    "category_title": "Makine Otomasyonu",
+    "title": "ISO 13849-1 Standardına Göre Makine Emniyet Devresi Tasarımı: Performance Level (PLr) ve SIL Hesabı",
+    "summary": "Pres, robot hücresi ve ambalaj hatlarında acil stop, ışık bariyeri ve çift kanal emniyet rölesi mimarisi ile SISTEMA üzerinde PL ve SIL doğrulama rehberi.",
+    "target_audience": "Makine İmalatçıları & İş Güvenliği Mühendisleri",
+    "reading_time": "8 dk okuma",
+    "diagram_type": "default",
+    "cta_headline": "Makinanızın CE ve Emniyet Uyumluluğu İçin Destek mi Gerekiyor?",
+    "cta_text": "GKM Elektrik ISO 13849-1 standartlarına uygun emniyet devresi projelendirmesi ve SISTEMA hesaplamalarını anahtar teslim yapar. Projenizi danışın.",
+    "date": "2026-11-13"
   }
 ]
