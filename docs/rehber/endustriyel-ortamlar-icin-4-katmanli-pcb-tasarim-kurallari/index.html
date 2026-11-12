@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endüstriyel Ortamlar İçin 4 Katmanlı PCB Tasarımı: EMC/EMI Koruması ve Ground Plane Kuralları | GKM Elektrik & Mühendislik</title>
+    <meta name="description" content="Motor sürücüleri ve şalt sahalarının oluşturduğu elektriksel gürültülere (EMC/ESD) dayanıklı 4 katmanlı (SIG-GND-PWR-SIG) endüstriyel kart tasarımı, diferansiyel empedans hesabı ve izolasyon teknikleri.">
+    <link rel="canonical" href="https://gokmen-54.github.io/gkm-engineering-hub/rehber/endustriyel-ortamlar-icin-4-katmanli-pcb-tasarim-kurallari/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Endüstriyel Ortamlar İçin 4 Katmanlı PCB Tasarımı: EMC/EMI Koruması ve Ground Plane Kuralları">
+    <meta property="og:description" content="Motor sürücüleri ve şalt sahalarının oluşturduğu elektriksel gürültülere (EMC/ESD) dayanıklı 4 katmanlı (SIG-GND-PWR-SIG) endüstriyel kart tasarımı, diferansiyel empedans hesabı ve izolasyon teknikleri.">
+    <meta property="og:url" content="https://gokmen-54.github.io/gkm-engineering-hub/rehber/endustriyel-ortamlar-icin-4-katmanli-pcb-tasarim-kurallari/">
+    <meta property="og:type" content="article">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+
+    <!-- Schema.org Article & Breadcrumbs -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Ana Sayfa",
+              "item": "https://gokmen-54.github.io/gkm-engineering-hub/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "PCB & Elektronik Tasarım",
+              "item": "https://gokmen-54.github.io/gkm-engineering-hub/pcb-elektronik-tasarim/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Endüstriyel Ortamlar İçin 4 Katmanlı PCB Tasarımı: EMC/EMI Koruması ve Ground Plane Kuralları",
+              "item": "https://gokmen-54.github.io/gkm-engineering-hub/rehber/endustriyel-ortamlar-icin-4-katmanli-pcb-tasarim-kurallari/"
+            }
+          ]
+        },
+        {
+          "@type": "TechArticle",
+          "headline": "Endüstriyel Ortamlar İçin 4 Katmanlı PCB Tasarımı: EMC/EMI Koruması ve Ground Plane Kuralları",
+          "description": "Motor sürücüleri ve şalt sahalarının oluşturduğu elektriksel gürültülere (EMC/ESD) dayanıklı 4 katmanlı (SIG-GND-PWR-SIG) endüstriyel kart tasarımı, diferansiyel empedans hesabı ve izolasyon teknikleri.",
+          "author": {
+            "@type": "Organization",
+            "name": "GKM Elektrik & Mühendislik",
+            "url": "https://gkmelektrik.com"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "GKM Elektrik",
+            "url": "https://gkmelektrik.com"
+          },
+          "datePublished": "2026-11-11",
+          "inLanguage": "tr"
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-cyan-500 selection:text-black min-h-screen flex flex-col justify-between">
+
+    
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-slate-950 via-cyan-950/40 to-slate-950 text-slate-300 text-xs py-2.5 px-4 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                <span><b>GKM Elektrik & Mühendislik:</b> Endüstriyel Otomasyon, PLC/SCADA, PCB ve Pano İmalatı</span>
+            </div>
+            <div class="flex items-center gap-4 text-xs font-semibold">
+                <a href="https://gkmelektrik.com" target="_blank" class="text-cyan-400 hover:underline flex items-center gap-1">
+                    <span>Resmi Sitemiz: gkmelektrik.com</span> ➔
+                </a>
+                <a href="tel:905377029954" class="text-slate-400 hover:text-white hidden sm:inline">
+                    📞 0537 702 99 54
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="border-b border-slate-800 bg-slate-950/90 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
+            
+            <!-- Logo -->
+            <a href="https://gokmen-54.github.io/gkm-engineering-hub/" class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-cyan-500/20">
+                    ⚡
+                </div>
+                <div>
+                    <span class="text-xl font-black text-white tracking-tight block">GKM<span class="text-cyan-400">MÜHENDİSLİK</span></span>
+                    <span class="text-[10px] text-slate-400 uppercase tracking-widest block font-bold">Endüstriyel Çözüm & Teknik Hub</span>
+                </div>
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="hidden lg:flex items-center gap-6 text-xs sm:text-sm font-bold text-slate-300">
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/makine-otomasyonu/" class="hover:text-cyan-400 transition ">Makine Otomasyonu</a>
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/plc-scada-yazilim/" class="hover:text-cyan-400 transition ">PLC & SCADA</a>
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/pcb-elektronik-tasarim/" class="hover:text-cyan-400 transition text-cyan-400">PCB Tasarımı</a>
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/elektrik-panosu-salt/" class="hover:text-cyan-400 transition ">Pano & Şalt</a>
+            </nav>
+
+            <!-- CTA Buttons -->
+            <div class="flex items-center gap-3">
+                <a href="https://wa.me/905377029954?text=Merhaba%2C%20m%C3%BChendislik%20projemiz%20i%C3%A7in%20teknik%20g%C3%B6r%C3%BC%C5%9Fme%20ve%20teklif%20almak%20istiyoruz." target="_blank" rel="noopener" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs sm:text-sm py-2.5 px-4 sm:px-5 rounded-full shadow-lg shadow-emerald-500/20 transition flex items-center gap-2">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                    <span>WhatsApp Proje Danış</span>
+                </a>
+            </div>
+
+        </div>
+    </header>
+    
+
+    <!-- Article Breadcrumb & Title Header -->
+    <section class="py-12 border-b border-slate-800 bg-slate-900/40">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            
+            <nav class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-4">
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/" class="hover:text-cyan-400">Ana Sayfa</a>
+                <span>/</span>
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/pcb-elektronik-tasarim/" class="text-cyan-400 hover:underline">PCB & Elektronik Tasarım</a>
+                <span>/</span>
+                <span class="text-slate-500 truncate max-w-xs">endustriyel-ortamlar-icin-4-katmanli-pcb-tasarim-kurallari</span>
+            </nav>
+
+            <div class="flex items-center gap-3 text-xs font-bold text-slate-400 mb-4">
+                <span class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full border border-cyan-500/20">PCB & Elektronik Tasarım</span>
+                <span>⏱️ 9 dk okuma</span>
+                <span>📅 2026-11-11</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl font-black text-white leading-tight mb-4">
+                Endüstriyel Ortamlar İçin 4 Katmanlı PCB Tasarımı: EMC/EMI Koruması ve Ground Plane Kuralları
+            </h1>
+
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Motor sürücüleri ve şalt sahalarının oluşturduğu elektriksel gürültülere (EMC/ESD) dayanıklı 4 katmanlı (SIG-GND-PWR-SIG) endüstriyel kart tasarımı, diferansiyel empedans hesabı ve izolasyon teknikleri.
+            </p>
+
+        </div>
+    </section>
+
+    <!-- Article Body & Diagram -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-1 w-full">
+        
+        <!-- Technical Vector Schematic -->
+        <div class="mb-10">
+            
+        <svg viewBox="0 0 800 360" class="w-full h-auto rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl p-4" xmlns="http://www.w3.org/2000/svg">
+          <text x="30" y="35" fill="#94a3b8" font-family="monospace" font-size="12" font-weight="bold">GKM MÜHENDİSLİK // 4-KATMAN ENDÜSTRİYEL PCB STACKUP & İZOLASYON ŞEMASI</text>
+
+          <!-- Layer 1 -->
+          <rect x="60" y="60" width="680" height="40" rx="4" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+          <text x="80" y="85" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="bold">LAYER 1: TOP SIGNAL (High Speed Bus & MCU Traces - 1oz Bakır)</text>
+          <text x="650" y="85" fill="#bae6fd" font-family="monospace" font-size="11">35 µm</text>
+
+          <!-- Prepreg -->
+          <rect x="60" y="105" width="680" height="25" fill="#334155" stroke="#475569" stroke-width="1"/>
+          <text x="400" y="122" fill="#cbd5e1" font-family="monospace" font-size="11" text-anchor="middle">DIELECTRIC PREPREG (FR4 Core - 0.2mm)</text>
+
+          <!-- Layer 2 -->
+          <rect x="60" y="135" width="680" height="40" rx="4" fill="#15803d" stroke="#22c55e" stroke-width="2"/>
+          <text x="80" y="160" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="bold">LAYER 2: SOLID GROUND PLANE (GND - 0V EMI Kalkanlama Referansı)</text>
+          <text x="650" y="160" fill="#bbf7d0" font-family="monospace" font-size="11">35 µm</text>
+
+          <!-- Core -->
+          <rect x="60" y="180" width="680" height="35" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+          <text x="400" y="202" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">CORE DIELECTRIC ISOLATION (1.0mm Yüksek Gerilim İzolasyonu)</text>
+
+          <!-- Layer 3 -->
+          <rect x="60" y="220" width="680" height="40" rx="4" fill="#b45309" stroke="#f59e0b" stroke-width="2"/>
+          <text x="80" y="245" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="bold">LAYER 3: POWER PLANE (+24V, +5V, +3.3V Dağıtım Alanı)</text>
+          <text x="650" y="245" fill="#fef08a" font-family="monospace" font-size="11">35 µm</text>
+
+          <!-- Prepreg -->
+          <rect x="60" y="265" width="680" height="25" fill="#334155" stroke="#475569" stroke-width="1"/>
+          <text x="400" y="282" fill="#cbd5e1" font-family="monospace" font-size="11" text-anchor="middle">DIELECTRIC PREPREG (FR4 - 0.2mm)</text>
+
+          <!-- Layer 4 -->
+          <rect x="60" y="295" width="680" height="40" rx="4" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+          <text x="80" y="320" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="bold">LAYER 4: BOTTOM SIGNAL (Sensör Girişleri & Röle Çıkışları)</text>
+          <text x="650" y="320" fill="#bae6fd" font-family="monospace" font-size="11">35 µm</text>
+        </svg>
+        
+            <span class="text-[11px] text-slate-500 font-mono block text-center mt-2">Şekil 1: GKM Mühendislik Teknik Mimari ve Sinyal Akış Diyagramı</span>
+        </div>
+
+        <!-- Rendered Markdown Body -->
+        <div class="prose prose-invert max-w-none text-slate-300">
+            <h2 class="text-xl sm:text-2xl font-black text-cyan-400 mt-10 mb-4 pb-2 border-b border-slate-800">Endüstriyel PCB Tasarımında Gürültü ve EMC/EMI Gerçeği</h2>
+
+<p class="text-slate-300 leading-relaxed text-sm sm:text-base mb-4">Tüketici elektroniğinin aksine, fabrika sahalarında çalışan elektronik kontrol kartları ağır şartlar altındadır:
+<li class="ml-4 list-disc text-slate-300 mb-1.5">Yüksek frekanslı PWM gürültüsü yayan AC motor sürücüleri (Inverter/VFD),</li>
+<li class="ml-4 list-disc text-slate-300 mb-1.5">Şebeke kaynaklı transients (EFT/Burst testleri - IEC 61000-4-4),</li>
+<li class="ml-4 list-disc text-slate-300 mb-1.5">İndüktif yüklerin (kontaktör ve selenoid valf bobinleri) açılıp kapanmasıyla oluşan arklar,</li>
+<li class="ml-4 list-disc text-slate-300 mb-1.5">Statik elektrik boşalmaları (ESD - IEC 61000-4-2).</li></p>
+
+<p class="text-slate-300 leading-relaxed text-sm sm:text-base mb-4">Bu ortamda kararlı çalışan bir elektronik kart üretmek için <strong class="text-white font-extrabold">şematik tasarım kadar PCB katman yapısı (Layer Stackup) ve Ground Plane stratejisi</strong> hayati önem taşır.</p>
+
+<p class="text-slate-300 leading-relaxed text-sm sm:text-base mb-4">---</p>
+
+<h2 class="text-xl sm:text-2xl font-black text-cyan-400 mt-10 mb-4 pb-2 border-b border-slate-800">4 Katmanlı Endüstriyel Stackup Konfigürasyonu (SIG - GND - PWR - SIG)</h2>
+
+<p class="text-slate-300 leading-relaxed text-sm sm:text-base mb-4">En yüksek elektromanyetik uyumluluk için standart 4 katmanlı endüstriyel stackup şu şekilde düzenlenir:</p>
+
+<div class="overflow-x-auto my-6"><table class="w-full text-left text-xs sm:text-sm border-collapse bg-slate-900/60 rounded-xl border border-slate-800"><thead class="bg-slate-950 text-cyan-400 font-bold border-b border-slate-800"><tr><th class="p-3.5">Katman</th><th class="p-3.5">Tip</th><th class="p-3.5">Fonksiyon ve Tasarım Kriteri</th><th class="p-3.5">Bakır Kalınlığı</th></tr></thead><tbody><tr class="border-b border-slate-800/60 hover:bg-slate-800/30 transition"><td class="p-3.5"><strong class="text-white font-extrabold">Layer 1 (Top)</strong></td><td class="p-3.5">Sinyal (SIG)</td><td class="p-3.5">MCU, kristal, sensör ve haberleşme yolları</td><td class="p-3.5">35 µm (1 oz)</td></tr><tr class="border-b border-slate-800/60 hover:bg-slate-800/30 transition"><td class="p-3.5"><strong class="text-white font-extrabold">Layer 2 (Inner 1)</strong></td><td class="p-3.5">Solid Ground (GND)</td><td class="p-3.5">Kesintisiz 0V referans düzlemi, EMI kalkanı</td><td class="p-3.5">35 µm (1 oz)</td></tr><tr class="border-b border-slate-800/60 hover:bg-slate-800/30 transition"><td class="p-3.5"><strong class="text-white font-extrabold">Layer 3 (Inner 2)</strong></td><td class="p-3.5">Güç (PWR)</td><td class="p-3.5">+24V, +5V, +3.3V ada/poligon dağıtımı</td><td class="p-3.5">35 µm (1 oz)</td></tr><tr class="border-b border-slate-800/60 hover:bg-slate-800/30 transition"><td class="p-3.5"><strong class="text-white font-extrabold">Layer 4 (Bottom)</strong></td><td class="p-3.5">Sinyal (SIG)</td><td class="p-3.5">Güç elemanları, filtreler ve konnektör hatları</td><td class="p-3.5">35 µm (1 oz)</td></tr></tbody></table></div>
+
+<h3 class="text-lg sm:text-xl font-bold text-white mt-8 mb-3">Neden Kesintisiz Solid GND Plane?</h3>
+Yüksek frekanslı sinyallerin geri dönüş akımı (Return Path), en düşük direnç yolunu değil, <strong class="text-white font-extrabold">en düşük endüktans yolunu</strong> (doğrudan sinyal yolunun altındaki GND yüzeyini) takip eder. Eğer Ground Plane yarıklarla bölünürse, geri dönüş akımı döngü (loop area) oluşturur ve PCB dev bir anten gibi hem EMI yayar hem de dış gürültüyü toplar.
+
+<p class="text-slate-300 leading-relaxed text-sm sm:text-base mb-4">---</p>
+
+<h2 class="text-xl sm:text-2xl font-black text-cyan-400 mt-10 mb-4 pb-2 border-b border-slate-800">Giriş/Çıkış (I/O) Koruması ve İzolasyon</h2>
+
+<li class="ml-4 list-decimal text-slate-300 mb-1.5"><strong class="text-white font-extrabold">Galvanik İzolasyon:</strong> 24V fabrika saha sinyalleri ile hassas 3.3V mikrodenetleyici (MCU) çekirdeği arasında optokuplörler (örn: PC817, TLP291) veya dijital izolatörler (örn: ISO7741) kullanılır.</li>
+<li class="ml-4 list-decimal text-slate-300 mb-1.5"><strong class="text-white font-extrabold">TVS Diyot ve Ferrit Boncuk:</strong> RS-485 veya CAN Bus haberleşme hatlarında SM712 veya benzeri çift yönlü TVS diyotlar kullanılır.</li>
+<li class="ml-4 list-decimal text-slate-300 mb-1.5"><strong class="text-white font-extrabold">Ayrık Toprak Mimarisi:</strong> Şase/Kutu toprağı (EARTH) ile dijital devre toprağı (GND), 1nF 2kV yüksek gerilim kondansatörü ve paralel 1MΩ direnç üzerinden bağlanarak ESD enerjisi güvenle tahliye edilir.</li>
+        </div>
+
+        <!-- Hot Lead Magnet & Call To Action Box -->
+        <div class="mt-14 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-slate-900 via-cyan-950/40 to-slate-900 border border-cyan-500/40 shadow-2xl">
+            <span class="text-xs font-black text-cyan-400 uppercase tracking-widest block mb-2">GKM MÜHENDİSLİK TEKNİK DANIŞMANLIK</span>
+            <h3 class="text-xl sm:text-2xl font-black text-white mb-3">Özel Elektronik Kart Projeniz mi Var?</h3>
+            <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                Şematik, blok diyagram veya gerber dosyalarınızı WhatsApp üzerinden paylaşın; DFM (Üretilebilirlik) analizi ve prototip bütçelendirmesini 24 saatte sunalım.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik%2C%20%27End%C3%BCstriyel%20Ortamlar%20%C4%B0%C3%A7in%204%20Katmanl%C4%B1%20PCB%20Tasar%C4%B1m%C4%B1%3A%20EMC/EMI%20Korumas%C4%B1%20ve%20Ground%20Plane%20Kurallar%C4%B1%27%20konulu%20rehberinizi%20okudum.%20Benzer%20bir%20projemiz%20var%2C%20teknik%20detaylar%C4%B1%20dan%C4%B1%C5%9Fmak%20ve%20teklif%20almak%20istiyorum." target="_blank" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm py-3.5 px-6 rounded-2xl shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-2">
+                    <span>WhatsApp'tan Proje / Şema Gönder</span>
+                </a>
+                <a href="tel:905377029954" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm py-3.5 px-6 rounded-2xl border border-slate-700 transition flex items-center justify-center gap-2">
+                    <span>📞 0537 702 99 54</span>
+                </a>
+                <a href="https://gkmelektrik.com" target="_blank" class="bg-slate-950 hover:bg-slate-900 text-cyan-400 font-bold text-sm py-3.5 px-6 rounded-2xl border border-slate-800 transition flex items-center justify-center gap-2">
+                    <span>Resmi Site: gkmelektrik.com</span>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    
+    <!-- Mobile Sticky Action Bar -->
+    <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-950/95 border-t border-slate-800 backdrop-blur-lg px-4 py-2.5 flex items-center justify-between gap-2 shadow-2xl">
+        <a href="tel:905377029954" class="flex-1 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-3 rounded-xl border border-slate-700 flex items-center justify-center gap-1.5">
+            📞 Hemen Ara: 0537 702 99 54
+        </a>
+        <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik%2C%20teknik%20projemiz%20i%C3%A7in%20%C5%9Fema/liste%20g%C3%B6nderip%20teklif%20almak%20istiyoruz." target="_blank" class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs py-2.5 px-3 rounded-xl shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-1.5">
+            <span>WhatsApp Şema Gönder</span>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-950 text-slate-500 text-xs py-14 pb-24 lg:pb-14">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-slate-900">
+                <div class="md:col-span-1">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center text-slate-950 font-black">⚡</div>
+                        <span class="font-black text-white text-base">GKM Elektrik</span>
+                    </div>
+                    <p class="text-slate-400 leading-relaxed text-xs mb-4">
+                        Özel makine otomasyonu, PLC/SCADA yazılımı, çok katmanlı PCB tasarımı ve tip testli elektrik panosu imalatı.
+                    </p>
+                    <a href="https://gkmelektrik.com" target="_blank" class="text-cyan-400 font-bold hover:underline block">
+                        ➔ Resmi Web Sitemiz: gkmelektrik.com
+                    </a>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Hizmet Alanlarımız</h4>
+                    <ul class="space-y-2">
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/makine-otomasyonu/" class="hover:text-cyan-400 transition">Makine Otomasyonu & Servo</a></li>
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/plc-scada-yazilim/" class="hover:text-cyan-400 transition">PLC Programlama & SCADA</a></li>
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/pcb-elektronik-tasarim/" class="hover:text-cyan-400 transition">Özel PCB & Gömülü Sistemler</a></li>
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/elektrik-panosu-salt/" class="hover:text-cyan-400 transition">Tip Testli Pano & Kompanzasyon</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Mühendislik İletişim</h4>
+                    <ul class="space-y-2 text-slate-400">
+                        <li><b>Telefon:</b> <a href="tel:905377029954" class="hover:text-white">0537 702 99 54</a></li>
+                        <li><b>WhatsApp:</b> <a href="https://wa.me/905377029954" target="_blank" class="hover:text-emerald-400">+90 537 702 99 54</a></li>
+                        <li><b>Hizmet Sahası:</b> Sakarya, Kocaeli, Marmara & Tüm Türkiye</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Hızlı Şema & Teklif</h4>
+                    <p class="text-slate-400 text-xs mb-3">
+                        EPLAN pano projenizi, makine fonksiyon şemanızı veya PCB gerber dosyalarınızı WhatsApp üzerinden anında iletebilirsiniz.
+                    </p>
+                    <a href="https://wa.me/905377029954?text=Merhaba%2C%20projemiz%20i%C3%A7in%20teknik%20d%C3%B6k%C3%BCman%20payla%C5%9Fmak%20istiyoruz." target="_blank" class="inline-block bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-slate-800 px-4 py-2 rounded-xl text-xs font-bold transition">
+                        Şema & Liste Gönder ➔
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-600">
+                <p>© 2026 GKM Elektrik & Mühendislik. Tüm hakları saklıdır.</p>
+                <p>Programmatic Engineering Hub • Yüksek Performanslı SEO ve Müşteri Yakalama Motoru</p>
+            </div>
+        </div>
+    </footer>
+    
+
+</body>
+</html>

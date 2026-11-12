@@ -848,7 +848,15 @@ def compile_site():
         f.write(build_robots_txt())
     print(" -> dist/robots.txt compiled.")
 
-    print(f"[ENGINE] All pages compiled successfully into dist/. Total articles: {len(articles)}")
+    # 5. Mirror to docs/ for GitHub Pages
+    import shutil
+    docs_dir = os.path.join(BASE_DIR, "docs")
+    if os.path.exists(docs_dir):
+        shutil.rmtree(docs_dir)
+    shutil.copytree(DIST_DIR, docs_dir)
+    print(" -> Mirrored dist/ to docs/ for GitHub Pages.")
+
+    print(f"[ENGINE] All pages compiled successfully into dist/ and docs/. Total articles: {len(articles)}")
 
 
 if __name__ == "__main__":
