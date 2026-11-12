@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gokmen-54.github.io/gkm-engineering-hub/sitemap.xml

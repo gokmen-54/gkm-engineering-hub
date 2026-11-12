@@ -1,0 +1,39 @@
+name: Daily Autonomous Engineering SEO Content & Sitemap
+
+on:
+  schedule:
+    # Runs every morning at 06:00 UTC (09:00 TR Time)
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate New Content & Compile Site
+        run: |
+          cd generator
+          python auto_daily_content.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/ generator/ dist/
+          if git diff --staged --quiet; then
+            echo "No new changes to commit."
+          else
+            git commit -m "chore(seo): autonomous daily engineering guide & sitemap update [skip ci]"
+            git push origin main
+          fi

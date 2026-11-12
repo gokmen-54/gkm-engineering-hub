@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fabrikalarda SCADA ve Endüstriyel IoT ile Enerji Takibi: Modbus TCP ve MQTT Entegrasyonu | GKM Elektrik & Mühendislik</title>
+    <meta name="description" content="Tesis genelindeki enerji analizörlerinden Modbus RTU/TCP üzerinden veri toplayıp Ignition SCADA veya Node-RED/MQTT sunucusuna aktaran, reaktif ceza ve harmonik anomalilerini anlık bildiren IoT mimarisi.">
+    <link rel="canonical" href="https://gokmen-54.github.io/gkm-engineering-hub/rehber/fabrikalarda-scada-ve-iot-enerji-izleme-sistemi-kurulumu/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Fabrikalarda SCADA ve Endüstriyel IoT ile Enerji Takibi: Modbus TCP ve MQTT Entegrasyonu">
+    <meta property="og:description" content="Tesis genelindeki enerji analizörlerinden Modbus RTU/TCP üzerinden veri toplayıp Ignition SCADA veya Node-RED/MQTT sunucusuna aktaran, reaktif ceza ve harmonik anomalilerini anlık bildiren IoT mimarisi.">
+    <meta property="og:url" content="https://gokmen-54.github.io/gkm-engineering-hub/rehber/fabrikalarda-scada-ve-iot-enerji-izleme-sistemi-kurulumu/">
+    <meta property="og:type" content="article">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+
+    <!-- Schema.org Article & Breadcrumbs -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Ana Sayfa",
+              "item": "https://gokmen-54.github.io/gkm-engineering-hub/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "PLC & SCADA Yazılım",
+              "item": "https://gokmen-54.github.io/gkm-engineering-hub/plc-scada-yazilim/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Fabrikalarda SCADA ve Endüstriyel IoT ile Enerji Takibi: Modbus TCP ve MQTT Entegrasyonu",
+              "item": "https://gokmen-54.github.io/gkm-engineering-hub/rehber/fabrikalarda-scada-ve-iot-enerji-izleme-sistemi-kurulumu/"
+            }
+          ]
+        },
+        {
+          "@type": "TechArticle",
+          "headline": "Fabrikalarda SCADA ve Endüstriyel IoT ile Enerji Takibi: Modbus TCP ve MQTT Entegrasyonu",
+          "description": "Tesis genelindeki enerji analizörlerinden Modbus RTU/TCP üzerinden veri toplayıp Ignition SCADA veya Node-RED/MQTT sunucusuna aktaran, reaktif ceza ve harmonik anomalilerini anlık bildiren IoT mimarisi.",
+          "author": {
+            "@type": "Organization",
+            "name": "GKM Elektrik & Mühendislik",
+            "url": "https://gkmelektrik.com"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "GKM Elektrik",
+            "url": "https://gkmelektrik.com"
+          },
+          "datePublished": "2026-11-10",
+          "inLanguage": "tr"
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-cyan-500 selection:text-black min-h-screen flex flex-col justify-between">
+
+    
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-slate-950 via-cyan-950/40 to-slate-950 text-slate-300 text-xs py-2.5 px-4 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                <span><b>GKM Elektrik & Mühendislik:</b> Endüstriyel Otomasyon, PLC/SCADA, PCB ve Pano İmalatı</span>
+            </div>
+            <div class="flex items-center gap-4 text-xs font-semibold">
+                <a href="https://gkmelektrik.com" target="_blank" class="text-cyan-400 hover:underline flex items-center gap-1">
+                    <span>Resmi Sitemiz: gkmelektrik.com</span> ➔
+                </a>
+                <a href="tel:905377029954" class="text-slate-400 hover:text-white hidden sm:inline">
+                    📞 0537 702 99 54
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="border-b border-slate-800 bg-slate-950/90 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
+            
+            <!-- Logo -->
+            <a href="https://gokmen-54.github.io/gkm-engineering-hub/" class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-cyan-500/20">
+                    ⚡
+                </div>
+                <div>
+                    <span class="text-xl font-black text-white tracking-tight block">GKM<span class="text-cyan-400">MÜHENDİSLİK</span></span>
+                    <span class="text-[10px] text-slate-400 uppercase tracking-widest block font-bold">Endüstriyel Çözüm & Teknik Hub</span>
+                </div>
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="hidden lg:flex items-center gap-6 text-xs sm:text-sm font-bold text-slate-300">
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/makine-otomasyonu/" class="hover:text-cyan-400 transition ">Makine Otomasyonu</a>
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/plc-scada-yazilim/" class="hover:text-cyan-400 transition text-cyan-400">PLC & SCADA</a>
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/pcb-elektronik-tasarim/" class="hover:text-cyan-400 transition ">PCB Tasarımı</a>
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/elektrik-panosu-salt/" class="hover:text-cyan-400 transition ">Pano & Şalt</a>
+            </nav>
+
+            <!-- CTA Buttons -->
+            <div class="flex items-center gap-3">
+                <a href="https://wa.me/905377029954?text=Merhaba%2C%20m%C3%BChendislik%20projemiz%20i%C3%A7in%20teknik%20g%C3%B6r%C3%BC%C5%9Fme%20ve%20teklif%20almak%20istiyoruz." target="_blank" rel="noopener" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs sm:text-sm py-2.5 px-4 sm:px-5 rounded-full shadow-lg shadow-emerald-500/20 transition flex items-center gap-2">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                    <span>WhatsApp Proje Danış</span>
+                </a>
+            </div>
+
+        </div>
+    </header>
+    
+
+    <!-- Article Breadcrumb & Title Header -->
+    <section class="py-12 border-b border-slate-800 bg-slate-900/40">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            
+            <nav class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-4">
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/" class="hover:text-cyan-400">Ana Sayfa</a>
+                <span>/</span>
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/plc-scada-yazilim/" class="text-cyan-400 hover:underline">PLC & SCADA Yazılım</a>
+                <span>/</span>
+                <span class="text-slate-500 truncate max-w-xs">fabrikalarda-scada-ve-iot-enerji-izleme-sistemi-kurulumu</span>
+            </nav>
+
+            <div class="flex items-center gap-3 text-xs font-bold text-slate-400 mb-4">
+                <span class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full border border-cyan-500/20">PLC & SCADA Yazılım</span>
+                <span>⏱️ 8 dk okuma</span>
+                <span>📅 2026-11-10</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl font-black text-white leading-tight mb-4">
+                Fabrikalarda SCADA ve Endüstriyel IoT ile Enerji Takibi: Modbus TCP ve MQTT Entegrasyonu
+            </h1>
+
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Tesis genelindeki enerji analizörlerinden Modbus RTU/TCP üzerinden veri toplayıp Ignition SCADA veya Node-RED/MQTT sunucusuna aktaran, reaktif ceza ve harmonik anomalilerini anlık bildiren IoT mimarisi.
+            </p>
+
+        </div>
+    </section>
+
+    <!-- Article Body & Diagram -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-1 w-full">
+        
+        <!-- Technical Vector Schematic -->
+        <div class="mb-10">
+            
+        <svg viewBox="0 0 800 360" class="w-full h-auto rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl p-4" xmlns="http://www.w3.org/2000/svg">
+          <text x="30" y="35" fill="#94a3b8" font-family="monospace" font-size="12" font-weight="bold">GKM MÜHENDİSLİK // FABRİKA SCADA & ENDÜSTRİYEL IoT HABERLEŞME TOPOLOJİSİ</text>
+
+          <!-- Saha Katmanı -->
+          <rect x="40" y="70" width="200" height="240" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+          <text x="140" y="95" fill="#38bdf8" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">SAHA KATMANI</text>
+          
+          <rect x="55" y="115" width="170" height="45" rx="6" fill="#1e293b" stroke="#00e5ff" stroke-width="1"/>
+          <text x="140" y="142" fill="#f8fafc" font-family="sans-serif" font-size="11" text-anchor="middle">Trafo Enerji Analizörleri</text>
+
+          <rect x="55" y="175" width="170" height="45" rx="6" fill="#1e293b" stroke="#00e5ff" stroke-width="1"/>
+          <text x="140" y="202" fill="#f8fafc" font-family="sans-serif" font-size="11" text-anchor="middle">Motor Sürücüleri (VFD)</text>
+
+          <rect x="55" y="235" width="170" height="45" rx="6" fill="#1e293b" stroke="#00e5ff" stroke-width="1"/>
+          <text x="140" y="262" fill="#f8fafc" font-family="sans-serif" font-size="11" text-anchor="middle">PLC & Üretim Sayaçları</text>
+
+          <!-- Gateway -->
+          <path d="M 240 190 L 320 190" stroke="#f59e0b" stroke-width="3" stroke-dasharray="4"/>
+          <text x="280" y="180" fill="#f59e0b" font-family="monospace" font-size="10" text-anchor="middle">RS485 / Modbus</text>
+
+          <rect x="320" y="115" width="160" height="150" rx="10" fill="#1e1b4b" stroke="#a855f7" stroke-width="2"/>
+          <text x="400" y="150" fill="#c084fc" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">IoT EDGE</text>
+          <text x="400" y="170" fill="#c084fc" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">GATEWAY</text>
+          <text x="400" y="200" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">GKM Smart Box</text>
+          <text x="400" y="225" fill="#10b981" font-family="monospace" font-size="10" text-anchor="middle">MQTT / OPC-UA</text>
+
+          <!-- Server & Cloud -->
+          <path d="M 480 190 L 560 190" stroke="#10b981" stroke-width="3"/>
+          <text x="520" y="180" fill="#10b981" font-family="monospace" font-size="10" text-anchor="middle">Ethernet / WiFi</text>
+
+          <rect x="560" y="70" width="200" height="240" rx="10" fill="#0f172a" stroke="#10b981" stroke-width="2"/>
+          <text x="660" y="95" fill="#10b981" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">İZLEME & SCADA</text>
+
+          <rect x="575" y="115" width="170" height="45" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="1"/>
+          <text x="660" y="142" fill="#f8fafc" font-family="sans-serif" font-size="11" text-anchor="middle">Merkezi SCADA Ekranı</text>
+
+          <rect x="575" y="175" width="170" height="45" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="1"/>
+          <text x="660" y="202" fill="#f8fafc" font-family="sans-serif" font-size="11" text-anchor="middle">Mobil Anlık Alarm / Telegram</text>
+
+          <rect x="575" y="235" width="170" height="45" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="1"/>
+          <text x="660" y="262" fill="#f8fafc" font-family="sans-serif" font-size="11" text-anchor="middle">Reaktif Ceza Erken Uyarı</text>
+        </svg>
+        
+            <span class="text-[11px] text-slate-500 font-mono block text-center mt-2">Şekil 1: GKM Mühendislik Teknik Mimari ve Sinyal Akış Diyagramı</span>
+        </div>
+
+        <!-- Rendered Markdown Body -->
+        <div class="prose prose-invert max-w-none text-slate-300">
+            <h2 class="text-xl sm:text-2xl font-black text-cyan-400 mt-10 mb-4 pb-2 border-b border-slate-800">Fabrikalarda Enerji Maliyetleri ve Dijitalleşme İhtiyacı</h2>
+
+<p class="text-slate-300 leading-relaxed text-sm sm:text-base mb-4">Sanayi tesislerinde elektrik faturalarının en büyük kalemini motorlar, kompresörler, fırınlar ve soğutma grupları oluşturur. Tesislerde yaşanan görünmeyen enerji kayıpları, hatalı reaktif güç kompanzasyonu ve tepe güç (demant) aşımları yüz binlerce liralık ek cezalara yol açmaktadır.</p>
+
+<p class="text-slate-300 leading-relaxed text-sm sm:text-base mb-4"><strong class="text-white font-extrabold">GKM Elektrik Endüstriyel IoT ve SCADA çözümleri</strong>, tesisteki tüm trafoları, ana panoları, dağıtım hatlarını ve makineleri tek ekranda toplayarak enerji verimliliğini gerçek zamanlı olarak yönetilebilir hale getirir.</p>
+
+<p class="text-slate-300 leading-relaxed text-sm sm:text-base mb-4">---</p>
+
+<h2 class="text-xl sm:text-2xl font-black text-cyan-400 mt-10 mb-4 pb-2 border-b border-slate-800">Modbus TCP ve MQTT ile Uçtan Uca Veri Mimarisi</h2>
+
+<p class="text-slate-300 leading-relaxed text-sm sm:text-base mb-4">Modern bir endüstriyel veri toplama mimarisinde şu katmanlar bulunur:</p>
+
+<li class="ml-4 list-decimal text-slate-300 mb-1.5"><strong class="text-white font-extrabold">Saha Seviyesi (Field Level):</strong></li>
+   - Ray tipi enerji analizörleri (Akım, Gerilim, Cos φ, THD-I, THD-V, Aktif/Reaktif Güç)
+   - RS-485 2 telli Twisted Pair kablolama üzerinden Modbus RTU protokolü (9600-115200 baud).
+
+<li class="ml-4 list-decimal text-slate-300 mb-1.5"><strong class="text-white font-extrabold">Kenar Ağ Geçidi (Edge Gateway - GKM Smart Box):</strong></li>
+   - Modbus RTU verilerini toplayıp yerel ağda Modbus TCP veya hafif JSON formatında MQTT protokolüne çeviren endüstriyel gateway.
+   - İnternet kesintilerine karşı yerel SQLite hafızasında 30 güne kadar veri saklama (Store and Forward).
+
+<li class="ml-4 list-decimal text-slate-300 mb-1.5"><strong class="text-white font-extrabold">Merkezi SCADA ve Bulut İzleme:</strong></li>
+   - Ignition SCADA, Siemens WinCC veya lokal Node-RED panelleri.
+   - Otomatik SMS ve Telegram botu: Reaktif oran (endüktif %20, kapasitif %15 sınırlarına yaklaştığında) anında bakım şefine alarm iletilir.
+
+<p class="text-slate-300 leading-relaxed text-sm sm:text-base mb-4">---</p>
+
+<h2 class="text-xl sm:text-2xl font-black text-cyan-400 mt-10 mb-4 pb-2 border-b border-slate-800">Yatırımın Geri Dönüşü (ROI)</h2>
+
+<p class="text-slate-300 leading-relaxed text-sm sm:text-base mb-4">Tesis genelinde devreye aldığımız SCADA ve enerji takip sistemleri ortalama <strong class="text-white font-extrabold">3 ila 6 ay</strong> içerisinde kendini amorti etmektedir:
+<li class="ml-4 list-disc text-slate-300 mb-1.5">Reaktif ceza riskinin %100 ortadan kalkması,</li>
+<li class="ml-4 list-disc text-slate-300 mb-1.5">Mesai dışı boşta çalışan kompresör ve hatların anında tespiti,</li>
+<li class="ml-4 list-disc text-slate-300 mb-1.5">Trafo harmonik yüklenmelerinin izlenerek trafo ömrünün korunması.</li></p>
+        </div>
+
+        <!-- Hot Lead Magnet & Call To Action Box -->
+        <div class="mt-14 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-slate-900 via-cyan-950/40 to-slate-900 border border-cyan-500/40 shadow-2xl">
+            <span class="text-xs font-black text-cyan-400 uppercase tracking-widest block mb-2">GKM MÜHENDİSLİK TEKNİK DANIŞMANLIK</span>
+            <h3 class="text-xl sm:text-2xl font-black text-white mb-3">Fabrikanızda Enerji Kaybı ve Reaktif Ceza Riskini Sıfırlayın</h3>
+            <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                Tesisinizdeki analizör ve trafo listesini bize iletin; bulut veya lokal sunuculu SCADA enerji izleme altyapısını anahtar teslim projelendirelim.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik%2C%20%27Fabrikalarda%20SCADA%20ve%20End%C3%BCstriyel%20IoT%20ile%20Enerji%20Takibi%3A%20Modbus%20TCP%20ve%20MQTT%20Entegrasyonu%27%20konulu%20rehberinizi%20okudum.%20Benzer%20bir%20projemiz%20var%2C%20teknik%20detaylar%C4%B1%20dan%C4%B1%C5%9Fmak%20ve%20teklif%20almak%20istiyorum." target="_blank" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm py-3.5 px-6 rounded-2xl shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-2">
+                    <span>WhatsApp'tan Proje / Şema Gönder</span>
+                </a>
+                <a href="tel:905377029954" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm py-3.5 px-6 rounded-2xl border border-slate-700 transition flex items-center justify-center gap-2">
+                    <span>📞 0537 702 99 54</span>
+                </a>
+                <a href="https://gkmelektrik.com" target="_blank" class="bg-slate-950 hover:bg-slate-900 text-cyan-400 font-bold text-sm py-3.5 px-6 rounded-2xl border border-slate-800 transition flex items-center justify-center gap-2">
+                    <span>Resmi Site: gkmelektrik.com</span>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    
+    <!-- Mobile Sticky Action Bar -->
+    <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-950/95 border-t border-slate-800 backdrop-blur-lg px-4 py-2.5 flex items-center justify-between gap-2 shadow-2xl">
+        <a href="tel:905377029954" class="flex-1 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-3 rounded-xl border border-slate-700 flex items-center justify-center gap-1.5">
+            📞 Hemen Ara: 0537 702 99 54
+        </a>
+        <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik%2C%20teknik%20projemiz%20i%C3%A7in%20%C5%9Fema/liste%20g%C3%B6nderip%20teklif%20almak%20istiyoruz." target="_blank" class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs py-2.5 px-3 rounded-xl shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-1.5">
+            <span>WhatsApp Şema Gönder</span>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-950 text-slate-500 text-xs py-14 pb-24 lg:pb-14">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-slate-900">
+                <div class="md:col-span-1">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center text-slate-950 font-black">⚡</div>
+                        <span class="font-black text-white text-base">GKM Elektrik</span>
+                    </div>
+                    <p class="text-slate-400 leading-relaxed text-xs mb-4">
+                        Özel makine otomasyonu, PLC/SCADA yazılımı, çok katmanlı PCB tasarımı ve tip testli elektrik panosu imalatı.
+                    </p>
+                    <a href="https://gkmelektrik.com" target="_blank" class="text-cyan-400 font-bold hover:underline block">
+                        ➔ Resmi Web Sitemiz: gkmelektrik.com
+                    </a>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Hizmet Alanlarımız</h4>
+                    <ul class="space-y-2">
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/makine-otomasyonu/" class="hover:text-cyan-400 transition">Makine Otomasyonu & Servo</a></li>
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/plc-scada-yazilim/" class="hover:text-cyan-400 transition">PLC Programlama & SCADA</a></li>
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/pcb-elektronik-tasarim/" class="hover:text-cyan-400 transition">Özel PCB & Gömülü Sistemler</a></li>
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/elektrik-panosu-salt/" class="hover:text-cyan-400 transition">Tip Testli Pano & Kompanzasyon</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Mühendislik İletişim</h4>
+                    <ul class="space-y-2 text-slate-400">
+                        <li><b>Telefon:</b> <a href="tel:905377029954" class="hover:text-white">0537 702 99 54</a></li>
+                        <li><b>WhatsApp:</b> <a href="https://wa.me/905377029954" target="_blank" class="hover:text-emerald-400">+90 537 702 99 54</a></li>
+                        <li><b>Hizmet Sahası:</b> Sakarya, Kocaeli, Marmara & Tüm Türkiye</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Hızlı Şema & Teklif</h4>
+                    <p class="text-slate-400 text-xs mb-3">
+                        EPLAN pano projenizi, makine fonksiyon şemanızı veya PCB gerber dosyalarınızı WhatsApp üzerinden anında iletebilirsiniz.
+                    </p>
+                    <a href="https://wa.me/905377029954?text=Merhaba%2C%20projemiz%20i%C3%A7in%20teknik%20d%C3%B6k%C3%BCman%20payla%C5%9Fmak%20istiyoruz." target="_blank" class="inline-block bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-slate-800 px-4 py-2 rounded-xl text-xs font-bold transition">
+                        Şema & Liste Gönder ➔
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-600">
+                <p>© 2026 GKM Elektrik & Mühendislik. Tüm hakları saklıdır.</p>
+                <p>Programmatic Engineering Hub • Yüksek Performanslı SEO ve Müşteri Yakalama Motoru</p>
+            </div>
+        </div>
+    </footer>
+    
+
+</body>
+</html>
