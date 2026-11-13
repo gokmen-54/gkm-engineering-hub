@@ -2,42 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://gokmen-54.github.io/gkm-engineering-hub/</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://gokmen-54.github.io/gkm-engineering-hub/hesaplama/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://gokmen-54.github.io/gkm-engineering-hub/projeler/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://gokmen-54.github.io/gkm-engineering-hub/makine-otomasyonu/</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://gokmen-54.github.io/gkm-engineering-hub/plc-scada-yazilim/</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://gokmen-54.github.io/gkm-engineering-hub/pcb-elektronik-tasarim/</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://gokmen-54.github.io/gkm-engineering-hub/elektrik-panosu-salt/</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://gokmen-54.github.io/gkm-engineering-hub/rehber/altium-designer-ile-yuksek-akim-ve-sicaklik-yonetimi-pcb/</loc>
+    <loc>https://gokmen-54.github.io/gkm-engineering-hub/rehber/iso-13849-1-makine-emniyet-devresi-tasarimi-sil-pl-hesabi/</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gokmen-54.github.io/gkm-engineering-hub/rehber/iso-13849-1-makine-emniyet-devresi-tasarimi-sil-pl-hesabi/</loc>
+    <loc>https://gokmen-54.github.io/gkm-engineering-hub/rehber/altium-designer-ile-yuksek-akim-ve-sicaklik-yonetimi-pcb/</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

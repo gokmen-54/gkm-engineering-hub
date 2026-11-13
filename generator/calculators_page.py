@@ -1,0 +1,685 @@
+"""
+Engineering Calculators Page Generator for GKM Elektrik
+1. Harmonik Filtreli Kompanzasyon & Reaktif Ceza Hesabı
+2. IEC 60364 Standart Kablo Kesiti & Gerilim Düşümü Hesabı
+3. Servo Motor Tork, Atalet & Güç Hesabı
+Includes live interactive JavaScript calculators and 1-click WhatsApp quote links.
+"""
+
+def generate_calculators_page(site_url, main_website, whatsapp_phone, phone_display, header, footer):
+    return f"""<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endüstriyel Mühendislik Hesaplama Araçları | GKM Elektrik</title>
+    <meta name="description" content="Ücretsiz online mühendislik hesaplayıcıları: Harmonik filtreli kompanzasyon ve reaktif ceza hesabı, IEC kablo kesiti ve gerilim düşümü, servo motor tork ve güç seçimi.">
+    <meta name="keywords" content="kompanzasyon hesabı, reaktif ceza hesaplama, kablo kesiti hesabı, gerilim düşümü hesabı, servo motor tork hesabı, harmonik reaktör seçimi, gkm elektrik">
+    <link rel="canonical" href="{site_url}/hesaplama/">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+        body {{ font-family: 'Plus Jakarta Sans', sans-serif; }}
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button {{ 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }}
+    </style>
+
+    <!-- Schema.org SoftwareApplication -->
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "GKM Endüstriyel Mühendislik Hesaplama Araçları",
+      "operatingSystem": "All",
+      "applicationCategory": "BusinessApplication",
+      "offers": {{
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "TRY"
+      }},
+      "provider": {{
+        "@type": "Organization",
+        "name": "GKM Elektrik & Mühendislik",
+        "url": "{main_website}"
+      }}
+    }}
+    </script>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans antialiased selection:bg-sky-500 selection:text-white min-h-screen flex flex-col justify-between">
+
+    {header}
+
+    <!-- Page Header Hero -->
+    <section class="py-14 border-b border-sky-950 bg-gradient-to-br from-[#001c30] to-[#00111f] text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-900/60 border border-sky-400/30 text-sky-300 text-xs font-bold mb-4">
+                <span>⚡ ÜCRETSİZ ENDÜSTRİYEL MÜHENDİSLİK HESAPLAMA ARAÇLARI</span>
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-4">
+                Kompanzasyon, Kablo Kesiti & <span class="text-sky-400">Servo Tork Hesabı</span>
+            </h1>
+            <p class="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed font-medium">
+                Fabrika elektrik bakım şefleri, pano imalatçıları ve makine tasarımcıları için IEC standartlarında geliştirilmiş 3 temel mühendislik hesaplama aracı. Hesaplama sonuçlarınızı tek tıkla WhatsApp üzerinden mühendislerimize ileterek doğrulatabilir ve resmi pano teklifi alabilirsiniz.
+            </p>
+            
+            <!-- Quick Anchor Nav -->
+            <div class="flex flex-wrap gap-2 mt-6">
+                <a href="#kompanzasyon-hesabi" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs px-4 py-2 rounded-xl transition">
+                    📊 1. Harmonik Kompanzasyon & Reaktif Ceza
+                </a>
+                <a href="#kablo-kesiti-hesabi" class="bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs px-4 py-2 rounded-xl border border-slate-700 transition">
+                    🔌 2. Kablo Kesiti & Gerilim Düşümü (IEC)
+                </a>
+                <a href="#servo-tork-hesabi" class="bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs px-4 py-2 rounded-xl border border-slate-700 transition">
+                    ⚙️ 3. Servo Motor Tork & Güç Boyutlandırma
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content: 3 Calculators -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-12 flex-1 w-full space-y-16">
+
+        <!-- ================= CALCULATOR 1: KOMPANZASYON & REAKTİF CEZA ================= -->
+        <section id="kompanzasyon-hesabi" class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24">
+            <div class="bg-gradient-to-r from-sky-900 to-[#001c30] p-6 text-white flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <span class="text-sky-400 font-extrabold text-xs uppercase tracking-wider block">ARAÇ 1 • ENERJİ KALİTESİ & ŞALT</span>
+                    <h2 class="text-xl sm:text-2xl font-black">Harmonik Filtreli Kompanzasyon & Reaktif Ceza Hesaplayıcı</h2>
+                </div>
+                <span class="bg-sky-500 text-slate-950 font-black text-xs px-3 py-1 rounded-full uppercase">189 Hz %7 De-Tuned Reaktör Uyumlu</span>
+            </div>
+
+            <div class="p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Inputs Form -->
+                <div class="lg:col-span-6 space-y-4">
+                    <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider pb-2 border-b border-slate-100">
+                        1. Tesis & Tüketim Parametreleri
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Trafo Gücü (kVA)</label>
+                            <input type="number" id="c1_trafo" value="1000" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Maksimum Aktif Güç (kW)</label>
+                            <input type="number" id="c1_kw" value="450" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Mevcut cosφ1 (Örn: 0.72)</label>
+                            <input type="number" step="0.01" min="0.5" max="0.99" id="c1_cos1" value="0.74" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Hedef cosφ2 (Örn: 0.98)</label>
+                            <input type="number" step="0.01" min="0.8" max="1.0" id="c1_cos2" value="0.98" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Harmonik Filtre Reaktörü Tipi</label>
+                        <select id="c1_reactor" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                            <option value="0.07" selected>%7 De-Tuned (189 Hz) - VFD ve Standart Sanayi Tesisleri</option>
+                            <option value="0.14">%14 De-Tuned (134 Hz) - 3. Harmonik & Ağır Non-Lineer Tesisler</option>
+                            <option value="0.0567">%5.67 De-Tuned (210 Hz) - Hafif Harmonikli Şebekeler</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Aylık Aktif Tüketim (kWh)</label>
+                            <input type="number" id="c1_kwh" value="95000" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Elektrik Birim Fiyatı (TL/kWh)</label>
+                            <input type="number" step="0.1" id="c1_tariff" value="4.8" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="calculateKomp()" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-black py-3 rounded-xl transition shadow-md shadow-sky-600/20 flex items-center justify-center gap-2">
+                        <span>⚡ Kompanzasyon & Ceza Hesabını Çalıştır</span>
+                    </button>
+                </div>
+
+                <!-- Results Output Card -->
+                <div class="lg:col-span-6 bg-slate-900 text-white rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-slate-800">
+                    <div>
+                        <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+                            <span class="text-xs font-black uppercase text-sky-400">GKM Mühendislik Hesaplama Raporu</span>
+                            <span id="c1_status_badge" class="bg-red-500/20 text-red-400 border border-red-500/40 text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase">
+                                ⚠️ Yüksek Reaktif Ceza Riski
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700">
+                                <span class="text-[11px] text-slate-400 font-bold block">Gerekli Kondansatör Gücü</span>
+                                <span id="c1_out_kvar" class="text-2xl font-black text-emerald-400">318 kVAR</span>
+                            </div>
+                            <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700">
+                                <span class="text-[11px] text-slate-400 font-bold block">Tavsiye Pano Toplamı</span>
+                                <span id="c1_out_pano" class="text-2xl font-black text-sky-400">350 kVAR</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5 text-xs text-slate-300 mb-6 bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono">
+                            <div class="flex justify-between pb-1.5 border-b border-slate-800/80">
+                                <span>Kondansatör Anma Gerilimi:</span>
+                                <strong id="c1_out_volt" class="text-amber-400">Min. 440V - 480V (Reaktör Gerilim Yükselmesi Nedeniyle)</strong>
+                            </div>
+                            <div class="flex justify-between pb-1.5 border-b border-slate-800/80">
+                                <span>Rezonans Frekansı:</span>
+                                <strong id="c1_out_freq" class="text-white">189 Hz (%7 De-Tuned)</strong>
+                            </div>
+                            <div class="flex justify-between pb-1.5 border-b border-slate-800/80">
+                                <span>Mevcut Reaktif Oran (Endüktif):</span>
+                                <strong id="c1_out_ratio" class="text-red-400">%90.8 (Yasal Sınır: %20)</strong>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Tahmini Aylık Reaktif Ceza:</span>
+                                <strong id="c1_out_penalty" class="text-red-400 font-bold text-sm">~ 322.848 TL / Ay</strong>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-sky-950/60 border border-sky-800/60 rounded-xl text-sky-200 text-xs leading-relaxed mb-6">
+                            💡 <b>GKM Mühendislik Notu:</b> Reaktörsüz standart kondansatör panoları harmonikli sanayi şebekelerinde rezonansa girerek kondansatörlerin patlamasına yol açar. GKM panolarında 480V ağır hizmet tipi kondansatör ve 189 Hz demir nüveli reaktörler kullanılır.
+                        </div>
+                    </div>
+
+                    <!-- Direct WhatsApp Quotation Button -->
+                    <a id="c1_wa_btn" href="https://wa.me/{whatsapp_phone}?text=Merhaba%20GKM%20Elektrik,%20web%20sitenizdeki%20hesaplama%20aracıyla%20350%20kVAR%20harmonik%20filtreli%20kompanzasyon%20panosu%20hesapladım.%20Teklif%20almak%20istiyorum." target="_blank" class="w-full bg-[#25D366] hover:bg-[#20ba5c] text-white font-black py-3.5 px-4 rounded-xl transition shadow-lg flex items-center justify-center gap-2 text-center text-xs sm:text-sm">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                        <span>Bu Değerlerle GKM'den Pano Teklifi Al (WhatsApp)</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ================= CALCULATOR 2: KABLO KESİTİ & GERİLİM DÜŞÜMÜ ================= -->
+        <section id="kablo-kesiti-hesabi" class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24">
+            <div class="bg-gradient-to-r from-emerald-900 to-[#001c30] p-6 text-white flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <span class="text-emerald-400 font-extrabold text-xs uppercase tracking-wider block">ARAÇ 2 • GÜÇ DAĞITIMI & TESİSAT</span>
+                    <h2 class="text-xl sm:text-2xl font-black">Kablo Kesiti & Gerilim Düşümü Hesaplayıcı (IEC 60364)</h2>
+                </div>
+                <span class="bg-emerald-500 text-slate-950 font-black text-xs px-3 py-1 rounded-full uppercase">Standart Bakır (Cu) & Alüminyum (Al)</span>
+            </div>
+
+            <div class="p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Inputs Form -->
+                <div class="lg:col-span-6 space-y-4">
+                    <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider pb-2 border-b border-slate-100">
+                        1. Hat ve Yük Parametreleri
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Şebeke Tipi</label>
+                            <select id="c2_system" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                                <option value="400" selected>Trifaze (380V - 400V 3P+N)</option>
+                                <option value="230">Monofaze (220V - 230V 1P+N)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">İletken Malzemesi</label>
+                            <select id="c2_mat" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                                <option value="56" selected>Bakır (Cu - Standart NYY/N2XH)</option>
+                                <option value="35">Alüminyum (Al - NAYY)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Yük Gücü (kW)</label>
+                            <input type="number" id="c2_kw" value="45" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Hat Mesafesi (Metre)</label>
+                            <input type="number" id="c2_len" value="120" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">İzin Verilen Gerilim Düşümü</label>
+                            <select id="c2_maxdrop" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                                <option value="3.0">%3 (Trafodan Tali Panoya / Aydınlatma)</option>
+                                <option value="5.0" selected>%5 (Motor Güç Hatları & Ana Besleme)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Güç Katsayısı cosφ</label>
+                            <input type="number" step="0.01" id="c2_cos" value="0.85" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="calculateCable()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-3 rounded-xl transition shadow-md shadow-emerald-600/20 flex items-center justify-center gap-2">
+                        <span>🔌 Kablo Kesiti & Sigorta Hesabını Çalıştır</span>
+                    </button>
+                </div>
+
+                <!-- Results Output Card -->
+                <div class="lg:col-span-6 bg-slate-900 text-white rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-slate-800">
+                    <div>
+                        <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+                            <span class="text-xs font-black uppercase text-emerald-400">IEC 60364 Boyutlandırma Raporu</span>
+                            <span id="c2_status_badge" class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase">
+                                ✅ Standartlara Uygun
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700">
+                                <span class="text-[11px] text-slate-400 font-bold block">Önerilen Standart Kesit</span>
+                                <span id="c2_out_section" class="text-2xl font-black text-emerald-400">3x25+16 mm²</span>
+                            </div>
+                            <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700">
+                                <span class="text-[11px] text-slate-400 font-bold block">Önerilen TMŞ / Sigorta</span>
+                                <span id="c2_out_breaker" class="text-2xl font-black text-sky-400">100 A TMŞ</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5 text-xs text-slate-300 mb-6 bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono">
+                            <div class="flex justify-between pb-1.5 border-b border-slate-800/80">
+                                <span>Çekilen Nominal Akım:</span>
+                                <strong id="c2_out_current" class="text-white">76.4 A</strong>
+                            </div>
+                            <div class="flex justify-between pb-1.5 border-b border-slate-800/80">
+                                <span>Gerçek Gerilim Düşümü (ΔU):</span>
+                                <strong id="c2_out_dropv" class="text-emerald-400">8.2 Volt (%2.05)</strong>
+                            </div>
+                            <div class="flex justify-between pb-1.5 border-b border-slate-800/80">
+                                <span>Kablo İletken Direnci:</span>
+                                <strong id="c2_out_res" class="text-white">0.086 Ohm</strong>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Kablo Güç Kaybı (Isı):</span>
+                                <strong id="c2_out_loss" class="text-amber-400 font-bold text-sm">~ 1.51 kW</strong>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-emerald-950/60 border border-emerald-800/60 rounded-xl text-emerald-200 text-xs leading-relaxed mb-6">
+                            💡 <b>GKM Mühendislik Notu:</b> Endüstriyel motor besleme hatlarında demeraj akımları sırasında gerilim çökmesini engellemek için kesit bir üst kademeye (35 mm²) çıkarıldığında motorların ömrü uzar ve kablo ısıl kayıpları %28 azalır.
+                        </div>
+                    </div>
+
+                    <!-- Direct WhatsApp Quotation Button -->
+                    <a id="c2_wa_btn" href="https://wa.me/{whatsapp_phone}?text=Merhaba%20GKM%20Elektrik,%20web%20hesaplama%20aracıyla%2045kW%20120m%20hat%20için%203x25+16mm2%20kablo%20ve%20100A%20TMŞ%20hesapladım.%20Pano%20ve%20şalt%20teklifi%20almak%20istiyorum." target="_blank" class="w-full bg-[#25D366] hover:bg-[#20ba5c] text-white font-black py-3.5 px-4 rounded-xl transition shadow-lg flex items-center justify-center gap-2 text-center text-xs sm:text-sm">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                        <span>Bu Kablo & Şalt Malzemeleri İçin Fiyat Al (WhatsApp)</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ================= CALCULATOR 3: SERVO MOTOR TORK & GÜÇ ================= -->
+        <section id="servo-tork-hesabi" class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24">
+            <div class="bg-gradient-to-r from-amber-900 to-[#001c30] p-6 text-white flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <span class="text-amber-400 font-extrabold text-xs uppercase tracking-wider block">ARAÇ 3 • HAREKET KONTROLÜ & MAKİNE OTOMASYONU</span>
+                    <h2 class="text-xl sm:text-2xl font-black">Servo Motor Tork, Atalet & Güç Hesaplayıcı</h2>
+                </div>
+                <span class="bg-amber-500 text-slate-950 font-black text-xs px-3 py-1 rounded-full uppercase">Siemens, Delta & Omron Uyumlu</span>
+            </div>
+
+            <div class="p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Inputs Form -->
+                <div class="lg:col-span-6 space-y-4">
+                    <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider pb-2 border-b border-slate-100">
+                        1. Mekanik Düzenek Parametreleri
+                    </h3>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Mekanizma Tipi</label>
+                        <select id="c3_mech" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                            <option value="ballscrew" selected>Vidalı Mil (Ballscrew - Yüksek Hassasiyet)</option>
+                            <option value="rotary">Döner Tabla / İndeksör (Rotary Table)</option>
+                            <option value="belt">Triger Kayış / Konveyör (Belt Conveyor)</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Hareket Eden Kütle (kg)</label>
+                            <input type="number" id="c3_mass" value="120" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Vidalı Mil Hatvesi / Çap (mm)</label>
+                            <input type="number" id="c3_lead" value="10" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Maksimum Lineer Hız (m/dk)</label>
+                            <input type="number" id="c3_speed" value="15" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">İvmelenme Süresi (sn)</label>
+                            <input type="number" step="0.05" id="c3_acc" value="0.2" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Redüktör Oranı (1:i)</label>
+                            <input type="number" id="c3_gear" value="1" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Sürtünme Katsayısı (μ)</label>
+                            <input type="number" step="0.01" id="c3_mu" value="0.05" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="calculateServo()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-black py-3 rounded-xl transition shadow-md shadow-amber-600/20 flex items-center justify-center gap-2">
+                        <span>⚙️ Servo Tork & Motor Gücünü Hesapla</span>
+                    </button>
+                </div>
+
+                <!-- Results Output Card -->
+                <div class="lg:col-span-6 bg-slate-900 text-white rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-slate-800">
+                    <div>
+                        <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+                            <span class="text-xs font-black uppercase text-amber-400">Servo Boyutlandırma Sonucu</span>
+                            <span id="c3_status_badge" class="bg-amber-500/20 text-amber-400 border border-amber-500/40 text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase">
+                                🎯 Kararlı Atalet Oranı
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700">
+                                <span class="text-[11px] text-slate-400 font-bold block">Gerekli Motor Gücü</span>
+                                <span id="c3_out_power" class="text-2xl font-black text-amber-400">1.0 kW / 1000W</span>
+                            </div>
+                            <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700">
+                                <span class="text-[11px] text-slate-400 font-bold block">Nominal Tork / Hız</span>
+                                <span id="c3_out_torque" class="text-2xl font-black text-sky-400">3.18 Nm @ 3000 RPM</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5 text-xs text-slate-300 mb-6 bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono">
+                            <div class="flex justify-between pb-1.5 border-b border-slate-800/80">
+                                <span>Peak (Zirve İvmelenme) Torku:</span>
+                                <strong id="c3_out_peak" class="text-emerald-400">6.45 Nm (Peak Güvenlik: 2.1x)</strong>
+                            </div>
+                            <div class="flex justify-between pb-1.5 border-b border-slate-800/80">
+                                <span>Yansıyan Yük Ataleti (J_load):</span>
+                                <strong id="c3_out_inertia" class="text-white">3.04 kg.cm²</strong>
+                            </div>
+                            <div class="flex justify-between pb-1.5 border-b border-slate-800/80">
+                                <span>Atalet Oranı (J_L / J_M):</span>
+                                <strong id="c3_out_ratio" class="text-emerald-400 font-bold">2.4 : 1 (Tavsiye: < 5:1)</strong>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Önerilen Sürücü & Motor:</span>
+                                <strong id="c3_out_model" class="text-sky-400 font-bold text-sm">Siemens S210 1kW veya Delta A2 1kW</strong>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-amber-950/60 border border-amber-800/60 rounded-xl text-amber-200 text-xs leading-relaxed mb-6">
+                            💡 <b>GKM Mühendislik Notu:</b> Yüksek hızlı çevrimlerde servo motorun mekanik rezonansa girmemesi için atalet oranının 5:1'in altında olması şarttır. GKM servo pano projelerinde auto-tuning ve notch filtre parametrelendirmesini sahada anahtar teslim devreye alıyoruz.
+                        </div>
+                    </div>
+
+                    <!-- Direct WhatsApp Quotation Button -->
+                    <a id="c3_wa_btn" href="https://wa.me/{whatsapp_phone}?text=Merhaba%20GKM%20Elektrik,%20makinemiz%20için%201kW%20servo%20motor%20ve%20sürücü%20hesapladım.%20Servo%20motor,%20sürücü%20ve%20yazılım%20dahil%20teklif%20almak%20istiyorum." target="_blank" class="w-full bg-[#25D366] hover:bg-[#20ba5c] text-white font-black py-3.5 px-4 rounded-xl transition shadow-lg flex items-center justify-center gap-2 text-center text-xs sm:text-sm">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                        <span>Bu Servo & Sürücü Paketi İçin Teklif Al (WhatsApp)</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    {footer}
+
+    <!-- Interactive Pure Vanilla JS Engine for All 3 Calculators -->
+    <script>
+    // 1. KOMPANZASYON HESAPLAYICI MOTORU
+    function calculateKomp() {{
+        const trafo = parseFloat(document.getElementById('c1_trafo').value) || 1000;
+        const kw = parseFloat(document.getElementById('c1_kw').value) || 450;
+        const cos1 = parseFloat(document.getElementById('c1_cos1').value) || 0.74;
+        const cos2 = parseFloat(document.getElementById('c1_cos2').value) || 0.98;
+        const p_reactor = parseFloat(document.getElementById('c1_reactor').value) || 0.07;
+        const kwh = parseFloat(document.getElementById('c1_kwh').value) || 95000;
+        const tariff = parseFloat(document.getElementById('c1_tariff').value) || 4.8;
+
+        const phi1 = Math.acos(cos1);
+        const phi2 = Math.acos(cos2);
+        const tan1 = Math.tan(phi1);
+        const tan2 = Math.tan(phi2);
+
+        // Required kVAR
+        const kvar_req = kw * (tan1 - tan2);
+        const kvar_round = Math.ceil(kvar_req / 25) * 25; // Round to commercial 25 kVAR steps
+        const total_pano = Math.max(kvar_round, Math.ceil(trafo * 0.35 / 25) * 25);
+
+        // Resonant frequency
+        const res_freq = Math.round(50 / Math.sqrt(p_reactor));
+
+        // Voltage rise on capacitor
+        const cap_volt = Math.round(400 / (1 - p_reactor));
+
+        // Current reactive percentage & penalty calculation
+        const reactive_ratio = (tan1 * 100).toFixed(1);
+        let penalty_tl = 0;
+        if (tan1 > 0.20) {{
+            // Enductive limit 20%
+            const excess_kvarh = kwh * (tan1 - 0.20);
+            penalty_tl = Math.round(excess_kvarh * tariff);
+        }}
+
+        // Update UI
+        document.getElementById('c1_out_kvar').innerText = Math.round(kvar_req) + ' kVAR';
+        document.getElementById('c1_out_pano').innerText = total_pano + ' kVAR';
+        document.getElementById('c1_out_volt').innerText = 'Min. ' + cap_volt + 'V - 480V (Reaktör Gerilim Yükselmesi Nedeniyle)';
+        document.getElementById('c1_out_freq').innerText = res_freq + ' Hz (p = %' + (p_reactor * 100).toFixed(1) + ')';
+        document.getElementById('c1_out_ratio').innerText = '%' + reactive_ratio + ' (Yasal Sınır: %20)';
+        document.getElementById('c1_out_penalty').innerText = '~ ' + penalty_tl.toLocaleString('tr-TR') + ' TL / Ay';
+
+        const badge = document.getElementById('c1_status_badge');
+        if (tan1 > 0.20) {{
+            badge.className = "bg-red-500/20 text-red-400 border border-red-500/40 text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase";
+            badge.innerText = "⚠️ Yüksek Reaktif Ceza Riski";
+        }} else {{
+            badge.className = "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase";
+            badge.innerText = "✅ Reaktif Ceza Sınırında";
+        }}
+
+        // Update WhatsApp link
+        const waMsg = `Merhaba GKM Elektrik, hesaplama aracınızla ${{total_pano}} kVAR harmonik filtreli (${{res_freq}}Hz) kompanzasyon panosu hesapladım. Trafo: ${{trafo}}kVA, Aktif: ${{kw}}kW, cosφ: ${{cos1}} -> ${{cos2}}. Tesisimiz için anahtar teslim pano teklifi almak istiyorum.`;
+        document.getElementById('c1_wa_btn').href = `https://wa.me/{whatsapp_phone}?text=${{encodeURIComponent(waMsg)}}`;
+    }}
+
+    // 2. KABLO KESİTİ & GERİLİM DÜŞÜMÜ HESAPLAYICI MOTORU
+    function calculateCable() {{
+        const system = parseFloat(document.getElementById('c2_system').value) || 400;
+        const kappa = parseFloat(document.getElementById('c2_mat').value) || 56;
+        const kw = parseFloat(document.getElementById('c2_kw').value) || 45;
+        const len = parseFloat(document.getElementById('c2_len').value) || 120;
+        const max_drop = parseFloat(document.getElementById('c2_maxdrop').value) || 5.0;
+        const cos = parseFloat(document.getElementById('c2_cos').value) || 0.85;
+
+        // Current calculation
+        let current = 0;
+        if (system === 400) {{
+            current = (kw * 1000) / (Math.sqrt(3) * 400 * cos);
+        }} else {{
+            current = (kw * 1000) / (230 * cos);
+        }}
+
+        // Standard sections mm²
+        const sections = [1.5, 2.5, 4, 6, 10, 16, 25, 35, 50, 70, 95, 120, 150, 185, 240, 300];
+        // Standard in-air/ground safe current carrying capacity for copper
+        const ampacity = {{
+            1.5: 18, 2.5: 25, 4: 34, 6: 44, 10: 61, 16: 82, 25: 108,
+            35: 135, 50: 168, 70: 207, 95: 250, 120: 292, 150: 335,
+            185: 382, 240: 453, 300: 523
+        }};
+
+        let chosen_s = 25;
+        let actual_drop_pct = 0;
+        let actual_drop_v = 0;
+
+        for (let i = 0; i < sections.length; i++) {{
+            const s = sections[i];
+            let drop_pct = 0;
+            if (system === 400) {{
+                drop_pct = (0.625 * kw * len) / (kappa * s);
+            }} else {{
+                drop_pct = (3.78 * kw * len) / (kappa * s);
+            }}
+
+            const safe_amp = (kappa === 56 ? ampacity[s] : ampacity[s] * 0.78);
+            if (drop_pct <= max_drop && safe_amp >= current) {{
+                chosen_s = s;
+                actual_drop_pct = drop_pct;
+                actual_drop_v = (drop_pct / 100) * system;
+                break;
+            }}
+            chosen_s = s;
+            actual_drop_pct = drop_pct;
+            actual_drop_v = (drop_pct / 100) * system;
+        }}
+
+        // Recommended Circuit Breaker
+        const breakers = [16, 20, 25, 32, 40, 50, 63, 80, 100, 125, 160, 200, 250, 315, 400, 500, 630];
+        let rec_breaker = 100;
+        for (let b of breakers) {{
+            if (b >= current * 1.15) {{
+                rec_breaker = b;
+                break;
+            }}
+        }}
+
+        // Resistance & Power Loss
+        const resistance = (len / (kappa * chosen_s));
+        const power_loss = (3 * Math.pow(current, 2) * resistance) / 1000;
+
+        // Update UI
+        let cable_label = system === 400 ? `3x${{chosen_s}} + ${{chosen_s > 16 ? Math.round(chosen_s/2) : chosen_s}} mm²` : `3x${{chosen_s}} mm²`;
+        document.getElementById('c2_out_section').innerText = cable_label;
+        document.getElementById('c2_out_breaker').innerText = rec_breaker + ' A TMŞ';
+        document.getElementById('c2_out_current').innerText = current.toFixed(1) + ' A';
+        document.getElementById('c2_out_dropv').innerText = actual_drop_v.toFixed(1) + ' Volt (%' + actual_drop_pct.toFixed(2) + ')';
+        document.getElementById('c2_out_res').innerText = resistance.toFixed(3) + ' Ohm';
+        document.getElementById('c2_out_loss').innerText = '~ ' + power_loss.toFixed(2) + ' kW';
+
+        const badge = document.getElementById('c2_status_badge');
+        if (actual_drop_pct <= max_drop) {{
+            badge.className = "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase";
+            badge.innerText = "✅ Standartlara Uygun";
+        }} else {{
+            badge.className = "bg-amber-500/20 text-amber-400 border border-amber-500/40 text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase";
+            badge.innerText = "⚠️ Gerilim Düşümü Sınırında";
+        }}
+
+        // Update WhatsApp link
+        const waMsg = `Merhaba GKM Elektrik, hesaplama aracınızla ${{kw}}kW ${{len}}m hat için ${{cable_label}} kablo ve ${{rec_breaker}}A TMŞ hesapladım. Akım: ${{current.toFixed(1)}}A. Malzeme ve pano teklifi almak istiyorum.`;
+        document.getElementById('c2_wa_btn').href = `https://wa.me/{whatsapp_phone}?text=${{encodeURIComponent(waMsg)}}`;
+    }}
+
+    // 3. SERVO MOTOR TORK & GÜÇ HESAPLAYICI MOTORU
+    function calculateServo() {{
+        const mech = document.getElementById('c3_mech').value;
+        const mass = parseFloat(document.getElementById('c3_mass').value) || 120;
+        const lead = parseFloat(document.getElementById('c3_lead').value) || 10;
+        const speed = parseFloat(document.getElementById('c3_speed').value) || 15;
+        const t_acc = parseFloat(document.getElementById('c3_acc').value) || 0.2;
+        const gear = parseFloat(document.getElementById('c3_gear').value) || 1;
+        const mu = parseFloat(document.getElementById('c3_mu').value) || 0.05;
+
+        // RPM at motor
+        const rpm = (speed * 1000 / lead) * gear;
+
+        // Reflected load inertia J_load (kg.cm²)
+        // J = m * (pitch / (2*pi))^2 * (1/gear^2) * 10^-2
+        const p_meters = lead / 1000;
+        const j_load = mass * Math.pow(p_meters / (2 * Math.PI), 2) * (1 / Math.pow(gear, 2)) * 10000; // in kg.cm²
+
+        // Friction force & friction torque
+        const f_friction = mass * 9.81 * mu;
+        const t_friction = (f_friction * p_meters) / (2 * Math.PI * 0.9 * gear);
+
+        // Acceleration torque
+        const ang_acc = (rpm * 2 * Math.PI / 60) / t_acc;
+        // Assume motor inertia ~ j_load / 3 for standard sizing
+        const j_motor_est = Math.max(j_load / 2.5, 1.2);
+        const t_accel = ((j_load + j_motor_est) * 1e-4) * ang_acc;
+
+        const t_peak = t_accel + t_friction;
+        const t_nominal = Math.sqrt((Math.pow(t_peak, 2) * t_acc + Math.pow(t_friction, 2) * (1.0 - t_acc)) / 1.0);
+
+        // Power kW
+        const power_watts = (t_nominal * (rpm * 2 * Math.PI / 60));
+        let motor_kw = 0.4;
+        let motor_model = "Siemens S210 400W veya Delta A2 400W";
+
+        if (power_watts > 1500) {{
+            motor_kw = 2.0;
+            motor_model = "Siemens S210 2.0kW veya Delta A2 2.0kW";
+        }} else if (power_watts > 850) {{
+            motor_kw = 1.0;
+            motor_model = "Siemens S210 1.0kW veya Delta A2 1.0kW";
+        }} else if (power_watts > 600) {{
+            motor_kw = 0.75;
+            motor_model = "Siemens S210 750W veya Delta A2 750W";
+        }} else {{
+            motor_kw = 0.4;
+            motor_model = "Siemens S210 400W veya Delta A2 400W";
+        }}
+
+        const inertia_ratio = (j_load / j_motor_est).toFixed(1);
+
+        // Update UI
+        document.getElementById('c3_out_power').innerText = motor_kw + ' kW (' + (motor_kw * 1000) + 'W)';
+        document.getElementById('c3_out_torque').innerText = t_nominal.toFixed(2) + ' Nm @ ' + Math.round(rpm) + ' RPM';
+        document.getElementById('c3_out_peak').innerText = t_peak.toFixed(2) + ' Nm (Güvenlik: ' + (t_peak/t_nominal).toFixed(1) + 'x)';
+        document.getElementById('c3_out_inertia').innerText = j_load.toFixed(2) + ' kg.cm²';
+        document.getElementById('c3_out_ratio').innerText = inertia_ratio + ' : 1 (Tavsiye: < 5:1)';
+        document.getElementById('c3_out_model').innerText = motor_model;
+
+        const badge = document.getElementById('c3_status_badge');
+        if (parseFloat(inertia_ratio) <= 5.0) {{
+            badge.className = "bg-amber-500/20 text-amber-400 border border-amber-500/40 text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase";
+            badge.innerText = "🎯 Kararlı Atalet Oranı";
+        }} else {{
+            badge.className = "bg-red-500/20 text-red-400 border border-red-500/40 text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase";
+            badge.innerText = "⚠️ Yüksek Atalet (Redüktör Önerilir)";
+        }}
+
+        // Update WhatsApp link
+        const waMsg = `Merhaba GKM Elektrik, hesaplama aracınızla ${{mass}}kg kütle ve ${{speed}}m/dk hız için ${{motor_kw}}kW servo motor (${{t_nominal.toFixed(2)}}Nm) hesapladım. Servo motor, sürücü ve pano teklifi almak istiyorum.`;
+        document.getElementById('c3_wa_btn').href = `https://wa.me/{whatsapp_phone}?text=${{encodeURIComponent(waMsg)}}`;
+    }}
+
+    // Initial calculations on page load
+    document.addEventListener('DOMContentLoaded', () => {{
+        calculateKomp();
+        calculateCable();
+        calculateServo();
+    }});
+    </script>
+
+</body>
+</html>
+"""

@@ -12,32 +12,38 @@ cta_headline: "Aşırı Isınan veya Yanan Güç Kartlarınız mı Var?"
 cta_text: "Gerber dosyalarınızı iletin; termal simülasyon ve bakır kalınlığı optimizasyonu ile kartınızı endüstriyel standartlara getirelim."
 ---
 
-## Endüstriyel Saha Standartları ve Mühendislik Yaklaşımı
 
-Bu teknik rehber, **GKM Elektrik & Mühendislik** saha tecrübeleri, Türk sanayisindeki fiili fabrika uygulamaları ve uluslararası mühendislik standartları (IEC 61439, ISO 13849, IPC-A-610) doğrultusunda hazırlanmıştır.
+## Endüstriyel PCB Tasarımında Gürültü ve EMC/EMI Gerçeği
 
-Sanayi tesislerinde yaşanan plansız üretim duruşları, yüksek reaktif enerji faturaları ve makine yazılım kararsızlıkları doğru mühendislik analizi ve kaliteli şalt/otomasyon komponentleri ile tamamen önlenebilir.
+Tüketici elektroniğinin aksine, fabrika sahalarında çalışan elektronik kontrol kartları ağır şartlar altındadır:
+- Yüksek frekanslı PWM gürültüsü yayan AC motor sürücüleri (Inverter/VFD),
+- Şebeke kaynaklı transients (EFT/Burst testleri - IEC 61000-4-4),
+- İndüktif yüklerin (kontaktör ve selenoid valf bobinleri) açılıp kapanmasıyla oluşan arklar,
+- Statik elektrik boşalmaları (ESD - IEC 61000-4-2).
 
----
-
-### Temel Tasarım ve Uygulama Kriterleri:
-
-1. **Uluslararası Standartlara Tam Uyum:**
-   Panolarda IEC 61439 tip testli hücre yapısı, klemenslerde yay baskılı titreşime dayanıklı bağlantılar, yazılımda ise IEC 61131-3 SCL programlama disiplini.
-
-2. **Termal ve Elektromanyetik Uyumluluk (EMC/EMI):**
-   Servo sürücü ve motor kablolarında 360 derece zırh topraklaması, kontrol sinyalleri ile güç kabloları arasında minimum 20 cm ayırma mesafesi ve pano içi zorlamalı fanlı/klimalı havalandırma.
-
-3. **Gözlemlenebilirlik ve Hızlı Arıza Teşhisi:**
-   SCADA ve operatör panellerinde (HMI) operatörü doğrudan arızalı sensör ve sigortaya yönlendiren Türkçe alarm ağacı ve olay günlüğü (event logger).
+Bu ortamda kararlı çalışan bir elektronik kart üretmek için **şematik tasarım kadar PCB katman yapısı (Layer Stackup) ve Ground Plane stratejisi** hayati önem taşır.
 
 ---
 
-### GKM Elektrik İle Projelendirme Süreci:
+## 4 Katmanlı Endüstriyel Stackup Konfigürasyonu (SIG - GND - PWR - SIG)
 
-- **1. Saha ve Keşif Analizi:** Tesisinizde veya makinenizde motor güçleri, I/O listesi ve haberleşme gereksinimleri yerinde tespit edilir.
-- **2. EPLAN Projelendirme & Şematik Çizim:** Tüm pano ve kablaj şemaları uluslararası normlarda çizilerek onayınıza sunulur.
-- **3. Atölye İmalatı & Fabrika Kabul Testi (FAT):** Tip testli karkaslarda montajı tamamlanan panolar gerilim ve fonksiyon testlerinden geçirilir.
-- **4. Saha Devreye Alma (SAT) & 7/24 Teknik Destek:** Uzman otomasyon ekibimiz hattı sahada devreye alır ve operatör eğitimlerini tamamlar.
+En yüksek elektromanyetik uyumluluk için standart 4 katmanlı endüstriyel stackup şu şekilde düzenlenir:
 
-> **Mühendislik Tavsiyesi:** Projelerinizde revizyon maliyetlerini düşürmek için mutlaka gerber, EPLAN veya tek hat şemanızı önceden mühendislerimize inceletiniz.
+| Katman | Tip | Fonksiyon ve Tasarım Kriteri | Bakır Kalınlığı |
+|---|---|---|---|
+| **Layer 1 (Top)** | Sinyal (SIG) | MCU, kristal, sensör ve haberleşme yolları | 35 µm (1 oz) |
+| **Layer 2 (Inner 1)** | Solid Ground (GND) | Kesintisiz 0V referans düzlemi, EMI kalkanı | 35 µm (1 oz) |
+| **Layer 3 (Inner 2)** | Güç (PWR) | +24V, +5V, +3.3V ada/poligon dağıtımı | 35 µm (1 oz) |
+| **Layer 4 (Bottom)** | Sinyal (SIG) | Güç elemanları, filtreler ve konnektör hatları | 35 µm (1 oz) |
+
+### Neden Kesintisiz Solid GND Plane?
+Yüksek frekanslı sinyallerin geri dönüş akımı (Return Path), en düşük direnç yolunu değil, **en düşük endüktans yolunu** (doğrudan sinyal yolunun altındaki GND yüzeyini) takip eder. Eğer Ground Plane yarıklarla bölünürse, geri dönüş akımı döngü (loop area) oluşturur ve PCB dev bir anten gibi hem EMI yayar hem de dış gürültüyü toplar.
+
+---
+
+## Giriş/Çıkış (I/O) Koruması ve İzolasyon
+
+1. **Galvanik İzolasyon:** 24V fabrika saha sinyalleri ile hassas 3.3V mikrodenetleyici (MCU) çekirdeği arasında optokuplörler (örn: PC817, TLP291) veya dijital izolatörler (örn: ISO7741) kullanılır.
+2. **TVS Diyot ve Ferrit Boncuk:** RS-485 veya CAN Bus haberleşme hatlarında SM712 veya benzeri çift yönlü TVS diyotlar kullanılır.
+3. **Ayrık Toprak Mimarisi:** Şase/Kutu toprağı (EARTH) ile dijital devre toprağı (GND), 1nF 2kV yüksek gerilim kondansatörü ve paralel 1MΩ direnç üzerinden bağlanarak ESD enerjisi güvenle tahliye edilir.
+

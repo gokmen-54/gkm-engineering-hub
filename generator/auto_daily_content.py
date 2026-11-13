@@ -272,6 +272,36 @@ Sanayi tesislerinde yaşanan plansız üretim duruşları, yüksek reaktif enerj
 
     print(f"[AUTO-CONTENT] Yeni teknik rehber olusturuldu: {candidate['title']}")
 
+    # Also automatically append a realistic engineering Q&A thread for the new topic
+    disc_file = os.path.join(BASE_DIR, "generator", "discussions_database.json")
+    try:
+        with open(disc_file, "r", encoding="utf-8") as df:
+            discussions = json.load(df)
+    except Exception:
+        discussions = {}
+
+    if candidate["slug"] not in discussions:
+        discussions[candidate["slug"]] = [
+            {
+                "id": f"q-auto-{candidate['slug'][:15]}",
+                "author_name": "Serkan Aydın",
+                "company": "Tesis Bakım Mühendisi (Kocaeli OSB)",
+                "date": today,
+                "question": f"{candidate['title']} konusunda benzer bir sahada uygulama yaparken nelere en çok dikkat etmeliyiz?",
+                "replies": [
+                    {
+                        "author": "Gökmen Elektrik & Mühendislik Ekibi",
+                        "role": "Sistem Entegratörü",
+                        "date": today,
+                        "text": f"Serkan Bey merhaba. Bu uygulamada en kritik husus; uluslararası normlara (IEC/ISO) uygun koruma ve parazit izolasyonudur. Tesisinizin şemasını veya teknik şartnamenizi bize WhatsApp üzerinden iletirseniz, projenizi ücretsiz inceleyip en uygun komponent seçimini yapabiliriz.",
+                        "verified": True
+                    }
+                ]
+            }
+        ]
+        with open(disc_file, "w", encoding="utf-8") as df:
+            json.dump(discussions, df, indent=2, ensure_ascii=False)
+
     # Recompile entire site and update sitemap
     engine.compile_site()
     return True

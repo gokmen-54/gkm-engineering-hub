@@ -24,7 +24,7 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
 
-    <!-- Schema.org Article & Breadcrumbs -->
+    <!-- Schema.org Article, Breadcrumbs & Q&A FAQ -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -85,10 +85,13 @@
                 <span class="hidden md:inline text-slate-300">Özel Makine Otomasyonu, PLC/SCADA, PCB ve Tip Testli Pano İmalatı</span>
             </div>
             <div class="flex items-center gap-5 text-xs font-semibold">
-                <a href="https://gkmelektrik.com" target="_blank" class="text-sky-400 hover:text-sky-300 flex items-center gap-1 transition">
-                    <span>Resmi Mağaza & Şalt: <b>gkmelektrik.com</b></span> ➔
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/hesaplama/" class="text-amber-400 hover:text-amber-300 flex items-center gap-1 transition">
+                    <span>⚡ <b>Mühendislik Hesaplama Araçları</b></span>
                 </a>
-                <a href="tel:905377029954" class="text-slate-300 hover:text-white hidden sm:flex items-center gap-1">
+                <a href="https://gkmelektrik.com" target="_blank" class="text-sky-400 hover:text-sky-300 flex items-center gap-1 transition hidden sm:flex">
+                    <span>Resmi Şalt Mağazası: <b>gkmelektrik.com</b></span> ➔
+                </a>
+                <a href="tel:905377029954" class="text-slate-300 hover:text-white hidden lg:flex items-center gap-1">
                     <span>📞 0537 702 99 54</span>
                 </a>
             </div>
@@ -109,16 +112,21 @@
             </a>
 
             <!-- Nav Links -->
-            <nav class="hidden lg:flex items-center gap-7 text-xs sm:text-sm font-bold text-slate-700">
+            <nav class="hidden xl:flex items-center gap-6 text-xs sm:text-sm font-bold text-slate-700">
                 <a href="https://gokmen-54.github.io/gkm-engineering-hub/makine-otomasyonu/" class="hover:text-sky-600 transition text-sky-600 border-b-2 border-sky-600 pb-1">Makine Otomasyonu</a>
                 <a href="https://gokmen-54.github.io/gkm-engineering-hub/plc-scada-yazilim/" class="hover:text-sky-600 transition ">PLC & SCADA</a>
                 <a href="https://gokmen-54.github.io/gkm-engineering-hub/pcb-elektronik-tasarim/" class="hover:text-sky-600 transition ">PCB Tasarımı</a>
-                <a href="https://gokmen-54.github.io/gkm-engineering-hub/elektrik-panosu-salt/" class="hover:text-sky-600 transition ">Pano İmalatı & Şalt</a>
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/elektrik-panosu-salt/" class="hover:text-sky-600 transition ">Pano & Şalt</a>
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/projeler/" class="hover:text-sky-600 transition ">Vaka Analizleri</a>
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/hesaplama/" class="hover:text-sky-600 transition text-amber-600 flex items-center gap-1.5 ">
+                    <span>📐 Hesaplama</span>
+                    <span class="bg-amber-100 text-amber-800 text-[10px] font-black px-1.5 py-0.5 rounded-full uppercase">Ücretsiz</span>
+                </a>
             </nav>
 
             <!-- Conversion Action Buttons -->
             <div class="flex items-center gap-3">
-                <a href="https://gkmelektrik.com" target="_blank" class="hidden md:inline-flex bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold py-2.5 px-4 rounded-xl border border-slate-300 transition">
+                <a href="https://gkmelektrik.com" target="_blank" class="hidden md:inline-flex bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold py-2.5 px-3.5 rounded-xl border border-slate-300 transition">
                     gkmelektrik.com ↗
                 </a>
 
@@ -215,7 +223,7 @@
 <li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">**Dokümantasyon ve EPLAN:** Her projenin EPLAN P8 elektrik projeleri, klemens planları ve malzeme listeleri müşteriye eksiksiz devredilir.</li>
             </div>
 
-            <!-- High Converting Article Call To Action Box -->
+            <!-- Article Call To Action Box -->
             <div class="mt-14 p-8 rounded-2xl bg-gradient-to-r from-[#001c30] to-[#00111f] text-white border border-sky-900 shadow-xl">
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
                     <div>
@@ -236,16 +244,85 @@
                 </div>
             </div>
 
+            <!-- Q&A and Engineering Discussions Section -->
+            <section id="soru-cevap-bolumu" class="mt-16 pt-12 border-t border-slate-200">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <span class="text-xs font-black text-sky-600 uppercase tracking-widest">MÜHENDİSLİK TARTIŞMALARI & SORU-CEVAP</span>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-black text-slate-900">Teknik Soru-Cevap & Saha Danışmanlığı</h3>
+                    </div>
+                    <span class="bg-slate-100 text-slate-700 font-bold text-xs px-3.5 py-1.5 rounded-full border border-slate-200">
+                        💬 0 Teknik Tartışma
+                    </span>
+                </div>
+
+                <!-- Discussion Items -->
+                <div id="qa-thread-list" class="space-y-6 mb-10">
+                    <div class="text-xs text-slate-500 bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center font-medium">Bu rehber için henüz soru sorulmamış. İlk teknik soruyu siz sorun!</div>
+                </div>
+
+                <!-- User Question Submission Form -->
+                <div class="bg-gradient-to-br from-slate-50 to-sky-50/50 p-6 sm:p-8 rounded-3xl border border-sky-200 shadow-sm">
+                    <div class="max-w-2xl mb-6">
+                        <span class="bg-sky-600 text-white font-black text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">MÜHENDİSE DANIŞIN</span>
+                        <h4 class="text-lg sm:text-xl font-black text-slate-900 mb-1">Bu Konuda Bir Probleminiz mi Var? Soru Sorun</h4>
+                        <p class="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                            Sahada karşılaştığınız arıza, PLC hata kodu veya tasarım sorusunu yazın; GKM Elektrik mühendislik ekibimiz inceleyip ücretsiz yanıtlasın.
+                        </p>
+                    </div>
+
+                    <form id="user-qa-form" onsubmit="handleUserSubmitQuestion(event, 'iso-13849-1-makine-emniyet-devresi-tasarimi-sil-pl-hesabi', 'ISO 13849-1 Standardına Göre Makine Emniyet Devresi Tasarımı: Performance Level (PLr) ve SIL Hesabı')" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Adınız Soyadınız *</label>
+                                <input type="text" id="uqa-name" placeholder="Örn: Ahmet Yılmaz" required class="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Şirket / Rol *</label>
+                                <input type="text" id="uqa-company" placeholder="Örn: Tesis Bakım Şefi / Fabrika" required class="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">WhatsApp / Telefon *</label>
+                                <input type="text" id="uqa-phone" placeholder="05XX XXX XX XX" required class="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Sorunuz / Yaşadığınız Teknik Problem *</label>
+                            <textarea id="uqa-question" rows="3" placeholder="Örn: Makinemizde servo frenleme anında aşırı gerilim (DC Bus Overvoltage) alıyoruz, parametre veya reaktör seçimi nasıl olmalı?" required class="w-full bg-white border border-slate-300 rounded-xl p-3 text-xs font-medium text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                            <span class="text-[11px] text-slate-500 font-medium">🔒 Bilgileriniz gizli tutulur, yanıt WhatsApp veya e-posta ile iletilir.</span>
+                            <button type="submit" class="w-full sm:w-auto bg-sky-600 hover:bg-sky-500 text-white font-black text-xs py-3 px-6 rounded-xl transition shadow-md shadow-sky-600/20">
+                                Sorumu Mühendise İlet ➔
+                            </button>
+                        </div>
+                    </form>
+
+                    <div id="uqa-success-msg" class="mt-4 p-4 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-900 text-xs hidden">
+                        <div class="font-black text-sm mb-1">🎉 Sorunuz Başarıyla Alındı!</div>
+                        <p class="mb-3">Mühendislik ekibimiz teknik incelemeyi yapıp yanıtınızı bu sayfada ve WhatsApp numaranıza gönderecektir.</p>
+                        <a id="uqa-wa-direct-link" href="#" target="_blank" class="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-3.5 py-2 rounded-lg transition shadow">
+                            <span>💬 Bu Soruyu WhatsApp ile Doğrudan Gökmen'e İlet (Öncelikli)</span> ➔
+                        </a>
+                    </div>
+                </div>
+            </section>
+
         </div>
     </main>
 
     
     <!-- Mobile Sticky Action Bar -->
     <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 border-t border-slate-200 backdrop-blur-lg px-4 py-2.5 flex items-center justify-between gap-2 shadow-2xl">
-        <a href="tel:905377029954" class="flex-1 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow">
-            📞 Hemen Ara: 0537 702 99 54
+        <a href="https://gokmen-54.github.io/gkm-engineering-hub/hesaplama/" class="flex-1 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs py-2.5 px-2 rounded-xl flex items-center justify-center gap-1 shadow">
+            📐 Hesaplayıcılar
         </a>
-        <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik%2C%20teknik%20projemiz%20i%C3%A7in%20%C5%9Fema/liste%20g%C3%B6nderip%20teklif%20almak%20istiyoruz." target="_blank" class="flex-1 bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs py-2.5 px-3 rounded-xl shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-1.5">
+        <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik%2C%20teknik%20projemiz%20i%C3%A7in%20%C5%9Fema/liste%20g%C3%B6nderip%20teklif%20almak%20istiyoruz." target="_blank" class="flex-1 bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs py-2.5 px-2 rounded-xl shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-1">
             <span>WhatsApp Şema Gönder</span>
         </a>
     </div>
@@ -259,8 +336,11 @@
                     <p class="text-slate-300 leading-relaxed text-xs mb-4">
                         Özel makine otomasyonu, PLC/SCADA yazılımı, çok katmanlı endüstriyel PCB tasarımı ve IEC 61439 tip testli pano imalatı.
                     </p>
-                    <a href="https://gkmelektrik.com" target="_blank" class="text-sky-400 font-bold hover:underline block">
-                        ➔ Resmi E-Ticaret & Şalt: gkmelektrik.com
+                    <a href="https://gkmelektrik.com" target="_blank" class="text-sky-400 font-bold hover:underline block mb-2">
+                        ➔ Resmi E-Ticaret: gkmelektrik.com
+                    </a>
+                    <a href="https://gokmen-54.github.io/gkm-engineering-hub/admin/" class="text-slate-500 hover:text-slate-400 font-semibold block text-[11px]">
+                        🔐 Soru-Cevap Yönetici Girişi
                     </a>
                 </div>
 
@@ -271,23 +351,27 @@
                         <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/plc-scada-yazilim/" class="hover:text-sky-400 transition">PLC Programlama & SCADA</a></li>
                         <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/pcb-elektronik-tasarim/" class="hover:text-sky-400 transition">Özel PCB & Gömülü Sistemler</a></li>
                         <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/elektrik-panosu-salt/" class="hover:text-sky-400 transition">Tip Testli Pano & Kompanzasyon</a></li>
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/projeler/" class="hover:text-sky-400 transition">Gerçek Vaka Analizleri</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Hesaplama Araçları (0 TL)</h4>
+                    <ul class="space-y-2 text-slate-300">
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/hesaplama/#kompanzasyon-hesabi" class="hover:text-amber-400 transition">📊 Harmonik Kompanzasyon Hesabı</a></li>
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/hesaplama/#kablo-kesiti-hesabi" class="hover:text-amber-400 transition">🔌 IEC Kablo Kesiti & Gerilim Düşümü</a></li>
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/hesaplama/#servo-tork-hesabi" class="hover:text-amber-400 transition">⚙️ Servo Motor Tork & Güç Seçimi</a></li>
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/admin/" class="hover:text-sky-400 transition">💬 Soru & Tartışma Yönetimi</a></li>
                     </ul>
                 </div>
 
                 <div>
                     <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">İletişim & Fabrika Destek</h4>
-                    <ul class="space-y-2 text-slate-300">
+                    <ul class="space-y-2 text-slate-300 mb-4">
                         <li><b>Telefon:</b> <a href="tel:905377029954" class="hover:text-white">0537 702 99 54</a></li>
                         <li><b>WhatsApp Destek:</b> <a href="https://wa.me/905377029954" target="_blank" class="hover:text-emerald-400">+90 537 702 99 54</a></li>
                         <li><b>Hizmet Sahası:</b> Sakarya, Kocaeli, Gebze, Bursa, Marmara & Tüm Türkiye</li>
                     </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Teknik Şema & Teklif</h4>
-                    <p class="text-slate-300 text-xs mb-3">
-                        EPLAN pano projenizi, makine fonksiyon şemanızı veya PCB gerber dosyalarınızı WhatsApp üzerinden anında iletebilirsiniz.
-                    </p>
                     <a href="https://wa.me/905377029954?text=Merhaba%2C%20projemiz%20i%C3%A7in%20teknik%20d%C3%B6k%C3%BCman%20payla%C5%9Fmak%20istiyoruz." target="_blank" class="inline-block bg-sky-600 hover:bg-sky-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition shadow-md">
                         Şema & Liste Gönder ➔
                     </a>
@@ -301,6 +385,79 @@
         </div>
     </footer>
     
+
+    <!-- Client-Side Q&A Form Script with LocalStorage Persistence -->
+    <script>
+    function handleUserSubmitQuestion(e, slug, articleTitle) {
+        e.preventDefault();
+        const name = document.getElementById('uqa-name').value.trim();
+        const company = document.getElementById('uqa-company').value.trim();
+        const phone = document.getElementById('uqa-phone').value.trim();
+        const question = document.getElementById('uqa-question').value.trim();
+
+        if (!name || !phone || !question) return;
+
+        const newQ = {
+            id: 'user-' + Date.now(),
+            slug: slug,
+            author_name: name,
+            company: company,
+            phone: phone,
+            date: new Date().toLocaleDateString('tr-TR'),
+            question: question,
+            is_user_submitted: true,
+            replies: []
+        };
+
+        // Store in localStorage for admin panel & persistence
+        let userQuestions = [];
+        try {
+            const stored = localStorage.getItem('gkm_user_questions');
+            if (stored) userQuestions = JSON.parse(stored);
+        } catch(e) {}
+        userQuestions.push(newQ);
+        localStorage.setItem('gkm_user_questions', JSON.stringify(userQuestions));
+
+        // Add live to current DOM thread
+        const threadList = document.getElementById('qa-thread-list');
+        const newCard = document.createElement('div');
+        newCard.className = "bg-amber-50/80 rounded-2xl border border-amber-300 p-5 sm:p-6 transition";
+        newCard.innerHTML = `
+            <div class="flex items-center justify-between gap-2 mb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-full bg-amber-200 text-amber-800 flex items-center justify-center font-black text-xs">
+                        ${name.charAt(0)}
+                    </span>
+                    <div>
+                        <span class="font-black text-slate-900 text-xs sm:text-sm block">${name}</span>
+                        <span class="text-[11px] text-amber-700 font-semibold">${company} (Yeni)</span>
+                    </div>
+                </div>
+                <span class="bg-amber-200 text-amber-900 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">🕒 Cevap Bekliyor</span>
+            </div>
+            <p class="text-slate-800 text-xs sm:text-sm font-semibold mt-2 mb-2 bg-white p-3.5 rounded-xl border border-amber-200">
+                ❓ ${question}
+            </p>
+            <p class="text-[11px] text-slate-500 italic">Mühendislerimiz sorunuzu inceleyip 24 saat içinde yanıtlayacaktır.</p>
+        `;
+        threadList.appendChild(newCard);
+
+        // Prepare WhatsApp link
+        const waText = encodeURIComponent(`Merhaba GKM Elektrik, '${articleTitle}' yazınız üzerinden soru sordum:
+
+Ad: ${name}
+Firma: ${company}
+Soru: ${question}
+
+Teknik yanıtınızı rica ederim.`);
+        const waLink = `https://wa.me/905377029954?text=${waText}`;
+        document.getElementById('uqa-wa-direct-link').href = waLink;
+
+        // Reset form & show success
+        document.getElementById('user-qa-form').reset();
+        document.getElementById('uqa-success-msg').classList.remove('hidden');
+    }
+    </script>
 
 </body>
 </html>
