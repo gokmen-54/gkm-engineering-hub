@@ -141,5 +141,18 @@
     "cta_headline": "Aşırı Isınan veya Yanan Güç Kartlarınız mı Var?",
     "cta_text": "Gerber dosyalarınızı iletin; termal simülasyon ve bakır kalınlığı optimizasyonu ile kartınızı endüstriyel standartlara getirelim.",
     "date": "2026-11-13"
+  },
+  {
+    "slug": "mcc-motor-kontrol-panosu-soft-starter-ve-vfd-secim-rehberi",
+    "category": "elektrik-panosu-salt",
+    "category_title": "Elektrik Panosu & Şalt",
+    "title": "MCC Panolarında Sürücü (VFD) vs Soft Starter Seçimi: Ağır Şart Kalkış ve Enerji Verimliliği Karşılaştırması",
+    "summary": "Pompa, fan, kırıcı ve konveyör uygulamalarında demeraj akımını sınırlama, şebeke harmonik etkisi ve pano içi havalandırma debisi hesaplama metodolojisi.",
+    "target_audience": "Elektrik Bakım Mühendisleri & Tesis Yöneticileri",
+    "reading_time": "8 dk okuma",
+    "diagram_type": "default",
+    "cta_headline": "Tesisiniz İçin MCC Motor Kontrol Panosu İhtiyacı mı Var?",
+    "cta_text": "Motor güç listenizi ve kalkış gereksinimlerinizi gönderin; tip testli ve iklimlendirmeli MCC pano teklifimizi 24 saatte sunalım.",
+    "date": "2026-11-14"
   }
 ]
