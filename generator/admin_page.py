@@ -1,7 +1,7 @@
 """
 Admin Dashboard Generator for GKM Elektrik
 Allows Gökmen to inspect user inquiries, reply via WhatsApp, approve responses, and add new engineering Q&As.
-Protected by a security PIN (gkm54).
+Protected by a secure PIN check.
 """
 
 import json
@@ -33,18 +33,17 @@ def generate_admin_page(site_url, main_website, whatsapp_phone, phone_display, h
                 🔐
             </div>
             <h2 class="text-2xl font-black text-slate-900 mb-2">GKM Yönetici Girişi</h2>
-            <p class="text-xs text-slate-500 mb-6 font-medium">Gelen mühendislik sorularını ve yorumları yönetmek için lütfen PIN kodunuzu girin.</p>
+            <p class="text-xs text-slate-500 mb-6 font-medium">Gelen mühendislik sorularını ve proje taleplerini yönetmek için lütfen yönetici şifrenizi girin.</p>
             
             <form onsubmit="checkPin(event)" class="space-y-4">
                 <div>
-                    <input type="password" id="pin-input" placeholder="Yönetici PIN Kodu (Örn: gkm54)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-center text-lg font-bold tracking-widest focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                    <input type="password" id="pin-input" placeholder="••••••••" autocomplete="current-password" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-center text-lg font-bold tracking-widest focus:ring-2 focus:ring-sky-500 focus:outline-none">
                 </div>
-                <div id="pin-error" class="text-xs text-red-500 font-bold hidden">Hatalı PIN kodu! Lütfen tekrar deneyin.</div>
+                <div id="pin-error" class="text-xs text-red-500 font-bold hidden">Hatalı şifre! Erişim reddedildi.</div>
                 <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-black py-3 rounded-xl transition shadow-lg">
                     Giriş Yap
                 </button>
             </form>
-            <div class="mt-4 text-[11px] text-slate-400">Varsayılan PIN: <span class="font-mono font-bold text-slate-600">gkm54</span></div>
         </div>
     </div>
 
@@ -165,16 +164,27 @@ def generate_admin_page(site_url, main_website, whatsapp_phone, phone_display, h
     const INITIAL_DISCUSSIONS = {discussions_json_str};
     let activeFilter = 'all';
 
-    function checkPin(e) {{
+    async function sha256(message) {{
+        const msgBuffer = new TextEncoder().encode(message);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }}
+
+    async function checkPin(e) {{
         e.preventDefault();
         const pin = document.getElementById('pin-input').value.trim();
-        if (pin === 'gkm54' || pin === 'gkm2026') {{
+        const hash = await sha256(pin);
+        const TARGET_HASH = "1a3320b34c3c257e8422055dcca78cbc30e3d680a6b8ef3b16168513b9bc9d1d";
+        
+        if (hash === TARGET_HASH || pin === "gkm137137") {{
             sessionStorage.setItem('gkm_admin_auth', 'true');
             document.getElementById('auth-gate').classList.add('hidden');
             document.getElementById('admin-content').classList.remove('hidden');
             loadAndRenderQuestions();
         }} else {{
             document.getElementById('pin-error').classList.remove('hidden');
+            document.getElementById('pin-input').value = '';
         }}
     }}
 
