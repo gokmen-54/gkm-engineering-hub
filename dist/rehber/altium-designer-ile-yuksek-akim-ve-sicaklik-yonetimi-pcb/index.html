@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Güç Elektroniği Kartlarında Termal Yönetim: Altium Designer ile Thermal Via ve Yüksek Akım Bakır Yolu Hesabı | GKM Elektrik & Mühendislik</title>
+    <meta name="description" content="Motor sürücü ve batarya yönetim (BMS) kartlarında 20A+ akım taşıma kapasitesi (IPC-2152), thermal via dikişi ve alüminyum tabanlı PCB (IMS) tasarım kriterleri.">
+    <link rel="canonical" href="https://gokmen-54.github.io/gkm-engineering-hub/rehber/altium-designer-ile-yuksek-akim-ve-sicaklik-yonetimi-pcb/">
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Güç Elektroniği Kartlarında Termal Yönetim: Altium Designer ile Thermal Via ve Yüksek Akım Bakır Yolu Hesabı">
+    <meta property="og:description" content="Motor sürücü ve batarya yönetim (BMS) kartlarında 20A+ akım taşıma kapasitesi (IPC-2152), thermal via dikişi ve alüminyum tabanlı PCB (IMS) tasarım kriterleri.">
+    <meta property="og:url" content="https://gokmen-54.github.io/gkm-engineering-hub/rehber/altium-designer-ile-yuksek-akim-ve-sicaklik-yonetimi-pcb/">
+    <meta property="og:image" content="https://gokmen-54.github.io/gkm-engineering-hub/assets/gkm_3_otomasyon.webp">
+    <meta property="og:type" content="article">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+
+    <!-- Schema.org Article & Breadcrumbs -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Ana Sayfa",
+              "item": "https://gokmen-54.github.io/gkm-engineering-hub/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "PCB & Elektronik Tasarım",
+              "item": "https://gokmen-54.github.io/gkm-engineering-hub/pcb-elektronik-tasarim/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Güç Elektroniği Kartlarında Termal Yönetim: Altium Designer ile Thermal Via ve Yüksek Akım Bakır Yolu Hesabı",
+              "item": "https://gokmen-54.github.io/gkm-engineering-hub/rehber/altium-designer-ile-yuksek-akim-ve-sicaklik-yonetimi-pcb/"
+            }
+          ]
+        },
+        {
+          "@type": "TechArticle",
+          "headline": "Güç Elektroniği Kartlarında Termal Yönetim: Altium Designer ile Thermal Via ve Yüksek Akım Bakır Yolu Hesabı",
+          "description": "Motor sürücü ve batarya yönetim (BMS) kartlarında 20A+ akım taşıma kapasitesi (IPC-2152), thermal via dikişi ve alüminyum tabanlı PCB (IMS) tasarım kriterleri.",
+          "author": {
+            "@type": "Organization",
+            "name": "GKM Elektrik & Mühendislik",
+            "url": "https://gkmelektrik.com"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "GKM Elektrik",
+            "url": "https://gkmelektrik.com"
+          },
+          "datePublished": "2026-11-13",
+          "inLanguage": "tr"
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans antialiased selection:bg-sky-500 selection:text-white min-h-screen flex flex-col justify-between">
+
+    
+    <!-- Top Announcement Bar (Deep Navy matching gkmelektrik.com) -->
+    <div class="bg-[#001c30] text-slate-300 text-xs py-2.5 px-4 border-b border-sky-950">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+                <span class="font-bold text-white">GKM Elektrik & Mühendislik:</span>
+                <span class="hidden md:inline text-slate-300">Özel Makine Otomasyonu, PLC/SCADA, PCB ve Tip Testli Pano İmalatı</span>
+            </div>
+            <div class="flex items-center gap-5 text-xs font-semibold">
+                <a href="https://gkmelektrik.com" target="_blank" class="text-sky-400 hover:text-sky-300 flex items-center gap-1 transition">
+                    <span>Resmi Mağaza & Şalt: <b>gkmelektrik.com</b></span> ➔
+                </a>
+                <a href="tel:905377029954" class="text-slate-300 hover:text-white hidden sm:flex items-center gap-1">
+                    <span>📞 0537 702 99 54</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Clean Navigation Header (White with backdrop blur) -->
+    <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
+            
+            <!-- Real Official Logo from gkmelektrik.com -->
+            <a href="https://gokmen-54.github.io/gkm-engineering-hub/" class="flex items-center gap-3">
+                <img src="https://gokmen-54.github.io/gkm-engineering-hub/assets/logo.webp" alt="Gökmen Elektrik Logo" class="h-10 sm:h-12 w-auto object-contain">
+                <div class="border-l border-slate-200 pl-3 hidden sm:block">
+                    <span class="text-xs font-black tracking-wider text-slate-900 block uppercase">MÜHENDİSLİK HUB</span>
+                    <span class="text-[10px] text-sky-700 font-bold uppercase tracking-wider block">Endüstriyel Otomasyon & Ar-Ge</span>
+                </div>
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="hidden lg:flex items-center gap-7 text-xs sm:text-sm font-bold text-slate-700">
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/makine-otomasyonu/" class="hover:text-sky-600 transition ">Makine Otomasyonu</a>
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/plc-scada-yazilim/" class="hover:text-sky-600 transition ">PLC & SCADA</a>
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/pcb-elektronik-tasarim/" class="hover:text-sky-600 transition text-sky-600 border-b-2 border-sky-600 pb-1">PCB Tasarımı</a>
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/elektrik-panosu-salt/" class="hover:text-sky-600 transition ">Pano İmalatı & Şalt</a>
+            </nav>
+
+            <!-- Conversion Action Buttons -->
+            <div class="flex items-center gap-3">
+                <a href="https://gkmelektrik.com" target="_blank" class="hidden md:inline-flex bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold py-2.5 px-4 rounded-xl border border-slate-300 transition">
+                    gkmelektrik.com ↗
+                </a>
+
+                <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik%2C%20m%C3%BChendislik%20projemiz%20i%C3%A7in%20teknik%20g%C3%B6r%C3%BC%C5%9Fme%20ve%20teklif%20almak%20istiyoruz." target="_blank" rel="noopener" class="bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-2.5 px-4 sm:px-5 rounded-full shadow-lg shadow-emerald-500/20 transition flex items-center gap-2">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                    <span>WhatsApp Proje Danış</span>
+                </a>
+            </div>
+
+        </div>
+    </header>
+    
+
+    <!-- Article Header Banner -->
+    <section class="py-12 border-b border-sky-950 bg-gradient-to-br from-[#001c30] to-[#00111f] text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            
+            <nav class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-4">
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/" class="hover:text-sky-400">Ana Sayfa</a>
+                <span>/</span>
+                <a href="https://gokmen-54.github.io/gkm-engineering-hub/pcb-elektronik-tasarim/" class="text-sky-400 hover:underline">PCB & Elektronik Tasarım</a>
+                <span>/</span>
+                <span class="text-slate-500 truncate max-w-xs">altium-designer-ile-yuksek-akim-ve-sicaklik-yonetimi-pcb</span>
+            </nav>
+
+            <div class="flex items-center gap-3 text-xs font-bold text-slate-300 mb-4">
+                <span class="bg-sky-500 text-slate-950 px-3 py-1 rounded-full uppercase">PCB & Elektronik Tasarım</span>
+                <span>⏱️ 9 dk okuma</span>
+                <span>📅 2026-11-13</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl font-black text-white leading-tight mb-4">
+                Güç Elektroniği Kartlarında Termal Yönetim: Altium Designer ile Thermal Via ve Yüksek Akım Bakır Yolu Hesabı
+            </h1>
+
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-medium">
+                Motor sürücü ve batarya yönetim (BMS) kartlarında 20A+ akım taşıma kapasitesi (IPC-2152), thermal via dikişi ve alüminyum tabanlı PCB (IMS) tasarım kriterleri.
+            </p>
+
+            <div class="mt-6 pt-6 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                <span>🎯 <b>Hedef Kitle:</b> Donanım Tasarımcıları & Güç Elektroniği Mühendisleri</span>
+                <span class="text-sky-400 font-bold">GKM Elektrik Mühendislik Ekibi</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Article Content Body -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-1 w-full">
+        <div class="bg-white rounded-3xl p-6 sm:p-12 border border-slate-200 shadow-sm">
+            
+            <!-- Technical SVG Schematic -->
+            <div class="mb-10 rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+                
+        <svg viewBox="0 0 800 360" class="w-full h-auto rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl p-4" xmlns="http://www.w3.org/2000/svg">
+          <text x="30" y="35" fill="#94a3b8" font-family="monospace" font-size="12" font-weight="bold">GKM MÜHENDİSLİK // 4-KATMAN ENDÜSTRİYEL PCB STACKUP & İZOLASYON ŞEMASI</text>
+
+          <!-- Layer 1 -->
+          <rect x="60" y="60" width="680" height="40" rx="4" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+          <text x="80" y="85" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="bold">LAYER 1: TOP SIGNAL (High Speed Bus & MCU Traces - 1oz Bakır)</text>
+          <text x="650" y="85" fill="#bae6fd" font-family="monospace" font-size="11">35 µm</text>
+
+          <!-- Prepreg -->
+          <rect x="60" y="105" width="680" height="25" fill="#334155" stroke="#475569" stroke-width="1"/>
+          <text x="400" y="122" fill="#cbd5e1" font-family="monospace" font-size="11" text-anchor="middle">DIELECTRIC PREPREG (FR4 Core - 0.2mm)</text>
+
+          <!-- Layer 2 -->
+          <rect x="60" y="135" width="680" height="40" rx="4" fill="#15803d" stroke="#22c55e" stroke-width="2"/>
+          <text x="80" y="160" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="bold">LAYER 2: SOLID GROUND PLANE (GND - 0V EMI Kalkanlama Referansı)</text>
+          <text x="650" y="160" fill="#bbf7d0" font-family="monospace" font-size="11">35 µm</text>
+
+          <!-- Core -->
+          <rect x="60" y="180" width="680" height="35" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+          <text x="400" y="202" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">CORE DIELECTRIC ISOLATION (1.0mm Yüksek Gerilim İzolasyonu)</text>
+
+          <!-- Layer 3 -->
+          <rect x="60" y="220" width="680" height="40" rx="4" fill="#b45309" stroke="#f59e0b" stroke-width="2"/>
+          <text x="80" y="245" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="bold">LAYER 3: POWER PLANE (+24V, +5V, +3.3V Dağıtım Alanı)</text>
+          <text x="650" y="245" fill="#fef08a" font-family="monospace" font-size="11">35 µm</text>
+
+          <!-- Prepreg -->
+          <rect x="60" y="265" width="680" height="25" fill="#334155" stroke="#475569" stroke-width="1"/>
+          <text x="400" y="282" fill="#cbd5e1" font-family="monospace" font-size="11" text-anchor="middle">DIELECTRIC PREPREG (FR4 - 0.2mm)</text>
+
+          <!-- Layer 4 -->
+          <rect x="60" y="295" width="680" height="40" rx="4" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+          <text x="80" y="320" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="bold">LAYER 4: BOTTOM SIGNAL (Sensör Girişleri & Röle Çıkışları)</text>
+          <text x="650" y="320" fill="#bae6fd" font-family="monospace" font-size="11">35 µm</text>
+        </svg>
+        
+            </div>
+
+            <!-- Body HTML -->
+            <div class="prose max-w-none">
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-950 mt-10 mb-4 pb-2 border-b border-slate-200">Endüstriyel Saha Standartları ve Mühendislik Yaklaşımı</h2>
+<div class="h-3"></div>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">Bu teknik rehber, <strong class='font-black text-slate-900'>GKM Elektrik & Mühendislik</strong> saha tecrübeleri, Türk sanayisindeki fiili fabrika uygulamaları ve uluslararası mühendislik standartları (IEC 61439, ISO 13849, IPC-A-610) doğrultusunda hazırlanmıştır.</p>
+<div class="h-3"></div>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">Sanayi tesislerinde yaşanan plansız üretim duruşları, yüksek reaktif enerji faturaları ve makine yazılım kararsızlıkları doğru mühendislik analizi ve kaliteli şalt/otomasyon komponentleri ile tamamen önlenebilir.</p>
+<div class="h-3"></div>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">---</p>
+<div class="h-3"></div>
+<h3 class="text-xl font-black text-slate-900 mt-8 mb-3 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-sky-500"></span>Temel Tasarım ve Uygulama Kriterleri:</h3>
+<div class="h-3"></div>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">**Uluslararası Standartlara Tam Uyum:**</li>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">   Panolarda IEC 61439 tip testli hücre yapısı, klemenslerde yay baskılı titreşime dayanıklı bağlantılar, yazılımda ise IEC 61131-3 SCL programlama disiplini.</p>
+<div class="h-3"></div>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">**Termal ve Elektromanyetik Uyumluluk (EMC/EMI):**</li>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">   Servo sürücü ve motor kablolarında 360 derece zırh topraklaması, kontrol sinyalleri ile güç kabloları arasında minimum 20 cm ayırma mesafesi ve pano içi zorlamalı fanlı/klimalı havalandırma.</p>
+<div class="h-3"></div>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">**Gözlemlenebilirlik ve Hızlı Arıza Teşhisi:**</li>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">   SCADA ve operatör panellerinde (HMI) operatörü doğrudan arızalı sensör ve sigortaya yönlendiren Türkçe alarm ağacı ve olay günlüğü (event logger).</p>
+<div class="h-3"></div>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">---</p>
+<div class="h-3"></div>
+<h3 class="text-xl font-black text-slate-900 mt-8 mb-3 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-sky-500"></span>GKM Elektrik İle Projelendirme Süreci:</h3>
+<div class="h-3"></div>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-disc mb-1.5">**1. Saha ve Keşif Analizi:** Tesisinizde veya makinenizde motor güçleri, I/O listesi ve haberleşme gereksinimleri yerinde tespit edilir.</li>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-disc mb-1.5">**2. EPLAN Projelendirme & Şematik Çizim:** Tüm pano ve kablaj şemaları uluslararası normlarda çizilerek onayınıza sunulur.</li>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-disc mb-1.5">**3. Atölye İmalatı & Fabrika Kabul Testi (FAT):** Tip testli karkaslarda montajı tamamlanan panolar gerilim ve fonksiyon testlerinden geçirilir.</li>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-disc mb-1.5">**4. Saha Devreye Alma (SAT) & 7/24 Teknik Destek:** Uzman otomasyon ekibimiz hattı sahada devreye alır ve operatör eğitimlerini tamamlar.</li>
+<div class="h-3"></div>
+<blockquote class="border-l-4 border-sky-500 bg-sky-50/70 text-slate-800 p-4 my-6 rounded-r-2xl text-sm font-medium leading-relaxed italic">**Mühendislik Tavsiyesi:** Projelerinizde revizyon maliyetlerini düşürmek için mutlaka gerber, EPLAN veya tek hat şemanızı önceden mühendislerimize inceletiniz.</blockquote>
+            </div>
+
+            <!-- High Converting Article Call To Action Box -->
+            <div class="mt-14 p-8 rounded-2xl bg-gradient-to-r from-[#001c30] to-[#00111f] text-white border border-sky-900 shadow-xl">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                    <div>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-sky-400 block mb-1">PROJENİZ İÇİN TEKNİK DESTEK</span>
+                        <h3 class="text-xl sm:text-2xl font-black mb-2">Aşırı Isınan veya Yanan Güç Kartlarınız mı Var?</h3>
+                        <p class="text-slate-300 text-xs sm:text-sm font-medium leading-relaxed max-w-xl">
+                            Gerber dosyalarınızı iletin; termal simülasyon ve bakır kalınlığı optimizasyonu ile kartınızı endüstriyel standartlara getirelim.
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                        <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik%2C%20%27G%C3%BC%C3%A7%20Elektroni%C4%9Fi%20Kartlar%C4%B1nda%20Termal%20Y%C3%B6netim%3A%20Altium%20Designer%20ile%20Thermal%20Via%20ve%20Y%C3%BCksek%20Ak%C4%B1m%20Bak%C4%B1r%20Yolu%20Hesab%C4%B1%27%20konulu%20rehberinizi%20okudum.%20Benzer%20bir%20projemiz%20var%2C%20teknik%20detaylar%C4%B1%20dan%C4%B1%C5%9Fmak%20ve%20teklif%20almak%20istiyorum." target="_blank" class="bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-5 rounded-xl shadow-lg transition text-center flex items-center justify-center gap-2">
+                            <span>💬 WhatsApp ile Proje Danış</span>
+                        </a>
+                        <a href="tel:905377029954" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs py-3 px-5 rounded-xl border border-white/20 transition text-center">
+                            📞 0537 702 99 54
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    
+    <!-- Mobile Sticky Action Bar -->
+    <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 border-t border-slate-200 backdrop-blur-lg px-4 py-2.5 flex items-center justify-between gap-2 shadow-2xl">
+        <a href="tel:905377029954" class="flex-1 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow">
+            📞 Hemen Ara: 0537 702 99 54
+        </a>
+        <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik%2C%20teknik%20projemiz%20i%C3%A7in%20%C5%9Fema/liste%20g%C3%B6nderip%20teklif%20almak%20istiyoruz." target="_blank" class="flex-1 bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs py-2.5 px-3 rounded-xl shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-1.5">
+            <span>WhatsApp Şema Gönder</span>
+        </a>
+    </div>
+
+    <!-- Corporate Footer (Deep Navy) -->
+    <footer class="border-t border-slate-200 bg-[#001c30] text-slate-400 text-xs py-14 pb-24 lg:pb-14">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-slate-800">
+                <div class="md:col-span-1">
+                    <img src="https://gokmen-54.github.io/gkm-engineering-hub/assets/logo.webp" alt="Gökmen Elektrik Logo" class="h-10 w-auto object-contain brightness-0 invert mb-4">
+                    <p class="text-slate-300 leading-relaxed text-xs mb-4">
+                        Özel makine otomasyonu, PLC/SCADA yazılımı, çok katmanlı endüstriyel PCB tasarımı ve IEC 61439 tip testli pano imalatı.
+                    </p>
+                    <a href="https://gkmelektrik.com" target="_blank" class="text-sky-400 font-bold hover:underline block">
+                        ➔ Resmi E-Ticaret & Şalt: gkmelektrik.com
+                    </a>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Mühendislik Çözümleri</h4>
+                    <ul class="space-y-2">
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/makine-otomasyonu/" class="hover:text-sky-400 transition">Makine Otomasyonu & Servo</a></li>
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/plc-scada-yazilim/" class="hover:text-sky-400 transition">PLC Programlama & SCADA</a></li>
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/pcb-elektronik-tasarim/" class="hover:text-sky-400 transition">Özel PCB & Gömülü Sistemler</a></li>
+                        <li><a href="https://gokmen-54.github.io/gkm-engineering-hub/elektrik-panosu-salt/" class="hover:text-sky-400 transition">Tip Testli Pano & Kompanzasyon</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">İletişim & Fabrika Destek</h4>
+                    <ul class="space-y-2 text-slate-300">
+                        <li><b>Telefon:</b> <a href="tel:905377029954" class="hover:text-white">0537 702 99 54</a></li>
+                        <li><b>WhatsApp Destek:</b> <a href="https://wa.me/905377029954" target="_blank" class="hover:text-emerald-400">+90 537 702 99 54</a></li>
+                        <li><b>Hizmet Sahası:</b> Sakarya, Kocaeli, Gebze, Bursa, Marmara & Tüm Türkiye</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Teknik Şema & Teklif</h4>
+                    <p class="text-slate-300 text-xs mb-3">
+                        EPLAN pano projenizi, makine fonksiyon şemanızı veya PCB gerber dosyalarınızı WhatsApp üzerinden anında iletebilirsiniz.
+                    </p>
+                    <a href="https://wa.me/905377029954?text=Merhaba%2C%20projemiz%20i%C3%A7in%20teknik%20d%C3%B6k%C3%BCman%20payla%C5%9Fmak%20istiyoruz." target="_blank" class="inline-block bg-sky-600 hover:bg-sky-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition shadow-md">
+                        Şema & Liste Gönder ➔
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-400">
+                <p>© 2026 GKM Elektrik & Otomasyon Sistemleri. Tüm hakları saklıdır.</p>
+                <p>Programmatic Engineering Hub • Yüksek Performanslı Teknik Blog ve Müşteri Yakalama Motoru</p>
+            </div>
+        </div>
+    </footer>
+    
+
+</body>
+</html>
+    

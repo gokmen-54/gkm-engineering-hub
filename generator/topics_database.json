@@ -128,5 +128,18 @@
     "cta_headline": "Haberleşme Kopmaları Üretiminizi mi Durduruyor?",
     "cta_text": "RS-485 veya endüstriyel Ethernet ağınızdaki paket kayıplarını analizörlerimizle yerinde tespit edip çözüyoruz. Bize ulaşın.",
     "date": "2026-11-13"
+  },
+  {
+    "slug": "altium-designer-ile-yuksek-akim-ve-sicaklik-yonetimi-pcb",
+    "category": "pcb-elektronik-tasarim",
+    "category_title": "PCB & Elektronik Tasarım",
+    "title": "Güç Elektroniği Kartlarında Termal Yönetim: Altium Designer ile Thermal Via ve Yüksek Akım Bakır Yolu Hesabı",
+    "summary": "Motor sürücü ve batarya yönetim (BMS) kartlarında 20A+ akım taşıma kapasitesi (IPC-2152), thermal via dikişi ve alüminyum tabanlı PCB (IMS) tasarım kriterleri.",
+    "target_audience": "Donanım Tasarımcıları & Güç Elektroniği Mühendisleri",
+    "reading_time": "9 dk okuma",
+    "diagram_type": "pcb_stackup",
+    "cta_headline": "Aşırı Isınan veya Yanan Güç Kartlarınız mı Var?",
+    "cta_text": "Gerber dosyalarınızı iletin; termal simülasyon ve bakır kalınlığı optimizasyonu ile kartınızı endüstriyel standartlara getirelim.",
+    "date": "2026-11-13"
   }
 ]
