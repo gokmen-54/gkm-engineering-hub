@@ -1,7 +1,7 @@
 """
 Projects & Case Studies Page Generator for GKM Elektrik
 Presents real-world industrial automation, panel manufacturing, PCB design and SCADA case studies.
-Captures plant managers and OEMs looking for proven engineering references.
+Includes interactive "Panonun İçine & Proje Detayına Bak" modal and full-screen image inspection lightbox.
 """
 
 import json
@@ -10,7 +10,7 @@ import os
 def generate_projects_page(site_url, main_website, whatsapp_phone, phone_display, header, footer, projects):
     cards_html = ""
     for p in projects:
-        wa_text = f"Merhaba GKM Elektrik, '{p['title']}' projenizi inceledim. Bizim de benzer bir projemiz var, teknik detayları görüşmek ve teklif almak istiyoruz."
+        wa_text = f"Merhaba GKM Elektrik, '{p['title']}' projenizin pano şeması ve malzeme listesi hakkında detaylı bilgi ve teklif almak istiyorum."
         wa_link = f"https://wa.me/{whatsapp_phone}?text=" + wa_text.replace(" ", "%20").replace("'", "")
 
         metrics_html = "".join([
@@ -26,15 +26,20 @@ def generate_projects_page(site_url, main_website, whatsapp_phone, phone_display
             for hw in p.get("hardware_used", [])
         ])
 
+        interior = p.get("interior_details", {})
+
         cards_html += f"""
         <article class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
             <div>
-                <!-- Top Image & Badges -->
-                <div class="h-60 bg-slate-900 relative overflow-hidden">
-                    <img src="{site_url}/{p['image']}" alt="{p['title']}" class="w-full h-full object-cover opacity-90 hover:scale-105 transition duration-700">
+                <!-- Top Image with Zoom Button -->
+                <div class="h-64 bg-slate-900 relative overflow-hidden group cursor-pointer" onclick="openLightbox('{site_url}/{p['image']}', '{p['title']}')">
+                    <img src="{site_url}/{p['image']}" alt="{p['title']}" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                     <span class="absolute top-4 left-4 bg-sky-600 text-white font-black text-xs px-3.5 py-1.5 rounded-full uppercase shadow">
                         {p['category_title']}
+                    </span>
+                    <span class="absolute top-4 right-4 bg-slate-950/80 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-sm flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition">
+                        🔍 Fotoğrafı Büyüt
                     </span>
                     <span class="absolute bottom-4 left-4 text-white text-xs font-bold flex items-center gap-1.5">
                         📍 <span>{p['location']}</span> • <span class="text-sky-300">{p['client_industry']}</span>
@@ -71,6 +76,13 @@ def generate_projects_page(site_url, main_website, whatsapp_phone, phone_display
                             {hw_tags}
                         </div>
                     </div>
+
+                    <!-- Internal Panel Engineering Drawer (Expandable) -->
+                    <div class="mt-4 pt-4 border-t border-slate-100">
+                        <button type="button" onclick="openProjectModal('{p['id']}')" class="w-full bg-slate-900 hover:bg-slate-800 text-sky-400 font-extrabold text-xs py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+                            <span>🔍 Panonun İç Yapısını & Teknik Şemayı İncele</span> ➔
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -84,6 +96,8 @@ def generate_projects_page(site_url, main_website, whatsapp_phone, phone_display
             </div>
         </article>
         """
+
+    projects_json_str = json.dumps(projects, ensure_ascii=False)
 
     return f"""<!DOCTYPE html>
 <html lang="tr" class="scroll-smooth">
@@ -113,7 +127,7 @@ def generate_projects_page(site_url, main_website, whatsapp_phone, phone_display
                 Gerçek Sanayi Projeleri ve <span class="text-sky-400">Vaka Analizleri</span>
             </h1>
             <p class="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed font-medium">
-                Fabrikalarda ve makine imalatlarında karşılaşılan gerçek teknik tıkanıklıklar, GKM Elektrik mühendislik ekibinin uyguladığı donanım/yazılım çözümleri ve ölçülebilir performans kazanımları.
+                Fabrikalarda ve makine imalatlarında karşılaşılan gerçek teknik tıkanıklıklar, GKM Elektrik mühendislik ekibinin uyguladığı donanım/yazılım çözümleri, pano içi kablaj standartları ve ölçülebilir performans kazanımları.
             </p>
         </div>
     </section>
@@ -146,7 +160,108 @@ def generate_projects_page(site_url, main_website, whatsapp_phone, phone_display
         </div>
     </section>
 
+    <!-- Fullscreen Image Lightbox Modal -->
+    <div id="lightbox-modal" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden" onclick="closeLightbox()">
+        <div class="max-w-5xl w-full max-h-[90vh] flex flex-col items-center justify-center relative" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white hover:text-sky-400 text-2xl font-black">✕ Kapat</button>
+            <img id="lightbox-img" src="" alt="Pano İçi Büyütülmüş Görünüm" class="max-w-full max-h-[80vh] rounded-2xl object-contain shadow-2xl border border-white/20">
+            <p id="lightbox-caption" class="text-white text-xs sm:text-sm font-bold mt-4 text-center"></p>
+        </div>
+    </div>
+
+    <!-- Project Interior Deep Dive Modal -->
+    <div id="project-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden" onclick="closeProjectModal()">
+        <div class="bg-white rounded-3xl p-6 sm:p-10 max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 shadow-2xl relative" onclick="event.stopPropagation()">
+            <button onclick="closeProjectModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-800 text-2xl font-black">✕</button>
+            
+            <div id="project-modal-content">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+    </div>
+
     {footer}
+
+    <!-- Lightbox & Project Modal Logic -->
+    <script>
+    const ALL_PROJECTS = {projects_json_str};
+
+    function openLightbox(imgSrc, caption) {{
+        document.getElementById('lightbox-img').src = imgSrc;
+        document.getElementById('lightbox-caption').innerText = caption;
+        document.getElementById('lightbox-modal').classList.remove('hidden');
+    }}
+
+    function closeLightbox() {{
+        document.getElementById('lightbox-modal').classList.add('hidden');
+    }}
+
+    function openProjectModal(projectId) {{
+        const p = ALL_PROJECTS.find(x => x.id === projectId);
+        if (!p) return;
+
+        const interior = p.interior_details || {{}};
+        const hwTags = (p.hardware_used || []).map(h => `<span class="bg-slate-100 text-slate-800 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-200">${{h}}</span>`).join(' ');
+
+        const waText = encodeURIComponent(`Merhaba GKM Elektrik, '${{p.title}}' projenizin pano içi teknik şeması ve malzeme listesini incelemek istiyorum.`);
+        const waLink = `https://wa.me/{whatsapp_phone}?text=${{waText}}`;
+
+        document.getElementById('project-modal-content').innerHTML = `
+            <div class="flex items-center gap-2 mb-2">
+                <span class="bg-sky-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase">${{p.category_title}}</span>
+                <span class="text-xs font-bold text-slate-400">📍 ${{p.location}}</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-950 mb-4">${{p.title}}</h2>
+
+            <div class="h-60 rounded-2xl overflow-hidden mb-6 bg-slate-900 cursor-pointer relative group" onclick="openLightbox('${{p.image.startsWith('http') ? p.image : site_url + '/' + p.image}}', '${{p.title}}')">
+                <img src="${{p.image.startsWith('http') ? p.image : site_url + '/' + p.image}}" alt="${{p.title}}" class="w-full h-full object-cover">
+                <span class="absolute bottom-3 right-3 bg-slate-950/80 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-sm">🔍 Fotoğrafı Tam Ekran Büyüt</span>
+            </div>
+
+            <div class="space-y-4 mb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                <div class="p-4 bg-sky-50 rounded-2xl border border-sky-200">
+                    <h4 class="font-black text-sky-950 text-sm mb-1">🏗️ Pano Karkası & Mekanik Yerleşim</h4>
+                    <p>${{interior.panel_structure || 'IEC 61439 standartlarında modüler tip testli hücre yapısı ve iklimlendirme.'}}</p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h4 class="font-black text-slate-900 text-sm mb-1">🔌 Kablaj & Klemens Standartları</h4>
+                    <p>${{interior.wiring_system || 'Titreşime dayanıklı yay baskılı Phoenix/Weidmüller klemensler ve IEC 60204-1 renk kodlaması.'}}</p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h4 class="font-black text-slate-900 text-sm mb-1">⚙️ Otomasyon & Kontrol Mimarisi</h4>
+                    <p>${{interior.control_architecture || 'Endüstriyel Ethernet / Profinet haberleşme mimarisi ve çift kanal emniyet devresi.'}}</p>
+                </div>
+
+                <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200">
+                    <h4 class="font-black text-emerald-950 text-sm mb-1">✅ Test & Saha Doğrulama (FAT / SAT)</h4>
+                    <p>${{interior.testing_verification || 'Saha devreye alma öncesi atölyede tüm fonksiyonel testler ve yalıtım dayanım testleri tamamlanmıştır.'}}</p>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-xs font-black uppercase text-slate-400 tracking-wider mb-2">Kullanılan Ana Donanım Parçaları:</h4>
+                <div class="flex flex-wrap gap-2">
+                    ${{hwTags}}
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <span class="text-xs font-bold text-slate-500">GKM Mühendislik Referans Projesi</span>
+                <a href="${{waLink}}" target="_blank" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-6 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                    <span>💬 Bu Sistemin EPLAN Şemasını & Malzeme Listesini İste</span>
+                </a>
+            </div>
+        `;
+
+        document.getElementById('project-modal').classList.remove('hidden');
+    }}
+
+    function closeProjectModal() {{
+        document.getElementById('project-modal').classList.add('hidden');
+    }}
+    </script>
 
 </body>
 </html>

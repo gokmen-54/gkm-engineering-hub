@@ -89,7 +89,7 @@
                 Gerçek Sanayi Projeleri ve <span class="text-sky-400">Vaka Analizleri</span>
             </h1>
             <p class="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed font-medium">
-                Fabrikalarda ve makine imalatlarında karşılaşılan gerçek teknik tıkanıklıklar, GKM Elektrik mühendislik ekibinin uyguladığı donanım/yazılım çözümleri ve ölçülebilir performans kazanımları.
+                Fabrikalarda ve makine imalatlarında karşılaşılan gerçek teknik tıkanıklıklar, GKM Elektrik mühendislik ekibinin uyguladığı donanım/yazılım çözümleri, pano içi kablaj standartları ve ölçülebilir performans kazanımları.
             </p>
         </div>
     </section>
@@ -100,12 +100,15 @@
             
         <article class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
             <div>
-                <!-- Top Image & Badges -->
-                <div class="h-60 bg-slate-900 relative overflow-hidden">
-                    <img src="https://gokmen-54.github.io/gkm-engineering-hub/assets/gkm_7_robotik_hat.webp" alt="12 İstasyonlu Döner Tabla İlaç Şişeleme Makinesi PLC & Servo Senkronizasyonu" class="w-full h-full object-cover opacity-90 hover:scale-105 transition duration-700">
+                <!-- Top Image with Zoom Button -->
+                <div class="h-64 bg-slate-900 relative overflow-hidden group cursor-pointer" onclick="openLightbox('https://gokmen-54.github.io/gkm-engineering-hub/assets/gkm_7_robotik_hat.webp', '12 İstasyonlu Döner Tabla İlaç Şişeleme Makinesi PLC & Servo Senkronizasyonu')">
+                    <img src="https://gokmen-54.github.io/gkm-engineering-hub/assets/gkm_7_robotik_hat.webp" alt="12 İstasyonlu Döner Tabla İlaç Şişeleme Makinesi PLC & Servo Senkronizasyonu" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                     <span class="absolute top-4 left-4 bg-sky-600 text-white font-black text-xs px-3.5 py-1.5 rounded-full uppercase shadow">
                         Makine Otomasyonu
+                    </span>
+                    <span class="absolute top-4 right-4 bg-slate-950/80 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-sm flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition">
+                        🔍 Fotoğrafı Büyüt
                     </span>
                     <span class="absolute bottom-4 left-4 text-white text-xs font-bold flex items-center gap-1.5">
                         📍 <span>Tekirdağ / Çorlu Serbest Bölge</span> • <span class="text-sky-300">İlaç & Medikal Dolum</span>
@@ -142,13 +145,20 @@
                             <span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">Siemens S7-1515T PLC</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">Siemens S210 & 1FK2 Servolar</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">KTP1200 Unified Comfort HMI</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">SICK Emniyet Işık Bariyerleri</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">GKM İklimlendirmeli Paslanmaz Pano</span>
                         </div>
                     </div>
+
+                    <!-- Internal Panel Engineering Drawer (Expandable) -->
+                    <div class="mt-4 pt-4 border-t border-slate-100">
+                        <button type="button" onclick="openProjectModal('case-1')" class="w-full bg-slate-900 hover:bg-slate-800 text-sky-400 font-extrabold text-xs py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+                            <span>🔍 Panonun İç Yapısını & Teknik Şemayı İncele</span> ➔
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <!-- Bottom CTA Button -->
             <div class="p-6 sm:p-8 pt-0 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 mt-auto">
                 <span class="text-xs font-bold text-slate-500 hidden sm:inline">Teslim Tarihi: 2026-10-24</span>
-                <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik,%2012%20İstasyonlu%20Döner%20Tabla%20İlaç%20Şişeleme%20Makinesi%20PLC%20&%20Servo%20Senkronizasyonu%20projenizi%20inceledim.%20Bizim%20de%20benzer%20bir%20projemiz%20var,%20teknik%20detayları%20görüşmek%20ve%20teklif%20almak%20istiyoruz." target="_blank" rel="noopener" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-6 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik,%2012%20İstasyonlu%20Döner%20Tabla%20İlaç%20Şişeleme%20Makinesi%20PLC%20&%20Servo%20Senkronizasyonu%20projenizin%20pano%20şeması%20ve%20malzeme%20listesi%20hakkında%20detaylı%20bilgi%20ve%20teklif%20almak%20istiyorum." target="_blank" rel="noopener" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-6 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
                     <span>Benzer Döner Tabla veya Dolum Makinesi Otomasyonu İçin Teklif Alın</span>
                 </a>
@@ -157,12 +167,15 @@
         
         <article class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
             <div>
-                <!-- Top Image & Badges -->
-                <div class="h-60 bg-slate-900 relative overflow-hidden">
-                    <img src="https://gokmen-54.github.io/gkm-engineering-hub/assets/gkm_8_kompanzasyon.webp" alt="1250 kVA Fabrika Tristörlü Hızlı Kompanzasyon ve Harmonik Filtrasyon Panosu" class="w-full h-full object-cover opacity-90 hover:scale-105 transition duration-700">
+                <!-- Top Image with Zoom Button -->
+                <div class="h-64 bg-slate-900 relative overflow-hidden group cursor-pointer" onclick="openLightbox('https://gokmen-54.github.io/gkm-engineering-hub/assets/gkm_8_kompanzasyon.webp', '1250 kVA Fabrika Tristörlü Hızlı Kompanzasyon ve Harmonik Filtrasyon Panosu')">
+                    <img src="https://gokmen-54.github.io/gkm-engineering-hub/assets/gkm_8_kompanzasyon.webp" alt="1250 kVA Fabrika Tristörlü Hızlı Kompanzasyon ve Harmonik Filtrasyon Panosu" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                     <span class="absolute top-4 left-4 bg-sky-600 text-white font-black text-xs px-3.5 py-1.5 rounded-full uppercase shadow">
                         Elektrik Panosu & Şalt
+                    </span>
+                    <span class="absolute top-4 right-4 bg-slate-950/80 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-sm flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition">
+                        🔍 Fotoğrafı Büyüt
                     </span>
                     <span class="absolute bottom-4 left-4 text-white text-xs font-bold flex items-center gap-1.5">
                         📍 <span>Kocaeli / Dilovası İMES OSB</span> • <span class="text-sky-300">Otomotiv Yan Sanayi & Punta Kaynak</span>
@@ -199,13 +212,20 @@
                             <span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">GKM Tip Testli Modüler Pano Karkası</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">Epcos / TDK Ağır Hizmet Kondansatörler</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">%7 De-Tuned Harmonik Reaktörler</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">Tristörlü Sıfır Geçiş Modülleri</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">Janitza UMG Enerji Analizörü</span>
                         </div>
                     </div>
+
+                    <!-- Internal Panel Engineering Drawer (Expandable) -->
+                    <div class="mt-4 pt-4 border-t border-slate-100">
+                        <button type="button" onclick="openProjectModal('case-2')" class="w-full bg-slate-900 hover:bg-slate-800 text-sky-400 font-extrabold text-xs py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+                            <span>🔍 Panonun İç Yapısını & Teknik Şemayı İncele</span> ➔
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <!-- Bottom CTA Button -->
             <div class="p-6 sm:p-8 pt-0 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 mt-auto">
                 <span class="text-xs font-bold text-slate-500 hidden sm:inline">Teslim Tarihi: 2026-10-18</span>
-                <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik,%201250%20kVA%20Fabrika%20Tristörlü%20Hızlı%20Kompanzasyon%20ve%20Harmonik%20Filtrasyon%20Panosu%20projenizi%20inceledim.%20Bizim%20de%20benzer%20bir%20projemiz%20var,%20teknik%20detayları%20görüşmek%20ve%20teklif%20almak%20istiyoruz." target="_blank" rel="noopener" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-6 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik,%201250%20kVA%20Fabrika%20Tristörlü%20Hızlı%20Kompanzasyon%20ve%20Harmonik%20Filtrasyon%20Panosu%20projenizin%20pano%20şeması%20ve%20malzeme%20listesi%20hakkında%20detaylı%20bilgi%20ve%20teklif%20almak%20istiyorum." target="_blank" rel="noopener" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-6 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
                     <span>Fabrikanızdaki Reaktif Cezayı Sıfırlamak İçin Şema & Fatura İletin</span>
                 </a>
@@ -214,12 +234,15 @@
         
         <article class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
             <div>
-                <!-- Top Image & Badges -->
-                <div class="h-60 bg-slate-900 relative overflow-hidden">
-                    <img src="https://gokmen-54.github.io/gkm-engineering-hub/assets/gkm_1_fabrika_otomasyon.webp" alt="Endüstriyel Soğuk Hava Deposu Kaskad Kompresör SCADA & IoT İzleme Sistemi" class="w-full h-full object-cover opacity-90 hover:scale-105 transition duration-700">
+                <!-- Top Image with Zoom Button -->
+                <div class="h-64 bg-slate-900 relative overflow-hidden group cursor-pointer" onclick="openLightbox('https://gokmen-54.github.io/gkm-engineering-hub/assets/gkm_1_fabrika_otomasyon.webp', 'Endüstriyel Soğuk Hava Deposu Kaskad Kompresör SCADA & IoT İzleme Sistemi')">
+                    <img src="https://gokmen-54.github.io/gkm-engineering-hub/assets/gkm_1_fabrika_otomasyon.webp" alt="Endüstriyel Soğuk Hava Deposu Kaskad Kompresör SCADA & IoT İzleme Sistemi" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                     <span class="absolute top-4 left-4 bg-sky-600 text-white font-black text-xs px-3.5 py-1.5 rounded-full uppercase shadow">
                         PLC & SCADA Yazılım
+                    </span>
+                    <span class="absolute top-4 right-4 bg-slate-950/80 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-sm flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition">
+                        🔍 Fotoğrafı Büyüt
                     </span>
                     <span class="absolute bottom-4 left-4 text-white text-xs font-bold flex items-center gap-1.5">
                         📍 <span>Sakarya / Hendek 2. OSB</span> • <span class="text-sky-300">Gıda Lojistiği & Donuk Muhafaza</span>
@@ -256,13 +279,20 @@
                             <span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">Schneider M241 PLC</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">Schneider Altivar ATV630 Sürücüler</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">PT100 4 telli Hassas Sıcaklık Sensörleri</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">GKM IoT 4G Gateway</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">SCADA Web Arayüzü</span>
                         </div>
                     </div>
+
+                    <!-- Internal Panel Engineering Drawer (Expandable) -->
+                    <div class="mt-4 pt-4 border-t border-slate-100">
+                        <button type="button" onclick="openProjectModal('case-3')" class="w-full bg-slate-900 hover:bg-slate-800 text-sky-400 font-extrabold text-xs py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+                            <span>🔍 Panonun İç Yapısını & Teknik Şemayı İncele</span> ➔
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <!-- Bottom CTA Button -->
             <div class="p-6 sm:p-8 pt-0 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 mt-auto">
                 <span class="text-xs font-bold text-slate-500 hidden sm:inline">Teslim Tarihi: 2026-10-05</span>
-                <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik,%20Endüstriyel%20Soğuk%20Hava%20Deposu%20Kaskad%20Kompresör%20SCADA%20&%20IoT%20İzleme%20Sistemi%20projenizi%20inceledim.%20Bizim%20de%20benzer%20bir%20projemiz%20var,%20teknik%20detayları%20görüşmek%20ve%20teklif%20almak%20istiyoruz." target="_blank" rel="noopener" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-6 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik,%20Endüstriyel%20Soğuk%20Hava%20Deposu%20Kaskad%20Kompresör%20SCADA%20&%20IoT%20İzleme%20Sistemi%20projenizin%20pano%20şeması%20ve%20malzeme%20listesi%20hakkında%20detaylı%20bilgi%20ve%20teklif%20almak%20istiyorum." target="_blank" rel="noopener" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-6 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
                     <span>Soğuk Depo & Tesis Otomasyonu İçin Danışmanlık Alın</span>
                 </a>
@@ -271,12 +301,15 @@
         
         <article class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
             <div>
-                <!-- Top Image & Badges -->
-                <div class="h-60 bg-slate-900 relative overflow-hidden">
-                    <img src="https://gokmen-54.github.io/gkm-engineering-hub/assets/gkm_3_otomasyon.webp" alt="4 Katmanlı STM32 Tabanlı Endüstriyel RS-485 / CAN-Bus Sensör Kartı Tasarımı" class="w-full h-full object-cover opacity-90 hover:scale-105 transition duration-700">
+                <!-- Top Image with Zoom Button -->
+                <div class="h-64 bg-slate-900 relative overflow-hidden group cursor-pointer" onclick="openLightbox('https://gokmen-54.github.io/gkm-engineering-hub/assets/gkm_3_otomasyon.webp', '4 Katmanlı STM32 Tabanlı Endüstriyel RS-485 / CAN-Bus Sensör Kartı Tasarımı')">
+                    <img src="https://gokmen-54.github.io/gkm-engineering-hub/assets/gkm_3_otomasyon.webp" alt="4 Katmanlı STM32 Tabanlı Endüstriyel RS-485 / CAN-Bus Sensör Kartı Tasarımı" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                     <span class="absolute top-4 left-4 bg-sky-600 text-white font-black text-xs px-3.5 py-1.5 rounded-full uppercase shadow">
                         PCB & Elektronik Tasarım
+                    </span>
+                    <span class="absolute top-4 right-4 bg-slate-950/80 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-sm flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition">
+                        🔍 Fotoğrafı Büyüt
                     </span>
                     <span class="absolute bottom-4 left-4 text-white text-xs font-bold flex items-center gap-1.5">
                         📍 <span>Bursa / Nilüfer NOSAB</span> • <span class="text-sky-300">Ağır İş Makineleri & Telemetri</span>
@@ -313,13 +346,20 @@
                             <span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">Altium Designer Tasarımı</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">STM32G071 ARM Cortex-M0+</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">Analog Devices ADM2483 Galvanik İzolatör</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">Würth Elektronik Koruma Komponentleri</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">GKM CNC Alüminyum Kutu</span>
                         </div>
                     </div>
+
+                    <!-- Internal Panel Engineering Drawer (Expandable) -->
+                    <div class="mt-4 pt-4 border-t border-slate-100">
+                        <button type="button" onclick="openProjectModal('case-4')" class="w-full bg-slate-900 hover:bg-slate-800 text-sky-400 font-extrabold text-xs py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+                            <span>🔍 Panonun İç Yapısını & Teknik Şemayı İncele</span> ➔
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <!-- Bottom CTA Button -->
             <div class="p-6 sm:p-8 pt-0 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 mt-auto">
                 <span class="text-xs font-bold text-slate-500 hidden sm:inline">Teslim Tarihi: 2026-09-28</span>
-                <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik,%204%20Katmanlı%20STM32%20Tabanlı%20Endüstriyel%20RS-485%20/%20CAN-Bus%20Sensör%20Kartı%20Tasarımı%20projenizi%20inceledim.%20Bizim%20de%20benzer%20bir%20projemiz%20var,%20teknik%20detayları%20görüşmek%20ve%20teklif%20almak%20istiyoruz." target="_blank" rel="noopener" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-6 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik,%204%20Katmanlı%20STM32%20Tabanlı%20Endüstriyel%20RS-485%20/%20CAN-Bus%20Sensör%20Kartı%20Tasarımı%20projenizin%20pano%20şeması%20ve%20malzeme%20listesi%20hakkında%20detaylı%20bilgi%20ve%20teklif%20almak%20istiyorum." target="_blank" rel="noopener" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-6 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
                     <span>Özel Elektronik Kart ve Donanım Tasarımı İçin Gerber Gönderin</span>
                 </a>
@@ -328,12 +368,15 @@
         
         <article class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
             <div>
-                <!-- Top Image & Badges -->
-                <div class="h-60 bg-slate-900 relative overflow-hidden">
-                    <img src="https://gokmen-54.github.io/gkm-engineering-hub/assets/gkm_6_fabrika_da__t_m_panosu.webp" alt="Konveyör ve Paletleme Hattı Güvenlik Revizyonu (ISO 13849-1 Ple Emniyet)" class="w-full h-full object-cover opacity-90 hover:scale-105 transition duration-700">
+                <!-- Top Image with Zoom Button -->
+                <div class="h-64 bg-slate-900 relative overflow-hidden group cursor-pointer" onclick="openLightbox('https://gokmen-54.github.io/gkm-engineering-hub/assets/gkm_6_fabrika_da__t_m_panosu.webp', 'Konveyör ve Paletleme Hattı Güvenlik Revizyonu (ISO 13849-1 Ple Emniyet)')">
+                    <img src="https://gokmen-54.github.io/gkm-engineering-hub/assets/gkm_6_fabrika_da__t_m_panosu.webp" alt="Konveyör ve Paletleme Hattı Güvenlik Revizyonu (ISO 13849-1 Ple Emniyet)" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                     <span class="absolute top-4 left-4 bg-sky-600 text-white font-black text-xs px-3.5 py-1.5 rounded-full uppercase shadow">
                         Makine Otomasyonu
+                    </span>
+                    <span class="absolute top-4 right-4 bg-slate-950/80 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-sm flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition">
+                        🔍 Fotoğrafı Büyüt
                     </span>
                     <span class="absolute bottom-4 left-4 text-white text-xs font-bold flex items-center gap-1.5">
                         📍 <span>Kocaeli / Gebze Plastikçiler OSB</span> • <span class="text-sky-300">Kimya & Paletleme Hatları</span>
@@ -370,13 +413,20 @@
                             <span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">SICK deTec4 Core Işık Bariyerleri</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">Pilz PNOZ multi Emniyet Rölesi</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">Euchner RFID Emniyet Kapı Sviçleri</span><span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200">Schneider TeSys Emniyet Kontaktörleri</span>
                         </div>
                     </div>
+
+                    <!-- Internal Panel Engineering Drawer (Expandable) -->
+                    <div class="mt-4 pt-4 border-t border-slate-100">
+                        <button type="button" onclick="openProjectModal('case-5')" class="w-full bg-slate-900 hover:bg-slate-800 text-sky-400 font-extrabold text-xs py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+                            <span>🔍 Panonun İç Yapısını & Teknik Şemayı İncele</span> ➔
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <!-- Bottom CTA Button -->
             <div class="p-6 sm:p-8 pt-0 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 mt-auto">
                 <span class="text-xs font-bold text-slate-500 hidden sm:inline">Teslim Tarihi: 2026-09-12</span>
-                <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik,%20Konveyör%20ve%20Paletleme%20Hattı%20Güvenlik%20Revizyonu%20(ISO%2013849-1%20Ple%20Emniyet)%20projenizi%20inceledim.%20Bizim%20de%20benzer%20bir%20projemiz%20var,%20teknik%20detayları%20görüşmek%20ve%20teklif%20almak%20istiyoruz." target="_blank" rel="noopener" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-6 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik,%20Konveyör%20ve%20Paletleme%20Hattı%20Güvenlik%20Revizyonu%20(ISO%2013849-1%20Ple%20Emniyet)%20projenizin%20pano%20şeması%20ve%20malzeme%20listesi%20hakkında%20detaylı%20bilgi%20ve%20teklif%20almak%20istiyorum." target="_blank" rel="noopener" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-6 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
                     <span>Makinanızın Emniyet Devresi ve CE Uyumluluğu İçin Bize Ulaşın</span>
                 </a>
@@ -406,6 +456,26 @@
             </div>
         </div>
     </section>
+
+    <!-- Fullscreen Image Lightbox Modal -->
+    <div id="lightbox-modal" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden" onclick="closeLightbox()">
+        <div class="max-w-5xl w-full max-h-[90vh] flex flex-col items-center justify-center relative" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white hover:text-sky-400 text-2xl font-black">✕ Kapat</button>
+            <img id="lightbox-img" src="" alt="Pano İçi Büyütülmüş Görünüm" class="max-w-full max-h-[80vh] rounded-2xl object-contain shadow-2xl border border-white/20">
+            <p id="lightbox-caption" class="text-white text-xs sm:text-sm font-bold mt-4 text-center"></p>
+        </div>
+    </div>
+
+    <!-- Project Interior Deep Dive Modal -->
+    <div id="project-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden" onclick="closeProjectModal()">
+        <div class="bg-white rounded-3xl p-6 sm:p-10 max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 shadow-2xl relative" onclick="event.stopPropagation()">
+            <button onclick="closeProjectModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-800 text-2xl font-black">✕</button>
+            
+            <div id="project-modal-content">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+    </div>
 
     
     <!-- Mobile Sticky Action Bar -->
@@ -476,6 +546,87 @@
         </div>
     </footer>
     
+
+    <!-- Lightbox & Project Modal Logic -->
+    <script>
+    const ALL_PROJECTS = [{"id": "case-1", "title": "12 İstasyonlu Döner Tabla İlaç Şişeleme Makinesi PLC & Servo Senkronizasyonu", "category": "makine-otomasyonu", "category_title": "Makine Otomasyonu", "location": "Tekirdağ / Çorlu Serbest Bölge", "client_industry": "İlaç & Medikal Dolum", "date": "2026-10-24", "image": "assets/gkm_7_robotik_hat.webp", "metrics": [{"label": "Kapasite Artışı", "val": "%65 (18 bpm -> 42 bpm)"}, {"label": "Dozajlama Hassasiyeti", "val": "±0.05 ml (Servo Pompa)"}, {"label": "Downtime / Duruş", "val": "%0 Mekanik Kam Arızası"}], "problem": "Mevcut mekanik kam tahrikli şişeleme makinesinde format değişimleri 4 saat sürüyordu. Mekanik kam aşınmaları nedeniyle dolum nozüllerinde damlama ve çene kesiminde fire oranı %4.5 seviyelerindeydi.", "solution": "Mekanik kam mili tamamen iptal edildi. 1 adet Siemens S7-1515T Teknoloji CPU, 4 eksen Siemens S210 servo motor ve 12 istasyonlu globoid kam tahrikli döner tabla elektronik kam (electronic camming) ile senkronize edildi. Reçete yönetimi HMI üzerinden tek tuşla 2 dakikada format geçişi sağlayacak şekilde programlandı.", "interior_details": {"panel_structure": "Rittal TS8 Paslanmaz Çelik (IP66), Form 2b iç bölmelendirme, servo sürücü soğutması için Rittal tavan tipi klima (1500W).", "wiring_system": "Titreşime dayanıklı Phoenix Contact Push-in klemensler, servo güç ve enkoder kablolarında 360 derece EMC blendaj klemensleri, renk kodlu IEC 60204-1 kablaj.", "control_architecture": "Profinet IRT üzerinden 1 ms senkron çevrim, SICK emniyet ışık bariyerleri ile entegre STO ve SLS fonksiyonları.", "testing_verification": "FAT fabrika kabul testinde 48 saat kesintisiz kuru çevrim testi ve lazer vibrometre ile titreşim analiz testleri başarıyla tamamlandı."}, "hardware_used": ["Siemens S7-1515T PLC", "Siemens S210 & 1FK2 Servolar", "KTP1200 Unified Comfort HMI", "SICK Emniyet Işık Bariyerleri", "GKM İklimlendirmeli Paslanmaz Pano"], "cta_text": "Benzer Döner Tabla veya Dolum Makinesi Otomasyonu İçin Teklif Alın"}, {"id": "case-2", "title": "1250 kVA Fabrika Tristörlü Hızlı Kompanzasyon ve Harmonik Filtrasyon Panosu", "category": "elektrik-panosu-salt", "category_title": "Elektrik Panosu & Şalt", "location": "Kocaeli / Dilovası İMES OSB", "client_industry": "Otomotiv Yan Sanayi & Punta Kaynak", "date": "2026-10-18", "image": "assets/gkm_8_kompanzasyon.webp", "metrics": [{"label": "Reaktif Ceza", "val": "0 TL (%34'ten %2.8'e düştü)"}, {"label": "Tepki Süresi", "val": "< 20 ms (1 Periyot Tristör)"}, {"label": "Kondansatör Ömrü", "val": "5x Artış (%7 Reaktörlü)"}], "problem": "Punta kaynak makineleri ve preslerin 200 ms gibi ani darbeli yük çekmesi nedeniyle mekanik kontaktörlü klasik kompanzasyon panosu yetişemiyor, fabrika her ay ortalama 145.000 TL endüktif reaktif ceza ödüyordu.", "solution": "GKM Elektrik saha ekibi enerji analizörü ile 72 saatlik harmonik ve dalga formu kaydı aldı. 189 Hz (p=%7) demir nüveli harmonik filtre reaktörleri ve sıfır geçişli (Zero-Cross) tristör modülleri ile 12 kademeli, toplam 800 kVAR gücünde dinamik kompanzasyon panosu imal edildi.", "interior_details": {"panel_structure": "2 mm galvaniz sac modüler karkas, de-tuned reaktörlerin ısıl yükü için termostat kontrollü çift cebri havalandırma fan bacaları.", "wiring_system": "Elektrolitik bakır baralar (Cu-ETP), ısıyla daralan makaron izolasyonu, Epcos ağır hizmet tipi 480V silindirik alüminyum tüp kondansatörler.", "control_architecture": "Tristör tetikleme kartları şebeke geriliminin sıfır geçiş anında (Zero Cross) anahtarlama yaparak demeraj akımını tamamen sıfırlar.", "testing_verification": "Fluke 435 güç analizörü ile saha devreye alma testinde THD-V %3.1 seviyesinde tutuldu, ceza oranı %2.8'e sabitlendi."}, "hardware_used": ["GKM Tip Testli Modüler Pano Karkası", "Epcos / TDK Ağır Hizmet Kondansatörler", "%7 De-Tuned Harmonik Reaktörler", "Tristörlü Sıfır Geçiş Modülleri", "Janitza UMG Enerji Analizörü"], "cta_text": "Fabrikanızdaki Reaktif Cezayı Sıfırlamak İçin Şema & Fatura İletin"}, {"id": "case-3", "title": "Endüstriyel Soğuk Hava Deposu Kaskad Kompresör SCADA & IoT İzleme Sistemi", "category": "plc-scada-yazilim", "category_title": "PLC & SCADA Yazılım", "location": "Sakarya / Hendek 2. OSB", "client_industry": "Gıda Lojistiği & Donuk Muhafaza", "date": "2026-10-05", "image": "assets/gkm_1_fabrika_otomasyon.webp", "metrics": [{"label": "Elektrik Tasarrufu", "val": "%24.6 (Eş Yaşlanma & VFD)"}, {"label": "HACCP Uyumluluğu", "val": "%100 Otomatik Bulut Rapor"}, {"label": "Acil Müdahale", "val": "Anlık SMS / WhatsApp Alarmı"}], "problem": "8 farklı soğuk odanın sıcaklık kontrolleri bağımsız termostatlarla yapılıyordu. Kompresörler dengesiz yıpranıyor, yüksek elektrik demerajı oluşuyor ve sıcaklık yükselmesi fark edilmediğinde ürün bozulma riski doğuyordu.", "solution": "Tüm soğutma grubu Schneider Modicon M241 PLC ve Web Tabanlı SCADA ile merkezi otomasyona bağlandı. Kompresörler için çalışma saati bazlı otomatik eş yaşlanma ve yük kaskad algoritması yazıldı. Sıcaklıklar 5 dakikada bir buluta yedeklenerek HACCP denetim raporu otomatikleştirildi.", "interior_details": {"panel_structure": "Schneider Spacial SF modüler pano, IP55 koruma sınıfı, dahili LED aydınlatma ve servis priz grubu.", "wiring_system": "Weidmüller kanallı kablaj, klemens köprüleme sistemi, 24V izole sinyal hatları ile 400V güç hatları arasında metal separatör.", "control_architecture": "Modbus TCP haberleşmeli Schneider ATV630 değişken frekanslı sürücüler ve 4G LTE endüstriyel gateway ile 7/24 bulut izleme.", "testing_verification": "8 odada 0.1°C hassasiyet kalibrasyonu yapıldı, kompresör arıza simülasyonlarında kaskad devreye girme süresi <1.5 sn olarak doğrulandı."}, "hardware_used": ["Schneider M241 PLC", "Schneider Altivar ATV630 Sürücüler", "PT100 4 telli Hassas Sıcaklık Sensörleri", "GKM IoT 4G Gateway", "SCADA Web Arayüzü"], "cta_text": "Soğuk Depo & Tesis Otomasyonu İçin Danışmanlık Alın"}, {"id": "case-4", "title": "4 Katmanlı STM32 Tabanlı Endüstriyel RS-485 / CAN-Bus Sensör Kartı Tasarımı", "category": "pcb-elektronik-tasarim", "category_title": "PCB & Elektronik Tasarım", "location": "Bursa / Nilüfer NOSAB", "client_industry": "Ağır İş Makineleri & Telemetri", "date": "2026-09-28", "image": "assets/gkm_3_otomasyon.webp", "metrics": [{"label": "EMC Test Başarısı", "val": "IEC 61000-4-4 Seviye 4 Geçti"}, {"label": "Çalışma Sıcaklığı", "val": "-40°C ila +105°C Endüstriyel"}, {"label": "Seri İmalat Birim Maliyet", "val": "İthal Eşdeğerine Göre %52 Daha Ekonomik"}], "problem": "Ağır iş makinelerinde çalışan ithal sensör kartları döviz kuru nedeniyle fahiş maliyetlere ulaşmış ve yüksek titreşim / kaynak arklarında parazit kaparak reset atıyordu.", "solution": "GKM Ar-Ge ekibi STM32G0 serisi mikrodenetleyici tabanlı, 4 katmanlı (SIG-GND-PWR-SIG) özel kontrol kartı tasarladı. Besleme hattı TVS ve common mode filtrelerle korundu, RS485 ve CAN hatları galvanik olarak izole edildi. FreeRTOS tabanlı firmware yazılarak 1000 adetlik ilk parti montajı teslim edildi.", "interior_details": {"panel_structure": "CNC işleme anodize alüminyum kutu, IP67 sızdırmaz O-ring conta, M12 endüstriyel konnektör arayüzü.", "wiring_system": "TG170 yüksek sıcaklık dayanımlı FR4 PCB, 2 oz bakır kalınlığı, Altium Designer diferansiyel empedans kontrollü (120 Ohm) hatlar.", "control_architecture": "Analog Devices galvanik izoleli CAN alıcı-verici (ADM3053) ve 2.5 kV izolasyonlu DC-DC konvertör mimarisi.", "testing_verification": "8 kV ESD darbe testi (IEC 61000-4-2) ve 20G titreşim testi altında veri kaybı olmadan kesintisiz çalışma onaylandı."}, "hardware_used": ["Altium Designer Tasarımı", "STM32G071 ARM Cortex-M0+", "Analog Devices ADM2483 Galvanik İzolatör", "Würth Elektronik Koruma Komponentleri", "GKM CNC Alüminyum Kutu"], "cta_text": "Özel Elektronik Kart ve Donanım Tasarımı İçin Gerber Gönderin"}, {"id": "case-5", "title": "Konveyör ve Paletleme Hattı Güvenlik Revizyonu (ISO 13849-1 Ple Emniyet)", "category": "makine-otomasyonu", "category_title": "Makine Otomasyonu", "location": "Kocaeli / Gebze Plastikçiler OSB", "client_industry": "Kimya & Paletleme Hatları", "date": "2026-09-12", "image": "assets/gkm_6_fabrika_da__t_m_panosu.webp", "metrics": [{"label": "Güvenlik Standardı", "val": "ISO 13849-1 Performance Level e (Ple)"}, {"label": "TÜV Onayı", "val": "%100 Denetim Uyumluluğu"}, {"label": "İş Kazası Riski", "val": "Sıfır Hata Çift Kanal Emniyet"}], "problem": "Mevcut paletleme ve streç sarma hattında mekanik sviçler tek kanaldı ve uluslararası iş güvenliği denetiminde hattın kapatılması uyarısı verilmişti.", "solution": "Hat baştan sona ISO 13849-1 standardına göre risk değerlendirmesine tabi tutuldu. SICK Muting özellikli optik emniyet bariyerleri, Pilz PNOZ emniyet rölesi ve çift kanal STO kontaktör kombinasyonu ile Ple mimarisi kuruldu. SISTEMA raporu hazırlanarak teslim edildi.", "interior_details": {"panel_structure": "Emniyet panosu RAL 1021 Sarı boyalı kapak, çift kilitli kilit mekanizması, kapı emniyet anahtarı.", "wiring_system": "Sarı renkli IEC 60204-1 emniyet kablajı, zorunlu kılavuzlu (forcibly guided) kontaklara sahip kontaktör geri besleme (EDM) köprüleri.", "control_architecture": "Pilz PNOZmulti emniyet kontrolörü, SICK deTec4 Type 4 bariyerler ve çift kanal acil stop buton devresi.", "testing_verification": "SISTEMA yazılımı ile PLr doğrulaması yapıldı, MTTFd > 100 yıl (Yüksek) ve DCavg > %99 hesaplandı."}, "hardware_used": ["SICK deTec4 Core Işık Bariyerleri", "Pilz PNOZ multi Emniyet Rölesi", "Euchner RFID Emniyet Kapı Sviçleri", "Schneider TeSys Emniyet Kontaktörleri"], "cta_text": "Makinanızın Emniyet Devresi ve CE Uyumluluğu İçin Bize Ulaşın"}];
+
+    function openLightbox(imgSrc, caption) {
+        document.getElementById('lightbox-img').src = imgSrc;
+        document.getElementById('lightbox-caption').innerText = caption;
+        document.getElementById('lightbox-modal').classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox-modal').classList.add('hidden');
+    }
+
+    function openProjectModal(projectId) {
+        const p = ALL_PROJECTS.find(x => x.id === projectId);
+        if (!p) return;
+
+        const interior = p.interior_details || {};
+        const hwTags = (p.hardware_used || []).map(h => `<span class="bg-slate-100 text-slate-800 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-200">${h}</span>`).join(' ');
+
+        const waText = encodeURIComponent(`Merhaba GKM Elektrik, '${p.title}' projenizin pano içi teknik şeması ve malzeme listesini incelemek istiyorum.`);
+        const waLink = `https://wa.me/905377029954?text=${waText}`;
+
+        document.getElementById('project-modal-content').innerHTML = `
+            <div class="flex items-center gap-2 mb-2">
+                <span class="bg-sky-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase">${p.category_title}</span>
+                <span class="text-xs font-bold text-slate-400">📍 ${p.location}</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-950 mb-4">${p.title}</h2>
+
+            <div class="h-60 rounded-2xl overflow-hidden mb-6 bg-slate-900 cursor-pointer relative group" onclick="openLightbox('${p.image.startsWith('http') ? p.image : site_url + '/' + p.image}', '${p.title}')">
+                <img src="${p.image.startsWith('http') ? p.image : site_url + '/' + p.image}" alt="${p.title}" class="w-full h-full object-cover">
+                <span class="absolute bottom-3 right-3 bg-slate-950/80 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-sm">🔍 Fotoğrafı Tam Ekran Büyüt</span>
+            </div>
+
+            <div class="space-y-4 mb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                <div class="p-4 bg-sky-50 rounded-2xl border border-sky-200">
+                    <h4 class="font-black text-sky-950 text-sm mb-1">🏗️ Pano Karkası & Mekanik Yerleşim</h4>
+                    <p>${interior.panel_structure || 'IEC 61439 standartlarında modüler tip testli hücre yapısı ve iklimlendirme.'}</p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h4 class="font-black text-slate-900 text-sm mb-1">🔌 Kablaj & Klemens Standartları</h4>
+                    <p>${interior.wiring_system || 'Titreşime dayanıklı yay baskılı Phoenix/Weidmüller klemensler ve IEC 60204-1 renk kodlaması.'}</p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h4 class="font-black text-slate-900 text-sm mb-1">⚙️ Otomasyon & Kontrol Mimarisi</h4>
+                    <p>${interior.control_architecture || 'Endüstriyel Ethernet / Profinet haberleşme mimarisi ve çift kanal emniyet devresi.'}</p>
+                </div>
+
+                <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200">
+                    <h4 class="font-black text-emerald-950 text-sm mb-1">✅ Test & Saha Doğrulama (FAT / SAT)</h4>
+                    <p>${interior.testing_verification || 'Saha devreye alma öncesi atölyede tüm fonksiyonel testler ve yalıtım dayanım testleri tamamlanmıştır.'}</p>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-xs font-black uppercase text-slate-400 tracking-wider mb-2">Kullanılan Ana Donanım Parçaları:</h4>
+                <div class="flex flex-wrap gap-2">
+                    ${hwTags}
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <span class="text-xs font-bold text-slate-500">GKM Mühendislik Referans Projesi</span>
+                <a href="${waLink}" target="_blank" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-6 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                    <span>💬 Bu Sistemin EPLAN Şemasını & Malzeme Listesini İste</span>
+                </a>
+            </div>
+        `;
+
+        document.getElementById('project-modal').classList.remove('hidden');
+    }
+
+    function closeProjectModal() {
+        document.getElementById('project-modal').classList.add('hidden');
+    }
+    </script>
 
 </body>
 </html>

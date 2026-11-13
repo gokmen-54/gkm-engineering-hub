@@ -68,57 +68,179 @@ CATEGORIES = {
 
 MARQUEE_PROJECTS = [
     {
+        "id": "mq-1",
         "title": "Ana Dağıtım & ADP Pano İmalatı",
         "desc": "IEC 61439 Form 4b Tip Testli İmalat",
         "img": "assets/gkm_6_fabrika_da__t_m_panosu.webp",
-        "tag": "Pano İmalatı"
+        "tag": "Pano İmalatı",
+        "specs": "2500A Bakır Bara, Form 4b Seperatörlü, Kısa Devre Dayanımı 65kA",
+        "interior": "Lazer kesim elektrolitik bakır baralar, epoksi elektrostatik toz boya, kablajda Phoenix Contact yay baskılı klemensler ve kanallı modüler düzen.",
+        "components": ["ABB Emax 2 Açık Tip Şalter", "Janitza Enerji Analizörü", "Phoenix Contact Parafudr", "Schneider TeSys Kontaktörler"]
     },
     {
+        "id": "mq-2",
         "title": "Robotik Hat & Makine Otomasyonu",
         "desc": "Çok Eksenli Servo Senkronizasyonu",
         "img": "assets/gkm_7_robotik_hat.webp",
-        "tag": "Makine Otomasyonu"
+        "tag": "Makine Otomasyonu",
+        "specs": "Siemens S7-1515T CPU, 4 Eksen S210 Servo, Elektronik Kamlama",
+        "interior": "Rittal paslanmaz çelik pano, servo güç ve enkoder kablolarında 360 derece EMC blendaj topraklaması, SICK Ple çift kanal emniyet mimarisi.",
+        "components": ["Siemens S7-1515T PLC", "Siemens S210 & 1FK2 Servolar", "SICK deTec4 Işık Bariyeri", "KTP1200 Unified HMI"]
     },
     {
+        "id": "mq-3",
         "title": "Fabrika Dağıtım & PLC / SCADA",
         "desc": "Siemens S7-1500 TIA Portal Entegrasyonu",
         "img": "assets/gkm_1_fabrika_otomasyon.webp",
-        "tag": "Endüstriyel Yazılım"
+        "tag": "Endüstriyel Yazılım",
+        "specs": "Ignition / WinCC SCADA, Modbus TCP & Profinet Veri Toplama",
+        "interior": "İklimlendirmeli modüler dikili tip karkas, izole 24V DC yedekli güç kaynağı, fiber optik endüstriyel Ethernet switch altyapısı.",
+        "components": ["Siemens S7-1500 PLC", "Moxa Endüstriyel Switch", "Weidmüller PROtop Güç Kaynağı", "Rittal Pano Kliması"]
     },
     {
+        "id": "mq-4",
         "title": "Harmonik Filtreli Kompanzasyon",
         "desc": "189 Hz %7 De-Tuned Reaktörlü Pano",
         "img": "assets/gkm_8_kompanzasyon.webp",
-        "tag": "Enerji Kalitesi"
+        "tag": "Enerji Kalitesi",
+        "specs": "800 kVAR Dinamik Tristörlü Kompanzasyon, THD-V <%3",
+        "interior": "Epcos 480V ağır hizmet tipi kondansatörler, 189 Hz demir nüveli reaktörler, sıfır geçişli tristör anahtarlama modülleri, termostatik çift fan bacası.",
+        "components": ["Epcos / TDK Ağır Hizmet Kondansatör", "%7 De-Tuned Reaktör", "Tristör Modülleri", "Janitza UMG Analizör"]
     },
     {
+        "id": "mq-5",
         "title": "MCC Motor Kontrol & Sürücü Panoları",
         "desc": "VFD & Soft Starter Güç Dağıtımı",
         "img": "assets/gkm_4_pano_donan_m_.webp",
-        "tag": "MCC Panoları"
+        "tag": "MCC Panoları",
+        "specs": "16 Motor Çıkışı, Form 3b Bölmelendirme, VFD ve Soft Starter",
+        "interior": "Her motor hücresi için bağımsız devre kesici ve termik koruma, havalandırma labirentleri, harici PLC klemens terminalleri.",
+        "components": ["Schneider ATV630 Sürücüler", "Schneider TeSys Kontaktör", "Weidmüller Klemensler", "Eaton Motor Koruma"]
     },
     {
+        "id": "mq-6",
         "title": "Endüstriyel Busbar & Şalt Altyapısı",
         "desc": "Yüksek Akım Güç İletim Hatları",
         "img": "assets/gkm_9_plaza_busbar.webp",
-        "tag": "Tesis Altyapısı"
+        "tag": "Tesis Altyapısı",
+        "specs": "1600A - 4000A Kompakt Busbar Hatları, Çıkış Kutuları",
+        "interior": "Alüminyum gövdeli kalay kaplı bakır iletkenler, yangın bariyerleri, geçmeli kilit mekanizmalı çıkış kutuları ve sigortalı şalterler.",
+        "components": ["EAE / Schneider Busbar", "Çıkış Kutuları", "Kompakt Şalterler", "Sismik Askı Sistemleri"]
     }
 ]
 
 BRAND_LOGOS = [
-    {"name": "Siemens", "file": "siemens.svg"},
-    {"name": "Schneider Electric", "file": "schneider.svg"},
-    {"name": "ABB", "file": "abb.svg"},
-    {"name": "Eaton", "file": "eaton.svg"},
-    {"name": "Phoenix Contact", "file": "phoenix_contact.svg"},
-    {"name": "Weidmüller", "file": "weidmuller.svg"},
-    {"name": "Omron", "file": "omron.svg"},
-    {"name": "Beckhoff Automation", "file": "beckhoff.svg"},
-    {"name": "Delta Electronics", "file": "delta.svg"},
-    {"name": "Festo", "file": "festo.svg"},
-    {"name": "SICK Sensor Intelligence", "file": "sick.svg"}
+    {
+        "id": "siemens",
+        "name": "Siemens",
+        "file": "siemens.svg",
+        "tagline": "TIA Portal SCL Yazılımı, S7-1200 / S7-1500 PLC & S210 Servo",
+        "desc": "GKM Elektrik; Siemens S7-1200, S7-1500 ve S7-1500T teknoloji CPU'larında IEC 61131-3 SCL dilinde modüler makine kodlaması, S210/V90 servo entegrasyonu, WinCC Unified SCADA sistemleri ve tip testli panolarımızda orijinal Sirius şalt komponentleri kullanır.",
+        "services": ["S7-1200 & S7-1500 PLC Programlama", "S210 & V90 Servo Sürücü Parametrelendirme", "WinCC SCADA & TIA Portal Entegrasyonu", "Orijinal Sirius Kontaktör & TMŞ Tedariği"],
+        "guide_slug": "siemens-s7-1200-ve-s7-1500-scl-programlama-standartlari",
+        "guide_title": "Siemens S7-1200 & S7-1500 SCL Programlama Standartları Rehberi"
+    },
+    {
+        "id": "schneider",
+        "name": "Schneider Electric",
+        "file": "schneider.svg",
+        "tagline": "Modicon PLC, Altivar VFD Sürücüler & TeSys Güç Dağıtımı",
+        "desc": "Schneider Modicon M241/M251/M262 PLC otomasyonu, Altivar ATV630/ATV930 frekans konvertörleri ile ağır şart motor kontrolü ve IEC 61439 Form 4b panolarımızda TeSys ve Compact NSX şalt kullanımı.",
+        "services": ["Modicon PLC & Machine Expert Yazılımı", "Altivar Sürücü Panoları & Harmonik Filtrasyon", "TeSys Emniyet Kontaktörleri & TMŞ Sistemleri", "EcoStruxure IoT ve SCADA Entegrasyonu"],
+        "guide_slug": "mcc-motor-kontrol-panosu-soft-starter-ve-vfd-secim-rehberi",
+        "guide_title": "MCC Panolarında Sürücü (VFD) vs Soft Starter Seçim Rehberi"
+    },
+    {
+        "id": "abb",
+        "name": "ABB",
+        "file": "abb.svg",
+        "tagline": "ACS Sürücü Sistemleri, Emax 2 Açık Tip Şalter & Robotik",
+        "desc": "Ağır sanayi, vinç, ekstruder ve pompa uygulamalarında ABB ACS880 / ACS580 motor sürücüleri entegrasyonu, ADP ana dağıtım panolarında Emax 2 akıllı açık tip şalterler ve robotlu otomasyon hatları.",
+        "services": ["ABB ACS Sürücü Devreye Alma & Parametre Ayarı", "Emax 2 & Tmax XT Güç Dağıtım Panoları", "Robotik Hücre ve Hat Otomasyonu", "Harmonik Ölçümü ve Filtre Reaktörü"],
+        "guide_slug": "iec-61439-tip-testli-ana-dagitim-panosu-adp-kriterleri",
+        "guide_title": "IEC 61439 Tip Testli Ana Dağıtım Panosu (ADP) Tasarım Kriterleri"
+    },
+    {
+        "id": "eaton",
+        "name": "Eaton",
+        "file": "eaton.svg",
+        "tagline": "Moeller Şalt, UPS Kesintisiz Güç & Akıllı Güç Yönetimi",
+        "desc": "Moeller serisi kompakt şalterler, motor koruma şalterleri (PKZM), acil aydınlatma ve endüstriyel UPS sistemleri ile tesis altyapılarında kesintisiz ve güvenli elektrik dağıtımı.",
+        "services": ["Eaton Moeller Şalt Malzeme Tedariği", "Tip Testli Tali Dağıtım Panoları", "Endüstriyel UPS & Akü Yedekleme", "Enerji Yönetimi ve Güç Analizi"],
+        "guide_slug": "iec-61439-tip-testli-ana-dagitim-panosu-adp-kriterleri",
+        "guide_title": "Tip Testli Pano & Güç Dağıtımı Çözümlerimiz"
+    },
+    {
+        "id": "phoenix_contact",
+        "name": "Phoenix Contact",
+        "file": "phoenix_contact.svg",
+        "tagline": "Push-in Klemensler, Aşırı Gerilim Parafudrları & Güç Kaynakları",
+        "desc": "Panolarımızda titreşime dayanıklı Push-in klemens mimarisi, yıldırım ve aşırı gerilim darbelerine karşı Tip 1+2 parafudr koruması (SEC serisi) ve Quint Power yedekli güç kaynakları.",
+        "services": ["Endüstriyel Klemens & Etiketleme Sistemleri", "Aşırı Gerilim ve Parafudr Koruması", "Quint Power 24V DC Kesintisiz Güç", "Sinyal İzolasyon Modülleri"],
+        "guide_slug": "endustriyel-ortamlar-icin-4-katmanli-pcb-tasarim-kurallari",
+        "guide_title": "Endüstriyel Ortamlar İçin EMC Koruması ve Topraklama"
+    },
+    {
+        "id": "weidmuller",
+        "name": "Weidmüller",
+        "file": "weidmuller.svg",
+        "tagline": "Klippon Pano Kutuları, Röleler & Endüstriyel Bağlantı",
+        "desc": "Klippon Ex ve endüstriyel buat kutuları, D-SERIES endüstriyel röleler, kablo kanalları ve pano içi profesyonel klemens etiketleme çözümleri.",
+        "services": ["Pano İçi Bağlantı ve Klemens Grupları", "Endüstriyel Röle & Optokuplör Modülleri", "PROtop Güç Kaynakları", "Saha Dağıtım Kutuları"],
+        "guide_slug": "iec-61439-tip-testli-ana-dagitim-panosu-adp-kriterleri",
+        "guide_title": "Pano İmalatında Tip Test ve Malzeme Kalitesi"
+    },
+    {
+        "id": "omron",
+        "name": "Omron",
+        "file": "omron.svg",
+        "tagline": "Sysmac Otomasyon Platformu, NX/NJ PLC & Emniyet",
+        "desc": "Omron Sysmac mimarisi, EtherCAT tabanlı servo kontrolü, endüstriyel optik sensörler ve emniyet ışık bariyerleri ile yüksek hızlı paketleme makineleri otomasyonu.",
+        "services": ["Omron Sysmac Studio & NX1P/NJ PLC Yazılımı", "1S Serisi Servo Sürücü Senkronizasyonu", "G9SE Emniyet Röleleri & Işık Perdeleri", "Endüstriyel Fotoelektrik Sensörler"],
+        "guide_slug": "servo-motor-surucu-parametre-ayari-ve-rezonans-filtreleme",
+        "guide_title": "Servo Sürücü Kazanç Ayarı ve Rezonans Filtreleme"
+    },
+    {
+        "id": "beckhoff",
+        "name": "Beckhoff Automation",
+        "file": "beckhoff.svg",
+        "tagline": "TwinCAT 3, EtherCAT I/O & PC Tabanlı Hareket Kontrolü",
+        "desc": "Beckhoff IPC ve gömülü PC'ler üzerinde TwinCAT 3 NC/CNC hareket kontrolü, mikrosaniye seviyesinde EtherCAT I/O terminalleri ve çok eksenli kartezyen robot yazılımı.",
+        "services": ["TwinCAT 3 C++/ST Hareket Kontrolü", "EtherCAT Yüksek Hızlı Giriş/Çıkış Modülleri", "Endüstriyel PC ve Panel PC Entegrasyonu", "Elektronik Kam ve Kinematik Çözümler"],
+        "guide_slug": "paketleme-makinesi-plc-servo-yazilim-revizyonu",
+        "guide_title": "Çok Eksenli Makine Otomasyonu ve Servo Çözümleri"
+    },
+    {
+        "id": "delta",
+        "name": "Delta Electronics",
+        "file": "delta.svg",
+        "tagline": "AS Serisi PLC, ASDA Servo & VFD Motor Sürücüleri",
+        "desc": "Fiyat/performans odaklı özel makinelerde Delta AS200/AS300 PLC, ASDA-A2/A3 servo motor sistemleri ve MS300/C2000 frekans invertörleri ile hat revizyonları.",
+        "services": ["Delta PLC & ISPSoft Programlama", "ASDA-A2/A3 Servo Sürücü Ayarları", "DOP-100 HMI Ekran Tasarımı", "VFD İnvertör Panosu İmalatı"],
+        "guide_slug": "paketleme-makinesi-plc-servo-yazilim-revizyonu",
+        "guide_title": "Paketleme ve Dolum Makinelerinde PLC & Servo Revizyonu"
+    },
+    {
+        "id": "festo",
+        "name": "Festo",
+        "file": "festo.svg",
+        "tagline": "Pnömatik Valf Adaları, Silindirler & Elektrikli Aktüatörler",
+        "desc": "Profinet / EtherCAT haberleşmeli Festo CPX/MPA valf adaları, hassas pnömatik silindirler ve elektro-mekanik lineer eksenler ile makine mekaniği otomasyonu.",
+        "services": ["Valf Adası Pano Entegrasyonu", "Oransal Basınç Regülasyonu", "Elektrikli Silindir & Sürücü Kurulumu", "Hava Hazırlama & Filtre Regülatör Grupları"],
+        "guide_slug": "paketleme-makinesi-plc-servo-yazilim-revizyonu",
+        "guide_title": "Makine Otomasyonu ve Pnömatik-Servo Entegrasyonu"
+    },
+    {
+        "id": "sick",
+        "name": "SICK Sensor Intelligence",
+        "file": "sick.svg",
+        "tagline": "Emniyet Işık Bariyerleri, Lazer Alan Tarayıcı & Optik Sensörler",
+        "desc": "ISO 13849-1 Ple emniyet standartlarında deTec4 ışık bariyerleri, microScan3 lazer alan tarayıcılar, kontrast renk fotoselleri ve barkod okuma sistemleri.",
+        "services": ["Makine Emniyet Devresi Projelendirmesi", "SICK deTec4 & miniTwin Işık Perdeleri", "Lazer Alan Tarayıcı Emniyet Alanı Çizimi", "Yüksek Hızlı Renk Kontrast Fotoselleri"],
+        "guide_slug": "iso-13849-1-makine-emniyet-devresi-tasarimi-sil-pl-hesabi",
+        "guide_title": "ISO 13849-1 Standardına Göre Makine Emniyet Devresi Tasarımı"
+    }
 ]
-
 
 def urllib_quote(text):
     return urllib.parse.quote(text)
@@ -379,32 +501,39 @@ def build_homepage(articles):
     header = get_base_header(active_nav="")
     footer = get_base_footer()
 
-    # Brand logo cards HTML with real vector SVG logos
+    # Brand logo cards HTML with interactive modal trigger
     brands_html = "".join([
-        f'<div class="flex items-center justify-center bg-white border border-slate-200 hover:border-sky-500 hover:shadow-md px-6 py-3 rounded-2xl shadow-sm transition duration-300 min-w-[150px] sm:min-w-[170px] h-16 group">'
+        f'<button onclick="openBrandModal(\'{b["id"]}\')" title="{b["name"]} Çözümlerimiz ve Ürünleri İncele" class="flex items-center justify-center bg-white border border-slate-200 hover:border-sky-500 hover:shadow-lg px-6 py-3 rounded-2xl shadow-sm transition-all duration-300 min-w-[150px] sm:min-w-[170px] h-16 group cursor-pointer text-left">'
         f'<img src="{SITE_URL}/assets/brands/{b["file"]}" alt="{b["name"]} Logo" class="h-7 max-h-7 max-w-[110px] sm:max-w-[130px] w-auto object-contain transition duration-300 group-hover:scale-105" loading="lazy">'
-        f'</div>'
+        f'</button>'
         for b in BRAND_LOGOS * 2
     ])
 
-    # Real project marquee cards HTML
+    # Real project marquee cards HTML with interior deep-dive inspection & lightbox
     project_cards = []
     for p in MARQUEE_PROJECTS:
         wa_text = urllib_quote(f"Merhaba GKM Elektrik, {p['title']} benzeri projemiz için bilgi ve teklif almak istiyoruz.")
         project_cards.append(
             f'<div class="flex-none w-[320px] bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-md hover:shadow-xl hover:border-sky-500 transition duration-300 flex flex-col">'
-            f'<div class="h-48 overflow-hidden bg-slate-900 relative">'
-            f'<img src="{SITE_URL}/{p["img"]}" alt="{p["title"]}" class="w-full h-full object-cover hover:scale-105 transition duration-500">'
+            f'<div class="h-48 overflow-hidden bg-slate-900 relative cursor-pointer group" onclick="openLightbox(\'{SITE_URL}/{p["img"]}\', \'{p["title"]}\')">'
+            f'<img src="{SITE_URL}/{p["img"]}" alt="{p["title"]}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">'
             f'<span class="absolute top-3 left-3 bg-sky-600 text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full uppercase shadow">{p["tag"]}</span>'
+            f'<span class="absolute bottom-2 right-2 bg-black/75 hover:bg-black text-white text-[10px] font-bold px-2 py-1 rounded-lg backdrop-blur-sm flex items-center gap-1 shadow">🔍 Fotoğrafı Büyüt</span>'
             f'</div>'
             f'<div class="p-4 flex-1 flex flex-col justify-between">'
             f'<div>'
             f'<h4 class="font-black text-slate-900 text-sm leading-snug mb-1">{p["title"]}</h4>'
-            f'<p class="text-slate-500 text-xs font-medium">{p["desc"]}</p>'
+            f'<p class="text-slate-500 text-xs font-medium mb-2">{p["desc"]}</p>'
+            f'<div class="bg-slate-50 border border-slate-200/80 rounded-xl p-2.5 mb-3 text-[11px] text-slate-600 leading-tight"><b>Öne Çıkan Standart:</b> {p.get("specs", "")}</div>'
             f'</div>'
-            f'<a href="https://wa.me/{WHATSAPP_PHONE}?text={wa_text}" target="_blank" class="mt-3 text-sky-600 hover:text-sky-700 text-xs font-bold flex items-center gap-1">'
-            f'<span>Detay & Teklif Al</span> ➔'
+            f'<div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">'
+            f'<button onclick="openMarqueeModal(\'{p["id"]}\')" class="bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 font-extrabold text-[11px] py-1.5 px-3 rounded-xl transition flex items-center gap-1 shadow-sm">'
+            f'<span>🔍 Panonun İçine Bak</span>'
+            f'</button>'
+            f'<a href="https://wa.me/{WHATSAPP_PHONE}?text={wa_text}" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold py-1.5 px-2.5 rounded-xl shadow flex items-center gap-1">'
+            f'<span>Teklif</span> ➔'
             f'</a>'
+            f'</div>'
             f'</div>'
             f'</div>'
         )
@@ -744,8 +873,176 @@ def build_homepage(articles):
         </div>
     </section>
 
+    <!-- Global Fullscreen Image Lightbox Modal -->
+    <div id="lightbox-modal" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden" onclick="closeLightbox()">
+        <div class="max-w-5xl w-full max-h-[90vh] flex flex-col items-center justify-center relative" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white hover:text-sky-400 text-2xl font-black">✕ Kapat</button>
+            <img id="lightbox-img" src="" alt="Büyütülmüş Detay Görünümü" class="max-w-full max-h-[80vh] rounded-2xl object-contain shadow-2xl border border-white/20">
+            <p id="lightbox-caption" class="text-white text-xs sm:text-sm font-bold mt-4 text-center"></p>
+        </div>
+    </div>
+
+    <!-- Marquee Project Interior Deep Dive Modal -->
+    <div id="marquee-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden" onclick="closeMarqueeModal()">
+        <div class="bg-white rounded-3xl p-6 sm:p-10 max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 shadow-2xl relative" onclick="event.stopPropagation()">
+            <button onclick="closeMarqueeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-800 text-2xl font-black">✕</button>
+            <div id="marquee-modal-content">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Brand Partner Capabilities & Integration Modal -->
+    <div id="brand-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden" onclick="closeBrandModal()">
+        <div class="bg-white rounded-3xl p-6 sm:p-10 max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 shadow-2xl relative" onclick="event.stopPropagation()">
+            <button onclick="closeBrandModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-800 text-2xl font-black">✕</button>
+            <div id="brand-modal-content">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+    </div>
+
     {footer}
 
+    <!-- Interactive Inspection Modals Logic -->
+    <script>
+    const MARQUEE_DATA = {json.dumps(MARQUEE_PROJECTS, ensure_ascii=False)};
+    const BRAND_DATA = {json.dumps(BRAND_LOGOS, ensure_ascii=False)};
+    const SITE_URL = "{SITE_URL}";
+    const WHATSAPP_PHONE = "{WHATSAPP_PHONE}";
+
+    function openLightbox(imgSrc, caption) {{
+        document.getElementById('lightbox-img').src = imgSrc;
+        document.getElementById('lightbox-caption').innerText = caption;
+        document.getElementById('lightbox-modal').classList.remove('hidden');
+    }}
+
+    function closeLightbox() {{
+        document.getElementById('lightbox-modal').classList.add('hidden');
+    }}
+
+    function openMarqueeModal(projId) {{
+        const p = MARQUEE_DATA.find(x => x.id === projId);
+        if (!p) return;
+
+        const compTags = (p.components || []).map(c => `<span class="bg-slate-100 text-slate-800 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-200">${{c}}</span>`).join(' ');
+        const waText = encodeURIComponent(`Merhaba GKM Elektrik, '${{p.title}}' projenizin pano içi teknik yerleşimi ve şeması hakkında bilgi almak istiyorum.`);
+        const waLink = `https://wa.me/${{WHATSAPP_PHONE}}?text=${{waText}}`;
+
+        document.getElementById('marquee-modal-content').innerHTML = `
+            <div class="flex items-center gap-2 mb-2">
+                <span class="bg-sky-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase">${{p.tag}}</span>
+                <span class="text-xs font-bold text-slate-400">⚡ IEC 61439 Standartları</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-950 mb-4">${{p.title}}</h2>
+
+            <div class="h-60 rounded-2xl overflow-hidden mb-6 bg-slate-900 cursor-pointer relative group" onclick="openLightbox('${{p.img.startsWith('http') ? p.img : SITE_URL + '/' + p.img}}', '${{p.title}}')">
+                <img src="${{p.img.startsWith('http') ? p.img : SITE_URL + '/' + p.img}}" alt="${{p.title}}" class="w-full h-full object-cover">
+                <span class="absolute bottom-3 right-3 bg-slate-950/85 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-sm">🔍 Fotoğrafı Büyüt</span>
+            </div>
+
+            <div class="space-y-4 mb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                <div class="p-4 bg-sky-50 rounded-2xl border border-sky-200">
+                    <h4 class="font-black text-sky-950 text-sm mb-1">🏗️ Pano Karkası & Mekanik Mimari</h4>
+                    <p>${{p.specs}}</p>
+                </div>
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h4 class="font-black text-slate-900 text-sm mb-1">🔌 Pano İçi Kablaj, Klemens & İletken Düzeni</h4>
+                    <p>${{p.interior}}</p>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-xs font-black uppercase text-slate-400 tracking-wider mb-2">Entegre Edilen Ana Ekipman & Donanımlar:</h4>
+                <div class="flex flex-wrap gap-2">
+                    ${{compTags}}
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <a href="${{waLink}}" target="_blank" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-6 rounded-2xl transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
+                    <span>💬 Benzer Pano / Proje İçin Teklif Al</span>
+                </a>
+                <a href="${{SITE_URL}}/projeler/" class="text-xs font-bold text-sky-600 hover:text-sky-700">
+                    Tüm Projeleri İncele ➔
+                </a>
+            </div>
+        `;
+        document.getElementById('marquee-modal').classList.remove('hidden');
+    }}
+
+    function closeMarqueeModal() {{
+        document.getElementById('marquee-modal').classList.add('hidden');
+    }}
+
+    function openBrandModal(brandId) {{
+        const b = BRAND_DATA.find(x => x.id === brandId);
+        if (!b) return;
+
+        const srvHtml = (b.services || []).map(s => `<li class="flex items-center gap-2 text-xs font-semibold text-slate-700"><span class="text-sky-500 font-bold">✔</span> ${{s}}</li>`).join('');
+        const waText = encodeURIComponent(`Merhaba GKM Elektrik, tesisimizdeki ${{b.name}} sistemleri ve pano tedariği için görüşmek istiyoruz.`);
+        const waLink = `https://wa.me/${{WHATSAPP_PHONE}}?text=${{waText}}`;
+
+        document.getElementById('brand-modal-content').innerHTML = `
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+                <div class="flex items-center gap-4">
+                    <div class="h-14 w-32 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-center p-2">
+                        <img src="${{SITE_URL}}/assets/brands/${{b.file}}" alt="${{b.name}} Logo" class="max-h-8 max-w-full object-contain">
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-black text-slate-900">${{b.name}}</h3>
+                        <p class="text-xs text-sky-600 font-bold">${{b.tagline}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4 mb-6">
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                    ${{b.desc}}
+                </p>
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    <h4 class="text-xs font-black uppercase text-slate-400 tracking-wider mb-3">GKM Elektrik ${{b.name}} Mühendislik Yetkinlikleri:</h4>
+                    <ul class="space-y-2">
+                        ${{srvHtml}}
+                    </ul>
+                </div>
+                ${{b.guide_slug ? `
+                <div class="p-3 bg-sky-50 rounded-xl border border-sky-200 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] font-black uppercase text-sky-600">İlgili Teknik Rehber</span>
+                        <div class="text-xs font-bold text-slate-900">${{b.guide_title}}</div>
+                    </div>
+                    <a href="${{SITE_URL}}/rehber/${{b.guide_slug}}/" class="bg-sky-600 hover:bg-sky-700 text-white text-[11px] font-bold py-1.5 px-3 rounded-lg shadow transition whitespace-nowrap">
+                        Rehberi Oku ➔
+                    </a>
+                </div>` : ''}}
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <a href="${{waLink}}" target="_blank" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs py-3 px-5 rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
+                    <span>💬 ${{b.name}} Çözümleri İçin Teklif Al</span>
+                </a>
+                <a href="https://gkmelektrik.com" target="_blank" class="text-xs font-bold text-slate-600 hover:text-sky-600 flex items-center gap-1">
+                    <span>🛒 gkmelektrik.com Mağazası</span> ➔
+                </a>
+            </div>
+        `;
+        document.getElementById('brand-modal').classList.remove('hidden');
+    }}
+
+    function closeBrandModal() {{
+        document.getElementById('brand-modal').classList.add('hidden');
+    }}
+
+    // Close modals on Escape key
+    document.addEventListener('keydown', function(e) {{
+        if (e.key === 'Escape') {{
+            closeLightbox();
+            closeMarqueeModal();
+            closeBrandModal();
+        }}
+    }});
+    </script>
 </body>
 </html>
     """
@@ -830,8 +1127,176 @@ def build_category_page(cat_key, articles):
         </div>
     </main>
 
+    <!-- Global Fullscreen Image Lightbox Modal -->
+    <div id="lightbox-modal" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden" onclick="closeLightbox()">
+        <div class="max-w-5xl w-full max-h-[90vh] flex flex-col items-center justify-center relative" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white hover:text-sky-400 text-2xl font-black">✕ Kapat</button>
+            <img id="lightbox-img" src="" alt="Büyütülmüş Detay Görünümü" class="max-w-full max-h-[80vh] rounded-2xl object-contain shadow-2xl border border-white/20">
+            <p id="lightbox-caption" class="text-white text-xs sm:text-sm font-bold mt-4 text-center"></p>
+        </div>
+    </div>
+
+    <!-- Marquee Project Interior Deep Dive Modal -->
+    <div id="marquee-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden" onclick="closeMarqueeModal()">
+        <div class="bg-white rounded-3xl p-6 sm:p-10 max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 shadow-2xl relative" onclick="event.stopPropagation()">
+            <button onclick="closeMarqueeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-800 text-2xl font-black">✕</button>
+            <div id="marquee-modal-content">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Brand Partner Capabilities & Integration Modal -->
+    <div id="brand-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden" onclick="closeBrandModal()">
+        <div class="bg-white rounded-3xl p-6 sm:p-10 max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 shadow-2xl relative" onclick="event.stopPropagation()">
+            <button onclick="closeBrandModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-800 text-2xl font-black">✕</button>
+            <div id="brand-modal-content">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+    </div>
+
     {footer}
 
+    <!-- Interactive Inspection Modals Logic -->
+    <script>
+    const MARQUEE_DATA = {json.dumps(MARQUEE_PROJECTS, ensure_ascii=False)};
+    const BRAND_DATA = {json.dumps(BRAND_LOGOS, ensure_ascii=False)};
+    const SITE_URL = "{SITE_URL}";
+    const WHATSAPP_PHONE = "{WHATSAPP_PHONE}";
+
+    function openLightbox(imgSrc, caption) {{
+        document.getElementById('lightbox-img').src = imgSrc;
+        document.getElementById('lightbox-caption').innerText = caption;
+        document.getElementById('lightbox-modal').classList.remove('hidden');
+    }}
+
+    function closeLightbox() {{
+        document.getElementById('lightbox-modal').classList.add('hidden');
+    }}
+
+    function openMarqueeModal(projId) {{
+        const p = MARQUEE_DATA.find(x => x.id === projId);
+        if (!p) return;
+
+        const compTags = (p.components || []).map(c => `<span class="bg-slate-100 text-slate-800 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-200">${{c}}</span>`).join(' ');
+        const waText = encodeURIComponent(`Merhaba GKM Elektrik, '${{p.title}}' projenizin pano içi teknik yerleşimi ve şeması hakkında bilgi almak istiyorum.`);
+        const waLink = `https://wa.me/${{WHATSAPP_PHONE}}?text=${{waText}}`;
+
+        document.getElementById('marquee-modal-content').innerHTML = `
+            <div class="flex items-center gap-2 mb-2">
+                <span class="bg-sky-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase">${{p.tag}}</span>
+                <span class="text-xs font-bold text-slate-400">⚡ IEC 61439 Standartları</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-950 mb-4">${{p.title}}</h2>
+
+            <div class="h-60 rounded-2xl overflow-hidden mb-6 bg-slate-900 cursor-pointer relative group" onclick="openLightbox('${{p.img.startsWith('http') ? p.img : SITE_URL + '/' + p.img}}', '${{p.title}}')">
+                <img src="${{p.img.startsWith('http') ? p.img : SITE_URL + '/' + p.img}}" alt="${{p.title}}" class="w-full h-full object-cover">
+                <span class="absolute bottom-3 right-3 bg-slate-950/85 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-sm">🔍 Fotoğrafı Büyüt</span>
+            </div>
+
+            <div class="space-y-4 mb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                <div class="p-4 bg-sky-50 rounded-2xl border border-sky-200">
+                    <h4 class="font-black text-sky-950 text-sm mb-1">🏗️ Pano Karkası & Mekanik Mimari</h4>
+                    <p>${{p.specs}}</p>
+                </div>
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h4 class="font-black text-slate-900 text-sm mb-1">🔌 Pano İçi Kablaj, Klemens & İletken Düzeni</h4>
+                    <p>${{p.interior}}</p>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-xs font-black uppercase text-slate-400 tracking-wider mb-2">Entegre Edilen Ana Ekipman & Donanımlar:</h4>
+                <div class="flex flex-wrap gap-2">
+                    ${{compTags}}
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <a href="${{waLink}}" target="_blank" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-6 rounded-2xl transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
+                    <span>💬 Benzer Pano / Proje İçin Teklif Al</span>
+                </a>
+                <a href="${{SITE_URL}}/projeler/" class="text-xs font-bold text-sky-600 hover:text-sky-700">
+                    Tüm Projeleri İncele ➔
+                </a>
+            </div>
+        `;
+        document.getElementById('marquee-modal').classList.remove('hidden');
+    }}
+
+    function closeMarqueeModal() {{
+        document.getElementById('marquee-modal').classList.add('hidden');
+    }}
+
+    function openBrandModal(brandId) {{
+        const b = BRAND_DATA.find(x => x.id === brandId);
+        if (!b) return;
+
+        const srvHtml = (b.services || []).map(s => `<li class="flex items-center gap-2 text-xs font-semibold text-slate-700"><span class="text-sky-500 font-bold">✔</span> ${{s}}</li>`).join('');
+        const waText = encodeURIComponent(`Merhaba GKM Elektrik, tesisimizdeki ${{b.name}} sistemleri ve pano tedariği için görüşmek istiyoruz.`);
+        const waLink = `https://wa.me/${{WHATSAPP_PHONE}}?text=${{waText}}`;
+
+        document.getElementById('brand-modal-content').innerHTML = `
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+                <div class="flex items-center gap-4">
+                    <div class="h-14 w-32 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-center p-2">
+                        <img src="${{SITE_URL}}/assets/brands/${{b.file}}" alt="${{b.name}} Logo" class="max-h-8 max-w-full object-contain">
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-black text-slate-900">${{b.name}}</h3>
+                        <p class="text-xs text-sky-600 font-bold">${{b.tagline}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4 mb-6">
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                    ${{b.desc}}
+                </p>
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    <h4 class="text-xs font-black uppercase text-slate-400 tracking-wider mb-3">GKM Elektrik ${{b.name}} Mühendislik Yetkinlikleri:</h4>
+                    <ul class="space-y-2">
+                        ${{srvHtml}}
+                    </ul>
+                </div>
+                ${{b.guide_slug ? `
+                <div class="p-3 bg-sky-50 rounded-xl border border-sky-200 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] font-black uppercase text-sky-600">İlgili Teknik Rehber</span>
+                        <div class="text-xs font-bold text-slate-900">${{b.guide_title}}</div>
+                    </div>
+                    <a href="${{SITE_URL}}/rehber/${{b.guide_slug}}/" class="bg-sky-600 hover:bg-sky-700 text-white text-[11px] font-bold py-1.5 px-3 rounded-lg shadow transition whitespace-nowrap">
+                        Rehberi Oku ➔
+                    </a>
+                </div>` : ''}}
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <a href="${{waLink}}" target="_blank" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs py-3 px-5 rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
+                    <span>💬 ${{b.name}} Çözümleri İçin Teklif Al</span>
+                </a>
+                <a href="https://gkmelektrik.com" target="_blank" class="text-xs font-bold text-slate-600 hover:text-sky-600 flex items-center gap-1">
+                    <span>🛒 gkmelektrik.com Mağazası</span> ➔
+                </a>
+            </div>
+        `;
+        document.getElementById('brand-modal').classList.remove('hidden');
+    }}
+
+    function closeBrandModal() {{
+        document.getElementById('brand-modal').classList.add('hidden');
+    }}
+
+    // Close modals on Escape key
+    document.addEventListener('keydown', function(e) {{
+        if (e.key === 'Escape') {{
+            closeLightbox();
+            closeMarqueeModal();
+            closeBrandModal();
+        }}
+    }});
+    </script>
 </body>
 </html>
     """

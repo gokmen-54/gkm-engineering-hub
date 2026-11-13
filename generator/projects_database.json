@@ -15,6 +15,12 @@
     ],
     "problem": "Mevcut mekanik kam tahrikli şişeleme makinesinde format değişimleri 4 saat sürüyordu. Mekanik kam aşınmaları nedeniyle dolum nozüllerinde damlama ve çene kesiminde fire oranı %4.5 seviyelerindeydi.",
     "solution": "Mekanik kam mili tamamen iptal edildi. 1 adet Siemens S7-1515T Teknoloji CPU, 4 eksen Siemens S210 servo motor ve 12 istasyonlu globoid kam tahrikli döner tabla elektronik kam (electronic camming) ile senkronize edildi. Reçete yönetimi HMI üzerinden tek tuşla 2 dakikada format geçişi sağlayacak şekilde programlandı.",
+    "interior_details": {
+      "panel_structure": "Rittal TS8 Paslanmaz Çelik (IP66), Form 2b iç bölmelendirme, servo sürücü soğutması için Rittal tavan tipi klima (1500W).",
+      "wiring_system": "Titreşime dayanıklı Phoenix Contact Push-in klemensler, servo güç ve enkoder kablolarında 360 derece EMC blendaj klemensleri, renk kodlu IEC 60204-1 kablaj.",
+      "control_architecture": "Profinet IRT üzerinden 1 ms senkron çevrim, SICK emniyet ışık bariyerleri ile entegre STO ve SLS fonksiyonları.",
+      "testing_verification": "FAT fabrika kabul testinde 48 saat kesintisiz kuru çevrim testi ve lazer vibrometre ile titreşim analiz testleri başarıyla tamamlandı."
+    },
     "hardware_used": ["Siemens S7-1515T PLC", "Siemens S210 & 1FK2 Servolar", "KTP1200 Unified Comfort HMI", "SICK Emniyet Işık Bariyerleri", "GKM İklimlendirmeli Paslanmaz Pano"],
     "cta_text": "Benzer Döner Tabla veya Dolum Makinesi Otomasyonu İçin Teklif Alın"
   },
@@ -34,6 +40,12 @@
     ],
     "problem": "Punta kaynak makineleri ve preslerin 200 ms gibi ani darbeli yük çekmesi nedeniyle mekanik kontaktörlü klasik kompanzasyon panosu yetişemiyor, fabrika her ay ortalama 145.000 TL endüktif reaktif ceza ödüyordu.",
     "solution": "GKM Elektrik saha ekibi enerji analizörü ile 72 saatlik harmonik ve dalga formu kaydı aldı. 189 Hz (p=%7) demir nüveli harmonik filtre reaktörleri ve sıfır geçişli (Zero-Cross) tristör modülleri ile 12 kademeli, toplam 800 kVAR gücünde dinamik kompanzasyon panosu imal edildi.",
+    "interior_details": {
+      "panel_structure": "2 mm galvaniz sac modüler karkas, de-tuned reaktörlerin ısıl yükü için termostat kontrollü çift cebri havalandırma fan bacaları.",
+      "wiring_system": "Elektrolitik bakır baralar (Cu-ETP), ısıyla daralan makaron izolasyonu, Epcos ağır hizmet tipi 480V silindirik alüminyum tüp kondansatörler.",
+      "control_architecture": "Tristör tetikleme kartları şebeke geriliminin sıfır geçiş anında (Zero Cross) anahtarlama yaparak demeraj akımını tamamen sıfırlar.",
+      "testing_verification": "Fluke 435 güç analizörü ile saha devreye alma testinde THD-V %3.1 seviyesinde tutuldu, ceza oranı %2.8'e sabitlendi."
+    },
     "hardware_used": ["GKM Tip Testli Modüler Pano Karkası", "Epcos / TDK Ağır Hizmet Kondansatörler", "%7 De-Tuned Harmonik Reaktörler", "Tristörlü Sıfır Geçiş Modülleri", "Janitza UMG Enerji Analizörü"],
     "cta_text": "Fabrikanızdaki Reaktif Cezayı Sıfırlamak İçin Şema & Fatura İletin"
   },
@@ -53,6 +65,12 @@
     ],
     "problem": "8 farklı soğuk odanın sıcaklık kontrolleri bağımsız termostatlarla yapılıyordu. Kompresörler dengesiz yıpranıyor, yüksek elektrik demerajı oluşuyor ve sıcaklık yükselmesi fark edilmediğinde ürün bozulma riski doğuyordu.",
     "solution": "Tüm soğutma grubu Schneider Modicon M241 PLC ve Web Tabanlı SCADA ile merkezi otomasyona bağlandı. Kompresörler için çalışma saati bazlı otomatik eş yaşlanma ve yük kaskad algoritması yazıldı. Sıcaklıklar 5 dakikada bir buluta yedeklenerek HACCP denetim raporu otomatikleştirildi.",
+    "interior_details": {
+      "panel_structure": "Schneider Spacial SF modüler pano, IP55 koruma sınıfı, dahili LED aydınlatma ve servis priz grubu.",
+      "wiring_system": "Weidmüller kanallı kablaj, klemens köprüleme sistemi, 24V izole sinyal hatları ile 400V güç hatları arasında metal separatör.",
+      "control_architecture": "Modbus TCP haberleşmeli Schneider ATV630 değişken frekanslı sürücüler ve 4G LTE endüstriyel gateway ile 7/24 bulut izleme.",
+      "testing_verification": "8 odada 0.1°C hassasiyet kalibrasyonu yapıldı, kompresör arıza simülasyonlarında kaskad devreye girme süresi <1.5 sn olarak doğrulandı."
+    },
     "hardware_used": ["Schneider M241 PLC", "Schneider Altivar ATV630 Sürücüler", "PT100 4 telli Hassas Sıcaklık Sensörleri", "GKM IoT 4G Gateway", "SCADA Web Arayüzü"],
     "cta_text": "Soğuk Depo & Tesis Otomasyonu İçin Danışmanlık Alın"
   },
@@ -72,6 +90,12 @@
     ],
     "problem": "Ağır iş makinelerinde çalışan ithal sensör kartları döviz kuru nedeniyle fahiş maliyetlere ulaşmış ve yüksek titreşim / kaynak arklarında parazit kaparak reset atıyordu.",
     "solution": "GKM Ar-Ge ekibi STM32G0 serisi mikrodenetleyici tabanlı, 4 katmanlı (SIG-GND-PWR-SIG) özel kontrol kartı tasarladı. Besleme hattı TVS ve common mode filtrelerle korundu, RS485 ve CAN hatları galvanik olarak izole edildi. FreeRTOS tabanlı firmware yazılarak 1000 adetlik ilk parti montajı teslim edildi.",
+    "interior_details": {
+      "panel_structure": "CNC işleme anodize alüminyum kutu, IP67 sızdırmaz O-ring conta, M12 endüstriyel konnektör arayüzü.",
+      "wiring_system": "TG170 yüksek sıcaklık dayanımlı FR4 PCB, 2 oz bakır kalınlığı, Altium Designer diferansiyel empedans kontrollü (120 Ohm) hatlar.",
+      "control_architecture": "Analog Devices galvanik izoleli CAN alıcı-verici (ADM3053) ve 2.5 kV izolasyonlu DC-DC konvertör mimarisi.",
+      "testing_verification": "8 kV ESD darbe testi (IEC 61000-4-2) ve 20G titreşim testi altında veri kaybı olmadan kesintisiz çalışma onaylandı."
+    },
     "hardware_used": ["Altium Designer Tasarımı", "STM32G071 ARM Cortex-M0+", "Analog Devices ADM2483 Galvanik İzolatör", "Würth Elektronik Koruma Komponentleri", "GKM CNC Alüminyum Kutu"],
     "cta_text": "Özel Elektronik Kart ve Donanım Tasarımı İçin Gerber Gönderin"
   },
@@ -91,6 +115,12 @@
     ],
     "problem": "Mevcut paletleme ve streç sarma hattında mekanik sviçler tek kanaldı ve uluslararası iş güvenliği denetiminde hattın kapatılması uyarısı verilmişti.",
     "solution": "Hat baştan sona ISO 13849-1 standardına göre risk değerlendirmesine tabi tutuldu. SICK Muting özellikli optik emniyet bariyerleri, Pilz PNOZ emniyet rölesi ve çift kanal STO kontaktör kombinasyonu ile Ple mimarisi kuruldu. SISTEMA raporu hazırlanarak teslim edildi.",
+    "interior_details": {
+      "panel_structure": "Emniyet panosu RAL 1021 Sarı boyalı kapak, çift kilitli kilit mekanizması, kapı emniyet anahtarı.",
+      "wiring_system": "Sarı renkli IEC 60204-1 emniyet kablajı, zorunlu kılavuzlu (forcibly guided) kontaklara sahip kontaktör geri besleme (EDM) köprüleri.",
+      "control_architecture": "Pilz PNOZmulti emniyet kontrolörü, SICK deTec4 Type 4 bariyerler ve çift kanal acil stop buton devresi.",
+      "testing_verification": "SISTEMA yazılımı ile PLr doğrulaması yapıldı, MTTFd > 100 yıl (Yüksek) ve DCavg > %99 hesaplandı."
+    },
     "hardware_used": ["SICK deTec4 Core Işık Bariyerleri", "Pilz PNOZ multi Emniyet Rölesi", "Euchner RFID Emniyet Kapı Sviçleri", "Schneider TeSys Emniyet Kontaktörleri"],
     "cta_text": "Makinanızın Emniyet Devresi ve CE Uyumluluğu İçin Bize Ulaşın"
   }
