@@ -12,32 +12,18 @@ cta_headline: "Tesisiniz İçin MCC Motor Kontrol Panosu İhtiyacı mı Var?"
 cta_text: "Motor güç listenizi ve kalkış gereksinimlerinizi gönderin; tip testli ve iklimlendirmeli MCC pano teklifimizi 24 saatte sunalım."
 ---
 
-## Endüstriyel Saha Standartları ve Mühendislik Yaklaşımı
 
-Bu teknik rehber, **GKM Elektrik & Mühendislik** saha tecrübeleri, Türk sanayisindeki fiili fabrika uygulamaları ve uluslararası mühendislik standartları (IEC 61439, ISO 13849, IPC-A-610) doğrultusunda hazırlanmıştır.
+## Endüstriyel Mühendislik ve Uygulama Kriterleri
 
-Sanayi tesislerinde yaşanan plansız üretim duruşları, yüksek reaktif enerji faturaları ve makine yazılım kararsızlıkları doğru mühendislik analizi ve kaliteli şalt/otomasyon komponentleri ile tamamen önlenebilir.
+Fabrika ve makine sahalarında uygulanan elektrik ve otomasyon projelerinde standartlara tam uyum, işletme güvenliği ve kesintisiz çalışma esastır. 
 
----
-
-### Temel Tasarım ve Uygulama Kriterleri:
-
-1. **Uluslararası Standartlara Tam Uyum:**
-   Panolarda IEC 61439 tip testli hücre yapısı, klemenslerde yay baskılı titreşime dayanıklı bağlantılar, yazılımda ise IEC 61131-3 SCL programlama disiplini.
-
-2. **Termal ve Elektromanyetik Uyumluluk (EMC/EMI):**
-   Servo sürücü ve motor kablolarında 360 derece zırh topraklaması, kontrol sinyalleri ile güç kabloları arasında minimum 20 cm ayırma mesafesi ve pano içi zorlamalı fanlı/klimalı havalandırma.
-
-3. **Gözlemlenebilirlik ve Hızlı Arıza Teşhisi:**
-   SCADA ve operatör panellerinde (HMI) operatörü doğrudan arızalı sensör ve sigortaya yönlendiren Türkçe alarm ağacı ve olay günlüğü (event logger).
+**GKM Elektrik & Mühendislik**, Sakarya, Kocaeli ve Marmara Bölgesi başta olmak üzere Türkiye genelinde endüstriyel tesisler, makine imalatçıları ve teknoloji firmaları için anahtar teslim projeler üretmektedir.
 
 ---
 
-### GKM Elektrik İle Projelendirme Süreci:
+## Temel Mühendislik Standartlarımız
 
-- **1. Saha ve Keşif Analizi:** Tesisinizde veya makinenizde motor güçleri, I/O listesi ve haberleşme gereksinimleri yerinde tespit edilir.
-- **2. EPLAN Projelendirme & Şematik Çizim:** Tüm pano ve kablaj şemaları uluslararası normlarda çizilerek onayınıza sunulur.
-- **3. Atölye İmalatı & Fabrika Kabul Testi (FAT):** Tip testli karkaslarda montajı tamamlanan panolar gerilim ve fonksiyon testlerinden geçirilir.
-- **4. Saha Devreye Alma (SAT) & 7/24 Teknik Destek:** Uzman otomasyon ekibimiz hattı sahada devreye alır ve operatör eğitimlerini tamamlar.
+1. **Elektriksel Güvenlik ve Tip Testi (IEC 61439-1/2):** Panolarımızda kısa devre dayanımı, sıcaklık artış hesapları ve dielektrik izolasyon testleri eksiksiz uygulanır.
+2. **Endüstriyel Yazılım Güvenilirliği (IEC 61131-3):** PLC ve SCADA yazılımlarımız temiz kod mimarisi, hata yakalama rutinleri ve kapsamlı alarm hiyerarşisi ile teslim edilir.
+3. **Dokümantasyon ve EPLAN:** Her projenin EPLAN P8 elektrik projeleri, klemens planları ve malzeme listeleri müşteriye eksiksiz devredilir.
 
-> **Mühendislik Tavsiyesi:** Projelerinizde revizyon maliyetlerini düşürmek için mutlaka gerber, EPLAN veya tek hat şemanızı önceden mühendislerimize inceletiniz.

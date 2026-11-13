@@ -105,9 +105,18 @@ MARQUEE_PROJECTS = [
     }
 ]
 
-BRANDS = [
-    "Siemens", "Schneider Electric", "ABB", "Eaton",
-    "Phoenix Contact", "Weidmüller", "Omron", "Delta Electronics", "Beckhoff Automation"
+BRAND_LOGOS = [
+    {"name": "Siemens", "file": "siemens.svg"},
+    {"name": "Schneider Electric", "file": "schneider.svg"},
+    {"name": "ABB", "file": "abb.svg"},
+    {"name": "Eaton", "file": "eaton.svg"},
+    {"name": "Phoenix Contact", "file": "phoenix_contact.svg"},
+    {"name": "Weidmüller", "file": "weidmuller.svg"},
+    {"name": "Omron", "file": "omron.svg"},
+    {"name": "Beckhoff Automation", "file": "beckhoff.svg"},
+    {"name": "Delta Electronics", "file": "delta.svg"},
+    {"name": "Festo", "file": "festo.svg"},
+    {"name": "SICK Sensor Intelligence", "file": "sick.svg"}
 ]
 
 
@@ -370,12 +379,12 @@ def build_homepage(articles):
     header = get_base_header(active_nav="")
     footer = get_base_footer()
 
-    # Brand badges HTML
+    # Brand logo cards HTML with real vector SVG logos
     brands_html = "".join([
-        f'<div class="flex items-center gap-2 bg-white border border-slate-200 px-5 py-2.5 rounded-xl shadow-sm font-bold text-xs text-slate-800 whitespace-nowrap">'
-        f'<span class="w-2 h-2 rounded-full bg-sky-500"></span>{b}'
+        f'<div class="flex items-center justify-center bg-white border border-slate-200 hover:border-sky-500 hover:shadow-md px-6 py-3 rounded-2xl shadow-sm transition duration-300 min-w-[150px] sm:min-w-[170px] h-16 group">'
+        f'<img src="{SITE_URL}/assets/brands/{b["file"]}" alt="{b["name"]} Logo" class="h-7 max-h-7 max-w-[110px] sm:max-w-[130px] w-auto object-contain transition duration-300 group-hover:scale-105" loading="lazy">'
         f'</div>'
-        for b in BRANDS * 2
+        for b in BRAND_LOGOS * 2
     ])
 
     # Real project marquee cards HTML
@@ -1345,12 +1354,19 @@ def compile_site():
         f.write(build_robots_txt())
     print(" -> robots.txt olusturuldu.")
 
-    # 8. Copy Assets into dist/assets
+    # 8. Copy Assets into dist/assets (including subdirectories like brands/)
     dist_assets = os.path.join(DIST_DIR, "assets")
     os.makedirs(dist_assets, exist_ok=True)
     if os.path.exists(ASSETS_DIR):
-        for f in os.listdir(ASSETS_DIR):
-            shutil.copy2(os.path.join(ASSETS_DIR, f), os.path.join(dist_assets, f))
+        for item in os.listdir(ASSETS_DIR):
+            src_item = os.path.join(ASSETS_DIR, item)
+            dst_item = os.path.join(dist_assets, item)
+            if os.path.isdir(src_item):
+                if os.path.exists(dst_item):
+                    shutil.rmtree(dst_item)
+                shutil.copytree(src_item, dst_item)
+            else:
+                shutil.copy2(src_item, dst_item)
     print(" -> assets kopyalandi.")
 
     # 9. Mirror to /docs for GitHub Pages
