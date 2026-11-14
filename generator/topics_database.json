@@ -180,5 +180,18 @@
     "diagram_type": "scada_flow",
     "cta_headline": "Soğuk Deponuzda Ürün Bozulma Riskine Son Verin",
     "cta_text": "Gökmen Elektrik OTS (Otomatik Takip Sistemi) ile tesisinizi 7/24 telefonunuzdan izleyin; sıcaklık yükseldiğinde WhatsApp alarmı anında cebinize gelsin. Tesisiniz için ücretsiz keşif isteyin."
+  },
+  {
+    "slug": "plastik-enjeksiyon-makinesi-plc-ve-hidrolik-servo-revizyonu",
+    "category": "makine-otomasyonu",
+    "category_title": "Makine Otomasyonu",
+    "title": "Plastik Enjeksiyon Makinelerinde PLC ve Hidrolik Servo Pompa Revizyonu ile %40 Enerji Tasarrufu",
+    "summary": "Eski oransal valfli hidrolik makinelerin servo motor ve sürücü tahrikli kapalı çevrim basınç-debi kontrolüne dönüştürülmesi ve PLC ekran modernizasyonu.",
+    "target_audience": "Plastik İmalatçıları & Makine Revizyon Şefleri",
+    "reading_time": "9 dk okuma",
+    "diagram_type": "servo_sync",
+    "cta_headline": "Enjeksiyon Makinelerinizin Elektrik Tüketimini Düşürün",
+    "cta_text": "GKM Elektrik anahtar teslim hidrolik servo dönüşüm ve PLC revizyonu ile enerji faturanızı %40 azaltır. Teklif alın.",
+    "date": "2026-11-15"
   }
 ]

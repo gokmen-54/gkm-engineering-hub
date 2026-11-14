@@ -4,7 +4,7 @@ summary: "Eski oransal valfli hidrolik makinelerin servo motor ve sürücü tahr
 category: "makine-otomasyonu"
 category_title: "Makine Otomasyonu"
 slug: "plastik-enjeksiyon-makinesi-plc-ve-hidrolik-servo-revizyonu"
-date: "2026-11-14"
+date: "2026-11-15"
 reading_time: "9 dk okuma"
 target_audience: "Plastik İmalatçıları & Makine Revizyon Şefleri"
 diagram_type: "servo_sync"
