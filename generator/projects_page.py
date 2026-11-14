@@ -206,6 +206,24 @@ def generate_projects_page(site_url, main_website, whatsapp_phone, phone_display
         const waText = encodeURIComponent(`Merhaba GKM Elektrik, '${{p.title}}' projenizin pano içi teknik şeması ve malzeme listesini incelemek istiyorum.`);
         const waLink = `https://wa.me/{whatsapp_phone}?text=${{waText}}`;
 
+        let extraHtml = '';
+        if (p.extra_images && p.extra_images.length > 0) {{
+            const thumbs = p.extra_images.map(img => {{
+                const fullImg = img.startsWith('http') ? img : '{site_url}/' + img;
+                return `<div class="h-20 sm:h-24 w-28 sm:w-36 rounded-xl overflow-hidden bg-slate-900 cursor-pointer border border-slate-300 hover:border-sky-500 shadow-sm relative group" onclick="openLightbox('${{fullImg}}', '${{p.title}}')">
+                    <img src="${{fullImg}}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <span class="absolute bottom-1 right-1 bg-black/80 text-[10px] text-white px-1.5 py-0.5 rounded font-bold">🔍 Büyüt</span>
+                </div>`;
+            }}).join('');
+            extraHtml = `
+            <div class="mb-6">
+                <span class="text-xs font-black uppercase text-slate-500 tracking-wider block mb-2">📸 Saha, HMI Ekran & Donanım Fotoğrafları (Büyütmek İçin Tıklayın):</span>
+                <div class="flex flex-wrap gap-2.5">
+                    ${{thumbs}}
+                </div>
+            </div>`;
+        }}
+
         document.getElementById('project-modal-content').innerHTML = `
             <div class="flex items-center gap-2 mb-2">
                 <span class="bg-sky-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase">${{p.category_title}}</span>
@@ -213,10 +231,12 @@ def generate_projects_page(site_url, main_website, whatsapp_phone, phone_display
             </div>
             <h2 class="text-xl sm:text-2xl font-black text-slate-950 mb-4">${{p.title}}</h2>
 
-            <div class="h-60 rounded-2xl overflow-hidden mb-6 bg-slate-900 cursor-pointer relative group" onclick="openLightbox('${{p.image.startsWith('http') ? p.image : site_url + '/' + p.image}}', '${{p.title}}')">
-                <img src="${{p.image.startsWith('http') ? p.image : site_url + '/' + p.image}}" alt="${{p.title}}" class="w-full h-full object-cover">
+            <div class="h-64 rounded-2xl overflow-hidden mb-4 bg-slate-900 cursor-pointer relative group" onclick="openLightbox('${{p.image.startsWith('http') ? p.image : site_url + '/' + p.image}}', '${{p.title}}')">
+                <img src="${{p.image.startsWith('http') ? p.image : site_url + '/' + p.image}}" alt="${{p.title}}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                 <span class="absolute bottom-3 right-3 bg-slate-950/80 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-sm">🔍 Fotoğrafı Tam Ekran Büyüt</span>
             </div>
+
+            ${{extraHtml}}
 
             <div class="space-y-4 mb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
                 <div class="p-4 bg-sky-50 rounded-2xl border border-sky-200">

@@ -154,5 +154,31 @@
     "cta_headline": "Tesisiniz İçin MCC Motor Kontrol Panosu İhtiyacı mı Var?",
     "cta_text": "Motor güç listenizi ve kalkış gereksinimlerinizi gönderin; tip testli ve iklimlendirmeli MCC pano teklifimizi 24 saatte sunalım.",
     "date": "2026-11-14"
+  },
+  {
+    "slug": "kumas-kontrol-ve-otomatik-boy-kesme-makinesi-plc-otomasyonu",
+    "category": "makine-otomasyonu",
+    "category_title": "Makine Otomasyonu",
+    "title": "Kumaş Kontrol, Metraj Sarım & Barkodlu Tartım Makinesi PLC Otomasyonu: İkizler Tekstil Vaka Analizi",
+    "summary": "Tekstil ve dokuma sanayisinde kumaş kalite kontrol, optik enkoderli metraj ölçümü, HANA dijital terazi (RS232) ve Argox barkod yazıcı ile otomatik kupon basımı mühendislik çözümü.",
+    "target_audience": "Tekstil Fabrika Müdürleri & Özel Makine İmalatçıları",
+    "reading_time": "8 dk okuma",
+    "date": "2026-11-14",
+    "diagram_type": "servo_sync",
+    "cta_headline": "Kumaş Kontrol veya Boy Kesme Makineniz İçin Otomasyon mu Gerekiyor?",
+    "cta_text": "Terazi, barkod yazıcı ve hassas metraj enkoderini tek bir PLC panelinde birleştiriyoruz. İkizler Tekstil referans projemizi inceleyin; makineniz için WhatsApp'tan hemen keşif isteyin."
+  },
+  {
+    "slug": "soguk-hava-deposu-scada-ve-uzaktan-sicaklik-takip-sistemi-ots",
+    "category": "plc-scada-yazilim",
+    "category_title": "PLC & SCADA Yazılım",
+    "title": "OTS Soğuk Hava Deposu Otomasyonu: Çoklu Oda Sıcaklık/Nem SCADA & WhatsApp Alarm Takip Sistemi",
+    "summary": "Gıda muhafaza, donuk depo ve yaş meyve/sebze tesislerinde HACCP uyumlu 8+ oda sıcaklık, nem, O2/CO2 gaz izleme, dış ortam IP65 HMI ve 4G LTE WhatsApp acil durum bildirim mimarisi.",
+    "target_audience": "Gıda Fabrika Müdürleri, Soğuk Depo İşletmecileri & Bakım Şefleri",
+    "reading_time": "7 dk okuma",
+    "date": "2026-11-14",
+    "diagram_type": "scada_flow",
+    "cta_headline": "Soğuk Deponuzda Ürün Bozulma Riskine Son Verin",
+    "cta_text": "Gökmen Elektrik OTS (Otomatik Takip Sistemi) ile tesisinizi 7/24 telefonunuzdan izleyin; sıcaklık yükseldiğinde WhatsApp alarmı anında cebinize gelsin. Tesisiniz için ücretsiz keşif isteyin."
   }
 ]

@@ -1,5 +1,136 @@
 [
   {
+    "id": "case-ots-soguk-hava",
+    "title": "OTS Otomatik Takip Sistemi: Endüstriyel Soğuk Hava Deposu & Çoklu Oda SCADA Otomasyonu",
+    "category": "plc-scada-yazilim",
+    "category_title": "PLC & SCADA Yazılım",
+    "location": "Sakarya / Akyazı Gıda Sanayi Bölgesi",
+    "client_industry": "Gıda Lojistiği & Yaş Meyve/Sebze Muhafaza (Özşekerci Gıda)",
+    "date": "2026-11-14",
+    "image": "assets/ots_soguk_hava_deposu_otomasyonu.webp",
+    "extra_images": [
+      "assets/ozsekerci_gida_scada_soguk_hava.webp"
+    ],
+    "metrics": [
+      {
+        "label": "İzlenen Oda Sayısı",
+        "val": "8+ Bağımsız Soğuk Oda"
+      },
+      {
+        "label": "Sıcaklık / Nem Hassasiyeti",
+        "val": "±0.1°C / %1 rH"
+      },
+      {
+        "label": "Alarm Bildirim Hızı",
+        "val": "< 5 Saniye (SMS & WhatsApp)"
+      }
+    ],
+    "problem": "Özşekerci Gıda soğuk hava tesisinde 8 farklı depoda hassas sıcaklık, nem ve atmosfer (O2/CO2) kontrolü gerekiyordu. Manuel kayıtlar güvenilmezdi, gece kompresör veya fan arızalarında ürün bozulma riski vardı ve HACCP denetimleri için geriye dönük rapor tutulamıyordu.",
+    "solution": "Gökmen Elektrik tarafından geliştirilen OTS (Otomatik Takip Sistemi) sahaya kuruldu. Dış ortam şartlarına dayanıklı IP65 dokunmatik operatör paneli ve merkezi PC SCADA yazılımı entegre edildi. Her oda için bağımsız sıcaklık, nem ve kapı açık sensörleri bağlandı. Eşik aşıldığında sistem otomatik olarak nöbetçi mühendise SMS ve WhatsApp alarmı gönderiyor; tüm veriler 5 dakikada bir buluta arşivleniyor.",
+    "interior_details": {
+      "panel_structure": "Dış ortam paslanmaz çelik IP65 karkas, dokunmatik renkli HMI operatör terminali, dahili termostatik ısıtıcı ve fan grubu.",
+      "wiring_system": "Galvanik izoleli analog PT100 ve 4-20mA sinyal hatları, Weidmüller Push-in klemens grubu ve ekranlı parazit önleyici LIYCY kablolar.",
+      "control_architecture": "Merkezi endüstriyel kontrolör, RS485 Modbus RTU sensör ağı ve Ethernet TCP/IP üzerinden çoklu istemci (PC, Tablet, Telefon) erişimi.",
+      "testing_verification": "Fluke kalibratörü ile 8 odanın sensör doğrulama testleri yapıldı; elektrik kesintisi ve kompresör arıza acil bildirim senaryoları %100 başarıyla doğrulandı."
+    },
+    "hardware_used": [
+      "GKM OTS Merkezi SCADA Yazılımı",
+      "Dış Ortam IP65 Endüstriyel HMI Panel",
+      "PT100 4 Telli Hassas Sıcaklık Sensörleri",
+      "Endüstriyel Nem & O2/CO2 Gaz Transmitterleri",
+      "GKM 4G LTE IoT Gateway & WhatsApp Alarm Modülü"
+    ],
+    "cta_text": "Soğuk Deponuz veya Tesisiniz İçin OTS Otomasyon Teklifi Alın"
+  },
+  {
+    "id": "case-kumas-sarim-terazi-barkod",
+    "title": "Tekstil Kumaş Muayene, Sarım, Metraj & HANA Terazi - Argox Barkodlu Tartım Otomasyonu",
+    "category": "makine-otomasyonu",
+    "category_title": "Makine Otomasyonu",
+    "location": "Bursa / Demirtaş OSB (DOSAB) & Sakarya",
+    "client_industry": "Tekstil, Dokuma & Kumaş İmalatı (İkizler Tekstil)",
+    "date": "2026-11-13",
+    "image": "assets/ikizler_tekstil_kumas_kontrol_barkod.webp",
+    "extra_images": [
+      "assets/kumas_sarim_metraj_makinesi_saha.webp",
+      "assets/terazi_barkod_yazici_plc_entegrasyon.webp"
+    ],
+    "metrics": [
+      {
+        "label": "Metraj Hassasiyeti",
+        "val": "±1 mm (Optik Enkoder)"
+      },
+      {
+        "label": "Tartım & Barkod Entegrasyonu",
+        "val": "1 Saniyede Otomatik Kupon"
+      },
+      {
+        "label": "Operatör Hatası",
+        "val": "Sıfır Hata (HANA Terazi RS232)"
+      }
+    ],
+    "problem": "İkizler Tekstil kumaş muayene ve sarım hattında operatörler rulo metrelerini ve ağırlıklarını deftere elle yazıyor, ardından ayrı bir bilgisayardan elle etiket basıyordu. Bu durum parti numarası (Parti No: 6035), renk kodu (Somon), top sayısı ve gramaj (180 gr/m²) bilgilerinde hatalara ve sevkiyat karışıklıklarına yol açıyordu.",
+    "solution": "Hatta PLC, operatör HMI paneli, HANA Dijital Terazi (HS-80) ve Argox termal barkod yazıcı doğrudan entegre edildi. Kumaş sarılırken optik enkoder hassas metrajı ölçüyor; rulo bittiğinde terazi ağırlığı (18.800 kg) RS232 üzerinden PLC'ye anında aktarılıyor. Sistem tek tuşla kumaşın gramajını (gr/m²) otomatik hesaplayarak EAN-13 barkodlu 'Kupon No / Parti No / Metre / Kilo' etiketini Argox yazıcıdan milisaniyeler içinde basıyor.",
+    "interior_details": {
+      "panel_structure": "Makine gövdesine entegre titreşimsiz IP54 kontrol panosu, operatör yüksekliğinde ayarlanabilir mafsallı HMI konsolu.",
+      "wiring_system": "Enkoder diferansiyel sinyal hatlarında blendajlı kablo, RS232 terazi ve yazıcı haberleşme hatlarında optik izolasyon.",
+      "control_architecture": "Hızlı enkoder sayıcı (HSC) modüllü PLC, invertörlü AC motor gergi/hız kontrolü ve ASCII string tabanlı yazıcı sürücü algoritması.",
+      "testing_verification": "116.27 metrelik Vualbant kumaş sarım testinde mekanik cetvel ve lazer mesafe ölçer ile %99.98 doğruluk onaylandı."
+    },
+    "hardware_used": [
+      "Endüstriyel PLC & Renkli Dokunmatik HMI",
+      "HANA Digital Scale HS-80 Dijital Terazi (RS232)",
+      "Argox Endüstriyel Termal Barkod Yazıcı",
+      "Yüksek Çözünürlüklü Optik Döner Enkoder",
+      "Schneider / Delta Frekans İnvertörü"
+    ],
+    "cta_text": "Kumaş Kontrol, Sarım & Barkodlu Terazi Otomasyonu İçin Ulaşın"
+  },
+  {
+    "id": "case-otomatik-boy-kesim-giyotin",
+    "title": "GKM PLC & Servo Kontrollü Otomatik Boy Kesim ve Dilimleme Makinesi Otomasyonu",
+    "category": "makine-otomasyonu",
+    "category_title": "Makine Otomasyonu",
+    "location": "Kocaeli / Gebze & Sakarya İmalat Tesisleri",
+    "client_industry": "Ambalaj, Sac Dilme, Profil & Ekstrüzyon Hatları",
+    "date": "2026-11-12",
+    "image": "assets/gkm_otomatik_boy_kesim_hmi.webp",
+    "extra_images": [
+      "assets/gkm_kesim_bicak_motor_hmi.webp",
+      "assets/gkm_enkoder_kalibrasyon_hmi.webp"
+    ],
+    "metrics": [
+      {
+        "label": "Kesim Toleransı",
+        "val": "±0.2 mm Hassasiyet"
+      },
+      {
+        "label": "Üretim Hızı",
+        "val": "Dakikada 45 Kesim"
+      },
+      {
+        "label": "Reçete Geçiş Süresi",
+        "val": "Tek Dokunuş (HMI Ekran)"
+      }
+    ],
+    "problem": "Giyotin kesme ve boylama makinelerinde mekanik dayama ile boy ayarı yapılması zaman kaybına neden oluyor ve farklı boylardaki siparişlerde yüksek fire oranları yaşanıyordu.",
+    "solution": "Gökmen Elektrik özel HMI arayüzü ve PLC yazılımı ile hat tamamen otomatikleştirildi. Operatör HMI ekranından Kesim Boyu (mm) ve Hedef Adet giriyor; enkoder puls/mm kalibrasyonu ile malzeme milimetrik sürülüyor. Sol/sağ limit siviçleri ve bıçak motoru güvenli interlock mantığı ile senkronize edilerek hedef adede ulaşıldığında otomatik duruş sağlanıyor.",
+    "interior_details": {
+      "panel_structure": "GKM standartlarında modüler çelik pano, HMI montajlı kapak, Acil Stop ve ergonomik buton grubu.",
+      "wiring_system": "Siemens & Schneider şalt malzemeleri, bağımsız 24V DC besleme, bıçak motoru için termik ve kontaktör koruması.",
+      "control_architecture": "Hızlı enkoder girişli PLC mimarisi, sol/sağ limit siviç çift kanal interlock koruması ve jog manuel kesim menüsü.",
+      "testing_verification": "500 mm hedef boy kesiminde 500 parça ardışık kesildi, mikrometre ölçümlerinde sapma <0.15 mm olarak tescillendi."
+    },
+    "hardware_used": [
+      "Gökmen Elektrik Özel Tasarım Dokunmatik HMI",
+      "GMT / Delta Hızlı Girişli PLC",
+      "Optik Artımlı Enkoder (1 Puls/mm Kalibrasyon)",
+      "Giyotin Bıçak Motoru & Sürücü Grubu",
+      "Endüstriyel Güvenlik Siviçleri & Acil Stop Devresi"
+    ],
+    "cta_text": "Makinanız İçin Otomatik Boy Kesim & Yazılım Teklifi Alın"
+  },
+  {
     "id": "case-1",
     "title": "12 İstasyonlu Döner Tabla İlaç Şişeleme Makinesi PLC & Servo Senkronizasyonu",
     "category": "makine-otomasyonu",
@@ -9,9 +140,18 @@
     "date": "2026-10-24",
     "image": "assets/gkm_7_robotik_hat.webp",
     "metrics": [
-      {"label": "Kapasite Artışı", "val": "%65 (18 bpm -> 42 bpm)"},
-      {"label": "Dozajlama Hassasiyeti", "val": "±0.05 ml (Servo Pompa)"},
-      {"label": "Downtime / Duruş", "val": "%0 Mekanik Kam Arızası"}
+      {
+        "label": "Kapasite Artışı",
+        "val": "%65 (18 bpm -> 42 bpm)"
+      },
+      {
+        "label": "Dozajlama Hassasiyeti",
+        "val": "±0.05 ml (Servo Pompa)"
+      },
+      {
+        "label": "Downtime / Duruş",
+        "val": "%0 Mekanik Kam Arızası"
+      }
     ],
     "problem": "Mevcut mekanik kam tahrikli şişeleme makinesinde format değişimleri 4 saat sürüyordu. Mekanik kam aşınmaları nedeniyle dolum nozüllerinde damlama ve çene kesiminde fire oranı %4.5 seviyelerindeydi.",
     "solution": "Mekanik kam mili tamamen iptal edildi. 1 adet Siemens S7-1515T Teknoloji CPU, 4 eksen Siemens S210 servo motor ve 12 istasyonlu globoid kam tahrikli döner tabla elektronik kam (electronic camming) ile senkronize edildi. Reçete yönetimi HMI üzerinden tek tuşla 2 dakikada format geçişi sağlayacak şekilde programlandı.",
@@ -21,7 +161,13 @@
       "control_architecture": "Profinet IRT üzerinden 1 ms senkron çevrim, SICK emniyet ışık bariyerleri ile entegre STO ve SLS fonksiyonları.",
       "testing_verification": "FAT fabrika kabul testinde 48 saat kesintisiz kuru çevrim testi ve lazer vibrometre ile titreşim analiz testleri başarıyla tamamlandı."
     },
-    "hardware_used": ["Siemens S7-1515T PLC", "Siemens S210 & 1FK2 Servolar", "KTP1200 Unified Comfort HMI", "SICK Emniyet Işık Bariyerleri", "GKM İklimlendirmeli Paslanmaz Pano"],
+    "hardware_used": [
+      "Siemens S7-1515T PLC",
+      "Siemens S210 & 1FK2 Servolar",
+      "KTP1200 Unified Comfort HMI",
+      "SICK Emniyet Işık Bariyerleri",
+      "GKM İklimlendirmeli Paslanmaz Pano"
+    ],
     "cta_text": "Benzer Döner Tabla veya Dolum Makinesi Otomasyonu İçin Teklif Alın"
   },
   {
@@ -34,9 +180,18 @@
     "date": "2026-10-18",
     "image": "assets/gkm_8_kompanzasyon.webp",
     "metrics": [
-      {"label": "Reaktif Ceza", "val": "0 TL (%34'ten %2.8'e düştü)"},
-      {"label": "Tepki Süresi", "val": "< 20 ms (1 Periyot Tristör)"},
-      {"label": "Kondansatör Ömrü", "val": "5x Artış (%7 Reaktörlü)"}
+      {
+        "label": "Reaktif Ceza",
+        "val": "0 TL (%34'ten %2.8'e düştü)"
+      },
+      {
+        "label": "Tepki Süresi",
+        "val": "< 20 ms (1 Periyot Tristör)"
+      },
+      {
+        "label": "Kondansatör Ömrü",
+        "val": "5x Artış (%7 Reaktörlü)"
+      }
     ],
     "problem": "Punta kaynak makineleri ve preslerin 200 ms gibi ani darbeli yük çekmesi nedeniyle mekanik kontaktörlü klasik kompanzasyon panosu yetişemiyor, fabrika her ay ortalama 145.000 TL endüktif reaktif ceza ödüyordu.",
     "solution": "GKM Elektrik saha ekibi enerji analizörü ile 72 saatlik harmonik ve dalga formu kaydı aldı. 189 Hz (p=%7) demir nüveli harmonik filtre reaktörleri ve sıfır geçişli (Zero-Cross) tristör modülleri ile 12 kademeli, toplam 800 kVAR gücünde dinamik kompanzasyon panosu imal edildi.",
@@ -46,7 +201,13 @@
       "control_architecture": "Tristör tetikleme kartları şebeke geriliminin sıfır geçiş anında (Zero Cross) anahtarlama yaparak demeraj akımını tamamen sıfırlar.",
       "testing_verification": "Fluke 435 güç analizörü ile saha devreye alma testinde THD-V %3.1 seviyesinde tutuldu, ceza oranı %2.8'e sabitlendi."
     },
-    "hardware_used": ["GKM Tip Testli Modüler Pano Karkası", "Epcos / TDK Ağır Hizmet Kondansatörler", "%7 De-Tuned Harmonik Reaktörler", "Tristörlü Sıfır Geçiş Modülleri", "Janitza UMG Enerji Analizörü"],
+    "hardware_used": [
+      "GKM Tip Testli Modüler Pano Karkası",
+      "Epcos / TDK Ağır Hizmet Kondansatörler",
+      "%7 De-Tuned Harmonik Reaktörler",
+      "Tristörlü Sıfır Geçiş Modülleri",
+      "Janitza UMG Enerji Analizörü"
+    ],
     "cta_text": "Fabrikanızdaki Reaktif Cezayı Sıfırlamak İçin Şema & Fatura İletin"
   },
   {
@@ -59,9 +220,18 @@
     "date": "2026-10-05",
     "image": "assets/gkm_1_fabrika_otomasyon.webp",
     "metrics": [
-      {"label": "Elektrik Tasarrufu", "val": "%24.6 (Eş Yaşlanma & VFD)"},
-      {"label": "HACCP Uyumluluğu", "val": "%100 Otomatik Bulut Rapor"},
-      {"label": "Acil Müdahale", "val": "Anlık SMS / WhatsApp Alarmı"}
+      {
+        "label": "Elektrik Tasarrufu",
+        "val": "%24.6 (Eş Yaşlanma & VFD)"
+      },
+      {
+        "label": "HACCP Uyumluluğu",
+        "val": "%100 Otomatik Bulut Rapor"
+      },
+      {
+        "label": "Acil Müdahale",
+        "val": "Anlık SMS / WhatsApp Alarmı"
+      }
     ],
     "problem": "8 farklı soğuk odanın sıcaklık kontrolleri bağımsız termostatlarla yapılıyordu. Kompresörler dengesiz yıpranıyor, yüksek elektrik demerajı oluşuyor ve sıcaklık yükselmesi fark edilmediğinde ürün bozulma riski doğuyordu.",
     "solution": "Tüm soğutma grubu Schneider Modicon M241 PLC ve Web Tabanlı SCADA ile merkezi otomasyona bağlandı. Kompresörler için çalışma saati bazlı otomatik eş yaşlanma ve yük kaskad algoritması yazıldı. Sıcaklıklar 5 dakikada bir buluta yedeklenerek HACCP denetim raporu otomatikleştirildi.",
@@ -71,7 +241,13 @@
       "control_architecture": "Modbus TCP haberleşmeli Schneider ATV630 değişken frekanslı sürücüler ve 4G LTE endüstriyel gateway ile 7/24 bulut izleme.",
       "testing_verification": "8 odada 0.1°C hassasiyet kalibrasyonu yapıldı, kompresör arıza simülasyonlarında kaskad devreye girme süresi <1.5 sn olarak doğrulandı."
     },
-    "hardware_used": ["Schneider M241 PLC", "Schneider Altivar ATV630 Sürücüler", "PT100 4 telli Hassas Sıcaklık Sensörleri", "GKM IoT 4G Gateway", "SCADA Web Arayüzü"],
+    "hardware_used": [
+      "Schneider M241 PLC",
+      "Schneider Altivar ATV630 Sürücüler",
+      "PT100 4 telli Hassas Sıcaklık Sensörleri",
+      "GKM IoT 4G Gateway",
+      "SCADA Web Arayüzü"
+    ],
     "cta_text": "Soğuk Depo & Tesis Otomasyonu İçin Danışmanlık Alın"
   },
   {
@@ -84,9 +260,18 @@
     "date": "2026-09-28",
     "image": "assets/gkm_3_otomasyon.webp",
     "metrics": [
-      {"label": "EMC Test Başarısı", "val": "IEC 61000-4-4 Seviye 4 Geçti"},
-      {"label": "Çalışma Sıcaklığı", "val": "-40°C ila +105°C Endüstriyel"},
-      {"label": "Seri İmalat Birim Maliyet", "val": "İthal Eşdeğerine Göre %52 Daha Ekonomik"}
+      {
+        "label": "EMC Test Başarısı",
+        "val": "IEC 61000-4-4 Seviye 4 Geçti"
+      },
+      {
+        "label": "Çalışma Sıcaklığı",
+        "val": "-40°C ila +105°C Endüstriyel"
+      },
+      {
+        "label": "Seri İmalat Birim Maliyet",
+        "val": "İthal Eşdeğerine Göre %52 Daha Ekonomik"
+      }
     ],
     "problem": "Ağır iş makinelerinde çalışan ithal sensör kartları döviz kuru nedeniyle fahiş maliyetlere ulaşmış ve yüksek titreşim / kaynak arklarında parazit kaparak reset atıyordu.",
     "solution": "GKM Ar-Ge ekibi STM32G0 serisi mikrodenetleyici tabanlı, 4 katmanlı (SIG-GND-PWR-SIG) özel kontrol kartı tasarladı. Besleme hattı TVS ve common mode filtrelerle korundu, RS485 ve CAN hatları galvanik olarak izole edildi. FreeRTOS tabanlı firmware yazılarak 1000 adetlik ilk parti montajı teslim edildi.",
@@ -96,7 +281,13 @@
       "control_architecture": "Analog Devices galvanik izoleli CAN alıcı-verici (ADM3053) ve 2.5 kV izolasyonlu DC-DC konvertör mimarisi.",
       "testing_verification": "8 kV ESD darbe testi (IEC 61000-4-2) ve 20G titreşim testi altında veri kaybı olmadan kesintisiz çalışma onaylandı."
     },
-    "hardware_used": ["Altium Designer Tasarımı", "STM32G071 ARM Cortex-M0+", "Analog Devices ADM2483 Galvanik İzolatör", "Würth Elektronik Koruma Komponentleri", "GKM CNC Alüminyum Kutu"],
+    "hardware_used": [
+      "Altium Designer Tasarımı",
+      "STM32G071 ARM Cortex-M0+",
+      "Analog Devices ADM2483 Galvanik İzolatör",
+      "Würth Elektronik Koruma Komponentleri",
+      "GKM CNC Alüminyum Kutu"
+    ],
     "cta_text": "Özel Elektronik Kart ve Donanım Tasarımı İçin Gerber Gönderin"
   },
   {
@@ -109,9 +300,18 @@
     "date": "2026-09-12",
     "image": "assets/gkm_6_fabrika_da__t_m_panosu.webp",
     "metrics": [
-      {"label": "Güvenlik Standardı", "val": "ISO 13849-1 Performance Level e (Ple)"},
-      {"label": "TÜV Onayı", "val": "%100 Denetim Uyumluluğu"},
-      {"label": "İş Kazası Riski", "val": "Sıfır Hata Çift Kanal Emniyet"}
+      {
+        "label": "Güvenlik Standardı",
+        "val": "ISO 13849-1 Performance Level e (Ple)"
+      },
+      {
+        "label": "TÜV Onayı",
+        "val": "%100 Denetim Uyumluluğu"
+      },
+      {
+        "label": "İş Kazası Riski",
+        "val": "Sıfır Hata Çift Kanal Emniyet"
+      }
     ],
     "problem": "Mevcut paletleme ve streç sarma hattında mekanik sviçler tek kanaldı ve uluslararası iş güvenliği denetiminde hattın kapatılması uyarısı verilmişti.",
     "solution": "Hat baştan sona ISO 13849-1 standardına göre risk değerlendirmesine tabi tutuldu. SICK Muting özellikli optik emniyet bariyerleri, Pilz PNOZ emniyet rölesi ve çift kanal STO kontaktör kombinasyonu ile Ple mimarisi kuruldu. SISTEMA raporu hazırlanarak teslim edildi.",
@@ -121,7 +321,12 @@
       "control_architecture": "Pilz PNOZmulti emniyet kontrolörü, SICK deTec4 Type 4 bariyerler ve çift kanal acil stop buton devresi.",
       "testing_verification": "SISTEMA yazılımı ile PLr doğrulaması yapıldı, MTTFd > 100 yıl (Yüksek) ve DCavg > %99 hesaplandı."
     },
-    "hardware_used": ["SICK deTec4 Core Işık Bariyerleri", "Pilz PNOZ multi Emniyet Rölesi", "Euchner RFID Emniyet Kapı Sviçleri", "Schneider TeSys Emniyet Kontaktörleri"],
+    "hardware_used": [
+      "SICK deTec4 Core Işık Bariyerleri",
+      "Pilz PNOZ multi Emniyet Rölesi",
+      "Euchner RFID Emniyet Kapı Sviçleri",
+      "Schneider TeSys Emniyet Kontaktörleri"
+    ],
     "cta_text": "Makinanızın Emniyet Devresi ve CE Uyumluluğu İçin Bize Ulaşın"
   }
 ]

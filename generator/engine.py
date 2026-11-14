@@ -68,6 +68,39 @@ CATEGORIES = {
 
 MARQUEE_PROJECTS = [
     {
+        "id": "mq-ots",
+        "title": "OTS Soğuk Hava Deposu SCADA & IoT Otomasyonu",
+        "desc": "Özşekerci Gıda Çoklu Oda Sıcaklık / Nem & WhatsApp Alarmı",
+        "img": "assets/ots_soguk_hava_deposu_otomasyonu.webp",
+        "extra_images": ["assets/ozsekerci_gida_scada_soguk_hava.webp"],
+        "tag": "SCADA & IoT",
+        "specs": "8+ Bağımsız Soğuk Oda, PT100 Sensörler, IP65 Dış Ortam HMI, 4G LTE Alarm",
+        "interior": "Dış ortam paslanmaz IP65 karkas, Weidmüller galvanik izoleli analog PT100 klemens grubu, 24V UPS yedekli güç kaynağı ve 4G bulut modem.",
+        "components": ["OTS Merkezi SCADA", "IP65 Dokunmatik HMI", "PT100 Sıcaklık Sensörleri", "4G LTE IoT Gateway", "O2/CO2 Gaz Transmitteri"]
+    },
+    {
+        "id": "mq-kumas",
+        "title": "Kumaş Kontrol, Metraj & HANA Terazi - Barkodlu Tartım",
+        "desc": "İkizler Tekstil Otomatik Kupon Etiketi & Enkoder Ölçümü",
+        "img": "assets/ikizler_tekstil_kumas_kontrol_barkod.webp",
+        "extra_images": ["assets/kumas_sarim_metraj_makinesi_saha.webp", "assets/terazi_barkod_yazici_plc_entegrasyon.webp"],
+        "tag": "Makine Otomasyonu",
+        "specs": "±1 mm Metraj Ölçümü, HANA HS-80 RS232 Terazi, Argox Termal Barkod Yazıcı",
+        "interior": "Titreşimsiz IP54 makine panosu, optik enkoder diferansiyel sinyal hattı, RS-232 izole terazi ve yazıcı haberleşme portları, invertör gergi kontrolü.",
+        "components": ["PLC & Dokunmatik HMI", "HANA Digital Scale HS-80", "Argox Barkod Yazıcı", "Optik Metraj Enkoderi", "Delta / Schneider VFD Sürücü"]
+    },
+    {
+        "id": "mq-kesim",
+        "title": "GKM Otomatik Boy Kesim & Dilimleme Makinesi",
+        "desc": "Gökmen Elektrik Özel HMI Arayüzü & Giyotin Bıçak Senkronizasyonu",
+        "img": "assets/gkm_otomatik_boy_kesim_hmi.webp",
+        "extra_images": ["assets/gkm_kesim_bicak_motor_hmi.webp", "assets/gkm_enkoder_kalibrasyon_hmi.webp"],
+        "tag": "Özel Makine Yazılımı",
+        "specs": "±0.2 mm Kesim Toleransı, Dakikada 45 Kesim, Otomatik Puls/mm Kalibrasyonu",
+        "interior": "GKM standartlarında çelik pano, çift yönlü mekanik/optik limit siviç koruması, bıçak motor kontaktör ve termik grubu, Acil Stop güvenlik devresi.",
+        "components": ["GKM Özel Tasarım HMI", "GMT Hızlı PLC", "Döner Optik Enkoder", "Giyotin Bıçak Motoru", "Emniyet Limit Siviçleri"]
+    },
+    {
         "id": "mq-1",
         "title": "Ana Dağıtım & ADP Pano İmalatı",
         "desc": "IEC 61439 Form 4b Tip Testli İmalat",
@@ -591,6 +624,41 @@ def build_homepage(articles):
     <meta name="keywords" content="gökmen elektrik, makine otomasyonu, plc programlama, scada yazılımı, pcb tasarımı, gömülü sistemler, elektrik panosu imalatı, kompanzasyon, sakarya elektrik, kocaeli otomasyon">
     <link rel="canonical" href="{SITE_URL}/">
 
+    <!-- OpenGraph / Social Metadata -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="GKM Elektrik & Mühendislik | Endüstriyel Otomasyon & Pano İmalatı">
+    <meta property="og:description" content="Özel makine otomasyonu, kumaş kontrol terazisi, OTS soğuk hava SCADA ve tip testli pano çözümleri.">
+    <meta property="og:url" content="{SITE_URL}/">
+    <meta property="og:image" content="{SITE_URL}/assets/ots_soguk_hava_deposu_otomasyonu.webp">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Schema.org Structured Data (Industrial & Engineering LocalBusiness) -->
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Gökmen Elektrik & Mühendislik Otomasyon Sistemleri",
+      "image": "{SITE_URL}/assets/ots_soguk_hava_deposu_otomasyonu.webp",
+      "telephone": "+90 537 702 99 54",
+      "url": "{SITE_URL}",
+      "address": {{
+        "@type": "PostalAddress",
+        "addressLocality": "Sakarya",
+        "addressRegion": "Marmara",
+        "addressCountry": "TR"
+      }},
+      "geo": {{
+        "@type": "GeoCoordinates",
+        "latitude": 40.7731,
+        "longitude": 30.3948
+      }},
+      "priceRange": "$$",
+      "sameAs": [
+        "https://gkmelektrik.com"
+      ]
+    }}
+    </script>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -936,10 +1004,17 @@ def build_homepage(articles):
             </div>
             <h2 class="text-xl sm:text-2xl font-black text-slate-950 mb-4">${{p.title}}</h2>
 
-            <div class="h-60 rounded-2xl overflow-hidden mb-6 bg-slate-900 cursor-pointer relative group" onclick="openLightbox('${{p.img.startsWith('http') ? p.img : SITE_URL + '/' + p.img}}', '${{p.title}}')">
+            <div class="h-60 rounded-2xl overflow-hidden mb-4 bg-slate-900 cursor-pointer relative group" onclick="openLightbox('${{p.img.startsWith('http') ? p.img : SITE_URL + '/' + p.img}}', '${{p.title}}')">
                 <img src="${{p.img.startsWith('http') ? p.img : SITE_URL + '/' + p.img}}" alt="${{p.title}}" class="w-full h-full object-cover">
-                <span class="absolute bottom-3 right-3 bg-slate-950/85 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-sm">🔍 Fotoğrafı Büyüt</span>
+                <span class="absolute bottom-3 right-3 bg-slate-950/85 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-sm">🔍 Ana Fotoğrafı Büyüt</span>
             </div>
+            ${{p.extra_images && p.extra_images.length > 0 ? `
+            <div class="mb-4">
+                <span class="text-[11px] font-black uppercase text-slate-500 tracking-wider block mb-2">📸 Saha, HMI Arayüz & Donanım Fotoğrafları:</span>
+                <div class="flex flex-wrap gap-2">
+                    ${{p.extra_images.map(img => `<div class="h-20 w-28 rounded-xl overflow-hidden bg-slate-900 cursor-pointer border border-slate-300 hover:border-sky-500 shadow-sm relative group" onclick="openLightbox('${{img.startsWith('http') ? img : SITE_URL + '/' + img}}', '${{p.title}}')"><img src="${{img.startsWith('http') ? img : SITE_URL + '/' + img}}" class="w-full h-full object-cover group-hover:scale-105 transition"><span class="absolute bottom-1 right-1 bg-black/80 text-[9px] text-white px-1 rounded font-bold">🔍 Büyüt</span></div>`).join('')}}
+                </div>
+            </div>` : ''}}
 
             <div class="space-y-4 mb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
                 <div class="p-4 bg-sky-50 rounded-2xl border border-sky-200">
@@ -1190,10 +1265,17 @@ def build_category_page(cat_key, articles):
             </div>
             <h2 class="text-xl sm:text-2xl font-black text-slate-950 mb-4">${{p.title}}</h2>
 
-            <div class="h-60 rounded-2xl overflow-hidden mb-6 bg-slate-900 cursor-pointer relative group" onclick="openLightbox('${{p.img.startsWith('http') ? p.img : SITE_URL + '/' + p.img}}', '${{p.title}}')">
+            <div class="h-60 rounded-2xl overflow-hidden mb-4 bg-slate-900 cursor-pointer relative group" onclick="openLightbox('${{p.img.startsWith('http') ? p.img : SITE_URL + '/' + p.img}}', '${{p.title}}')">
                 <img src="${{p.img.startsWith('http') ? p.img : SITE_URL + '/' + p.img}}" alt="${{p.title}}" class="w-full h-full object-cover">
-                <span class="absolute bottom-3 right-3 bg-slate-950/85 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-sm">🔍 Fotoğrafı Büyüt</span>
+                <span class="absolute bottom-3 right-3 bg-slate-950/85 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-sm">🔍 Ana Fotoğrafı Büyüt</span>
             </div>
+            ${{p.extra_images && p.extra_images.length > 0 ? `
+            <div class="mb-4">
+                <span class="text-[11px] font-black uppercase text-slate-500 tracking-wider block mb-2">📸 Saha, HMI Arayüz & Donanım Fotoğrafları:</span>
+                <div class="flex flex-wrap gap-2">
+                    ${{p.extra_images.map(img => `<div class="h-20 w-28 rounded-xl overflow-hidden bg-slate-900 cursor-pointer border border-slate-300 hover:border-sky-500 shadow-sm relative group" onclick="openLightbox('${{img.startsWith('http') ? img : SITE_URL + '/' + img}}', '${{p.title}}')"><img src="${{img.startsWith('http') ? img : SITE_URL + '/' + img}}" class="w-full h-full object-cover group-hover:scale-105 transition"><span class="absolute bottom-1 right-1 bg-black/80 text-[9px] text-white px-1 rounded font-bold">🔍 Büyüt</span></div>`).join('')}}
+                </div>
+            </div>` : ''}}
 
             <div class="space-y-4 mb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
                 <div class="p-4 bg-sky-50 rounded-2xl border border-sky-200">

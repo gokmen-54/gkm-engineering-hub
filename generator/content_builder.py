@@ -179,6 +179,64 @@ Punta kaynak makineleri, presler, asansörler ve vinçler gibi yüklerin saniyel
 - Sonsuz anahtarlama ömrü sunar ve reaktif cezayı kesin olarak sıfırlar.
 """
 
+    elif "kumas" in slug or "kesim" in slug:
+        return f"""
+## Giriş: Kumaş Kontrol ve Boy Kesim Hatlarında Manuel Hataların Önlenmesi
+
+Tekstil, dokuma ve ambalaj hatlarında kumaş sarım, metraj ölçümü ve tartım işlemleri geleneksel olarak operatörün manuel kayıtlarına dayanır. Bu durum kumaş topu boylarında (metre), ağırlıkta (kg) ve parti numarası etiketlerinde hatalara, sevkiyat karışıklıklarına yol açar.
+
+**Gökmen Elektrik & Mühendislik**, **İkizler Tekstil** ve benzeri endüstriyel tesislerde uyguladığı entegre otomasyon mimarisi ile metraj ölçümünü, dijital terazi tartımını ve barkod etiket basımını tek bir PLC ve dokunmatik HMI panelinde tam otonom hale getirmiştir.
+
+---
+
+## Sistem Mimarisi ve Entegre Donanım Katmanı
+
+1. **Optik Enkoder ile ±1 mm Hassasiyetle Metraj Ölçümü:** Çekici merdane üzerine monte edilen yüksek çözünürlüklü optik enkoder, PLC'nin Hızlı Sayıcı (HSC) modülüne bağlanır. Kumaş esneme ve kayma payı HMI ekranındaki 'Kalibrasyon' menüsünden kalibre edilir.
+2. **HANA Digital Scale HS-80 Terazi Entegrasyonu:** Sarım bitip rulo kesildiğinde operatör topu terazinin üzerine bırakır. HANA HS-80 terazi indikatörü RS-232 portundan ASCII formatında net ağırlık verisini (örneğin 18.800 kg) PLC'ye iletir.
+3. **Otomatik Gramaj Hesabı ve Argox Barkod Basımı:** PLC, kumaşın eni (160 cm), sarılan metraj (116.27 mt) ve tartılan net kiloyu (18.800 kg) formüle ederek kumaşın gramajını (180 gr/m²) otomatik hesaplar.
+4. **Argox Termal Barkod Yazıcı Sürücüsü:** Hesaplanan tüm veriler (Firma: İKİZLER, Mal Cinsi: Vualbant, Parti No: 6035, Renk: Somon, Metre: 116.27 mt, Kilo: 18.800 kg) Argox yazıcıya PPLB komut dizisi olarak yollanır ve saniyeler içinde barkodlu rulo kupon etiketi basılır.
+
+---
+
+## Gökmen Elektrik Özel Dokunmatik HMI Arayüzü
+
+- **Otomatik Kesim Menüsü:** Kesim boyu (500 mm), hedef adet (6) ve kesilen adet anlık takip edilir. Enkoder puls/mm kalibrasyonu ile sıfır fire elde edilir.
+- **Manuel Jog & Bıçak Emniyeti:** Bıçak yönü, sol siviç ve sağ siviç limitleri arasında kontrol edilir. Bıçak inerken kumaş çekiş motoru kilitlenerek iş güvenliği sağlanır.
+
+---
+
+## Saha Sonuçları ve Başarı Kriterleri
+
+- **Operatör Hataları Sıfırlandı:** Yanlış parti veya yanlış metre etiketi basılması imkansız hale geldi.
+- **İşlem Süresi %70 Kısaldı:** Manuel tartım ve ofis bilgisayarından etiket yazma süresi ortadan kalktı.
+- **ERP Uyumluluğu:** Basılan EAN-13 barkodlar fabrika ambar sistemine anında entegre oldu.
+"""
+
+    elif "soguk-hava" in slug or "ots" in slug:
+        return f"""
+## Giriş: Soğuk Hava Depolarında 7/24 Kesintisiz Takip ve HACCP Standartları
+
+Gıda saklama, donuk muhafaza ve yaş meyve/sebze depolarında kompresör arızası veya kapının açık kalması nedeniyle sıcaklığın yükselmesi saatler içinde yüz binlerce liralık ürün bozulmasına neden olur.
+
+**Gökmen Elektrik & Mühendislik** tarafından geliştirilen **OTS (Otomatik Takip Sistemi)**, **Özşekerci Gıda** başta olmak üzere çok sayıda endüstriyel soğuk hava tesisinde 8+ bağımsız odanın sıcaklık, nem ve gaz değerlerini merkezi SCADA ve cep telefonu üzerinden izlemektedir.
+
+---
+
+## OTS Sisteminin 4 Temel Mühendislik Bileşeni
+
+1. **4 Telli PT100 & Nem/Gaz Transmitterleri:** Tesis genelindeki 8 odada ±0.1°C hassasiyetle sıcaklık ve %1 rH hassasiyetle nem ölçülür.
+2. **Dış Ortam IP65 Renkli Dokunmatik HMI:** Saha şartlarına, yıkamaya ve neme dayanıklı IP65 korumalı operatör paneli depo girişine monte edilir.
+3. **Merkezi Windows SCADA & Bulut Kayıt:** Tüm odaların verileri 5 dakikada bir veri tabanına arşivlenir. HACCP denetimlerinde tek tuşla geçmiş sıcaklık grafikleri raporlanır.
+4. **4G LTE WhatsApp & SMS Acil Durum Alarmı:** Sıcaklık kritik eşiği (+4°C) aştığında veya kompresör arızaya geçtiğinde sistem tanımlı 5 personele WhatsApp ve SMS mesajı gönderir. Tesisin elektriği veya interneti kesilse bile pano içindeki 24V UPS ve 4G modem sayesinde alarm aksamadan iletilir.
+
+---
+
+## Kaskad Kompresör Eş Yaşlanma ve Elektrik Tasarrufu
+
+- Kompresörlerin çalışma saatleri PLC tarafından sayılarak eşit yıpranma sağlanır.
+- Gece ucuz elektrik tarifesinde derin soğutma yapılarak gündüz pik saatlerde kompresör yükü azaltılır ve **%20 ila %28 elektrik tasarrufu** elde edilir.
+"""
+
     else:
         return f"""
 ## Endüstriyel Mühendislik ve Uygulama Kriterleri

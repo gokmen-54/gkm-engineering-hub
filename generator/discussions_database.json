@@ -74,6 +74,22 @@
           "verified": true
         }
       ]
+    },
+    {
+      "id": "q-ots-cold-storage-scada",
+      "author_name": "Bülent Şekerci",
+      "company": "Tesis Müdürü & Soğuk Hava Deposu İşletmecisi (Sakarya)",
+      "date": "14.11.2026",
+      "question": "OTS Soğuk Hava Deposu Takip Sisteminizde 8 odanın sıcaklık ve nem verilerini tek merkezden izlerken, gece oda sıcaklığı kritik eşiğin (+4°C) üzerine çıktığında veya kompresör termiği attığında WhatsApp üzerinden birden fazla nöbetçi personele anlık mesaj iletilebiliyor mu?",
+      "replies": [
+        {
+          "author": "Gökmen Elektrik & Mühendislik Ekibi",
+          "role": "SCADA & Endüstriyel IoT Sistem Mimarı",
+          "date": "14.11.2026",
+          "text": "Bülent Bey merhaba. Evet, Özşekerci Gıda ve benzeri tesislerde uyguladığımız OTS sisteminde bu tam olarak standarttır. SCADA sunucumuz üzerinde çalışan otonom alarm motoru, PT100 sensörlerinden gelen anlık sıcaklığı veya nemi sürekli kontrol eder. Kritik eşik aşıldığında (örneğin +4.2°C) veya kaskad kompresör arıza kontakları açıldığında: 1) Sahadaki IP65 HMI ekranda flaşörlü sesli siren çalar. 2) Sistem tanımlı 5 farklı nöbetçi mühendis ve işletme müdürünün telefonuna anlık WhatsApp ve SMS alarmı gönderir: 'DİKKAT: ODA-3 Sıcaklık +4.5°C'ye ulaştı! Kompresör-2 Arıza Durumunda.' 3) Elektrikler kesilse dahi sistem panosu içindeki yedekli 24V UPS ve 4G LTE IoT modem sayesinde bildirim aksamadan iletilir. Tesisiniz için ücretsiz keşif yapıp projelendirebiliriz.",
+          "verified": true
+        }
+      ]
     }
   ],
   "harmonik-filtreli-kompanzasyon-panosu-hesabi-ve-imalati": [
