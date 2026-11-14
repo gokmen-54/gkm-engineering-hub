@@ -154,5 +154,18 @@
     "cta_headline": "Tesisiniz İçin MCC Motor Kontrol Panosu İhtiyacı mı Var?",
     "cta_text": "Motor güç listenizi ve kalkış gereksinimlerinizi gönderin; tip testli ve iklimlendirmeli MCC pano teklifimizi 24 saatte sunalım.",
     "date": "2026-11-14"
+  },
+  {
+    "slug": "plastik-enjeksiyon-makinesi-plc-ve-hidrolik-servo-revizyonu",
+    "category": "makine-otomasyonu",
+    "category_title": "Makine Otomasyonu",
+    "title": "Plastik Enjeksiyon Makinelerinde PLC ve Hidrolik Servo Pompa Revizyonu ile %40 Enerji Tasarrufu",
+    "summary": "Eski oransal valfli hidrolik makinelerin servo motor ve sürücü tahrikli kapalı çevrim basınç-debi kontrolüne dönüştürülmesi ve PLC ekran modernizasyonu.",
+    "target_audience": "Plastik İmalatçıları & Makine Revizyon Şefleri",
+    "reading_time": "9 dk okuma",
+    "diagram_type": "servo_sync",
+    "cta_headline": "Enjeksiyon Makinelerinizin Elektrik Tüketimini Düşürün",
+    "cta_text": "GKM Elektrik anahtar teslim hidrolik servo dönüşüm ve PLC revizyonu ile enerji faturanızı %40 azaltır. Teklif alın.",
+    "date": "2026-11-14"
   }
 ]

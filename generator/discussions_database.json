@@ -147,5 +147,23 @@
         }
       ]
     }
+  ],
+  "plastik-enjeksiyon-makinesi-plc-ve-hidrolik-servo-revizyonu": [
+    {
+      "id": "q-auto-plastik-enjeksi",
+      "author_name": "Serkan Aydın",
+      "company": "Tesis Bakım Mühendisi (Kocaeli OSB)",
+      "date": "2026-11-14",
+      "question": "Plastik Enjeksiyon Makinelerinde PLC ve Hidrolik Servo Pompa Revizyonu ile %40 Enerji Tasarrufu konusunda benzer bir sahada uygulama yaparken nelere en çok dikkat etmeliyiz?",
+      "replies": [
+        {
+          "author": "Gökmen Elektrik & Mühendislik Ekibi",
+          "role": "Sistem Entegratörü",
+          "date": "2026-11-14",
+          "text": "Serkan Bey merhaba. Bu uygulamada en kritik husus; uluslararası normlara (IEC/ISO) uygun koruma ve parazit izolasyonudur. Tesisinizin şemasını veya teknik şartnamenizi bize WhatsApp üzerinden iletirseniz, projenizi ücretsiz inceleyip en uygun komponent seçimini yapabiliriz.",
+          "verified": true
+        }
+      ]
+    }
   ]
 }
