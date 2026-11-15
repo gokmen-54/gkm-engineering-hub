@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GKM Mühendislik Hub - Yönetici & Agent Reach Paneli</title>
+    <title>GKM Mühendislik Hub - Yönetici & Gelen Müşteri Paneli</title>
     <meta name="robots" content="noindex, nofollow">
 
     <!-- Tailwind CSS -->
@@ -87,7 +87,7 @@
                 🔐
             </div>
             <h2 class="text-2xl font-black text-slate-900 mb-2">GKM Yönetici Girişi</h2>
-            <p class="text-xs text-slate-500 mb-6 font-medium">Soru-Cevap ve Agent Reach B2B Müşteri Avcısı modüllerine erişmek için lütfen şifrenizi girin.</p>
+            <p class="text-xs text-slate-500 mb-6 font-medium">Siteden gelen müşteri taleplerini ve teknik soruları yönetmek için lütfen şifrenizi girin.</p>
             
             <form onsubmit="checkPin(event)" class="space-y-4">
                 <div>
@@ -104,149 +104,68 @@
     <!-- Admin Panel Main Content (Hidden until authenticated) -->
     <main id="admin-content" class="max-w-7xl mx-auto px-4 sm:px-6 py-10 flex-1 w-full hidden">
         
-        <!-- Header & Top Navigation Switcher -->
+        <!-- Header & Stats Bar -->
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-200">
             <div>
                 <span class="text-xs font-black text-sky-600 uppercase tracking-widest block mb-1">GÖKMEN ELEKTRİK KONTROL MERKEZİ</span>
-                <h1 class="text-2xl sm:text-3xl font-black text-slate-900">Mühendislik & Agent Reach Yönetimi</h1>
+                <h1 class="text-2xl sm:text-3xl font-black text-slate-900">Gelen Müşteri Soruları & Talep Yönetimi</h1>
+                <p class="text-xs text-slate-500 mt-1">Siteden gelen müşteri sorularını, proje taleplerini görüntüleyebilir ve WhatsApp ile anında yanıtlayabilirsiniz.</p>
             </div>
 
             <div class="flex flex-wrap items-center gap-3">
-                <div class="bg-slate-200 p-1 rounded-2xl flex items-center gap-1">
-                    <button id="view-reach-btn" onclick="switchView('reach')" class="bg-sky-600 text-white font-black text-xs py-2 px-4 rounded-xl shadow transition flex items-center gap-2">
-                        <span>🎯 Agent Reach (Müşteri Avcısı)</span>
-                    </button>
-                    <button id="view-qa-btn" onclick="switchView('qa')" class="text-slate-700 hover:text-slate-950 font-bold text-xs py-2 px-4 rounded-xl transition flex items-center gap-2">
-                        <span>💬 Soru-Cevap & Yorumlar</span>
-                    </button>
-                </div>
+                <button onclick="openNewModal()" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow transition flex items-center gap-2">
+                    <span>➕ Yeni Soru/Cevap Ekle</span>
+                </button>
+                <button onclick="exportJson()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow transition flex items-center gap-2">
+                    <span>📥 JSON Yedekle</span>
+                </button>
                 <button onclick="logout()" class="bg-red-50 hover:bg-red-100 text-red-600 font-bold text-xs py-2.5 px-3 rounded-xl transition border border-red-200">
                     Çıkış
                 </button>
             </div>
         </div>
 
-        <!-- VIEW 1: AGENT REACH (B2B AUTONOMOUS OUTREACH RADAR) -->
-        <section id="section-agent-reach" class="space-y-8">
-            <!-- Banner & Googlebot Ping -->
-            <div class="bg-gradient-to-r from-[#001c30] to-[#001726] rounded-3xl p-6 sm:p-8 text-white border border-sky-900 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <!-- Quick Summary Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
                 <div>
-                    <div class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-black px-3 py-1 rounded-full uppercase mb-2">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                        <span>Canlı B2B Sanayi Radarı Aktif</span>
-                    </div>
-                    <h2 class="text-xl sm:text-2xl font-black mb-1">Agent Reach: Reklamsız Müşteri Yakalama Motoru</h2>
-                    <p class="text-xs sm:text-sm text-slate-300 max-w-2xl font-medium">
-                        Ajan; tekstil fabrikaları, soğuk hava depoları, ambalaj kesim hatları ve kompanzasyon cezası ödeyen tesislerin gerçek problemlerini analiz edip doğrudan ilgili vaka analizimizi (İkizler Tekstil, Özşekerci Gıda vb.) eşleştirdi. Tek tıkla WhatsApp veya LinkedIn üzerinden teklif iletebilirsiniz.
-                    </p>
+                    <span class="text-xs font-bold text-slate-400 uppercase">Toplam Soru / Konu</span>
+                    <span id="stat-total" class="text-2xl font-black text-slate-900 block mt-1">0</span>
                 </div>
-                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
-                    <button onclick="pingGooglebot()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs py-3 px-5 rounded-2xl shadow-lg transition flex items-center justify-center gap-2">
-                        <span>🌐 Googlebot İndeksleme Tetikle</span>
-                    </button>
-                    <button onclick="refreshLeadRadar()" class="bg-sky-600 hover:bg-sky-500 text-white font-black text-xs py-3 px-5 rounded-2xl shadow-lg transition flex items-center justify-center gap-2">
-                        <span>🔄 Radarı Güncelle</span>
-                    </button>
-                </div>
+                <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center font-black text-lg">📚</div>
             </div>
-
-            <!-- Reach Stats -->
-            <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
-                    <div>
-                        <span class="text-xs font-bold text-slate-400 uppercase">Taranan Hedefler</span>
-                        <span id="reach-stat-total" class="text-2xl font-black text-slate-900 block mt-1">5</span>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center font-black text-lg">🏭</div>
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-bold text-slate-400 uppercase">Gelen Müşteri Soruları</span>
+                    <span id="stat-pending" class="text-2xl font-black text-amber-500 block mt-1">0</span>
                 </div>
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
-                    <div>
-                        <span class="text-xs font-bold text-slate-400 uppercase">Özel Hazırlanan Pitch</span>
-                        <span id="reach-stat-pitches" class="text-2xl font-black text-emerald-500 block mt-1">5</span>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-lg">🎯</div>
-                </div>
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
-                    <div>
-                        <span class="text-xs font-bold text-slate-400 uppercase">İletişime Geçilen</span>
-                        <span id="reach-stat-contacted" class="text-2xl font-black text-amber-500 block mt-1">0</span>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-black text-lg">💬</div>
-                </div>
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
-                    <div>
-                        <span class="text-xs font-bold text-slate-400 uppercase">Dönüşüm Oranı</span>
-                        <span class="text-2xl font-black text-sky-600 block mt-1">%100 Proof</span>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center font-black text-lg">📈</div>
-                </div>
+                <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-black text-lg">⏳</div>
             </div>
-
-            <!-- Sector Filters -->
-            <div class="flex flex-wrap items-center gap-2 text-xs font-bold">
-                <button onclick="filterLeads('all')" id="btn-lead-all" class="bg-slate-900 text-white px-4 py-2 rounded-xl transition shadow">Tüm Hedefler (5)</button>
-                <button onclick="filterLeads('tekstil')" id="btn-lead-tekstil" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl transition">🧵 Tekstil & Kumaş</button>
-                <button onclick="filterLeads('gida_soguk_hava')" id="btn-lead-gida" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl transition">❄️ Gıda & Soğuk Depo</button>
-                <button onclick="filterLeads('kesim_makine')" id="btn-lead-kesim" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl transition">✂️ Makine OEM & Kesim</button>
-                <button onclick="filterLeads('pano_kompanzasyon')" id="btn-lead-komp" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl transition">⚡ Kompanzasyon & Pano</button>
-            </div>
-
-            <!-- Leads Cards Container -->
-            <div id="leads-container" class="space-y-6">
-                <!-- Dynamically loaded -->
-            </div>
-        </section>
-
-
-        <!-- VIEW 2: QUESTIONS & ANSWERS (Q&A) -->
-        <section id="section-qa" class="space-y-6 hidden">
-            <!-- Quick Summary Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
-                    <div>
-                        <span class="text-xs font-bold text-slate-400 uppercase">Toplam Soru / Konu</span>
-                        <span id="stat-total" class="text-2xl font-black text-slate-900 block mt-1">0</span>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center font-black text-lg">📚</div>
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-bold text-slate-400 uppercase">Onaylı Mühendis Yanıtları</span>
+                    <span id="stat-answered" class="text-2xl font-black text-emerald-500 block mt-1">0</span>
                 </div>
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
-                    <div>
-                        <span class="text-xs font-bold text-slate-400 uppercase">Kullanıcı Soruları (Bekleyen)</span>
-                        <span id="stat-pending" class="text-2xl font-black text-amber-500 block mt-1">0</span>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-black text-lg">⏳</div>
-                </div>
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
-                    <div>
-                        <span class="text-xs font-bold text-slate-400 uppercase">Onaylı Mühendis Yanıtları</span>
-                        <span id="stat-answered" class="text-2xl font-black text-emerald-500 block mt-1">0</span>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-lg">✅</div>
-                </div>
+                <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-lg">✅</div>
             </div>
+        </div>
 
-            <!-- Tabs & Actions -->
-            <div class="flex flex-wrap items-center justify-between gap-4">
-                <div class="flex items-center gap-2">
-                    <button id="tab-all" onclick="setFilter('all')" class="bg-slate-900 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow">Tümü</button>
-                    <button id="tab-user" onclick="setFilter('user')" class="bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs px-4 py-2 rounded-xl border border-slate-300 transition">Müşteri Soruları</button>
-                    <button id="tab-curated" onclick="setFilter('curated')" class="bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs px-4 py-2 rounded-xl border border-slate-300 transition">Hazır Teknik Rehberler</button>
-                </div>
-                <div class="flex items-center gap-2">
-                    <button onclick="openNewModal()" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs py-2 px-3.5 rounded-xl shadow transition">
-                        ➕ Yeni Soru/Cevap Ekle
-                    </button>
-                    <button onclick="exportJson()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2 px-3.5 rounded-xl shadow transition">
-                        📥 JSON İndir
-                    </button>
-                </div>
+        <!-- Tabs & Filter -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+            <div class="flex items-center gap-2">
+                <button id="tab-all" onclick="setFilter('all')" class="bg-slate-900 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow">Tümü</button>
+                <button id="tab-user" onclick="setFilter('user')" class="bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs px-4 py-2 rounded-xl border border-slate-300 transition">Canlı Müşteri Soruları</button>
+                <button id="tab-curated" onclick="setFilter('curated')" class="bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs px-4 py-2 rounded-xl border border-slate-300 transition">Hazır Teknik Rehberler</button>
             </div>
+            <div class="text-xs text-slate-500 font-medium">
+                💡 Ziyaretçilerin bıraktığı soruların altında <b>"WhatsApp ile Yanıtla"</b> butonuyla doğrudan müşteriye ulaşabilirsiniz.
+            </div>
+        </div>
 
-            <!-- Questions Feed -->
-            <div id="questions-container" class="space-y-6">
-                <!-- Dynamically populated -->
-            </div>
-        </section>
+        <!-- Questions Feed -->
+        <div id="questions-container" class="space-y-6">
+            <!-- Dynamically populated -->
+        </div>
 
     </main>
 
@@ -261,7 +180,7 @@
             <form onsubmit="handleAddNewQA(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">İlişkili Makale / Konu Slug</label>
-                    <input type="text" id="new-slug" placeholder="paketleme-makinesi-plc-servo-yazilim-revizyonu" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                    <input type="text" id="new-slug" placeholder="kumas-kontrol-ve-otomatik-boy-kesme-makinesi-plc-otomasyonu" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -277,7 +196,7 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Müşteri Sorusu / Problem</label>
-                    <textarea id="new-question" rows="3" placeholder="Örn: S7-1500 ile S210 servo sürerken MC_Power hatası alıyoruz..." required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs font-medium text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
+                    <textarea id="new-question" rows="3" placeholder="Örn: Kumaş kontrol makinemizde terazi verisi PLC'ye bazen gecikmeli geliyor..." required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs font-medium text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
                 </div>
 
                 <div>
@@ -363,13 +282,10 @@
     </footer>
     
 
-    <!-- Admin & Agent Reach Logic -->
+    <!-- Admin Logic -->
     <script>
     const INITIAL_DISCUSSIONS = {"paketleme-makinesi-plc-servo-yazilim-revizyonu": [{"id": "q-1", "author_name": "Hakan Yılmaz", "company": "Kardelen Ambalaj A.Ş. - İmalat Müdürü (Konya)", "date": "12.11.2026", "question": "Hocam yatay paketleme makinemizde folyo çekişi sırasında baskı fotoseli periyodik olarak 2-3 mm kaçırıyor ve fire veriyoruz. Siemens S7-1200 ile PLC normal dijital girişinden mi okumalıyız yoksa sürücünün kendi touch probe girişini mi kullanmalıyız?", "replies": [{"author": "Gökmen Elektrik & Mühendislik Ekibi", "role": "Otomasyon & Hareket Kontrol Mühendisi", "date": "12.11.2026", "text": "Hakan Bey merhaba. Kesinlikle PLC'nin standart dijital girişini kullanmamalısınız; çünkü PLC çevrim süresi (scan time: 3-8 ms) yüksek hızda folyo akarken birkaç milimetrelik kaymaya neden olur. Bu uygulamada fotosel sinyali doğrudan Siemens V90 veya S210 servo sürücünün donanımsal 'Fast DI / Touch Probe' girişine girmelidir. Sürücü mikro-saniye mertebesinde (1 µs) motor enkoder pozisyonunu mandallar (latch eder) ve PLC'ye SCL üzerinden 'Mark Registration' düzeltme ofseti olarak yollar. Gerekirse makinenizin mevcut TIA Portal projesini bize WhatsApp'tan iletebilirsiniz, blok yapınızı inceleyip düzeltelim.", "verified": true}, {"author": "Hakan Yılmaz", "company": "Kardelen Ambalaj A.Ş.", "date": "13.11.2026", "text": "Harika bir açıklama Gökmen Bey, donanımsal girişe aktarıp dediğiniz gibi deneyeceğiz. Teşekkürler!", "verified": false}]}, {"id": "q-2", "author_name": "Mert Çetin", "company": "Makine Tasarım Uzmanı (Bursa)", "date": "10.11.2026", "question": "Döner çeneli (Rotary knife) paketlemede 5. derece polinom kam eğrisi mi yoksa modifiye sinüs mü kullanmak daha az mekanik aşınma sağlar?", "replies": [{"author": "Gökmen Elektrik & Mühendislik Ekibi", "role": "Mühendislik Departmanı", "date": "10.11.2026", "text": "Mert Bey, döner çenede kesme anında çene lineer hızı film hızına tam eşitlenmeli (1:1 senkron), kesim sonrasında ise paket boyuna göre çene ya hızlanmalı ya da yavaşlamalıdır. 5. derece polinom (Quintic polynomial) eğrileri ivmenin türevi olan sarsıntıyı (Jerk) sınırladığı için redüktör dişli boşluklarındaki darbeleri ve çene bıçak aşınmasını minimuma indirir. Siemens CamTool veya TwinCAT Cam Design Tool üzerinde jerk grafiğinin sıfırdan başladığı profilleri tercih ediyoruz.", "verified": true}]}], "endustriyel-ortamlar-icin-4-katmanli-pcb-tasarim-kurallari": [{"id": "q-3", "author_name": "Caner Demir", "company": "Gömülü Sistemler Ar-Ge Mühendisi (İzmir)", "date": "11.11.2026", "question": "Motor sürücüsü ile aynı kart üzerinde RS485 transceiver kullanıyoruz. İzole DC-DC dönüştürücü koymamıza rağmen sahadan ESD darbesi geldiğinde transceiver yanıyor. TVS diyotları nereye yerleştirmeliyiz?", "replies": [{"author": "Gökmen Elektrik & Mühendislik Ekibi", "role": "Donanım & PCB Tasarım Şefi", "date": "11.11.2026", "text": "Caner Bey merhaba. TVS diyotların (örneğin SM712) yerleşimi kritik kuraldır: TVS diyotlar mutlak suretle klemens konnektörünün tam arkasına (sinyalin karta girdiği ilk noktaya) yerleştirilmelidir ve GND bacağı doğrudan klemens şase bağlantısına bağlanmalıdır. Sinyal izole transceiver çipine gitmeden önce TVS diyottan geçmelidir. Eğer TVS diyot çipin yanına konulursa, yüksek hızlı ESD darbesi (8kV) PCB yolunun parazitik endüktansından dolayı transceiver'ı patlatır. Ayrıca A ve B hatlarına seri 10 Ohm pulse-proof MELF direnç eklemenizi öneririz.", "verified": true}]}], "fabrikalarda-scada-ve-iot-enerji-izleme-sistemi-kurulumu": [{"id": "q-4", "author_name": "Mustafa Koç", "company": "Enerji Yöneticisi & Bakım Şefi (Gebze OSB)", "date": "10.11.2026", "question": "Tesisimizde 45 adet Janitza ve Entes enerji analizörü var. RS-485 Modbus RTU hattı 600 metre sürüyor ve sorgu süresi çok uzuyor. Bunu Modbus Gateway ile IP ağına taşımak mantıklı mı?", "replies": [{"author": "Gökmen Elektrik & Mühendislik Ekibi", "role": "SCADA & Endüstriyel IoT Şefi", "date": "10.11.2026", "text": "Mustafa Bey, tek bir RS-485 hattına 45 analizör bağlamak ciddi sorgu gecikmesi (polling delay) yaratır. 9600 baud hızında her cihazdan 10 register okusanız tüm hattın taranması 15-20 saniyeyi bulur, anlık reaktif sıçramaları kaçırırsınız. En doğru çözüm; sahayı 3 veya 4 ayrı bölgeye bölüp, her bölgeye bir adet çok portlu Modbus RTU/TCP Gateway (örneğin Moxa veya Advantech) yerleştirmektir. SCADA sunucunuz veya PLC'niz tüm gateway'leri Ethernet üzerinden paralel sorgulayacağı için güncelleme süresi 1 saniyenin altına iner. Proje için şemanızı WhatsApp'tan iletebilirsiniz.", "verified": true}]}, {"id": "q-ots-cold-storage-scada", "author_name": "Bülent Şekerci", "company": "Tesis Müdürü & Soğuk Hava Deposu İşletmecisi (Sakarya)", "date": "14.11.2026", "question": "OTS Soğuk Hava Deposu Takip Sisteminizde 8 odanın sıcaklık ve nem verilerini tek merkezden izlerken, gece oda sıcaklığı kritik eşiğin (+4°C) üzerine çıktığında veya kompresör termiği attığında WhatsApp üzerinden birden fazla nöbetçi personele anlık mesaj iletilebiliyor mu?", "replies": [{"author": "Gökmen Elektrik & Mühendislik Ekibi", "role": "SCADA & Endüstriyel IoT Sistem Mimarı", "date": "14.11.2026", "text": "Bülent Bey merhaba. Evet, Özşekerci Gıda ve benzeri tesislerde uyguladığımız OTS sisteminde bu tam olarak standarttır. SCADA sunucumuz üzerinde çalışan otonom alarm motoru, PT100 sensörlerinden gelen anlık sıcaklığı veya nemi sürekli kontrol eder. Kritik eşik aşıldığında (örneğin +4.2°C) veya kaskad kompresör arıza kontakları açıldığında: 1) Sahadaki IP65 HMI ekranda flaşörlü sesli siren çalar. 2) Sistem tanımlı 5 farklı nöbetçi mühendis ve işletme müdürünün telefonuna anlık WhatsApp ve SMS alarmı gönderir: 'DİKKAT: ODA-3 Sıcaklık +4.5°C'ye ulaştı! Kompresör-2 Arıza Durumunda.' 3) Elektrikler kesilse dahi sistem panosu içindeki yedekli 24V UPS ve 4G LTE IoT modem sayesinde bildirim aksamadan iletilir. Tesisiniz için ücretsiz keşif yapıp projelendirebiliriz.", "verified": true}]}], "harmonik-filtreli-kompanzasyon-panosu-hesabi-ve-imalati": [{"id": "q-5", "author_name": "Murat Karahan", "company": "Tesis Elektrik Başmühendisi (Dilovası)", "date": "09.11.2026", "question": "Fabrikamızda 4 adet 200 kW frekans konvertörü devreye alındıktan sonra mevcut standart kompanzasyon panosundaki kondansatörler şişip patlamaya başladı. %7 reaktör eklemek sorunu kesin çözer mi yoksa %14 mü seçmeliyiz?", "replies": [{"author": "Gökmen Elektrik & Mühendislik Ekibi", "role": "Pano İmalat & Şalt Departmanı", "date": "09.11.2026", "text": "Murat Bey merhaba. Frekans konvertörleri (6 darbeli VFD) ağırlıklı olarak 5. harmonik (250 Hz) ve 7. harmonik (350 Hz) üretir. Standart reaktörsüz kompanzasyon panoları şebeke trafosunun endüktansı ile rezonansa girerek bu harmonikleri 5-10 kat büyütür; kondansatörlerin patlama sebebi bu akım aşırı yüklenmesidir. %7 de-tuned filtre reaktörünün rezonans frekansı 189 Hz'dir. 189 Hz frekansı 250 Hz'in altında kaldığı için kompanzasyon kademeleri 5. ve daha yüksek harmoniklere karşı endüktif davranır ve rezonans riskini %100 sıfırlar. %14 reaktör ise 134 Hz'e ayarlar ve genelde yüksek 3. harmonik (tek fazlı non-lineer yükler) olan yerlerde gereklidir. Tesisiniz için 440V veya 480V kondansatör serisi ile güçlendirilmiş %7 reaktörlü pano teklifimizi iletebiliriz.", "verified": true}]}], "siemens-s7-1200-ve-s7-1500-scl-programlama-standartlari": [{"id": "q-6", "author_name": "Eren Toprak", "company": "Otomasyon Yazılım Uzmanı (Kocaeli)", "date": "08.11.2026", "question": "SCL dilinde büyük veri dizileri (Array of UDT) işlerken indeks aşımı hatasında CPU'nun STOP'a geçmesini nasıl engelliyorsunuz?", "replies": [{"author": "Gökmen Elektrik & Mühendislik Ekibi", "role": "Yazılım & Ar-Ge Ekibi", "date": "08.11.2026", "text": "Eren Bey merhaba. TIA Portal SCL'de iki temel güvenlik mekanizması uyguluyoruz: 1) Dinamik döngülerde veya Array erişimlerinde mutlak suretle 'LOWER_BOUND' ve 'UPPER_BOUND' komutları ile indeks sınırlarını kontrol ediyoruz. 2) Projeye mutlaka boş dahi olsa OB121 (Programming Error) ve OB122 (I/O Access Error) organizasyon bloklarını ekliyoruz. Bu bloklar eklendiğinde CPU STOP moduna düşmez, diagnostik tamponuna hata kaydı atarak çalışmaya devam eder.", "verified": true}]}], "iec-61439-tip-testli-ana-dagitim-panosu-adp-kriterleri": [{"id": "q-7", "author_name": "Zafer Bilgin", "company": "Elektrik Taahhüt Proje Müdürü (İstanbul)", "date": "06.11.2026", "question": "2500 kVA trafo çıkışı için ana dağıtım panosunda Form 4b bölmelendirme şartnamesi var. Form 4b ile Form 2b arasındaki temel fark ve maliyet etkisi nedir?", "replies": [{"author": "Gökmen Elektrik & Mühendislik Ekibi", "role": "Tip Testli Pano Üretim Müdürü", "date": "06.11.2026", "text": "Zafer Bey merhaba. IEC 61439-2 standardına göre Form 2b'de bara sistemi fonksiyonel birimlerden (şalterlerden) ayrılmıştır fakat şalter çıkış klemensleri birbiriyle veya barayla aynı bölmede kalabilir. Form 4b'de ise her bir fonksiyonel şalter hücresi, ana baralar ve harici kablo çıkış klemensleri tamamen metal seperatörlerle birbirinden izole edilmiştir. Bu sayede panoda bir kolda çalışma yapılırken diğer kollar güvenle enerjili kalabilir. İmalat işçiliği ve seperatör saç maliyeti Form 2b'ye göre yaklaşık %15-20 daha yüksektir ancak endüstriyel tesisler için can güvenliği ve kesintisiz bakım açısından şartnamelerde vazgeçilmezdir.", "verified": true}]}], "mcc-motor-kontrol-panosu-soft-starter-ve-vfd-secim-rehberi": [{"id": "q-auto-mcc-motor-kontr", "author_name": "Serkan Aydın", "company": "Tesis Bakım Mühendisi (Kocaeli OSB)", "date": "2026-11-14", "question": "MCC Panolarında Sürücü (VFD) vs Soft Starter Seçimi: Ağır Şart Kalkış ve Enerji Verimliliği Karşılaştırması konusunda benzer bir sahada uygulama yaparken nelere en çok dikkat etmeliyiz?", "replies": [{"author": "Gökmen Elektrik & Mühendislik Ekibi", "role": "Sistem Entegratörü", "date": "2026-11-14", "text": "Serkan Bey merhaba. Bu uygulamada en kritik husus; uluslararası normlara (IEC/ISO) uygun koruma ve parazit izolasyonudur. Tesisinizin şemasını veya teknik şartnamenizi bize WhatsApp üzerinden iletirseniz, projenizi ücretsiz inceleyip en uygun komponent seçimini yapabiliriz.", "verified": true}]}], "plastik-enjeksiyon-makinesi-plc-ve-hidrolik-servo-revizyonu": [{"id": "q-auto-plastik-enjeksi", "author_name": "Serkan Aydın", "company": "Tesis Bakım Mühendisi (Kocaeli OSB)", "date": "2026-11-14", "question": "Plastik Enjeksiyon Makinelerinde PLC ve Hidrolik Servo Pompa Revizyonu ile %40 Enerji Tasarrufu konusunda benzer bir sahada uygulama yaparken nelere en çok dikkat etmeliyiz?", "replies": [{"author": "Gökmen Elektrik & Mühendislik Ekibi", "role": "Sistem Entegratörü", "date": "2026-11-14", "text": "Serkan Bey merhaba. Bu uygulamada en kritik husus; uluslararası normlara (IEC/ISO) uygun koruma ve parazit izolasyonudur. Tesisinizin şemasını veya teknik şartnamenizi bize WhatsApp üzerinden iletirseniz, projenizi ücretsiz inceleyip en uygun komponent seçimini yapabiliriz.", "verified": true}]}]};
-    const INITIAL_LEADS = [{"id": "lead-1", "company": "Bursa Dokuma & Kumaş İmalatçıları (DOSAB Grubu)", "contact_role": "Fabrika Müdürü / Üretim Şefi", "location": "Bursa / Demirtaş OSB (DOSAB)", "sector": "tekstil", "sector_title": "Tekstil & Kumaş İmalatı", "need": "Kumaş kalite kontrol ve rulo sarım hatlarında manuel metre okuma ve el terazisiyle tartım karışıklıkları.", "case_study": "İkizler Tekstil Kumaş Kontrol, Metraj & HANA Terazi - Barkodlu Tartım Makinesi", "case_url": "https://gokmen-54.github.io/gkm-engineering-hub/rehber/kumas-kontrol-ve-otomatik-boy-kesme-makinesi-plc-otomasyonu/", "pitch_message": "Merhaba, Bursa tekstil hatlarında kumaş muayene ve sarım aşamasında rulo metreleri ile el terazisi tartımında operatör hatalarını sıfırlayan entegre bir otomasyon geliştirdik. İkizler Tekstil projemizde optik enkoder ile ±1 mm metrajı, HANA HS-80 dijital teraziyi (RS232) ve Argox termal barkod yazıcıyı doğrudan tek bir PLC ekranına bağladık. Rulo bittiğinde net kilo (örn: 18.80 kg), metre ve gramaj (180 gr/m²) anında hesaplanıp EAN-13 barkodlu etiket basılıyor. Sahada çalışan makine videomuzu ve teknik şemamızı inceleyebilirsiniz: https://gokmen-54.github.io/gkm-engineering-hub/rehber/kumas-kontrol-ve-otomatik-boy-kesme-makinesi-plc-otomasyonu/ Mevcut kumaş kontrol veya sarım makineleriniz için revizyon düşünürseniz yardımcı olmaktan memnuniyet duyarız.", "wa_text": "Merhaba, kumaş kontrol ve sarım makinemiz için HANA terazi ve barkod yazıcı PLC entegrasyonu hakkında bilgi ve fiyat almak istiyoruz."}, {"id": "lead-2", "company": "Marmara Soğuk Hava Depoları & Meyve/Sebze Lojistik Tesisleri", "contact_role": "Tesis İşletme Müdürü & Bakım Sorumlusu", "location": "Sakarya / Akyazı, Hendek & Pamukova", "sector": "gida_soguk_hava", "sector_title": "Gıda & Soğuk Hava Deposu", "need": "Gece kompresör termiği atması veya kapı açık kalmasında ürün bozulma riski, HACCP denetim raporu eksikliği.", "case_study": "OTS Soğuk Hava Deposu 8+ Oda SCADA & WhatsApp 7/24 Alarm Takip Sistemi (Özşekerci Gıda)", "case_url": "https://gokmen-54.github.io/gkm-engineering-hub/rehber/soguk-hava-deposu-scada-ve-uzaktan-sicaklik-takip-sistemi-ots/", "pitch_message": "İyi günler, Sakarya ve Marmara bölgesindeki soğuk hava depolarında gece kompresör arızası veya kapı açık kalması sebebiyle ürün bozulma riskini sıfıra indiren OTS (Otomatik Takip Sistemi) mimarimizi Özşekerci Gıda'da devreye aldık. 8 bağımsız odanın sıcaklık ve nemini PT100 sensörlerle ±0.1°C hassasiyetle izliyoruz. Sıcaklık +4°C'yi aştığında veya fan durduğunda elektrik ve internet kesilse bile 4G IoT modemle nöbetçi personelin cebine anlık WhatsApp alarmı düşüyor. Saha kurulum fotoğraflarımız ve SCADA arayüzümüz: https://gokmen-54.github.io/gkm-engineering-hub/rehber/soguk-hava-deposu-scada-ve-uzaktan-sicaklik-takip-sistemi-ots/ Tesisiniz için ücretsiz keşif ve teklif hazırlayabiliriz.", "wa_text": "Merhaba GKM Elektrik, soğuk hava depomuz için OTS uzaktan sıcaklık takip ve WhatsApp alarm sistemi teklifi almak istiyoruz."}, {"id": "lead-3", "company": "Gebze & Sakarya Ambalaj, Sac Dilme ve Profil İmalatçıları (OEM)", "contact_role": "Makine Tasarım Şefi & İmalat Müdürü", "location": "Kocaeli / Gebze İMES OSB & Sakarya 1. OSB", "sector": "kesim_makine", "sector_title": "Makine İmalatçıları (OEM) & Kesim", "need": "Giyotin kesme hatlarında mekanik dayama ayar süresi (downtime), hız arttıkça boy kayması ve fire oranı.", "case_study": "GKM Dokunmatik HMI & PLC Otomatik Boy Kesim / Dilimleme Makinesi Yazılımı", "case_url": "https://gokmen-54.github.io/gkm-engineering-hub/projeler/", "pitch_message": "Merhaba, ambalaj, sac dilme ve plastik profil boy kesim makinelerinde mekanik ayar sürelerini sıfırlayan ve ±0.15 mm kesim hassasiyeti sağlayan GKM PLC & HMI boy kesim yazılımımızı incelemenizi öneririz. Operatör HMI ekranından Kesim Boyu (mm) ve Hedef Adet girer; enkoder puls/mm kalibrasyonu ile malzeme milimetrik sürülür, hedef adede ulaşıldığında otomatik durdurulur. Çift yönlü limit siviç emniyeti ile bıçak ve operatör güvenliği garanti altındadır. Detaylı HMI ekranlarımızı ve vaka analizimizi buradan görebilirsiniz: https://gokmen-54.github.io/gkm-engineering-hub/projeler/ İmalatını yaptığınız makineler için pano ve yazılım partnerliği teklifimizi iletebiliriz.", "wa_text": "Merhaba, imal ettiğimiz kesme/dilimleme makinesi için GKM HMI ve PLC boy kesim otomasyon paketi teklifi istiyoruz."}, {"id": "lead-4", "company": "Dilovası & Kocaeli Plastik Enjeksiyon & Pres Fabrikaları", "contact_role": "Fabrika Enerji Yöneticisi & Elektrik Bakım Şefi", "location": "Kocaeli / Dilovası İMES & TOSB", "sector": "pano_kompanzasyon", "sector_title": "Pano İmalatı & Kompanzasyon", "need": "VFD sürücüler ve darbeli presler yüzünden her ay yüz binlerce lira reaktif ceza ve kondansatör patlama problemi.", "case_study": "1250 kVA Tristörlü Hızlı Kompanzasyon ve 189 Hz %7 De-Tuned Harmonik Filtreli Pano", "case_url": "https://gokmen-54.github.io/gkm-engineering-hub/rehber/harmonik-filtreli-kompanzasyon-panosu-hesabi-ve-imalati/", "pitch_message": "Merhaba, fabrikanızda çalışan VFD motor sürücüleri veya punta kaynak/pres makineleri sebebiyle reaktif ceza ödüyor veya kompanzasyon kondansatörlerinde şişme/patlama yaşıyorsanız; Dilovası'ndaki otomotiv tesisinde reaktif cezayı 145.000 TL'den 0 TL'ye düşürdüğümüz tristörlü hızlı kompanzasyon panosu referansımızı inceleyebilirsiniz. 189 Hz (%7) demir nüveli harmonik filtreler ve sıfır geçişli tristör modülleri ile rezonans %100 engellenir. Tesisinizin faturasını ve tek hat şemasını iletirseniz, 0 TL kompanzasyon hesabınızı yapıp tip testli pano teklifimizi 2 saatte hazırlayabiliriz: https://gokmen-54.github.io/gkm-engineering-hub/hesaplama/#kompanzasyon-hesabi", "wa_text": "Merhaba GKM Elektrik, fabrikamızdaki reaktif ceza ve kompanzasyon panosu için son elektrik faturamızı gönderip teklif almak istiyoruz."}, {"id": "lead-5", "company": "Özel Otomasyon Makinesi İmalatçıları (OEM) - Paketleme & Dolum", "contact_role": "Mekanik Tasarım & Ar-Ge Müdürü", "location": "İstanbul İkitelli OSB & Bursa Nilüfer", "sector": "makine_otomasyonu", "sector_title": "Özel Makine Otomasyonu", "need": "Mekanik kamlı eski makinelerde hız sınırı (düşük PPM) ve format geçişinde saatler süren mekanik ayar kaybı.", "case_study": "Siemens S7-1515T & S210 Elektronik Kamlama (Electronic Camming) ile 42 BPM İlaç/Dolum Makinesi", "case_url": "https://gokmen-54.github.io/gkm-engineering-hub/rehber/paketleme-makinesi-plc-servo-yazilim-revizyonu/", "pitch_message": "Merhaba, imal ettiğiniz dikey/yatay dolum ve paketleme makinelerinde mekanik kam aşınmaları yerine Siemens S7-1500T Teknoloji CPU ve S210 servo motorlar ile Elektronik Kam (Electronic Camming) mimarisine geçiş yaparak makine hızını %65 artırıyoruz. Tek tuşla HMI üzerinden reçete format geçişi sağlanır ve mekanik fireler sıfırlanır. Çorlu Serbest Bölge'deki 12 istasyonlu döner tabla dolum makinesi vaka analizimizi buradan inceleyebilirsiniz: https://gokmen-54.github.io/gkm-engineering-hub/rehber/paketleme-makinesi-plc-servo-yazilim-revizyonu/ Yeni makinenizin yazılım ve pano imalatını anahtar teslim üstlenebiliriz.", "wa_text": "Merhaba, imalatını yapacağımız paketleme/dolum makinesi için Siemens PLC & Servo yazılım ve pano imalat teklifi istiyoruz."}];
     let activeFilter = 'all';
-    let currentView = 'reach'; // default to Agent Reach
-    let activeLeadFilter = 'all';
 
     async function sha256(message) {
         const msgBuffer = new TextEncoder().encode(message);
@@ -388,8 +304,6 @@
             sessionStorage.setItem('gkm_admin_auth', 'true');
             document.getElementById('auth-gate').classList.add('hidden');
             document.getElementById('admin-content').classList.remove('hidden');
-            switchView('reach');
-            renderLeads();
             loadAndRenderQuestions();
         } else {
             document.getElementById('pin-error').classList.remove('hidden');
@@ -402,170 +316,11 @@
         window.location.reload();
     }
 
-    function switchView(view) {
-        currentView = view;
-        const reachSec = document.getElementById('section-agent-reach');
-        const qaSec = document.getElementById('section-qa');
-        const reachBtn = document.getElementById('view-reach-btn');
-        const qaBtn = document.getElementById('view-qa-btn');
-
-        if (view === 'reach') {
-            reachSec.classList.remove('hidden');
-            qaSec.classList.add('hidden');
-            reachBtn.className = "bg-sky-600 text-white font-black text-xs py-2 px-4 rounded-xl shadow transition flex items-center gap-2";
-            qaBtn.className = "text-slate-700 hover:text-slate-950 font-bold text-xs py-2 px-4 rounded-xl transition flex items-center gap-2";
-            renderLeads();
-        } else {
-            reachSec.classList.add('hidden');
-            qaSec.classList.remove('hidden');
-            qaBtn.className = "bg-sky-600 text-white font-black text-xs py-2 px-4 rounded-xl shadow transition flex items-center gap-2";
-            reachBtn.className = "text-slate-700 hover:text-slate-950 font-bold text-xs py-2 px-4 rounded-xl transition flex items-center gap-2";
-            loadAndRenderQuestions();
-        }
-    }
-
-    // AGENT REACH LOGIC
-    function getStoredLeads() {
-        const stored = localStorage.getItem('gkm_agent_reach_leads');
-        return stored ? JSON.parse(stored) : INITIAL_LEADS;
-    }
-
-    function saveLeads(leads) {
-        localStorage.setItem('gkm_agent_reach_leads', JSON.stringify(leads));
-        renderLeads();
-    }
-
-    function filterLeads(sector) {
-        activeLeadFilter = sector;
-        const btns = ['all', 'tekstil', 'gida', 'kesim', 'komp'];
-        btns.forEach(b => {
-            const el = document.getElementById(`btn-lead-${b}`);
-            if (el) {
-                el.className = (b === sector || (sector === 'all' && b === 'all') || (sector === 'gida_soguk_hava' && b === 'gida') || (sector === 'kesim_makine' && b === 'kesim') || (sector === 'pano_kompanzasyon' && b === 'komp'))
-                    ? "bg-slate-900 text-white px-4 py-2 rounded-xl transition shadow"
-                    : "bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl transition";
-            }
-        });
-        renderLeads();
-    }
-
-    function renderLeads() {
-        const container = document.getElementById('leads-container');
-        const leads = getStoredLeads();
-        let filtered = leads;
-        if (activeLeadFilter !== 'all') {
-            filtered = leads.filter(l => l.sector === activeLeadFilter);
-        }
-
-        const contactedCount = leads.filter(l => l.contacted).length;
-        document.getElementById('reach-stat-total').innerText = leads.length;
-        document.getElementById('reach-stat-pitches').innerText = leads.length;
-        document.getElementById('reach-stat-contacted').innerText = contactedCount;
-
-        if (filtered.length === 0) {
-            container.innerHTML = `<div class="bg-white p-8 rounded-2xl border border-slate-200 text-center text-slate-400 font-medium">Bu sektörde aktif hedef bulunamadı.</div>`;
-            return;
-        }
-
-        let html = '';
-        filtered.forEach(lead => {
-            const cleanWaText = encodeURIComponent(lead.pitch_message);
-            const waShareUrl = `https://api.whatsapp.com/send?text=${cleanWaText}`;
-
-            html += `
-            <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm hover:shadow-md transition">
-                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-                    <div class="flex items-center gap-2">
-                        <span class="bg-sky-100 text-sky-800 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">${lead.sector_title}</span>
-                        <span class="text-xs font-bold text-slate-400">📍 ${lead.location}</span>
-                    </div>
-                    <div>
-                        ${lead.contacted ? '<span class="bg-emerald-100 text-emerald-800 text-[10px] font-black px-3 py-1 rounded-full uppercase">✅ İletildi</span>' : '<span class="bg-amber-100 text-amber-800 text-[10px] font-black px-3 py-1 rounded-full uppercase">🎯 Hedef Sırada</span>'}
-                    </div>
-                </div>
-
-                <div class="mb-4">
-                    <h3 class="text-lg font-black text-slate-900 mb-1">${lead.company}</h3>
-                    <div class="text-xs font-bold text-sky-700 mb-2">👤 Hedef Muhatap: ${lead.contact_role}</div>
-                    <div class="p-3 bg-red-50 border border-red-200/60 rounded-xl text-xs text-red-900 font-semibold mb-3">
-                        ⚠️ <b>Tespit Edilen Teknik Problem:</b> ${lead.need}
-                    </div>
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 mb-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs font-black uppercase text-slate-500 tracking-wider">Ajan Tarafından Üretilen Özel B2B Pitch:</span>
-                        <a href="${lead.case_url}" target="_blank" class="text-sky-600 hover:text-sky-700 text-xs font-bold">Vakayı İncele ➔</a>
-                    </div>
-                    <p id="pitch-text-${lead.id}" class="text-xs leading-relaxed text-slate-700 font-medium whitespace-pre-line">${lead.pitch_message}</p>
-                </div>
-
-                <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-100">
-                    <div class="flex flex-wrap items-center gap-2">
-                        <a href="${waShareUrl}" target="_blank" onclick="markLeadContacted('${lead.id}')" class="bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs py-2.5 px-4 rounded-xl transition flex items-center gap-1.5 shadow-md shadow-emerald-500/20">
-                            <span>💬 WhatsApp ile Gönder</span>
-                        </a>
-                        <button onclick="copyPitch('${lead.id}')" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl transition flex items-center gap-1.5 shadow">
-                            <span>📋 Pitch Metnini Kopyala</span>
-                        </button>
-                    </div>
-                    <div>
-                        <button onclick="toggleLeadStatus('${lead.id}')" class="text-slate-500 hover:text-slate-800 text-xs font-bold">
-                            ${lead.contacted ? 'Durumu Sıfırla ↺' : 'İletildi İşaretle ✔'}
-                        </button>
-                    </div>
-                </div>
-            </div>
-            `;
-        });
-
-        container.innerHTML = html;
-    }
-
-    function copyPitch(leadId) {
-        const text = document.getElementById(`pitch-text-${leadId}`).innerText;
-        navigator.clipboard.writeText(text).then(() => {
-            alert('Özel B2B teklif metni panoya kopyalandı! LinkedIn veya E-postaya yapıştırabilirsiniz.');
-        });
-    }
-
-    function markLeadContacted(leadId) {
-        const leads = getStoredLeads();
-        const l = leads.find(x => x.id === leadId);
-        if (l) {
-            l.contacted = true;
-            saveLeads(leads);
-        }
-    }
-
-    function toggleLeadStatus(leadId) {
-        const leads = getStoredLeads();
-        const l = leads.find(x => x.id === leadId);
-        if (l) {
-            l.contacted = !l.contacted;
-            saveLeads(leads);
-        }
-    }
-
-    function refreshLeadRadar() {
-        localStorage.removeItem('gkm_agent_reach_leads');
-        renderLeads();
-        alert('Agent Reach radarı güncellendi! Yeni sanayi vaka analizleri ve hedefler listelendi.');
-    }
-
-    function pingGooglebot() {
-        const sitemapUrl = encodeURIComponent("https://gokmen-54.github.io/gkm-engineering-hub/sitemap.xml");
-        const pingUrl = `https://www.google.com/ping?sitemap=${sitemapUrl}`;
-        window.open(pingUrl, '_blank');
-        alert('Googlebot sitemap ping tetiklendi! Google arama motoruna yeni sayfaların tarama bildirimi gönderildi.');
-    }
-
-
-    // Q&A LOGIC
     function getMergedDiscussions() {
         const stored = localStorage.getItem('gkm_discussions');
         let discussions = stored ? JSON.parse(stored) : JSON.parse(JSON.stringify(INITIAL_DISCUSSIONS));
         
+        // Also merge user submitted questions from localStorage
         const userQs = localStorage.getItem('gkm_user_questions');
         if (userQs) {
             const parsedUserQs = JSON.parse(userQs);
@@ -641,6 +396,7 @@
                 </div>
             `).join('');
 
+            // WhatsApp reply action
             let waBtn = '';
             if (item.phone) {
                 const cleanPhone = item.phone.replace(/[^0-9]/g, '');
@@ -667,8 +423,10 @@
                         <p class="text-slate-700 text-xs sm:text-sm bg-slate-50 p-4 rounded-xl border border-slate-100 font-medium">${item.question}</p>
                     </div>
 
+                    <!-- Existing Replies -->
                     ${repliesHtml}
 
+                    <!-- Inline Reply Form -->
                     <div class="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
                         <div class="flex items-center gap-2">
                             ${waBtn}
@@ -681,6 +439,7 @@
                         </button>
                     </div>
 
+                    <!-- Hidden Reply Input Box -->
                     <div id="reply-box-${item.id}" class="mt-3 hidden">
                         <textarea id="reply-text-${item.id}" rows="3" placeholder="Gökmen Elektrik mühendislik yanıtınızı yazın..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs font-medium text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none mb-2"></textarea>
                         <div class="flex justify-end gap-2">
@@ -787,8 +546,6 @@
         if (sessionStorage.getItem('gkm_admin_auth') === 'true') {
             document.getElementById('auth-gate').classList.add('hidden');
             document.getElementById('admin-content').classList.remove('hidden');
-            switchView('reach');
-            renderLeads();
             loadAndRenderQuestions();
         }
     });
