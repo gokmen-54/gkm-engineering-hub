@@ -21,6 +21,7 @@ from svg_generator import generate_svg_diagram
 from calculators_page import generate_calculators_page
 from projects_page import generate_projects_page
 from admin_page import generate_admin_page
+from software_page import generate_software_page
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT_DIR = os.path.join(BASE_DIR, "content")
@@ -446,6 +447,7 @@ def get_base_header(active_nav=""):
                 <a href="{SITE_URL}/plc-scada-yazilim/" class="hover:text-sky-600 transition {'text-sky-600 border-b-2 border-sky-600 pb-1' if active_nav == 'plc-scada-yazilim' else ''}">PLC & SCADA</a>
                 <a href="{SITE_URL}/pcb-elektronik-tasarim/" class="hover:text-sky-600 transition {'text-sky-600 border-b-2 border-sky-600 pb-1' if active_nav == 'pcb-elektronik-tasarim' else ''}">PCB Tasarımı</a>
                 <a href="{SITE_URL}/elektrik-panosu-salt/" class="hover:text-sky-600 transition {'text-sky-600 border-b-2 border-sky-600 pb-1' if active_nav == 'elektrik-panosu-salt' else ''}">Pano & Şalt</a>
+                <a href="{SITE_URL}/isletme-yazilimlari-web/" class="hover:text-indigo-600 transition text-indigo-700 flex items-center gap-1 {'font-extrabold border-b-2 border-indigo-600 pb-1' if active_nav == 'isletme-yazilimlari-web' else ''}"><span>💻 Yazılım & Web</span></a>
                 <a href="{SITE_URL}/projeler/" class="hover:text-sky-600 transition {'text-sky-600 border-b-2 border-sky-600 pb-1' if active_nav == 'projeler' else ''}">Vaka Analizleri</a>
                 <a href="{SITE_URL}/hesaplama/" class="hover:text-sky-600 transition text-amber-600 flex items-center gap-1.5 {'font-extrabold underline' if active_nav == 'hesaplama' else ''}">
                     <span>📐 Hesaplama</span>
@@ -1783,6 +1785,12 @@ def build_sitemap(articles):
     <priority>0.95</priority>
   </url>""",
         f"""  <url>
+    <loc>{SITE_URL}/isletme-yazilimlari-web/</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>""",
+        f"""  <url>
     <loc>{SITE_URL}/projeler/</loc>
     <lastmod>{today}</lastmod>
     <changefreq>weekly</changefreq>
@@ -1893,6 +1901,15 @@ def compile_site():
     with open(os.path.join(proj_dir, "index.html"), "w", encoding="utf-8") as f:
         f.write(proj_html)
     print(" -> /projeler/index.html (Vaka Analizleri & Proje Galerisi) olusturuldu.")
+
+    # 5.5 Sakarya Business Software & Live Web Demos (/isletme-yazilimlari-web/)
+    sw_dir = os.path.join(DIST_DIR, "isletme-yazilimlari-web")
+    os.makedirs(sw_dir, exist_ok=True)
+    sw_header = get_base_header(active_nav="isletme-yazilimlari-web")
+    sw_html = generate_software_page(SITE_URL, MAIN_WEBSITE, WHATSAPP_PHONE, PHONE_DISPLAY, sw_header, footer)
+    with open(os.path.join(sw_dir, "index.html"), "w", encoding="utf-8") as f:
+        f.write(sw_html)
+    print(" -> /isletme-yazilimlari-web/index.html (İşletme Yazılımları & Web Demoları) olusturuldu.")
 
     # 6. Admin Panel (/admin/)
     admin_dir = os.path.join(DIST_DIR, "admin")
