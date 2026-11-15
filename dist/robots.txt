@@ -16,4 +16,4 @@ User-agent: *
 Disallow: /admin/
 Allow: /
 
-Sitemap: https://gokmen-54.github.io/gkm-engineering-hub/sitemap.xml
+Sitemap: https://muhendislik.gkmelektrik.com/sitemap.xml

@@ -31,7 +31,8 @@ DISCUSSIONS_FILE = os.path.join(BASE_DIR, "generator", "discussions_database.jso
 PROJECTS_FILE = os.path.join(BASE_DIR, "generator", "projects_database.json")
 LEADS_FILE = os.path.join(BASE_DIR, "generator", "agent_reach_database.json")
 
-SITE_URL = "https://gokmen-54.github.io/gkm-engineering-hub"
+CUSTOM_DOMAIN = "muhendislik.gkmelektrik.com"
+SITE_URL = f"https://{CUSTOM_DOMAIN}"
 MAIN_WEBSITE = "https://gkmelektrik.com"
 WHATSAPP_PHONE = "905377029954"
 PHONE_DISPLAY = "0537 702 99 54"
@@ -1911,6 +1912,11 @@ def compile_site():
     with open(os.path.join(DIST_DIR, "robots.txt"), "w", encoding="utf-8") as f:
         f.write(build_robots_txt())
     print(" -> robots.txt olusturuldu.")
+
+    # CNAME for Custom Subdomain (muhendislik.gkmelektrik.com)
+    with open(os.path.join(DIST_DIR, "CNAME"), "w", encoding="utf-8") as f:
+        f.write(CUSTOM_DOMAIN.strip() + "\n")
+    print(f" -> CNAME ({CUSTOM_DOMAIN}) olusturuldu.")
 
     # 8. Copy Assets into dist/assets (including subdirectories like brands/)
     dist_assets = os.path.join(DIST_DIR, "assets")

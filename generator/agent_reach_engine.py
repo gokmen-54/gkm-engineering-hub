@@ -12,7 +12,7 @@ from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATABASE_PATH = os.path.join(BASE_DIR, "generator", "agent_reach_database.json")
-SITE_URL = "https://gokmen-54.github.io/gkm-engineering-hub"
+SITE_URL = "https://muhendislik.gkmelektrik.com"
 
 def ping_google_sitemap():
     sitemap_url = f"{SITE_URL}/sitemap.xml"
