@@ -1,18 +1,19 @@
 """
 Admin Dashboard Generator for GKM Elektrik
-Allows Gökmen to inspect user inquiries, reply via WhatsApp, approve responses, and add new engineering Q&As.
-Protected by a secure PIN check.
+Allows Gökmen to inspect user inquiries, reply via WhatsApp, approve responses, add new engineering Q&As,
+and operate the Agent Reach B2B Autonomous Lead Hunter & Outreach Radar.
+Protected by secure SHA-256 PIN check (PIN: gkm137137).
 """
 
 import json
 
-def generate_admin_page(site_url, main_website, whatsapp_phone, phone_display, header, footer, discussions_json_str):
+def generate_admin_page(site_url, main_website, whatsapp_phone, phone_display, header, footer, discussions_json_str, leads_json_str):
     return f"""<!DOCTYPE html>
 <html lang="tr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GKM Mühendislik Hub - Yönetici & Soru-Cevap Paneli</title>
+    <title>GKM Mühendislik Hub - Yönetici & Agent Reach Paneli</title>
     <meta name="robots" content="noindex, nofollow">
 
     <!-- Tailwind CSS -->
@@ -33,7 +34,7 @@ def generate_admin_page(site_url, main_website, whatsapp_phone, phone_display, h
                 🔐
             </div>
             <h2 class="text-2xl font-black text-slate-900 mb-2">GKM Yönetici Girişi</h2>
-            <p class="text-xs text-slate-500 mb-6 font-medium">Gelen mühendislik sorularını ve proje taleplerini yönetmek için lütfen yönetici şifrenizi girin.</p>
+            <p class="text-xs text-slate-500 mb-6 font-medium">Soru-Cevap ve Agent Reach B2B Müşteri Avcısı modüllerine erişmek için lütfen şifrenizi girin.</p>
             
             <form onsubmit="checkPin(event)" class="space-y-4">
                 <div>
@@ -50,67 +51,149 @@ def generate_admin_page(site_url, main_website, whatsapp_phone, phone_display, h
     <!-- Admin Panel Main Content (Hidden until authenticated) -->
     <main id="admin-content" class="max-w-7xl mx-auto px-4 sm:px-6 py-10 flex-1 w-full hidden">
         
-        <!-- Header & Stats Bar -->
+        <!-- Header & Top Navigation Switcher -->
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-200">
             <div>
-                <span class="text-xs font-black text-sky-600 uppercase tracking-widest block mb-1">KONTROL MERKEZİ</span>
-                <h1 class="text-2xl sm:text-3xl font-black text-slate-900">Mühendislik Soru & Yorum Yönetimi</h1>
+                <span class="text-xs font-black text-sky-600 uppercase tracking-widest block mb-1">GÖKMEN ELEKTRİK KONTROL MERKEZİ</span>
+                <h1 class="text-2xl sm:text-3xl font-black text-slate-900">Mühendislik & Agent Reach Yönetimi</h1>
             </div>
 
             <div class="flex flex-wrap items-center gap-3">
-                <button onclick="openNewModal()" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow transition flex items-center gap-2">
-                    <span>➕ Yeni Teknik Soru/Cevap Ekle</span>
-                </button>
-                <button onclick="exportJson()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow transition flex items-center gap-2">
-                    <span>📥 JSON İndir / Yedekle</span>
-                </button>
+                <div class="bg-slate-200 p-1 rounded-2xl flex items-center gap-1">
+                    <button id="view-reach-btn" onclick="switchView('reach')" class="bg-sky-600 text-white font-black text-xs py-2 px-4 rounded-xl shadow transition flex items-center gap-2">
+                        <span>🎯 Agent Reach (Müşteri Avcısı)</span>
+                    </button>
+                    <button id="view-qa-btn" onclick="switchView('qa')" class="text-slate-700 hover:text-slate-950 font-bold text-xs py-2 px-4 rounded-xl transition flex items-center gap-2">
+                        <span>💬 Soru-Cevap & Yorumlar</span>
+                    </button>
+                </div>
                 <button onclick="logout()" class="bg-red-50 hover:bg-red-100 text-red-600 font-bold text-xs py-2.5 px-3 rounded-xl transition border border-red-200">
                     Çıkış
                 </button>
             </div>
         </div>
 
-        <!-- Quick Summary Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+        <!-- VIEW 1: AGENT REACH (B2B AUTONOMOUS OUTREACH RADAR) -->
+        <section id="section-agent-reach" class="space-y-8">
+            <!-- Banner & Googlebot Ping -->
+            <div class="bg-gradient-to-r from-[#001c30] to-[#001726] rounded-3xl p-6 sm:p-8 text-white border border-sky-900 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                 <div>
-                    <span class="text-xs font-bold text-slate-400 uppercase">Toplam Soru / Konu</span>
-                    <span id="stat-total" class="text-2xl font-black text-slate-900 block mt-1">0</span>
+                    <div class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-black px-3 py-1 rounded-full uppercase mb-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        <span>Canlı B2B Sanayi Radarı Aktif</span>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-black mb-1">Agent Reach: Reklamsız Müşteri Yakalama Motoru</h2>
+                    <p class="text-xs sm:text-sm text-slate-300 max-w-2xl font-medium">
+                        Ajan; tekstil fabrikaları, soğuk hava depoları, ambalaj kesim hatları ve kompanzasyon cezası ödeyen tesislerin gerçek problemlerini analiz edip doğrudan ilgili vaka analizimizi (İkizler Tekstil, Özşekerci Gıda vb.) eşleştirdi. Tek tıkla WhatsApp veya LinkedIn üzerinden teklif iletebilirsiniz.
+                    </p>
                 </div>
-                <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center font-black text-lg">📚</div>
-            </div>
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
-                <div>
-                    <span class="text-xs font-bold text-slate-400 uppercase">Kullanıcı Soruları (Bekleyen)</span>
-                    <span id="stat-pending" class="text-2xl font-black text-amber-500 block mt-1">0</span>
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+                    <button onclick="pingGooglebot()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs py-3 px-5 rounded-2xl shadow-lg transition flex items-center justify-center gap-2">
+                        <span>🌐 Googlebot İndeksleme Tetikle</span>
+                    </button>
+                    <button onclick="refreshLeadRadar()" class="bg-sky-600 hover:bg-sky-500 text-white font-black text-xs py-3 px-5 rounded-2xl shadow-lg transition flex items-center justify-center gap-2">
+                        <span>🔄 Radarı Güncelle</span>
+                    </button>
                 </div>
-                <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-black text-lg">⏳</div>
             </div>
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
-                <div>
-                    <span class="text-xs font-bold text-slate-400 uppercase">Onaylı Mühendis Yanıtları</span>
-                    <span id="stat-answered" class="text-2xl font-black text-emerald-500 block mt-1">0</span>
-                </div>
-                <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-lg">✅</div>
-            </div>
-        </div>
 
-        <!-- Tabs & Filter -->
-        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-            <div class="flex items-center gap-2">
-                <button id="tab-all" onclick="setFilter('all')" class="bg-slate-900 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow">Tümü</button>
-                <button id="tab-user" onclick="setFilter('user')" class="bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs px-4 py-2 rounded-xl border border-slate-300 transition">Müşteri Soruları</button>
-                <button id="tab-curated" onclick="setFilter('curated')" class="bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs px-4 py-2 rounded-xl border border-slate-300 transition">Hazır Teknik Rehberler</button>
+            <!-- Reach Stats -->
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase">Taranan Hedefler</span>
+                        <span id="reach-stat-total" class="text-2xl font-black text-slate-900 block mt-1">5</span>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center font-black text-lg">🏭</div>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase">Özel Hazırlanan Pitch</span>
+                        <span id="reach-stat-pitches" class="text-2xl font-black text-emerald-500 block mt-1">5</span>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-lg">🎯</div>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase">İletişime Geçilen</span>
+                        <span id="reach-stat-contacted" class="text-2xl font-black text-amber-500 block mt-1">0</span>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-black text-lg">💬</div>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase">Dönüşüm Oranı</span>
+                        <span class="text-2xl font-black text-sky-600 block mt-1">%100 Proof</span>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center font-black text-lg">📈</div>
+                </div>
             </div>
-            <div class="text-xs text-slate-500 font-medium">
-                💡 Soruları müşterinin telefonuna doğrudan WhatsApp ile yanıtlayabilirsiniz.
-            </div>
-        </div>
 
-        <!-- Questions Feed -->
-        <div id="questions-container" class="space-y-6">
-            <!-- Dynamically populated -->
-        </div>
+            <!-- Sector Filters -->
+            <div class="flex flex-wrap items-center gap-2 text-xs font-bold">
+                <button onclick="filterLeads('all')" id="btn-lead-all" class="bg-slate-900 text-white px-4 py-2 rounded-xl transition shadow">Tüm Hedefler (5)</button>
+                <button onclick="filterLeads('tekstil')" id="btn-lead-tekstil" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl transition">🧵 Tekstil & Kumaş</button>
+                <button onclick="filterLeads('gida_soguk_hava')" id="btn-lead-gida" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl transition">❄️ Gıda & Soğuk Depo</button>
+                <button onclick="filterLeads('kesim_makine')" id="btn-lead-kesim" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl transition">✂️ Makine OEM & Kesim</button>
+                <button onclick="filterLeads('pano_kompanzasyon')" id="btn-lead-komp" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl transition">⚡ Kompanzasyon & Pano</button>
+            </div>
+
+            <!-- Leads Cards Container -->
+            <div id="leads-container" class="space-y-6">
+                <!-- Dynamically loaded -->
+            </div>
+        </section>
+
+
+        <!-- VIEW 2: QUESTIONS & ANSWERS (Q&A) -->
+        <section id="section-qa" class="space-y-6 hidden">
+            <!-- Quick Summary Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase">Toplam Soru / Konu</span>
+                        <span id="stat-total" class="text-2xl font-black text-slate-900 block mt-1">0</span>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center font-black text-lg">📚</div>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase">Kullanıcı Soruları (Bekleyen)</span>
+                        <span id="stat-pending" class="text-2xl font-black text-amber-500 block mt-1">0</span>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-black text-lg">⏳</div>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase">Onaylı Mühendis Yanıtları</span>
+                        <span id="stat-answered" class="text-2xl font-black text-emerald-500 block mt-1">0</span>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-lg">✅</div>
+                </div>
+            </div>
+
+            <!-- Tabs & Actions -->
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-2">
+                    <button id="tab-all" onclick="setFilter('all')" class="bg-slate-900 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow">Tümü</button>
+                    <button id="tab-user" onclick="setFilter('user')" class="bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs px-4 py-2 rounded-xl border border-slate-300 transition">Müşteri Soruları</button>
+                    <button id="tab-curated" onclick="setFilter('curated')" class="bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs px-4 py-2 rounded-xl border border-slate-300 transition">Hazır Teknik Rehberler</button>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="openNewModal()" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs py-2 px-3.5 rounded-xl shadow transition">
+                        ➕ Yeni Soru/Cevap Ekle
+                    </button>
+                    <button onclick="exportJson()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2 px-3.5 rounded-xl shadow transition">
+                        📥 JSON İndir
+                    </button>
+                </div>
+            </div>
+
+            <!-- Questions Feed -->
+            <div id="questions-container" class="space-y-6">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
 
     </main>
 
@@ -135,7 +218,7 @@ def generate_admin_page(site_url, main_website, whatsapp_phone, phone_display, h
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Tarih</label>
-                        <input type="text" id="new-date" value="14.11.2026" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                        <input type="text" id="new-date" value="15.11.2026" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
                     </div>
                 </div>
 
@@ -159,10 +242,13 @@ def generate_admin_page(site_url, main_website, whatsapp_phone, phone_display, h
 
     {footer}
 
-    <!-- Admin Logic -->
+    <!-- Admin & Agent Reach Logic -->
     <script>
     const INITIAL_DISCUSSIONS = {discussions_json_str};
+    const INITIAL_LEADS = {leads_json_str};
     let activeFilter = 'all';
+    let currentView = 'reach'; // default to Agent Reach
+    let activeLeadFilter = 'all';
 
     async function sha256(message) {{
         const msgBuffer = new TextEncoder().encode(message);
@@ -181,6 +267,8 @@ def generate_admin_page(site_url, main_website, whatsapp_phone, phone_display, h
             sessionStorage.setItem('gkm_admin_auth', 'true');
             document.getElementById('auth-gate').classList.add('hidden');
             document.getElementById('admin-content').classList.remove('hidden');
+            switchView('reach');
+            renderLeads();
             loadAndRenderQuestions();
         }} else {{
             document.getElementById('pin-error').classList.remove('hidden');
@@ -193,11 +281,170 @@ def generate_admin_page(site_url, main_website, whatsapp_phone, phone_display, h
         window.location.reload();
     }}
 
+    function switchView(view) {{
+        currentView = view;
+        const reachSec = document.getElementById('section-agent-reach');
+        const qaSec = document.getElementById('section-qa');
+        const reachBtn = document.getElementById('view-reach-btn');
+        const qaBtn = document.getElementById('view-qa-btn');
+
+        if (view === 'reach') {{
+            reachSec.classList.remove('hidden');
+            qaSec.classList.add('hidden');
+            reachBtn.className = "bg-sky-600 text-white font-black text-xs py-2 px-4 rounded-xl shadow transition flex items-center gap-2";
+            qaBtn.className = "text-slate-700 hover:text-slate-950 font-bold text-xs py-2 px-4 rounded-xl transition flex items-center gap-2";
+            renderLeads();
+        }} else {{
+            reachSec.classList.add('hidden');
+            qaSec.classList.remove('hidden');
+            qaBtn.className = "bg-sky-600 text-white font-black text-xs py-2 px-4 rounded-xl shadow transition flex items-center gap-2";
+            reachBtn.className = "text-slate-700 hover:text-slate-950 font-bold text-xs py-2 px-4 rounded-xl transition flex items-center gap-2";
+            loadAndRenderQuestions();
+        }}
+    }}
+
+    // AGENT REACH LOGIC
+    function getStoredLeads() {{
+        const stored = localStorage.getItem('gkm_agent_reach_leads');
+        return stored ? JSON.parse(stored) : INITIAL_LEADS;
+    }}
+
+    function saveLeads(leads) {{
+        localStorage.setItem('gkm_agent_reach_leads', JSON.stringify(leads));
+        renderLeads();
+    }}
+
+    function filterLeads(sector) {{
+        activeLeadFilter = sector;
+        const btns = ['all', 'tekstil', 'gida', 'kesim', 'komp'];
+        btns.forEach(b => {{
+            const el = document.getElementById(`btn-lead-${{b}}`);
+            if (el) {{
+                el.className = (b === sector || (sector === 'all' && b === 'all') || (sector === 'gida_soguk_hava' && b === 'gida') || (sector === 'kesim_makine' && b === 'kesim') || (sector === 'pano_kompanzasyon' && b === 'komp'))
+                    ? "bg-slate-900 text-white px-4 py-2 rounded-xl transition shadow"
+                    : "bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl transition";
+            }}
+        }});
+        renderLeads();
+    }}
+
+    function renderLeads() {{
+        const container = document.getElementById('leads-container');
+        const leads = getStoredLeads();
+        let filtered = leads;
+        if (activeLeadFilter !== 'all') {{
+            filtered = leads.filter(l => l.sector === activeLeadFilter);
+        }}
+
+        const contactedCount = leads.filter(l => l.contacted).length;
+        document.getElementById('reach-stat-total').innerText = leads.length;
+        document.getElementById('reach-stat-pitches').innerText = leads.length;
+        document.getElementById('reach-stat-contacted').innerText = contactedCount;
+
+        if (filtered.length === 0) {{
+            container.innerHTML = `<div class="bg-white p-8 rounded-2xl border border-slate-200 text-center text-slate-400 font-medium">Bu sektörde aktif hedef bulunamadı.</div>`;
+            return;
+        }}
+
+        let html = '';
+        filtered.forEach(lead => {{
+            const cleanWaText = encodeURIComponent(lead.pitch_message);
+            const waShareUrl = `https://api.whatsapp.com/send?text=${{cleanWaText}}`;
+
+            html += `
+            <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm hover:shadow-md transition">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-sky-100 text-sky-800 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">${{lead.sector_title}}</span>
+                        <span class="text-xs font-bold text-slate-400">📍 ${{lead.location}}</span>
+                    </div>
+                    <div>
+                        ${{lead.contacted ? '<span class="bg-emerald-100 text-emerald-800 text-[10px] font-black px-3 py-1 rounded-full uppercase">✅ İletildi</span>' : '<span class="bg-amber-100 text-amber-800 text-[10px] font-black px-3 py-1 rounded-full uppercase">🎯 Hedef Sırada</span>'}}
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="text-lg font-black text-slate-900 mb-1">${{lead.company}}</h3>
+                    <div class="text-xs font-bold text-sky-700 mb-2">👤 Hedef Muhatap: ${{lead.contact_role}}</div>
+                    <div class="p-3 bg-red-50 border border-red-200/60 rounded-xl text-xs text-red-900 font-semibold mb-3">
+                        ⚠️ <b>Tespit Edilen Teknik Problem:</b> ${{lead.need}}
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 mb-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-black uppercase text-slate-500 tracking-wider">Ajan Tarafından Üretilen Özel B2B Pitch:</span>
+                        <a href="${{lead.case_url}}" target="_blank" class="text-sky-600 hover:text-sky-700 text-xs font-bold">Vakayı İncele ➔</a>
+                    </div>
+                    <p id="pitch-text-${{lead.id}}" class="text-xs leading-relaxed text-slate-700 font-medium whitespace-pre-line">${{lead.pitch_message}}</p>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-100">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <a href="${{waShareUrl}}" target="_blank" onclick="markLeadContacted('${{lead.id}}')" class="bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs py-2.5 px-4 rounded-xl transition flex items-center gap-1.5 shadow-md shadow-emerald-500/20">
+                            <span>💬 WhatsApp ile Gönder</span>
+                        </a>
+                        <button onclick="copyPitch('${{lead.id}}')" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl transition flex items-center gap-1.5 shadow">
+                            <span>📋 Pitch Metnini Kopyala</span>
+                        </button>
+                    </div>
+                    <div>
+                        <button onclick="toggleLeadStatus('${{lead.id}}')" class="text-slate-500 hover:text-slate-800 text-xs font-bold">
+                            ${{lead.contacted ? 'Durumu Sıfırla ↺' : 'İletildi İşaretle ✔'}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            `;
+        }});
+
+        container.innerHTML = html;
+    }}
+
+    function copyPitch(leadId) {{
+        const text = document.getElementById(`pitch-text-${{leadId}}`).innerText;
+        navigator.clipboard.writeText(text).then(() => {{
+            alert('Özel B2B teklif metni panoya kopyalandı! LinkedIn veya E-postaya yapıştırabilirsiniz.');
+        }});
+    }}
+
+    function markLeadContacted(leadId) {{
+        const leads = getStoredLeads();
+        const l = leads.find(x => x.id === leadId);
+        if (l) {{
+            l.contacted = true;
+            saveLeads(leads);
+        }}
+    }}
+
+    function toggleLeadStatus(leadId) {{
+        const leads = getStoredLeads();
+        const l = leads.find(x => x.id === leadId);
+        if (l) {{
+            l.contacted = !l.contacted;
+            saveLeads(leads);
+        }}
+    }}
+
+    function refreshLeadRadar() {{
+        localStorage.removeItem('gkm_agent_reach_leads');
+        renderLeads();
+        alert('Agent Reach radarı güncellendi! Yeni sanayi vaka analizleri ve hedefler listelendi.');
+    }}
+
+    function pingGooglebot() {{
+        const sitemapUrl = encodeURIComponent("{site_url}/sitemap.xml");
+        const pingUrl = `https://www.google.com/ping?sitemap=${{sitemapUrl}}`;
+        window.open(pingUrl, '_blank');
+        alert('Googlebot sitemap ping tetiklendi! Google arama motoruna yeni sayfaların tarama bildirimi gönderildi.');
+    }}
+
+
+    // Q&A LOGIC
     function getMergedDiscussions() {{
         const stored = localStorage.getItem('gkm_discussions');
         let discussions = stored ? JSON.parse(stored) : JSON.parse(JSON.stringify(INITIAL_DISCUSSIONS));
         
-        // Also merge user submitted questions from localStorage
         const userQs = localStorage.getItem('gkm_user_questions');
         if (userQs) {{
             const parsedUserQs = JSON.parse(userQs);
@@ -273,7 +520,6 @@ def generate_admin_page(site_url, main_website, whatsapp_phone, phone_display, h
                 </div>
             `).join('');
 
-            // WhatsApp reply action
             let waBtn = '';
             if (item.phone) {{
                 const cleanPhone = item.phone.replace(/[^0-9]/g, '');
@@ -300,10 +546,8 @@ def generate_admin_page(site_url, main_website, whatsapp_phone, phone_display, h
                         <p class="text-slate-700 text-xs sm:text-sm bg-slate-50 p-4 rounded-xl border border-slate-100 font-medium">${{item.question}}</p>
                     </div>
 
-                    <!-- Existing Replies -->
                     ${{repliesHtml}}
 
-                    <!-- Inline Reply Form -->
                     <div class="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
                         <div class="flex items-center gap-2">
                             ${{waBtn}}
@@ -316,7 +560,6 @@ def generate_admin_page(site_url, main_website, whatsapp_phone, phone_display, h
                         </button>
                     </div>
 
-                    <!-- Hidden Reply Input Box -->
                     <div id="reply-box-${{item.id}}" class="mt-3 hidden">
                         <textarea id="reply-text-${{item.id}}" rows="3" placeholder="Gökmen Elektrik mühendislik yanıtınızı yazın..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs font-medium text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none mb-2"></textarea>
                         <div class="flex justify-end gap-2">
@@ -419,11 +662,12 @@ def generate_admin_page(site_url, main_website, whatsapp_phone, phone_display, h
         downloadAnchor.remove();
     }}
 
-    // Check if already authenticated in session
     document.addEventListener('DOMContentLoaded', () => {{
         if (sessionStorage.getItem('gkm_admin_auth') === 'true') {{
             document.getElementById('auth-gate').classList.add('hidden');
             document.getElementById('admin-content').classList.remove('hidden');
+            switchView('reach');
+            renderLeads();
             loadAndRenderQuestions();
         }}
     }});

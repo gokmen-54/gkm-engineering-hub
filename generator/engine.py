@@ -29,6 +29,7 @@ DOCS_DIR = os.path.join(BASE_DIR, "docs")
 ASSETS_DIR = os.path.join(BASE_DIR, "assets")
 DISCUSSIONS_FILE = os.path.join(BASE_DIR, "generator", "discussions_database.json")
 PROJECTS_FILE = os.path.join(BASE_DIR, "generator", "projects_database.json")
+LEADS_FILE = os.path.join(BASE_DIR, "generator", "agent_reach_database.json")
 
 SITE_URL = "https://gokmen-54.github.io/gkm-engineering-hub"
 MAIN_WEBSITE = "https://gkmelektrik.com"
@@ -293,6 +294,16 @@ def load_projects():
     if os.path.exists(PROJECTS_FILE):
         try:
             with open(PROJECTS_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return []
+    return []
+
+
+def load_agent_reach_leads():
+    if os.path.exists(LEADS_FILE):
+        try:
+            with open(LEADS_FILE, "r", encoding="utf-8") as f:
                 return json.load(f)
         except Exception:
             return []
@@ -1887,10 +1898,12 @@ def compile_site():
     os.makedirs(admin_dir, exist_ok=True)
     admin_header = get_base_header(active_nav="")
     discussions_json_str = json.dumps(discussions, ensure_ascii=False)
-    admin_html = generate_admin_page(SITE_URL, MAIN_WEBSITE, WHATSAPP_PHONE, PHONE_DISPLAY, admin_header, footer, discussions_json_str)
+    leads = load_agent_reach_leads()
+    leads_json_str = json.dumps(leads, ensure_ascii=False)
+    admin_html = generate_admin_page(SITE_URL, MAIN_WEBSITE, WHATSAPP_PHONE, PHONE_DISPLAY, admin_header, footer, discussions_json_str, leads_json_str)
     with open(os.path.join(admin_dir, "index.html"), "w", encoding="utf-8") as f:
         f.write(admin_html)
-    print(" -> /admin/index.html (Yönetici & Soru Paneli) olusturuldu.")
+    print(" -> /admin/index.html (Yönetici & Agent Reach Paneli) olusturuldu.")
 
     # 7. Sitemap & Robots
     with open(os.path.join(DIST_DIR, "sitemap.xml"), "w", encoding="utf-8") as f:

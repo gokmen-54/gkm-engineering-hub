@@ -249,35 +249,53 @@
 
             <!-- Body HTML -->
             <div class="prose max-w-none">
-                <h2 class="text-2xl sm:text-3xl font-black text-slate-950 mt-10 mb-4 pb-2 border-b border-slate-200">Endüstriyel Saha Standartları ve Mühendislik Yaklaşımı</h2>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-950 mt-10 mb-4 pb-2 border-b border-slate-200">Giriş: Mekanik Kam Sistemlerinin Sınırları ve Servo Dönüşümü</h2>
 <div class="h-3"></div>
-<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">Bu teknik rehber, <strong class='font-black text-slate-900'>GKM Elektrik & Mühendislik</strong> saha tecrübeleri, Türk sanayisindeki fiili fabrika uygulamaları ve uluslararası mühendislik standartları (IEC 61439, ISO 13849, IPC-A-610) doğrultusunda hazırlanmıştır.</p>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">Geleneksel ambalaj, dikey/yatay dolum (VFFS/HFFS) ve termoform makinelerinde hareket kontrolü uzun yıllar boyunca mekanik kam milleri ve dişli kutuları ile sağlanmıştır. Ancak farklı paket boylarına geçişte yaşanan mekanik ayar süreleri (downtime), mekanik aşınmalar ve hız limitleri günümüz esnek üretim bantlarında ciddi bir verimsizlik yaratmaktadır.</p>
 <div class="h-3"></div>
-<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">Sanayi tesislerinde yaşanan plansız üretim duruşları, yüksek reaktif enerji faturaları ve makine yazılım kararsızlıkları doğru mühendislik analizi ve kaliteli şalt/otomasyon komponentleri ile tamamen önlenebilir.</p>
-<div class="h-3"></div>
-<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">---</p>
-<div class="h-3"></div>
-<h3 class="text-xl font-black text-slate-900 mt-8 mb-3 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-sky-500"></span>Temel Tasarım ve Uygulama Kriterleri:</h3>
-<div class="h-3"></div>
-<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">**Uluslararası Standartlara Tam Uyum:**</li>
-<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">   Panolarda IEC 61439 tip testli hücre yapısı, klemenslerde yay baskılı titreşime dayanıklı bağlantılar, yazılımda ise IEC 61131-3 SCL programlama disiplini.</p>
-<div class="h-3"></div>
-<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">**Termal ve Elektromanyetik Uyumluluk (EMC/EMI):**</li>
-<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">   Servo sürücü ve motor kablolarında 360 derece zırh topraklaması, kontrol sinyalleri ile güç kabloları arasında minimum 20 cm ayırma mesafesi ve pano içi zorlamalı fanlı/klimalı havalandırma.</p>
-<div class="h-3"></div>
-<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">**Gözlemlenebilirlik ve Hızlı Arıza Teşhisi:**</li>
-<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">   SCADA ve operatör panellerinde (HMI) operatörü doğrudan arızalı sensör ve sigortaya yönlendiren Türkçe alarm ağacı ve olay günlüğü (event logger).</p>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4"><strong class='font-black text-slate-900'>GKM Elektrik & Mühendislik</strong> olarak gerçekleştirdiğimiz hat revizyonlarında, mekanik kam milleri yerine <strong class='font-black text-slate-900'>Elektronik Kam (Electronic Camming)</strong> ve <strong class='font-black text-slate-900'>Sanal Master (Virtual Master)</strong> mimarisine geçiş yaparak dakikadaki paket sayısını (PPM) %40 ila %65 oranında artırıyoruz.</p>
 <div class="h-3"></div>
 <p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">---</p>
 <div class="h-3"></div>
-<h3 class="text-xl font-black text-slate-900 mt-8 mb-3 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-sky-500"></span>GKM Elektrik İle Projelendirme Süreci:</h3>
+<h2 class="text-2xl sm:text-3xl font-black text-slate-950 mt-10 mb-4 pb-2 border-b border-slate-200">Elektronik Kam (Camming) Mimarisi Nasıl Çalışır?</h2>
 <div class="h-3"></div>
-<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-disc mb-1.5">**1. Saha ve Keşif Analizi:** Tesisinizde veya makinenizde motor güçleri, I/O listesi ve haberleşme gereksinimleri yerinde tespit edilir.</li>
-<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-disc mb-1.5">**2. EPLAN Projelendirme & Şematik Çizim:** Tüm pano ve kablaj şemaları uluslararası normlarda çizilerek onayınıza sunulur.</li>
-<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-disc mb-1.5">**3. Atölye İmalatı & Fabrika Kabul Testi (FAT):** Tip testli karkaslarda montajı tamamlanan panolar gerilim ve fonksiyon testlerinden geçirilir.</li>
-<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-disc mb-1.5">**4. Saha Devreye Alma (SAT) & 7/24 Teknik Destek:** Uzman otomasyon ekibimiz hattı sahada devreye alır ve operatör eğitimlerini tamamlar.</li>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">Siemens S7-1500T (Technology CPU) veya Beckhoff TwinCAT NC Motion denetleyicileri üzerinde tanımlanan kam tabloları (5. dereceden polinom veya Spline eğrileri), master eksenin (örneğin film çekici rulo veya ana konveyör) enkoder pozisyonunu referans alır.</p>
 <div class="h-3"></div>
-<blockquote class="border-l-4 border-sky-500 bg-sky-50/70 text-slate-800 p-4 my-6 rounded-r-2xl text-sm font-medium leading-relaxed italic">**Mühendislik Tavsiyesi:** Projelerinizde revizyon maliyetlerini düşürmek için mutlaka gerber, EPLAN veya tek hat şemanızı önceden mühendislerimize inceletiniz.</blockquote>
+<div class="my-6 rounded-2xl overflow-hidden border border-slate-700 bg-slate-950 shadow-xl"><div class="bg-slate-900 px-4 py-2 text-[11px] font-mono text-sky-400 font-bold border-b border-slate-800 flex items-center justify-between"><span>SCL</span><span class="text-slate-500">GKM Endüstriyel Standart</span></div><pre class="p-4 text-xs font-mono text-emerald-300 overflow-x-auto leading-relaxed">// Siemens TIA Portal SCL Örneği: Kam Senkronizasyon Bloğu
+FUNCTION_BLOCK "GKM_CamSync_Control"
+VAR_INPUT
+    EnableSync : BOOL;
+    MasterAxis : DB_ANY;
+    SlaveAxis  : DB_ANY;
+    CamProfile : DB_ANY;
+END_VAR
+VAR_OUTPUT
+    InSync : BOOL;
+    Busy   : BOOL;
+    Error  : BOOL;
+END_VAR
+BEGIN
+    IF EnableSync THEN
+        MC_CamIn(Master := MasterAxis,
+                 Slave  := SlaveAxis,
+                 Cam    := CamProfile,
+                 Execute := TRUE);
+        InSync := SlaveAxis.StatusBits.Synchronized;
+    END_IF;
+END_FUNCTION_BLOCK</pre></div>
+<div class="h-3"></div>
+<h3 class="text-xl font-black text-slate-900 mt-8 mb-3 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-sky-500"></span>Temel Mühendislik Kriterleri:</h3>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">**Jerk (Sarsıntı) Sınırlaması:** Yüksek hızlarda ani ivmelenme değişimleri film yırtılmalarına ve mekanik titreşime yol açar. S-rampa (S-Curve) jerk filtreleme zorunludur.</li>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">**Kayıpsız Renk Fotoseli Düzeltmesi (Mark Registration):** Baskılı ambalaj filmlerinde baskı kaymalarını önlemek için yüksek hızlı dijital giriş (Fast Input - sub-millisecond) ile film pozisyonu anlık kompanze edilir.</li>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">**Emniyet (Safety Integrated - ISO 13849-1):** Acil stop ve kapı açılma durumlarında STO (Safe Torque Off) ve SLS (Safely-Limited Speed) devreye girmelidir.</li>
+<div class="h-3"></div>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">---</p>
+<div class="h-3"></div>
+<h2 class="text-2xl sm:text-3xl font-black text-slate-950 mt-10 mb-4 pb-2 border-b border-slate-200">Proje Adımları ve Saha Devreye Alma</h2>
+<div class="h-3"></div>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">**Mekanik & Atalet (Inertia) Analizi:** Motor miline yansıyan atalet oranının (J_load / J_motor) 5:1 seviyesinin altında tutulması sağlanır.</li>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">**EPLAN P8 Pano Projelendirmesi:** Siemens S120 / V90 sürücü güç dağıtımı, hat filtreleri ve frenleme dirençleri standartlara uygun boyutlandırılır.</li>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">**Saha Entegrasyonu ve Test:** PLC, HMI ve servo haberleşmesi PROFINET IRT (Isochronous Real-Time) protokolü ile 1 ms altında çevrim zamanında test edilir.</li>
             </div>
 
             <!-- Article Call To Action Box -->

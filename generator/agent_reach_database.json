@@ -1,0 +1,67 @@
+[
+  {
+    "id": "lead-1",
+    "company": "Bursa Dokuma & Kumaş İmalatçıları (DOSAB Grubu)",
+    "contact_role": "Fabrika Müdürü / Üretim Şefi",
+    "location": "Bursa / Demirtaş OSB (DOSAB)",
+    "sector": "tekstil",
+    "sector_title": "Tekstil & Kumaş İmalatı",
+    "need": "Kumaş kalite kontrol ve rulo sarım hatlarında manuel metre okuma ve el terazisiyle tartım karışıklıkları.",
+    "case_study": "İkizler Tekstil Kumaş Kontrol, Metraj & HANA Terazi - Barkodlu Tartım Makinesi",
+    "case_url": "https://gokmen-54.github.io/gkm-engineering-hub/rehber/kumas-kontrol-ve-otomatik-boy-kesme-makinesi-plc-otomasyonu/",
+    "pitch_message": "Merhaba, Bursa tekstil hatlarında kumaş muayene ve sarım aşamasında rulo metreleri ile el terazisi tartımında operatör hatalarını sıfırlayan entegre bir otomasyon geliştirdik. İkizler Tekstil projemizde optik enkoder ile ±1 mm metrajı, HANA HS-80 dijital teraziyi (RS232) ve Argox termal barkod yazıcıyı doğrudan tek bir PLC ekranına bağladık. Rulo bittiğinde net kilo (örn: 18.80 kg), metre ve gramaj (180 gr/m²) anında hesaplanıp EAN-13 barkodlu etiket basılıyor. Sahada çalışan makine videomuzu ve teknik şemamızı inceleyebilirsiniz: https://gokmen-54.github.io/gkm-engineering-hub/rehber/kumas-kontrol-ve-otomatik-boy-kesme-makinesi-plc-otomasyonu/ Mevcut kumaş kontrol veya sarım makineleriniz için revizyon düşünürseniz yardımcı olmaktan memnuniyet duyarız.",
+    "wa_text": "Merhaba, kumaş kontrol ve sarım makinemiz için HANA terazi ve barkod yazıcı PLC entegrasyonu hakkında bilgi ve fiyat almak istiyoruz."
+  },
+  {
+    "id": "lead-2",
+    "company": "Marmara Soğuk Hava Depoları & Meyve/Sebze Lojistik Tesisleri",
+    "contact_role": "Tesis İşletme Müdürü & Bakım Sorumlusu",
+    "location": "Sakarya / Akyazı, Hendek & Pamukova",
+    "sector": "gida_soguk_hava",
+    "sector_title": "Gıda & Soğuk Hava Deposu",
+    "need": "Gece kompresör termiği atması veya kapı açık kalmasında ürün bozulma riski, HACCP denetim raporu eksikliği.",
+    "case_study": "OTS Soğuk Hava Deposu 8+ Oda SCADA & WhatsApp 7/24 Alarm Takip Sistemi (Özşekerci Gıda)",
+    "case_url": "https://gokmen-54.github.io/gkm-engineering-hub/rehber/soguk-hava-deposu-scada-ve-uzaktan-sicaklik-takip-sistemi-ots/",
+    "pitch_message": "İyi günler, Sakarya ve Marmara bölgesindeki soğuk hava depolarında gece kompresör arızası veya kapı açık kalması sebebiyle ürün bozulma riskini sıfıra indiren OTS (Otomatik Takip Sistemi) mimarimizi Özşekerci Gıda'da devreye aldık. 8 bağımsız odanın sıcaklık ve nemini PT100 sensörlerle ±0.1°C hassasiyetle izliyoruz. Sıcaklık +4°C'yi aştığında veya fan durduğunda elektrik ve internet kesilse bile 4G IoT modemle nöbetçi personelin cebine anlık WhatsApp alarmı düşüyor. Saha kurulum fotoğraflarımız ve SCADA arayüzümüz: https://gokmen-54.github.io/gkm-engineering-hub/rehber/soguk-hava-deposu-scada-ve-uzaktan-sicaklik-takip-sistemi-ots/ Tesisiniz için ücretsiz keşif ve teklif hazırlayabiliriz.",
+    "wa_text": "Merhaba GKM Elektrik, soğuk hava depomuz için OTS uzaktan sıcaklık takip ve WhatsApp alarm sistemi teklifi almak istiyoruz."
+  },
+  {
+    "id": "lead-3",
+    "company": "Gebze & Sakarya Ambalaj, Sac Dilme ve Profil İmalatçıları (OEM)",
+    "contact_role": "Makine Tasarım Şefi & İmalat Müdürü",
+    "location": "Kocaeli / Gebze İMES OSB & Sakarya 1. OSB",
+    "sector": "kesim_makine",
+    "sector_title": "Makine İmalatçıları (OEM) & Kesim",
+    "need": "Giyotin kesme hatlarında mekanik dayama ayar süresi (downtime), hız arttıkça boy kayması ve fire oranı.",
+    "case_study": "GKM Dokunmatik HMI & PLC Otomatik Boy Kesim / Dilimleme Makinesi Yazılımı",
+    "case_url": "https://gokmen-54.github.io/gkm-engineering-hub/projeler/",
+    "pitch_message": "Merhaba, ambalaj, sac dilme ve plastik profil boy kesim makinelerinde mekanik ayar sürelerini sıfırlayan ve ±0.15 mm kesim hassasiyeti sağlayan GKM PLC & HMI boy kesim yazılımımızı incelemenizi öneririz. Operatör HMI ekranından Kesim Boyu (mm) ve Hedef Adet girer; enkoder puls/mm kalibrasyonu ile malzeme milimetrik sürülür, hedef adede ulaşıldığında otomatik durdurulur. Çift yönlü limit siviç emniyeti ile bıçak ve operatör güvenliği garanti altındadır. Detaylı HMI ekranlarımızı ve vaka analizimizi buradan görebilirsiniz: https://gokmen-54.github.io/gkm-engineering-hub/projeler/ İmalatını yaptığınız makineler için pano ve yazılım partnerliği teklifimizi iletebiliriz.",
+    "wa_text": "Merhaba, imal ettiğimiz kesme/dilimleme makinesi için GKM HMI ve PLC boy kesim otomasyon paketi teklifi istiyoruz."
+  },
+  {
+    "id": "lead-4",
+    "company": "Dilovası & Kocaeli Plastik Enjeksiyon & Pres Fabrikaları",
+    "contact_role": "Fabrika Enerji Yöneticisi & Elektrik Bakım Şefi",
+    "location": "Kocaeli / Dilovası İMES & TOSB",
+    "sector": "pano_kompanzasyon",
+    "sector_title": "Pano İmalatı & Kompanzasyon",
+    "need": "VFD sürücüler ve darbeli presler yüzünden her ay yüz binlerce lira reaktif ceza ve kondansatör patlama problemi.",
+    "case_study": "1250 kVA Tristörlü Hızlı Kompanzasyon ve 189 Hz %7 De-Tuned Harmonik Filtreli Pano",
+    "case_url": "https://gokmen-54.github.io/gkm-engineering-hub/rehber/harmonik-filtreli-kompanzasyon-panosu-hesabi-ve-imalati/",
+    "pitch_message": "Merhaba, fabrikanızda çalışan VFD motor sürücüleri veya punta kaynak/pres makineleri sebebiyle reaktif ceza ödüyor veya kompanzasyon kondansatörlerinde şişme/patlama yaşıyorsanız; Dilovası'ndaki otomotiv tesisinde reaktif cezayı 145.000 TL'den 0 TL'ye düşürdüğümüz tristörlü hızlı kompanzasyon panosu referansımızı inceleyebilirsiniz. 189 Hz (%7) demir nüveli harmonik filtreler ve sıfır geçişli tristör modülleri ile rezonans %100 engellenir. Tesisinizin faturasını ve tek hat şemasını iletirseniz, 0 TL kompanzasyon hesabınızı yapıp tip testli pano teklifimizi 2 saatte hazırlayabiliriz: https://gokmen-54.github.io/gkm-engineering-hub/hesaplama/#kompanzasyon-hesabi",
+    "wa_text": "Merhaba GKM Elektrik, fabrikamızdaki reaktif ceza ve kompanzasyon panosu için son elektrik faturamızı gönderip teklif almak istiyoruz."
+  },
+  {
+    "id": "lead-5",
+    "company": "Özel Otomasyon Makinesi İmalatçıları (OEM) - Paketleme & Dolum",
+    "contact_role": "Mekanik Tasarım & Ar-Ge Müdürü",
+    "location": "İstanbul İkitelli OSB & Bursa Nilüfer",
+    "sector": "makine_otomasyonu",
+    "sector_title": "Özel Makine Otomasyonu",
+    "need": "Mekanik kamlı eski makinelerde hız sınırı (düşük PPM) ve format geçişinde saatler süren mekanik ayar kaybı.",
+    "case_study": "Siemens S7-1515T & S210 Elektronik Kamlama (Electronic Camming) ile 42 BPM İlaç/Dolum Makinesi",
+    "case_url": "https://gokmen-54.github.io/gkm-engineering-hub/rehber/paketleme-makinesi-plc-servo-yazilim-revizyonu/",
+    "pitch_message": "Merhaba, imal ettiğiniz dikey/yatay dolum ve paketleme makinelerinde mekanik kam aşınmaları yerine Siemens S7-1500T Teknoloji CPU ve S210 servo motorlar ile Elektronik Kam (Electronic Camming) mimarisine geçiş yaparak makine hızını %65 artırıyoruz. Tek tuşla HMI üzerinden reçete format geçişi sağlanır ve mekanik fireler sıfırlanır. Çorlu Serbest Bölge'deki 12 istasyonlu döner tabla dolum makinesi vaka analizimizi buradan inceleyebilirsiniz: https://gokmen-54.github.io/gkm-engineering-hub/rehber/paketleme-makinesi-plc-servo-yazilim-revizyonu/ Yeni makinenizin yazılım ve pano imalatını anahtar teslim üstlenebiliriz.",
+    "wa_text": "Merhaba, imalatını yapacağımız paketleme/dolum makinesi için Siemens PLC & Servo yazılım ve pano imalat teklifi istiyoruz."
+  }
+]
