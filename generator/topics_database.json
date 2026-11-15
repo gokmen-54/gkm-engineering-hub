@@ -193,5 +193,18 @@
     "cta_headline": "Enjeksiyon Makinelerinizin Elektrik Tüketimini Düşürün",
     "cta_text": "GKM Elektrik anahtar teslim hidrolik servo dönüşüm ve PLC revizyonu ile enerji faturanızı %40 azaltır. Teklif alın.",
     "date": "2026-11-15"
+  },
+  {
+    "slug": "soguk-hava-deposu-merkezi-plc-ve-scada-sicaklik-takip-otomasyonu",
+    "category": "plc-scada-yazilim",
+    "category_title": "PLC & SCADA Yazılım",
+    "title": "Endüstriyel Soğuk Hava Depolarında Merkezi PLC & SCADA Otomasyonu: Enerji Optimizasyonu ve Defrost Kontrolü",
+    "summary": "Kompresör kaskad kontrolü, elektronik genleşme vanası yönetimi, akıllı defrost döngüleri ve bulut tabanlı HACCP sıcaklık kayıt altyapısı.",
+    "target_audience": "Gıda Fabrikası Yöneticileri & Soğutma Mühendisleri",
+    "reading_time": "8 dk okuma",
+    "diagram_type": "scada_iot",
+    "cta_headline": "Soğuk Depo Tesisiniz İçin Otomasyon ve SCADA Çözümü",
+    "cta_text": "HACCP uyumlu, uzaktan SMS/alarm bildirimli ve enerji tasarruflu soğuk hava otomasyonu için bize danışın.",
+    "date": "2026-11-15"
   }
 ]
