@@ -206,5 +206,18 @@
     "cta_headline": "Soğuk Depo Tesisiniz İçin Otomasyon ve SCADA Çözümü",
     "cta_text": "HACCP uyumlu, uzaktan SMS/alarm bildirimli ve enerji tasarruflu soğuk hava otomasyonu için bize danışın.",
     "date": "2026-11-15"
+  },
+  {
+    "slug": "stm32-ve-can-bus-tabanli-endustriyel-kontrol-karti-tasarimi",
+    "category": "pcb-elektronik-tasarim",
+    "category_title": "PCB & Elektronik Tasarım",
+    "title": "STM32 Mikrodenetleyici ve İzole CAN Bus (CANopen) Tabanlı Endüstriyel Makine Kontrol Kartı Geliştirme",
+    "summary": "Otomotiv ve ağır sanayi ortamları için diferansiyel sinyal koruması, TVS diyot seçimi, optoizole alıcı-verici mimarisi ve FreeRTOS firmware kurgusu.",
+    "target_audience": "Elektronik Ar-Ge Mühendisleri & Donanım Geliştiriciler",
+    "reading_time": "10 dk okuma",
+    "diagram_type": "pcb_stackup",
+    "cta_headline": "Özel Elektronik Kart ve Gömülü Yazılım Projeniz mi Var?",
+    "cta_text": "STM32 mimarisinde şematik, çok katmanlı PCB ve firmware yazılımını endüstriyel kalitede geliştirip teslim ediyoruz.",
+    "date": "2026-11-16"
   }
 ]
