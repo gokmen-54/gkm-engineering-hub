@@ -232,5 +232,18 @@
     "cta_headline": "Faturanıza Yansıyan Reaktif Ceza Bedelini Sıfırlayın",
     "cta_text": "Tesisinizde harmonik ve güç analizi yapıp, ceza garantili tristörlü kompanzasyon panosu projelendiriyoruz.",
     "date": "2026-11-17"
+  },
+  {
+    "slug": "beckhoff-twincat-3-ile-ethercat-cok-eksenli-hareket-kontrolu",
+    "category": "plc-scada-yazilim",
+    "category_title": "PLC & SCADA Yazılım",
+    "title": "Beckhoff TwinCAT 3 & EtherCAT ile Çok Eksenli Yüksek Hızlı Hareket Kontrolü (NC/CNC ve Robotik)",
+    "summary": "1 ms altı çevrim süresi, distributed clock (DC) senkronizasyonu, PLCopen Motion Control blokları ve kartezyen robot kinematik yazılımı.",
+    "target_audience": "Makine Tasarımcıları & Hareket Kontrol Mühendisleri",
+    "reading_time": "9 dk okuma",
+    "diagram_type": "servo_sync",
+    "cta_headline": "Makinanızda Mikrosaniye Düzeyinde Hassasiyet İstiyor Musunuz?",
+    "cta_text": "GKM Elektrik Beckhoff TwinCAT ve EtherCAT servo sistemlerinde uzman yazılım ve devreye alma desteği sağlar.",
+    "date": "2026-11-17"
   }
 ]

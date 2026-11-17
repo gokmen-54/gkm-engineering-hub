@@ -55,6 +55,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://muhendislik.gkmelektrik.com/rehber/beckhoff-twincat-3-ile-ethercat-cok-eksenli-hareket-kontrolu/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://muhendislik.gkmelektrik.com/rehber/stm32-ve-can-bus-tabanli-endustriyel-kontrol-karti-tasarimi/</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
@@ -73,13 +79,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://muhendislik.gkmelektrik.com/rehber/kumas-kontrol-ve-otomatik-boy-kesme-makinesi-plc-otomasyonu/</loc>
+    <loc>https://muhendislik.gkmelektrik.com/rehber/mcc-motor-kontrol-panosu-soft-starter-ve-vfd-secim-rehberi/</loc>
     <lastmod>2026-11-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://muhendislik.gkmelektrik.com/rehber/mcc-motor-kontrol-panosu-soft-starter-ve-vfd-secim-rehberi/</loc>
+    <loc>https://muhendislik.gkmelektrik.com/rehber/kumas-kontrol-ve-otomatik-boy-kesme-makinesi-plc-otomasyonu/</loc>
     <lastmod>2026-11-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -91,13 +97,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://muhendislik.gkmelektrik.com/rehber/altium-designer-ile-yuksek-akim-ve-sicaklik-yonetimi-pcb/</loc>
+    <loc>https://muhendislik.gkmelektrik.com/rehber/iso-13849-1-makine-emniyet-devresi-tasarimi-sil-pl-hesabi/</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://muhendislik.gkmelektrik.com/rehber/iso-13849-1-makine-emniyet-devresi-tasarimi-sil-pl-hesabi/</loc>
+    <loc>https://muhendislik.gkmelektrik.com/rehber/altium-designer-ile-yuksek-akim-ve-sicaklik-yonetimi-pcb/</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
