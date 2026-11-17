@@ -219,5 +219,18 @@
     "cta_headline": "Özel Elektronik Kart ve Gömülü Yazılım Projeniz mi Var?",
     "cta_text": "STM32 mimarisinde şematik, çok katmanlı PCB ve firmware yazılımını endüstriyel kalitede geliştirip teslim ediyoruz.",
     "date": "2026-11-16"
+  },
+  {
+    "slug": "reaktif-guc-cezasi-nasil-onlenir-hizli-tristorlu-kompanzasyon",
+    "category": "elektrik-panosu-salt",
+    "category_title": "Elektrik Panosu & Şalt",
+    "title": "Fabrikalarda Reaktif Güç Cezasını Sıfırlama Yöntemi: Hızlı Tristörlü Kompanzasyon ve Rezonans Koruması",
+    "summary": "Punta kaynağı, vinç ve asansör gibi dinamik yüklerde klasik kontaktörlerin yetersizliği; sıfır geçişli tristör anahtarlama ve indüktif/kapasitif ceza önleme rehberi.",
+    "target_audience": "Tesis Müdürleri & Enerji Yöneticileri",
+    "reading_time": "7 dk okuma",
+    "diagram_type": "detuned_reactor",
+    "cta_headline": "Faturanıza Yansıyan Reaktif Ceza Bedelini Sıfırlayın",
+    "cta_text": "Tesisinizde harmonik ve güç analizi yapıp, ceza garantili tristörlü kompanzasyon panosu projelendiriyoruz.",
+    "date": "2026-11-17"
   }
 ]
