@@ -253,5 +253,23 @@
         }
       ]
     }
+  ],
+  "iec-61439-form-4b-cekmeceli-mcc-panosu-tasarim-standartlari": [
+    {
+      "id": "q-auto-iec-61439-form-",
+      "author_name": "Serkan Aydın",
+      "company": "Tesis Bakım Mühendisi (Kocaeli OSB)",
+      "date": "2026-11-18",
+      "question": "IEC 61439-2 Form 4b Standardında Çekmeceli MCC Panosu Tasarım ve İmalat Kriterleri konusunda benzer bir sahada uygulama yaparken nelere en çok dikkat etmeliyiz?",
+      "replies": [
+        {
+          "author": "Gökmen Elektrik & Mühendislik Ekibi",
+          "role": "Sistem Entegratörü",
+          "date": "2026-11-18",
+          "text": "Serkan Bey merhaba. Bu uygulamada en kritik husus; uluslararası normlara (IEC/ISO) uygun koruma ve parazit izolasyonudur. Tesisinizin şemasını veya teknik şartnamenizi bize WhatsApp üzerinden iletirseniz, projenizi ücretsiz inceleyip en uygun komponent seçimini yapabiliriz.",
+          "verified": true
+        }
+      ]
+    }
   ]
 }

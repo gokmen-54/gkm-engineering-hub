@@ -245,5 +245,18 @@
     "cta_headline": "Makinanızda Mikrosaniye Düzeyinde Hassasiyet İstiyor Musunuz?",
     "cta_text": "GKM Elektrik Beckhoff TwinCAT ve EtherCAT servo sistemlerinde uzman yazılım ve devreye alma desteği sağlar.",
     "date": "2026-11-17"
+  },
+  {
+    "slug": "iec-61439-form-4b-cekmeceli-mcc-panosu-tasarim-standartlari",
+    "category": "elektrik-panosu-salt",
+    "category_title": "Elektrik Panosu & Şalt",
+    "title": "IEC 61439-2 Form 4b Standardında Çekmeceli MCC Panosu Tasarım ve İmalat Kriterleri",
+    "summary": "Kesintisiz üretim yapan çimento, cam ve kimya tesislerinde enerjiyi kesmeden çekmece modülü değiştirme, dahili ark koruması ve bara boyutlandırma.",
+    "target_audience": "Elektrik Proje Mühendisleri & Ağır Sanayi Tesis Şefleri",
+    "reading_time": "8 dk okuma",
+    "diagram_type": "default",
+    "cta_headline": "Tip Testli Çekmeceli Pano İmalatında Çözüm Ortağınız",
+    "cta_text": "Uluslararası tip testli pano karkaslarımız ve orijinal şalt ekipmanlarımızla projenizi anahtar teslim üretiyoruz.",
+    "date": "2026-11-18"
   }
 ]
