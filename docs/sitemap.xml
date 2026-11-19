@@ -55,19 +55,25 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://muhendislik.gkmelektrik.com/rehber/gida-harmonik-kompanzasyon-panosu-39/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://muhendislik.gkmelektrik.com/rehber/iec-61439-form-4b-cekmeceli-mcc-panosu-tasarim-standartlari/</loc>
     <lastmod>2026-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://muhendislik.gkmelektrik.com/rehber/beckhoff-twincat-3-ile-ethercat-cok-eksenli-hareket-kontrolu/</loc>
+    <loc>https://muhendislik.gkmelektrik.com/rehber/reaktif-guc-cezasi-nasil-onlenir-hizli-tristorlu-kompanzasyon/</loc>
     <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://muhendislik.gkmelektrik.com/rehber/reaktif-guc-cezasi-nasil-onlenir-hizli-tristorlu-kompanzasyon/</loc>
+    <loc>https://muhendislik.gkmelektrik.com/rehber/beckhoff-twincat-3-ile-ethercat-cok-eksenli-hareket-kontrolu/</loc>
     <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -91,6 +97,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://muhendislik.gkmelektrik.com/rehber/mcc-motor-kontrol-panosu-soft-starter-ve-vfd-secim-rehberi/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://muhendislik.gkmelektrik.com/rehber/kumas-kontrol-ve-otomatik-boy-kesme-makinesi-plc-otomasyonu/</loc>
     <lastmod>2026-11-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -98,12 +110,6 @@
   </url>
   <url>
     <loc>https://muhendislik.gkmelektrik.com/rehber/soguk-hava-deposu-scada-ve-uzaktan-sicaklik-takip-sistemi-ots/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://muhendislik.gkmelektrik.com/rehber/mcc-motor-kontrol-panosu-soft-starter-ve-vfd-secim-rehberi/</loc>
     <lastmod>2026-11-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
