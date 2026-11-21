@@ -325,5 +325,23 @@
         }
       ]
     }
+  ],
+  "metal-harmonik-kompanzasyon-panosu-37": [
+    {
+      "id": "q-auto-metal-harmonik-",
+      "author_name": "Serkan Aydın",
+      "company": "Tesis Bakım Mühendisi (Kocaeli OSB)",
+      "date": "2026-11-21",
+      "question": "Ağır Sanayi ve Metal Şekillendirme Fabrikalarında 189 Hz %7 De-Tuned Reaktörlü Harmonik Kompanzasyon Panosu İmalatı konusunda benzer bir sahada uygulama yaparken nelere en çok dikkat etmeliyiz?",
+      "replies": [
+        {
+          "author": "Gökmen Elektrik & Mühendislik Ekibi",
+          "role": "Sistem Entegratörü",
+          "date": "2026-11-21",
+          "text": "Serkan Bey merhaba. Bu uygulamada en kritik husus; uluslararası normlara (IEC/ISO) uygun koruma ve parazit izolasyonudur. Tesisinizin şemasını veya teknik şartnamenizi bize WhatsApp üzerinden iletirseniz, projenizi ücretsiz inceleyip en uygun komponent seçimini yapabiliriz.",
+          "verified": true
+        }
+      ]
+    }
   ]
 }
