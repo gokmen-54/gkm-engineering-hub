@@ -379,5 +379,23 @@
         }
       ]
     }
+  ],
+  "otomotiv-servo-kam-revizyonu-88": [
+    {
+      "id": "q-auto-otomotiv-servo-",
+      "author_name": "Serkan Aydın",
+      "company": "Tesis Bakım Mühendisi (Kocaeli OSB)",
+      "date": "2026-11-24",
+      "question": "Otomotiv Yan Sanayi Üretim Hatlarında Hassas Servo Senkronizasyonu ve Elektronik Kam (Camming) Revizyonu konusunda benzer bir sahada uygulama yaparken nelere en çok dikkat etmeliyiz?",
+      "replies": [
+        {
+          "author": "Gökmen Elektrik & Mühendislik Ekibi",
+          "role": "Sistem Entegratörü",
+          "date": "2026-11-24",
+          "text": "Serkan Bey merhaba. Bu uygulamada en kritik husus; uluslararası normlara (IEC/ISO) uygun koruma ve parazit izolasyonudur. Tesisinizin şemasını veya teknik şartnamenizi bize WhatsApp üzerinden iletirseniz, projenizi ücretsiz inceleyip en uygun komponent seçimini yapabiliriz.",
+          "verified": true
+        }
+      ]
+    }
   ]
 }
