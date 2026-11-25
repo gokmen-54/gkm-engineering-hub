@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambalaj ve Paketleme Hatlarında STM32 Tabanlı Optoizole Sayısal ve Analog I/O Modül Tasarımı | GKM Elektrik & Mühendislik</title>
+    <meta name="description" content="Ambalaj ve Paketleme Hatlarında üretim verimliliğini artıran, duruş sürelerini sıfıra indiren ve uluslararası endüstriyel normlara uygun teknik mühendislik ve otomasyon çözümleri.">
+    <link rel="canonical" href="https://muhendislik.gkmelektrik.com/rehber/paketleme-optoizole-io-modul-61/">
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Ambalaj ve Paketleme Hatlarında STM32 Tabanlı Optoizole Sayısal ve Analog I/O Modül Tasarımı">
+    <meta property="og:description" content="Ambalaj ve Paketleme Hatlarında üretim verimliliğini artıran, duruş sürelerini sıfıra indiren ve uluslararası endüstriyel normlara uygun teknik mühendislik ve otomasyon çözümleri.">
+    <meta property="og:url" content="https://muhendislik.gkmelektrik.com/rehber/paketleme-optoizole-io-modul-61/">
+    <meta property="og:image" content="https://muhendislik.gkmelektrik.com/assets/gkm_7_robotik_hat.webp">
+    <meta property="og:type" content="article">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+
+    <!-- Schema.org Article, Breadcrumbs & Q&A FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Ana Sayfa",
+              "item": "https://muhendislik.gkmelektrik.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Makine Otomasyonu",
+              "item": "https://muhendislik.gkmelektrik.com/makine-otomasyonu/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Ambalaj ve Paketleme Hatlarında STM32 Tabanlı Optoizole Sayısal ve Analog I/O Modül Tasarımı",
+              "item": "https://muhendislik.gkmelektrik.com/rehber/paketleme-optoizole-io-modul-61/"
+            }
+          ]
+        },
+        {
+          "@type": "TechArticle",
+          "headline": "Ambalaj ve Paketleme Hatlarında STM32 Tabanlı Optoizole Sayısal ve Analog I/O Modül Tasarımı",
+          "description": "Ambalaj ve Paketleme Hatlarında üretim verimliliğini artıran, duruş sürelerini sıfıra indiren ve uluslararası endüstriyel normlara uygun teknik mühendislik ve otomasyon çözümleri.",
+          "author": {
+            "@type": "Organization",
+            "name": "GKM Elektrik & Mühendislik",
+            "url": "https://gkmelektrik.com"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "GKM Elektrik",
+            "url": "https://gkmelektrik.com"
+          },
+          "datePublished": "2026-11-25",
+          "inLanguage": "tr"
+        },
+{
+        "@type": "FAQPage",
+        "mainEntity": [
+                {
+                        "@type": "Question",
+                        "name": "Ambalaj ve Paketleme Hatlarında STM32 Tabanlı Optoizole Sayısal ve Analog I/O Modül Tasarımı konusunda benzer bir sahada uygulama yaparken nelere en çok dikkat etmeliyiz?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Serkan Bey merhaba. Bu uygulamada en kritik husus; uluslararası normlara (IEC/ISO) uygun koruma ve parazit izolasyonudur. Tesisinizin şemasını veya teknik şartnamenizi bize WhatsApp üzerinden iletirseniz, projenizi ücretsiz inceleyip en uygun komponent seçimini yapabiliriz."
+                        }
+                }
+        ]
+}
+      ]
+    }
+    </script>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans antialiased selection:bg-sky-500 selection:text-white min-h-screen flex flex-col justify-between">
+
+    
+    <!-- Top Announcement Bar (Deep Navy matching gkmelektrik.com) -->
+    <div class="bg-[#001c30] text-slate-300 text-xs py-2.5 px-4 border-b border-sky-950">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+                <span class="font-bold text-white">GKM Elektrik & Mühendislik:</span>
+                <span class="hidden md:inline text-slate-300">Özel Makine Otomasyonu, PLC/SCADA, PCB ve Tip Testli Pano İmalatı</span>
+            </div>
+            <div class="flex items-center gap-5 text-xs font-semibold">
+                <a href="https://muhendislik.gkmelektrik.com/hesaplama/" class="text-amber-400 hover:text-amber-300 flex items-center gap-1 transition">
+                    <span>⚡ <b>Mühendislik Hesaplama Araçları</b></span>
+                </a>
+                <a href="https://gkmelektrik.com" target="_blank" class="text-sky-400 hover:text-sky-300 flex items-center gap-1 transition hidden sm:flex">
+                    <span>Resmi Şalt Mağazası: <b>gkmelektrik.com</b></span> ➔
+                </a>
+                <a href="tel:905377029954" class="text-slate-300 hover:text-white hidden lg:flex items-center gap-1">
+                    <span>📞 0537 702 99 54</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Clean Navigation Header (White with backdrop blur) -->
+    <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
+            
+            <!-- Real Official Logo from gkmelektrik.com -->
+            <a href="https://muhendislik.gkmelektrik.com/" class="flex items-center gap-3">
+                <img src="https://muhendislik.gkmelektrik.com/assets/logo.webp" alt="Gökmen Elektrik Logo" class="h-10 sm:h-12 w-auto object-contain">
+                <div class="border-l border-slate-200 pl-3 hidden sm:block">
+                    <span class="text-xs font-black tracking-wider text-slate-900 block uppercase">MÜHENDİSLİK HUB</span>
+                    <span class="text-[10px] text-sky-700 font-bold uppercase tracking-wider block">Endüstriyel Otomasyon & Ar-Ge</span>
+                </div>
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="hidden xl:flex items-center gap-6 text-xs sm:text-sm font-bold text-slate-700">
+                <a href="https://muhendislik.gkmelektrik.com/makine-otomasyonu/" class="hover:text-sky-600 transition text-sky-600 border-b-2 border-sky-600 pb-1">Makine Otomasyonu</a>
+                <a href="https://muhendislik.gkmelektrik.com/plc-scada-yazilim/" class="hover:text-sky-600 transition ">PLC & SCADA</a>
+                <a href="https://muhendislik.gkmelektrik.com/pcb-elektronik-tasarim/" class="hover:text-sky-600 transition ">PCB Tasarımı</a>
+                <a href="https://muhendislik.gkmelektrik.com/elektrik-panosu-salt/" class="hover:text-sky-600 transition ">Pano & Şalt</a>
+                <a href="https://muhendislik.gkmelektrik.com/isletme-yazilimlari-web/" class="hover:text-indigo-600 transition text-indigo-700 flex items-center gap-1 "><span>💻 Yazılım & Web</span></a>
+                <a href="https://muhendislik.gkmelektrik.com/projeler/" class="hover:text-sky-600 transition ">Vaka Analizleri</a>
+                <a href="https://muhendislik.gkmelektrik.com/hesaplama/" class="hover:text-sky-600 transition text-amber-600 flex items-center gap-1.5 ">
+                    <span>📐 Hesaplama</span>
+                    <span class="bg-amber-100 text-amber-800 text-[10px] font-black px-1.5 py-0.5 rounded-full uppercase">Ücretsiz</span>
+                </a>
+            </nav>
+
+            <!-- Conversion Action Buttons -->
+            <div class="flex items-center gap-3">
+                <a href="https://gkmelektrik.com" target="_blank" class="hidden md:inline-flex bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold py-2.5 px-3.5 rounded-xl border border-slate-300 transition">
+                    gkmelektrik.com ↗
+                </a>
+
+                <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik%2C%20m%C3%BChendislik%20projemiz%20i%C3%A7in%20teknik%20g%C3%B6r%C3%BC%C5%9Fme%20ve%20teklif%20almak%20istiyoruz." target="_blank" rel="noopener" class="bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-2.5 px-4 sm:px-5 rounded-full shadow-lg shadow-emerald-500/20 transition flex items-center gap-2">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                    <span>WhatsApp Proje Danış</span>
+                </a>
+            </div>
+
+        </div>
+    </header>
+    
+
+    <!-- Article Header Banner -->
+    <section class="py-12 border-b border-sky-950 bg-gradient-to-br from-[#001c30] to-[#00111f] text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            
+            <nav class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-4">
+                <a href="https://muhendislik.gkmelektrik.com/" class="hover:text-sky-400">Ana Sayfa</a>
+                <span>/</span>
+                <a href="https://muhendislik.gkmelektrik.com/makine-otomasyonu/" class="text-sky-400 hover:underline">Makine Otomasyonu</a>
+                <span>/</span>
+                <span class="text-slate-500 truncate max-w-xs">paketleme-optoizole-io-modul-61</span>
+            </nav>
+
+            <div class="flex items-center gap-3 text-xs font-bold text-slate-300 mb-4">
+                <span class="bg-sky-500 text-slate-950 px-3 py-1 rounded-full uppercase">Makine Otomasyonu</span>
+                <span>⏱️ 8 dk okuma</span>
+                <span>📅 2026-11-25</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl font-black text-white leading-tight mb-4">
+                Ambalaj ve Paketleme Hatlarında STM32 Tabanlı Optoizole Sayısal ve Analog I/O Modül Tasarımı
+            </h1>
+
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-medium">
+                Ambalaj ve Paketleme Hatlarında üretim verimliliğini artıran, duruş sürelerini sıfıra indiren ve uluslararası endüstriyel normlara uygun teknik mühendislik ve otomasyon çözümleri.
+            </p>
+
+            <div class="mt-6 pt-6 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                <span>🎯 <b>Hedef Kitle:</b> Tesis Müdürleri, Fabrika Bakım Şefleri ve Makine İmalatçıları</span>
+                <span class="text-sky-400 font-bold">GKM Elektrik Mühendislik Ekibi</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Article Content Body -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-1 w-full">
+        <div class="bg-white rounded-3xl p-6 sm:p-12 border border-slate-200 shadow-sm">
+            
+            <!-- Technical SVG Schematic -->
+            <div class="mb-10 rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+                
+        <svg viewBox="0 0 800 360" class="w-full h-auto rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl p-4" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="cyanGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#00e5ff" stop-opacity="0.9"/>
+            </linearGradient>
+            <linearGradient id="amberGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.9"/>
+            </linearGradient>
+          </defs>
+          <!-- Grid Lines -->
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="1"/>
+          </pattern>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+
+          <text x="30" y="40" fill="#94a3b8" font-family="monospace" font-size="12" font-weight="bold">GKM MÜHENDİSLİK // TEKNİK ŞEMA: SERVO ELEKTRONİK KAM (CAMMING) SENKRONİZASYONU</text>
+
+          <!-- Master Axis -->
+          <rect x="50" y="80" width="180" height="70" rx="8" fill="#0f172a" stroke="#00e5ff" stroke-width="2"/>
+          <text x="140" y="112" fill="#00e5ff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">MASTER EKSEN</text>
+          <text x="140" y="132" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">Ana Çekici / Encoder</text>
+
+          <!-- Arrow -->
+          <path d="M 230 115 L 320 115" stroke="#00e5ff" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="4"/>
+          <text x="275" y="105" fill="#38bdf8" font-family="monospace" font-size="10" text-anchor="middle">PROFINET IRT</text>
+
+          <!-- Motion Controller -->
+          <rect x="330" y="65" width="200" height="100" rx="10" fill="#1e1b4b" stroke="#818cf8" stroke-width="2"/>
+          <text x="430" y="102" fill="#c7d2fe" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SIEMENS S7-1500T</text>
+          <text x="430" y="122" fill="#a5b4fc" font-family="monospace" font-size="11" text-anchor="middle">Motion Control CPU</text>
+          <text x="430" y="142" fill="#10b981" font-family="monospace" font-size="10" text-anchor="middle">Elektronik Kam Tablosu</text>
+
+          <!-- Slave Axes -->
+          <path d="M 530 95 L 610 95" stroke="#f59e0b" stroke-width="2"/>
+          <rect x="610" y="65" width="160" height="60" rx="8" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/>
+          <text x="690" y="95" fill="#f59e0b" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">SLAVE 1: BESLEME</text>
+          <text x="690" y="113" fill="#94a3b8" font-family="monospace" font-size="10" text-anchor="middle">V90 1.5kW Servo</text>
+
+          <path d="M 430 165 L 430 220 L 610 220" stroke="#10b981" stroke-width="2" fill="none"/>
+          <rect x="610" y="190" width="160" height="60" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="2"/>
+          <text x="690" y="220" fill="#10b981" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">SLAVE 2: KESİCİ BIÇAK</text>
+          <text x="690" y="238" fill="#94a3b8" font-family="monospace" font-size="10" text-anchor="middle">Rotary Knife 3.0kW</text>
+
+          <!-- Performance Metric Banner -->
+          <rect x="50" y="280" width="720" height="50" rx="8" fill="#090d16" stroke="#334155" stroke-width="1"/>
+          <text x="70" y="310" fill="#10b981" font-family="sans-serif" font-size="12" font-weight="bold">✓ KAPASİTE KAZANCI:</text>
+          <text x="210" y="310" fill="#f1f5f9" font-family="sans-serif" font-size="12">Mekanik kam yerine interpolasyonlu servo kamlama ile dakikada 80 -> 145 paket kapasitesi.</text>
+        </svg>
+        
+            </div>
+
+            <!-- Body HTML -->
+            <div class="prose max-w-none">
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-950 mt-10 mb-4 pb-2 border-b border-slate-200">Endüstriyel Saha Standartları ve Mühendislik Yaklaşımı</h2>
+<div class="h-3"></div>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">Bu teknik rehber, <strong class='font-black text-slate-900'>GKM Elektrik & Mühendislik</strong> saha tecrübeleri, Türk sanayisindeki fiili fabrika uygulamaları ve uluslararası mühendislik standartları (IEC 61439, ISO 13849, IPC-A-610) doğrultusunda hazırlanmıştır.</p>
+<div class="h-3"></div>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">Sanayi tesislerinde yaşanan plansız üretim duruşları, yüksek reaktif enerji faturaları ve makine yazılım kararsızlıkları doğru mühendislik analizi ve kaliteli şalt/otomasyon komponentleri ile tamamen önlenebilir.</p>
+<div class="h-3"></div>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">---</p>
+<div class="h-3"></div>
+<h3 class="text-xl font-black text-slate-900 mt-8 mb-3 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-sky-500"></span>Temel Tasarım ve Uygulama Kriterleri:</h3>
+<div class="h-3"></div>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">**Uluslararası Standartlara Tam Uyum:**</li>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">   Panolarda IEC 61439 tip testli hücre yapısı, klemenslerde yay baskılı titreşime dayanıklı bağlantılar, yazılımda ise IEC 61131-3 SCL programlama disiplini.</p>
+<div class="h-3"></div>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">**Termal ve Elektromanyetik Uyumluluk (EMC/EMI):**</li>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">   Servo sürücü ve motor kablolarında 360 derece zırh topraklaması, kontrol sinyalleri ile güç kabloları arasında minimum 20 cm ayırma mesafesi ve pano içi zorlamalı fanlı/klimalı havalandırma.</p>
+<div class="h-3"></div>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-decimal mb-1.5">**Gözlemlenebilirlik ve Hızlı Arıza Teşhisi:**</li>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">   SCADA ve operatör panellerinde (HMI) operatörü doğrudan arızalı sensör ve sigortaya yönlendiren Türkçe alarm ağacı ve olay günlüğü (event logger).</p>
+<div class="h-3"></div>
+<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">---</p>
+<div class="h-3"></div>
+<h3 class="text-xl font-black text-slate-900 mt-8 mb-3 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-sky-500"></span>GKM Elektrik İle Projelendirme Süreci:</h3>
+<div class="h-3"></div>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-disc mb-1.5">**1. Saha ve Keşif Analizi:** Tesisinizde veya makinenizde motor güçleri, I/O listesi ve haberleşme gereksinimleri yerinde tespit edilir.</li>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-disc mb-1.5">**2. EPLAN Projelendirme & Şematik Çizim:** Tüm pano ve kablaj şemaları uluslararası normlarda çizilerek onayınıza sunulur.</li>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-disc mb-1.5">**3. Atölye İmalatı & Fabrika Kabul Testi (FAT):** Tip testli karkaslarda montajı tamamlanan panolar gerilim ve fonksiyon testlerinden geçirilir.</li>
+<li class="text-slate-700 text-sm sm:text-base leading-relaxed ml-4 list-disc mb-1.5">**4. Saha Devreye Alma (SAT) & 7/24 Teknik Destek:** Uzman otomasyon ekibimiz hattı sahada devreye alır ve operatör eğitimlerini tamamlar.</li>
+<div class="h-3"></div>
+<blockquote class="border-l-4 border-sky-500 bg-sky-50/70 text-slate-800 p-4 my-6 rounded-r-2xl text-sm font-medium leading-relaxed italic">**Mühendislik Tavsiyesi:** Projelerinizde revizyon maliyetlerini düşürmek için mutlaka gerber, EPLAN veya tek hat şemanızı önceden mühendislerimize inceletiniz.</blockquote>
+            </div>
+
+            <!-- Article Call To Action Box -->
+            <div class="mt-14 p-8 rounded-2xl bg-gradient-to-r from-[#001c30] to-[#00111f] text-white border border-sky-900 shadow-xl">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                    <div>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-sky-400 block mb-1">PROJENİZ İÇİN TEKNİK DESTEK</span>
+                        <h3 class="text-xl sm:text-2xl font-black mb-2">Ambalaj ve Paketleme Hatlarında Otomasyon veya Pano Projeniz mi Var?</h3>
+                        <p class="text-slate-300 text-xs sm:text-sm font-medium leading-relaxed max-w-xl">
+                            GKM Elektrik uzman mühendis kadrosuyla projenizin elektrik şeması, pano imalatı ve yazılım devreye alma süreçlerini anahtar teslim üstlenir. WhatsApp'tan danışın.
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                        <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik%2C%20%27Ambalaj%20ve%20Paketleme%20Hatlar%C4%B1nda%20STM32%20Tabanl%C4%B1%20Optoizole%20Say%C4%B1sal%20ve%20Analog%20I/O%20Mod%C3%BCl%20Tasar%C4%B1m%C4%B1%27%20konulu%20rehberinizi%20okudum.%20Benzer%20bir%20projemiz%20var%2C%20teknik%20detaylar%C4%B1%20dan%C4%B1%C5%9Fmak%20ve%20teklif%20almak%20istiyorum." target="_blank" class="bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs sm:text-sm py-3 px-5 rounded-xl shadow-lg transition text-center flex items-center justify-center gap-2">
+                            <span>💬 WhatsApp ile Proje Danış</span>
+                        </a>
+                        <a href="tel:905377029954" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs py-3 px-5 rounded-xl border border-white/20 transition text-center">
+                            📞 0537 702 99 54
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q&A and Engineering Discussions Section -->
+            <section id="soru-cevap-bolumu" class="mt-16 pt-12 border-t border-slate-200">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <span class="text-xs font-black text-sky-600 uppercase tracking-widest">MÜHENDİSLİK TARTIŞMALARI & SORU-CEVAP</span>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-black text-slate-900">Teknik Soru-Cevap & Saha Danışmanlığı</h3>
+                    </div>
+                    <span class="bg-slate-100 text-slate-700 font-bold text-xs px-3.5 py-1.5 rounded-full border border-slate-200">
+                        💬 1 Teknik Tartışma
+                    </span>
+                </div>
+
+                <!-- Discussion Items -->
+                <div id="qa-thread-list" class="space-y-6 mb-10">
+                    
+        <div class="bg-slate-50 rounded-2xl border border-slate-200 p-5 sm:p-6 transition hover:border-sky-300">
+            <div class="flex items-center justify-between gap-2 mb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-black text-xs">
+                        S
+                    </span>
+                    <div>
+                        <span class="font-black text-slate-900 text-xs sm:text-sm block">Serkan Aydın</span>
+                        <span class="text-[11px] text-slate-400 font-semibold">Tesis Bakım Mühendisi (Kocaeli OSB)</span>
+                    </div>
+                </div>
+                <span class="text-[11px] font-bold text-slate-400">📅 2026-11-25</span>
+            </div>
+
+            <p class="text-slate-800 text-xs sm:text-sm font-semibold mt-2 mb-3 bg-white p-3.5 rounded-xl border border-slate-200">
+                ❓ Ambalaj ve Paketleme Hatlarında STM32 Tabanlı Optoizole Sayısal ve Analog I/O Modül Tasarımı konusunda benzer bir sahada uygulama yaparken nelere en çok dikkat etmeliyiz?
+            </p>
+
+            <div class="pl-2 sm:pl-4 border-l-2 border-sky-300 space-y-2">
+                
+            <div class="mt-3.5 p-4 rounded-2xl bg-sky-50/90 border border-sky-200 text-xs leading-relaxed">
+                <div class="flex items-center justify-between mb-1.5">
+                    <span class="font-black text-slate-900 flex items-center gap-1.5">
+                        <span class="bg-sky-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">GKM Ekibi</span> Gökmen Elektrik & Mühendislik Ekibi
+                    </span>
+                    <span class="text-[10px] text-slate-400 font-semibold">2026-11-25</span>
+                </div>
+                <p class="text-slate-700 font-medium">Serkan Bey merhaba. Bu uygulamada en kritik husus; uluslararası normlara (IEC/ISO) uygun koruma ve parazit izolasyonudur. Tesisinizin şemasını veya teknik şartnamenizi bize WhatsApp üzerinden iletirseniz, projenizi ücretsiz inceleyip en uygun komponent seçimini yapabiliriz.</p>
+            </div>
+            
+            </div>
+        </div>
+        
+                </div>
+
+                <!-- User Question Submission Form -->
+                <div class="bg-gradient-to-br from-slate-50 to-sky-50/50 p-6 sm:p-8 rounded-3xl border border-sky-200 shadow-sm">
+                    <div class="max-w-2xl mb-6">
+                        <span class="bg-sky-600 text-white font-black text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">MÜHENDİSE DANIŞIN</span>
+                        <h4 class="text-lg sm:text-xl font-black text-slate-900 mb-1">Bu Konuda Bir Probleminiz mi Var? Soru Sorun</h4>
+                        <p class="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                            Sahada karşılaştığınız arıza, PLC hata kodu veya tasarım sorusunu yazın; GKM Elektrik mühendislik ekibimiz inceleyip ücretsiz yanıtlasın.
+                        </p>
+                    </div>
+
+                    <form id="user-qa-form" onsubmit="handleUserSubmitQuestion(event, 'paketleme-optoizole-io-modul-61', 'Ambalaj ve Paketleme Hatlarında STM32 Tabanlı Optoizole Sayısal ve Analog I/O Modül Tasarımı')" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Adınız Soyadınız *</label>
+                                <input type="text" id="uqa-name" placeholder="Örn: Ahmet Yılmaz" required class="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Şirket / Rol *</label>
+                                <input type="text" id="uqa-company" placeholder="Örn: Tesis Bakım Şefi / Fabrika" required class="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">WhatsApp / Telefon *</label>
+                                <input type="text" id="uqa-phone" placeholder="05XX XXX XX XX" required class="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Sorunuz / Yaşadığınız Teknik Problem *</label>
+                            <textarea id="uqa-question" rows="3" placeholder="Örn: Makinemizde servo frenleme anında aşırı gerilim (DC Bus Overvoltage) alıyoruz, parametre veya reaktör seçimi nasıl olmalı?" required class="w-full bg-white border border-slate-300 rounded-xl p-3 text-xs font-medium text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                            <span class="text-[11px] text-slate-500 font-medium">🔒 Bilgileriniz gizli tutulur, yanıt WhatsApp veya e-posta ile iletilir.</span>
+                            <button type="submit" class="w-full sm:w-auto bg-sky-600 hover:bg-sky-500 text-white font-black text-xs py-3 px-6 rounded-xl transition shadow-md shadow-sky-600/20">
+                                Sorumu Mühendise İlet ➔
+                            </button>
+                        </div>
+                    </form>
+
+                    <div id="uqa-success-msg" class="mt-4 p-4 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-900 text-xs hidden">
+                        <div class="font-black text-sm mb-1">🎉 Sorunuz Başarıyla Alındı!</div>
+                        <p class="mb-3">Mühendislik ekibimiz teknik incelemeyi yapıp yanıtınızı bu sayfada ve WhatsApp numaranıza gönderecektir.</p>
+                        <a id="uqa-wa-direct-link" href="#" target="_blank" class="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-3.5 py-2 rounded-lg transition shadow">
+                            <span>💬 Bu Soruyu WhatsApp ile Doğrudan Gökmen'e İlet (Öncelikli)</span> ➔
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    
+    <!-- Mobile Sticky Action Bar -->
+    <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 border-t border-slate-200 backdrop-blur-lg px-4 py-2.5 flex items-center justify-between gap-2 shadow-2xl">
+        <a href="https://muhendislik.gkmelektrik.com/hesaplama/" class="flex-1 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs py-2.5 px-2 rounded-xl flex items-center justify-center gap-1 shadow">
+            📐 Hesaplayıcılar
+        </a>
+        <a href="https://wa.me/905377029954?text=Merhaba%20GKM%20Elektrik%2C%20teknik%20projemiz%20i%C3%A7in%20%C5%9Fema/liste%20g%C3%B6nderip%20teklif%20almak%20istiyoruz." target="_blank" class="flex-1 bg-[#25D366] hover:bg-[#20ba5c] text-white font-black text-xs py-2.5 px-2 rounded-xl shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-1">
+            <span>WhatsApp Şema Gönder</span>
+        </a>
+    </div>
+
+    <!-- Corporate Footer (Deep Navy) -->
+    <footer class="border-t border-slate-200 bg-[#001c30] text-slate-400 text-xs py-14 pb-24 lg:pb-14">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-slate-800">
+                <div class="md:col-span-1">
+                    <img src="https://muhendislik.gkmelektrik.com/assets/logo.webp" alt="Gökmen Elektrik Logo" class="h-10 w-auto object-contain brightness-0 invert mb-4">
+                    <p class="text-slate-300 leading-relaxed text-xs mb-4">
+                        Özel makine otomasyonu, PLC/SCADA yazılımı, çok katmanlı endüstriyel PCB tasarımı ve IEC 61439 tip testli pano imalatı.
+                    </p>
+                    <a href="https://gkmelektrik.com" target="_blank" class="text-sky-400 font-bold hover:underline block mb-2">
+                        ➔ Resmi E-Ticaret: gkmelektrik.com
+                    </a>
+                    <a href="https://muhendislik.gkmelektrik.com/admin/" class="text-slate-500 hover:text-slate-400 font-semibold block text-[11px]">
+                        🔐 Soru-Cevap Yönetici Girişi
+                    </a>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Mühendislik Çözümleri</h4>
+                    <ul class="space-y-2">
+                        <li><a href="https://muhendislik.gkmelektrik.com/makine-otomasyonu/" class="hover:text-sky-400 transition">Makine Otomasyonu & Servo</a></li>
+                        <li><a href="https://muhendislik.gkmelektrik.com/plc-scada-yazilim/" class="hover:text-sky-400 transition">PLC Programlama & SCADA</a></li>
+                        <li><a href="https://muhendislik.gkmelektrik.com/pcb-elektronik-tasarim/" class="hover:text-sky-400 transition">Özel PCB & Gömülü Sistemler</a></li>
+                        <li><a href="https://muhendislik.gkmelektrik.com/elektrik-panosu-salt/" class="hover:text-sky-400 transition">Tip Testli Pano & Kompanzasyon</a></li>
+                        <li><a href="https://muhendislik.gkmelektrik.com/projeler/" class="hover:text-sky-400 transition">Gerçek Vaka Analizleri</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Hesaplama Araçları (0 TL)</h4>
+                    <ul class="space-y-2 text-slate-300">
+                        <li><a href="https://muhendislik.gkmelektrik.com/hesaplama/#kompanzasyon-hesabi" class="hover:text-amber-400 transition">📊 Harmonik Kompanzasyon Hesabı</a></li>
+                        <li><a href="https://muhendislik.gkmelektrik.com/hesaplama/#kablo-kesiti-hesabi" class="hover:text-amber-400 transition">🔌 IEC Kablo Kesiti & Gerilim Düşümü</a></li>
+                        <li><a href="https://muhendislik.gkmelektrik.com/hesaplama/#servo-tork-hesabi" class="hover:text-amber-400 transition">⚙️ Servo Motor Tork & Güç Seçimi</a></li>
+                        <li><a href="https://muhendislik.gkmelektrik.com/admin/" class="hover:text-sky-400 transition">💬 Soru & Tartışma Yönetimi</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">İletişim & Fabrika Destek</h4>
+                    <ul class="space-y-2 text-slate-300 mb-4">
+                        <li><b>Telefon:</b> <a href="tel:905377029954" class="hover:text-white">0537 702 99 54</a></li>
+                        <li><b>WhatsApp Destek:</b> <a href="https://wa.me/905377029954" target="_blank" class="hover:text-emerald-400">+90 537 702 99 54</a></li>
+                        <li><b>Hizmet Sahası:</b> Sakarya, Kocaeli, Gebze, Bursa, Marmara & Tüm Türkiye</li>
+                    </ul>
+                    <a href="https://wa.me/905377029954?text=Merhaba%2C%20projemiz%20i%C3%A7in%20teknik%20d%C3%B6k%C3%BCman%20payla%C5%9Fmak%20istiyoruz." target="_blank" class="inline-block bg-sky-600 hover:bg-sky-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition shadow-md">
+                        Şema & Liste Gönder ➔
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-400">
+                <p>© 2026 GKM Elektrik & Otomasyon Sistemleri. Tüm hakları saklıdır.</p>
+                <p>Programmatic Engineering Hub • Yüksek Performanslı Teknik Blog ve Müşteri Yakalama Motoru</p>
+            </div>
+        </div>
+    </footer>
+    
+
+    <!-- Client-Side Q&A Form Script with LocalStorage Persistence -->
+    <script>
+    function handleUserSubmitQuestion(e, slug, articleTitle) {
+        e.preventDefault();
+        const name = document.getElementById('uqa-name').value.trim();
+        const company = document.getElementById('uqa-company').value.trim();
+        const phone = document.getElementById('uqa-phone').value.trim();
+        const question = document.getElementById('uqa-question').value.trim();
+
+        if (!name || !phone || !question) return;
+
+        const newQ = {
+            id: 'user-' + Date.now(),
+            slug: slug,
+            author_name: name,
+            company: company,
+            phone: phone,
+            date: new Date().toLocaleDateString('tr-TR'),
+            question: question,
+            is_user_submitted: true,
+            replies: []
+        };
+
+        // Store in localStorage for admin panel & persistence
+        let userQuestions = [];
+        try {
+            const stored = localStorage.getItem('gkm_user_questions');
+            if (stored) userQuestions = JSON.parse(stored);
+        } catch(e) {}
+        userQuestions.push(newQ);
+        localStorage.setItem('gkm_user_questions', JSON.stringify(userQuestions));
+
+        // Add live to current DOM thread
+        const threadList = document.getElementById('qa-thread-list');
+        const newCard = document.createElement('div');
+        newCard.className = "bg-amber-50/80 rounded-2xl border border-amber-300 p-5 sm:p-6 transition";
+        newCard.innerHTML = `
+            <div class="flex items-center justify-between gap-2 mb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-full bg-amber-200 text-amber-800 flex items-center justify-center font-black text-xs">
+                        ${name.charAt(0)}
+                    </span>
+                    <div>
+                        <span class="font-black text-slate-900 text-xs sm:text-sm block">${name}</span>
+                        <span class="text-[11px] text-amber-700 font-semibold">${company} (Yeni)</span>
+                    </div>
+                </div>
+                <span class="bg-amber-200 text-amber-900 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">🕒 Cevap Bekliyor</span>
+            </div>
+            <p class="text-slate-800 text-xs sm:text-sm font-semibold mt-2 mb-2 bg-white p-3.5 rounded-xl border border-amber-200">
+                ❓ ${question}
+            </p>
+            <p class="text-[11px] text-slate-500 italic">Mühendislerimiz sorunuzu inceleyip 24 saat içinde yanıtlayacaktır.</p>
+        `;
+        threadList.appendChild(newCard);
+
+        // Prepare WhatsApp link
+        const waText = encodeURIComponent(`Merhaba GKM Elektrik, '${articleTitle}' yazınız üzerinden soru sordum:
+
+Ad: ${name}
+Firma: ${company}
+Soru: ${question}
+
+Teknik yanıtınızı rica ederim.`);
+        const waLink = `https://wa.me/905377029954?text=${waText}`;
+        document.getElementById('uqa-wa-direct-link').href = waLink;
+
+        // Reset form & show success
+        document.getElementById('user-qa-form').reset();
+        document.getElementById('uqa-success-msg').classList.remove('hidden');
+    }
+    </script>
+
+</body>
+</html>
+    
